@@ -2,6 +2,12 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    @if (session('status') == 'verification-link-sent')
+    <div class="alert alert-success">
+        A new verification link has been sent to your email address.
+    </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

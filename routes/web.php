@@ -15,6 +15,11 @@ use App\Http\Controllers\WordController;
 |
 */
 
+$middleware = ['auth'];
+if (app()->environment('production')) {
+    $middleware[] = 'verified';
+}
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,13 +28,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware($middleware)->group(function () {
+    //Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware(['auth'])->group(function () {
+    //Words
     Route::get('/words', [WordController::class, 'index'])->name('words.index');
     Route::get('/words/create', [WordController::class, 'create'])->name('words.create');
     Route::post('/words', [WordController::class, 'store'])->name('words.store');
