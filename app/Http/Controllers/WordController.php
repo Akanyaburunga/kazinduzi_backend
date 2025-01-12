@@ -9,10 +9,19 @@ class WordController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
-        $words = Word::with('user')->latest()->paginate(10); // 10 words per page
-        return view('words.index', compact('words'));
+        $query = Word::with('user')->latest();
+
+        if ($request->has('search') && $request->search) {
+            $query->where('word', 'like', '%' . $request->search . '%')
+                ->orWhere('meaning', 'like', '%' . $request->search . '%');
+        }
+
+    $words = $query->paginate(10);
+
+    return view('words.index', compact('words'));
+
     }
 
     public function create()
