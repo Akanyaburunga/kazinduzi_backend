@@ -3,6 +3,16 @@
 @section('content')
 <div class="container">
     <h1>Submit a New Word</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('words.store') }}" method="POST">
         @csrf
         <div class="mb-3">
