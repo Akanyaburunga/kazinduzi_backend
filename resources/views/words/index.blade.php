@@ -20,6 +20,8 @@
                     <h3 class="card-title">{{ $word->word }}</h3>
                     <p class="card-text">{{ $word->meaning }}</p>
                     <small class="text-muted">Submitted by: {{ $word->user->name }}</small>
+                    <br>
+                    <small>Created: {{ $word->created_at->diffForHumans() }}</small>
                 </div>
             </div>
         @endforeach
