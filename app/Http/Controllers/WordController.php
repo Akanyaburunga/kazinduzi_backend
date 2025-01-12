@@ -11,7 +11,7 @@ class WordController extends Controller
 
     public function index()
     {
-        $words = Word::with('user')->latest()->get();
+        $words = Word::with('user')->latest()->paginate(10); // 10 words per page
         return view('words.index', compact('words'));
     }
 
