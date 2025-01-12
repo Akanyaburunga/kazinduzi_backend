@@ -15,11 +15,12 @@
     @if ($words->isEmpty())
         <p>No words found.</p>
     @else
+
         @foreach ($words as $word)
             <div class="card my-3">
                 <div class="card-body">
-                    <h3>{{ $word->word }}</h3>
-                    <p>{{ $word->meaning }}</p>
+                <h3>{!! str_replace($search, "<mark>$search</mark>", $word->word) !!}</h3>
+                <p>{!! str_replace($search, "<mark>$search</mark>", $word->meaning) !!}</p>
                     <small>Submitted by: {{ $word->user->name }}</small>
                 </div>
             </div>

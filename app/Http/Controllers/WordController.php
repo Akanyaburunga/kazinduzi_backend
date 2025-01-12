@@ -11,17 +11,17 @@ class WordController extends Controller
 
     public function index(Request $request)
     {
+        $search = $request->search;
         $query = Word::with('user')->latest();
 
-        if ($request->has('search') && $request->search) {
-            $query->where('word', 'like', '%' . $request->search . '%')
-                ->orWhere('meaning', 'like', '%' . $request->search . '%');
+        if ($search) {
+            $query->where('word', 'like', '%' . $search . '%')
+                ->orWhere('meaning', 'like', '%' . $search . '%');
         }
 
-    $words = $query->paginate(10);
+        $words = $query->paginate(10);
 
-    return view('words.index', compact('words'));
-
+        return view('words.index', compact('words', 'search'));
     }
 
     public function create()
