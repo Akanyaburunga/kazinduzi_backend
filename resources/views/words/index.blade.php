@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1>Words List</h1>
+    <h1 class="mb-4">Words List</h1>
 
-    <!-- Search Form -->
     <form action="{{ route('words.index') }}" method="GET" class="mb-4">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Search for a word..." value="{{ request('search') }}">
@@ -13,21 +12,20 @@
     </form>
 
     @if ($words->isEmpty())
-        <p>No words found.</p>
+        <div class="alert alert-warning">No words found.</div>
     @else
-
         @foreach ($words as $word)
             <div class="card my-3">
                 <div class="card-body">
-                <h3>{!! str_replace($search, "<mark>$search</mark>", $word->word) !!}</h3>
-                <p>{!! str_replace($search, "<mark>$search</mark>", $word->meaning) !!}</p>
-                    <small>Submitted by: {{ $word->user->name }}</small>
+                    <h3 class="card-title">{{ $word->word }}</h3>
+                    <p class="card-text">{{ $word->meaning }}</p>
+                    <small class="text-muted">Submitted by: {{ $word->user->name }}</small>
                 </div>
             </div>
         @endforeach
 
         <div class="d-flex justify-content-center">
-            {{ $words->links() }}
+            {{ $words->links('pagination::bootstrap-5') }}
         </div>
     @endif
 </div>

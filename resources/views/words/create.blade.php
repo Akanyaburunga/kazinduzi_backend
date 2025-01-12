@@ -2,16 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Submit a New Word</h1>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <h1 class="mb-4">Submit a New Word</h1>
 
     <form action="{{ route('words.store') }}" method="POST">
         @csrf
@@ -23,7 +14,7 @@
             <label for="meaning" class="form-label">Meaning</label>
             <textarea name="meaning" id="meaning" class="form-control" rows="4" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </div>
 @endsection
