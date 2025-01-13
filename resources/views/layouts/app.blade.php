@@ -6,6 +6,20 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="@yield('meta-description', 'Kazinduzi ni urubuga')">
 
+        <!-- Open Graph -->
+        <meta property="og:title" content="@yield('title', 'Kazinduzi')" />
+        <meta property="og:description" content="@yield('meta-description', 'Default description for the Kazinduzi')" />
+        <meta property="og:url" content="{{ url()->current() }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="@yield('meta-image', asset('default-image.jpg'))" />
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="@yield('title', 'Kazinduzi')" />
+        <meta name="twitter:description" content="@yield('meta-description', 'Default description for the Kazinduzi')" />
+        <meta name="twitter:image" content="@yield('meta-image', asset('default-image.jpg'))" />
+
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
