@@ -48,4 +48,9 @@ class WordController extends Controller
         return redirect()->route('words.index')->with('success', 'Word added successfully!');
     }
 
+    public function show(Word $word)
+    {
+        return view('words.show', compact('word'));
+    }
+
 }

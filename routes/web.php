@@ -39,4 +39,6 @@ Route::middleware($middleware)->group(function () {
     Route::post('/words', [WordController::class, 'store'])->name('words.store');
 });
 
+Route::get('/words/{word}', [WordController::class, 'show'])->name('words.show');
+
 require __DIR__.'/auth.php';

@@ -12,11 +12,13 @@
         @else
             <ul class="list-group">
                 @foreach ($recentWords as $word)
-                    <li class="list-group-item">
-                        <strong>{{ $word->word }}</strong>: {{ $word->meaning }}
-                        <br>
-                        <small>By {{ $word->user->name }} on {{ $word->created_at->format('F j, Y') }}</small>
-                    </li>
+                <li class="list-group-item">
+                    <a href="{{ route('words.show', $word) }}">
+                        <strong>{{ $word->word }}</strong>
+                    </a>: {{ $word->meaning }}
+                    <br>
+                    <small>By {{ $word->user->name }} on {{ $word->created_at->format('F j, Y') }}</small>
+                </li>
                 @endforeach
             </ul>
 
