@@ -31,18 +31,21 @@ class WordController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'word' => 'required|string|unique:words|max:255',
+        $validated = $request->validate([
+            'word' => 'required|string|max:255',
             'meaning' => 'required|string',
         ]);
 
-        Word::create([
-            'word' => $request->word,
-            'meaning' => $request->meaning,
+        $word = Word::create([
+            'word' => $validated['word'],
+            'meaning' => $validated['meaning'],
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('words.index')->with('success', 'Word submitted successfully!');
+        // Clear the top contributors cache
+        Cache::forget('top_contributors');
+
+        return redirect()->route('words.index')->with('success', 'Word added successfully!');
     }
 
 }
