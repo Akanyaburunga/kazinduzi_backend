@@ -1,17 +1,30 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+@section('title', 'Dashboard')
+
+@section('content')
+<div class="container">
+    <h1>Welcome, {{ $user->name }}</h1>
+    <p>Here are your contributions:</p>
+
+    @if($contributions->isEmpty())
+        <p>You haven't added any words yet. Start contributing <a href="{{ route('words.create') }}">here</a>.</p>
+    @else
+        <ul class="list-group">
+            @foreach($contributions as $word)
+                <li class="list-group-item">
+                    <a href="{{ route('words.show', $word) }}">
+                        <strong>{{ $word->word }}</strong>
+                    </a>: {{ $word->meaning }}
+                    <br>
+                    <small>Added on {{ $word->created_at->format('F j, Y') }}</small>
+                </li>
+            @endforeach
+        </ul>
+
+        <div class="mt-3">
+            {{ $contributions->links() }} <!-- Pagination links -->
         </div>
-    </div>
-</x-app-layout>
+    @endif
+</div>
+@endsection
