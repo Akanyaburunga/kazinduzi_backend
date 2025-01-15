@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Word;
+use App\Policies\WordPolicy;
 
 class WordController extends Controller
 {
@@ -52,5 +53,37 @@ class WordController extends Controller
     {
         return view('words.show', compact('word'));
     }
+
+    public function edit(Word $word)
+    {
+        $this->authorize('update', $word); // Ensure the user owns the word
+        return view('words.edit', compact('word'));
+    }
+
+    public function update(Request $request, Word $word)
+    {
+        $this->authorize('update', $word);
+
+        $request->validate([
+            'word' => 'required|string|max:255',
+            'meaning' => 'required|string',
+        ]);
+
+        $word->update([
+            'word' => $request->word,
+            'meaning' => $request->meaning,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Word updated successfully!');
+    }
+
+    public function destroy(Word $word)
+    {
+        $this->authorize('delete', $word);
+        $word->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Word deleted successfully!');
+    }
+
 
 }
