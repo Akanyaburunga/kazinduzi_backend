@@ -11,8 +11,9 @@ class UserController extends Controller
     {
         $user = auth()->user(); // Get the currently logged-in user
         $contributions = $user->words()->latest()->paginate(10); // Fetch user's contributions
+        $referrals = $user->referrals()->with('email_verified_at')->get();
 
-        return view('dashboard', compact('user', 'contributions'));
+        return view('dashboard', compact('user', 'contributions', 'referrals'));
     }
 }
 

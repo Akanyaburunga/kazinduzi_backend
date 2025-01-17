@@ -44,8 +44,27 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // Generate a referral code for the new user
+    $user->generateReferralCode();
+
+    // Check if a referral code was used
+    if (!empty($data['referral_code'])) {
+        $referrer = User::where('referral_code', $data['referral_code'])->first();
+        if ($referrer) {
+            $user->referred_by = $referrer->id;
+            $user->save();
+        }
+    }
+
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    protected function showRegistrationForm(Request $request)
+    {
+        $referralCode = $request->query('ref', '');
+        return view('auth.register', compact('referralCode'));
+    }
+    
 }

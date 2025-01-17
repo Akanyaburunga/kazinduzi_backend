@@ -73,4 +73,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ReputationLog::class);
     }
 
+    public function referredBy()
+    {
+        return $this->belongsTo(User::class, 'referred_by');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referred_by');
+    }
+
+    // Generate a unique referral code
+    public function generateReferralCode()
+    {
+        do {
+            $code = strtoupper(uniqid($this->id . '_'));
+        } while (self::where('referral_code', $code)->exists());
+    
+        $this->referral_code = $code;
+        $this->save();
+    }
+
 }

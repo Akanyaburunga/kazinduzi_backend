@@ -36,6 +36,30 @@
             {{ $contributions->links() }} <!-- Pagination links -->
         </div>
     @endif
+
+    <h3>Your Referrals</h3>
+@if ($referrals->isEmpty())
+    <p>No referrals yet. Share your referral code to invite others!</p>
+@else
+    <ul>
+        @foreach ($referrals as $referral)
+            <li>
+                {{ $referral->name }} - 
+                @if ($referral->email_verified_at)
+                    <span class="text-success">Verified</span>
+                @else
+                    <span class="text-danger">Not Verified</span>
+                @endif
+            </li>
+        @endforeach
+    </ul>
+@endif
+
+<h3>Your Referral Code</h3>
+<p>Share this code to invite others: <strong>{{ $user->referral_code }}</strong></p>
+
+<p>Referral Link: <a href="{{ url('/register?ref=' . $user->referral_code) }}">{{ url('/register?ref=' . $user->referral_code) }}</a></p>
+
 </div>
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
