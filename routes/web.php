@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\MeaningController;
+use App\Http\Controllers\VoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,8 @@ Route::middleware($middleware)->group(function () {
 
     Route::post('/words/{word}/meanings', [MeaningController::class, 'store'])->name('meanings.store');
     
+    //Votes
+    Route::post('/meanings/{meaning}/vote', [VoteController::class, 'store'])->name('meanings.vote');
 });
 
 Route::get('/words/{word}', [WordController::class, 'show'])->name('words.show');
