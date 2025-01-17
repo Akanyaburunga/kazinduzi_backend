@@ -14,6 +14,12 @@ class VoteController extends Controller
             'vote' => 'required|in:up,down',
         ]);
 
+        // Prevent voting on one's own meaning
+        if ($meaning->user_id === auth()->id()) {
+            return redirect()->back()->with('error', 'You cannot vote on your own contribution.');
+        }
+
+        // Record the vote or update an existing one
         $vote = Vote::updateOrCreate(
             [
                 'user_id' => auth()->id(),
@@ -26,4 +32,5 @@ class VoteController extends Controller
 
         return redirect()->back()->with('success', 'Your vote has been recorded.');
     }
+
 }
