@@ -47,4 +47,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Word::class);
     }
+
+    public function meanings()
+    {
+        return $this->hasMany(Meaning::class);
+    }
+
 }

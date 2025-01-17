@@ -17,11 +17,9 @@
         @foreach ($words as $word)
             <div class="card my-3">
                 <div class="card-body">
-                    <h3 class="card-title">{{ $word->word }}</h3>
-                    <p class="card-text">{{ $word->meaning }}</p>
-                    <small class="text-muted">Submitted by: {{ $word->user->name }}</small>
-                    <br>
-                    <small>Created: {{ $word->created_at->diffForHumans() }}</small>
+                <a href="{{ route('words.show', $word) }}">{{ $word->word }}</a>
+                <span class="badge bg-secondary">{{ $word->meanings->count() }} meanings</span>
+
                 </div>
             </div>
         @endforeach

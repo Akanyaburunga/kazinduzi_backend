@@ -6,6 +6,7 @@ use App\Http\Controllers\WordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MeaningController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::middleware($middleware)->group(function () {
     //Searches for words
     Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 
+    Route::post('/words/{word}/meanings', [MeaningController::class, 'store'])->name('meanings.store');
+    
 });
 
 Route::get('/words/{word}', [WordController::class, 'show'])->name('words.show');

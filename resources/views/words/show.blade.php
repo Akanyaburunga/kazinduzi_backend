@@ -6,11 +6,23 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ $word->word }}</h1>
-    <p>{{ $word->meaning }}</p>
+<h1>{{ $word->word }}</h1>
 
-    <p><small>Added by {{ $word->user->name }} on {{ $word->created_at->format('F j, Y') }}</small></p>
+<h3>Meanings:</h3>
+<ul>
+    @foreach ($word->meanings as $meaning)
+        <li>
+            <strong>{{ $meaning->user->name }}:</strong> {{ $meaning->meaning }}
+        </li>
+    @endforeach
+</ul>
 
-    <a href="{{ route('home') }}" class="btn btn-primary">Back to Home</a>
+@auth
+    <form action="{{ route('meanings.store', $word) }}" method="POST">
+        @csrf
+        <textarea name="meaning" class="form-control" rows="3" placeholder="Add your meaning..."></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+@endauth
 </div>
 @endsection

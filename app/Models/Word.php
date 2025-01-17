@@ -31,4 +31,9 @@ class Word extends Model
         return 'slug';
     }
 
+    public function meanings()
+    {
+        return $this->hasMany(Meaning::class);
+    }
+
 }
