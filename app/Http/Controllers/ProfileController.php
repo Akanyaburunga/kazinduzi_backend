@@ -57,4 +57,11 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function show(User $user)
+    {
+        $user->load('reputationLogs');
+        return view('profile.edit', compact('user'));
+    }
+
 }

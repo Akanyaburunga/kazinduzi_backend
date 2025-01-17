@@ -1,29 +1,28 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@section('content')
+<div class="container">
+    <h1>{{ $user->name }}</h1>
+    <p>Reputation: <strong>{{ $user->reputation }}</strong></p>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+    <h3>Contributions:</h3>
+    <ul class="list-group">
+        @foreach ($user->meanings as $meaning)
+            <li class="list-group-item">
+                {{ $meaning->meaning }} ({{ $meaning->votes->sum(fn($vote) => $vote->vote === 'up' ? 1 : -1) }} votes)
+            </li>
+        @endforeach
+    </ul>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+    <h3>Activity Log:</h3>
+    <ul class="list-group">
+        @foreach ($user->reputationLogs as $log)
+            <li class="list-group-item">
+                <strong>{{ $log->change > 0 ? '+' : '' }}{{ $log->change }} points</strong>
+                - {{ $log->reason }}
+                <small class="text-muted">on {{ $log->created_at->format('d M Y, H:i') }}</small>
+            </li>
+        @endforeach
+    </ul>
+</div>
+@endsection

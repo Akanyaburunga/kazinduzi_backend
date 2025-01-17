@@ -30,6 +30,17 @@ class VoteController extends Controller
             ]
         );
 
+        // Adjust reputation
+        if ($vote->wasRecentlyCreated || $vote->wasChanged()) {
+            $points = $request->vote === 'up' ? 5 : -2; // Upvote: +5, Downvote: -2
+            $meaning->user->updateReputation($points, $request->vote === 'up' ? 'Received an upvote' : 'Received a downvote', $vote);
+
+            // Deduct 1 point from the voter if it's a downvote
+            if ($request->vote === 'down') {
+                auth()->user()->updateReputation(-1, 'Cast a downvote', $vote);
+            }
+        }
+
         return redirect()->back()->with('success', 'Your vote has been recorded.');
     }
 

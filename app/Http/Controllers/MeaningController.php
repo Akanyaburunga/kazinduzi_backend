@@ -27,6 +27,8 @@ class MeaningController extends Controller
             'user_id' => Auth::id(),
         ]);
 
+        auth()->user()->updateReputation(10, 'Submitted a new meaning', $meaning); // Add 10 points for submitting a meaning
+
         return redirect()->back()->with('success', 'Your meaning has been added.');
     }
 }
