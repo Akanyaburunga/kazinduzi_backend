@@ -17,17 +17,23 @@
                     <strong>{{ $meaning->user->name }}:</strong> {{ $meaning->meaning }}
                 </div>
                 <div>
-                    <form action="{{ route('meanings.vote', $meaning) }}" method="POST" class="d-inline">
-                        @csrf
-                        <input type="hidden" name="vote" value="up">
-                        <button type="submit" class="btn btn-sm btn-success">Upvote</button>
-                    </form>
-                    <form action="{{ route('meanings.vote', $meaning) }}" method="POST" class="d-inline">
-                        @csrf
-                        <input type="hidden" name="vote" value="down">
-                        <button type="submit" class="btn btn-sm btn-danger">Downvote</button>
-                    </form>
-                    <span class="badge bg-primary">{{ $meaning->votes->sum(fn($vote) => $vote->vote === 'up' ? 1 : -1) }}</span>
+                    @auth
+                        <form action="{{ route('meanings.vote', $meaning) }}" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="vote" value="up">
+                            <button type="submit" class="btn btn-sm btn-success">Upvote</button>
+                        </form>
+                        <form action="{{ route('meanings.vote', $meaning) }}" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="vote" value="down">
+                            <button type="submit" class="btn btn-sm btn-danger">Downvote</button>
+                        </form>
+                    @else
+                        <p class="text-muted">Login to vote.</p>
+                    @endauth
+                    <span class="badge bg-primary">
+                        {{ $meaning->votes->sum(fn($vote) => $vote->vote === 'up' ? 1 : -1) }}
+                    </span>
                 </div>
             </li>
         @endforeach
