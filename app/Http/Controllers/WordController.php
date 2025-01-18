@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Word;
 use App\Policies\WordPolicy;
+use Cache;
 
 class WordController extends Controller
 {
