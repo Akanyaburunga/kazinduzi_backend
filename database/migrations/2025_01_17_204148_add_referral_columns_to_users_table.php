@@ -22,5 +22,5 @@ return new class extends Migration
             $table->dropForeign(['referred_by']);
             $table->dropColumn('referred_by');
         });
-    }c
+    }
 };

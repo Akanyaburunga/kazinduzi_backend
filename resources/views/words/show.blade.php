@@ -2,7 +2,7 @@
 
 @section('title', $word->word) <!-- Dynamic Page Title -->
 
-@section('meta-description', Str::limit($word->meaning, 150)) <!-- Dynamic Meta Description -->
+@section('meta-description', Str::limit($word->meanings, 150)) <!-- Dynamic Meta Description -->
 
 @section('content')
 <div class="container">

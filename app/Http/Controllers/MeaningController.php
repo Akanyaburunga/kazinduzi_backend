@@ -21,7 +21,7 @@ class MeaningController extends Controller
         }
 
         // Add the meaning
-        Meaning::create([
+        $meaning = Meaning::create([
             'meaning' => $request->input('meaning'),
             'word_id' => $word->id,
             'user_id' => Auth::id(),

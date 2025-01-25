@@ -16,7 +16,7 @@
 
         <div class="mb-3">
             <label for="meaning" class="form-label">Meaning</label>
-            <textarea class="form-control" id="meaning" name="meaning" rows="5" required>{{ old('meaning', $word->meaning) }}</textarea>
+            <textarea class="form-control" id="meaning" name="meaning" rows="5" required>{{ old('meaning', $word->meanings) }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Save Changes</button>

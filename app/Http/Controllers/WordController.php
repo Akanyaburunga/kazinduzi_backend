@@ -34,12 +34,26 @@ class WordController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'word' => 'required|string|max:255',
-            'meaning' => 'required|string',
+            'word' => 'required|string|max:255|unique:words,word',
+            'meaning' => 'required|string|max:1000',
+        ], [
+            'word.unique' => 'This word has already been added. Please consider adding a new meaning instead.',
         ]);
+
+        $existingWord = Word::whereRaw('LOWER(word) = ?', [strtolower($validated['word'])])->first();
+
+        if ($existingWord) {
+            // Redirect to the page to add a meaning for this word
+            return redirect()->route('words.show', $existingWord->id)
+                ->with('info', 'This word already exists. You can add your meaning here.');
+        }
 
         $word = Word::create([
             'word' => $validated['word'],
+            'user_id' => auth()->id(),
+        ]);
+
+        $word->meanings()->create([
             'meaning' => $validated['meaning'],
             'user_id' => auth()->id(),
         ]);
@@ -47,7 +61,7 @@ class WordController extends Controller
         // Clear the top contributors cache
         Cache::forget('top_contributors');
 
-        return redirect()->route('words.index')->with('success', 'Word added successfully!');
+        return redirect()->route('words.index')->with('success', 'Word and meaning added successfully!');
     }
 
     public function show(Word $word)

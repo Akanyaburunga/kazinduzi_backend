@@ -53,18 +53,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Meaning::class);
     }
 
-    public function updateReputation(int $points)
+    public function updateReputation(int $points, String $reason, int $related)
     {
         $this->reputation += $points;
         $this->save();
 
         // Log the reputation change
-    $this->reputationLogs()->create([
-        'change' => $points,
-        'reason' => $reason,
-        'related_id' => $related ? $related->id : null,
-        'related_type' => $related ? get_class($related) : null,
-    ]);
+        $this->reputationLogs()->create([
+            'change' => $points,
+            'reason' => $reason,
+            'related_id' => $related ? $related->id : null,
+            'related_type' => $related ? get_class($related) : null,
+        ]);
 
     }
 
