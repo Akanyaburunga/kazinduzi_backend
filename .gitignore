@@ -17,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+# Ignore the sitemap files in the public folder
+/public/sitemap*.xml
