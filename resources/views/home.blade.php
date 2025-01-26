@@ -15,13 +15,12 @@
                 <li class="list-group-item">
                     <a href="{{ route('words.show', $word) }}">
                         <strong>{{ $word->word }}</strong>
-                    </a>: {{ $word->meaning }}
+                    </a>: {{ $word->meanings->first()->meaning ?? 'No meaning available' }}
                     <br>
                     <small>By {{ $word->user->name }} on {{ $word->created_at->format('F j, Y') }}</small>
                 </li>
                 @endforeach
             </ul>
-
             <!-- Pagination Links -->
             <div class="mt-3">
                 {{ $recentWords->links() }}
@@ -33,13 +32,14 @@
     <section class="my-5">
         <h2>Top Contributors</h2>
         @if ($topContributors->isEmpty())
-            <p>No contributors found.</p>
+            <p>No top contributors found.</p>
         @else
             <ul class="list-group">
                 @foreach ($topContributors as $user)
-                    <li class="list-group-item">
-                        {{ $user->name }} - {{ $user->words_count }} contributions
-                    </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ $user->name }}
+                    <span class="badge bg-primary rounded-pill">{{ $user->words_count }} contributions</span>
+                </li>
                 @endforeach
             </ul>
         @endif
