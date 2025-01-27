@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Meaning;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -53,10 +54,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Meaning::class);
     }
 
-    public function updateReputation(int $points, String $reason, int $related)
+    public function updateReputation(int $points, String $reason, $related)
     {
         $this->reputation += $points;
         $this->save();
+
+        // Determine the class or type of $related
+        if (is_object($related)) {
+            $relatedClass = get_class($related);
+            $relatedId = $related->id; // Extract ID if it's an object
+        } elseif (is_int($related)) {
+            $relatedClass = null; // No class for plain integers
+            $relatedId = $related; // Use the integer as the ID
+        } else {
+            throw new InvalidArgumentException('Invalid related argument type.');
+        }
 
         // Log the reputation change
         $this->reputationLogs()->create([

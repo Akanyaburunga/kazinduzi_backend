@@ -58,6 +58,8 @@ class WordController extends Controller
             'user_id' => auth()->id(),
         ]);
 
+        auth()->user()->updateReputation(10, 'Submitted a new word', $word); // Add 10 points for submitting a word
+
         // Clear the top contributors cache
         Cache::forget('top_contributors');
 
