@@ -17,6 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request, User $user): View
     {
+        $user = auth()->user();
         $logs = $user->reputationLogs()->latest()->paginate(10); // Show 10 logs per page
         return view('profile.edit', compact('user', 'logs'));
     }
