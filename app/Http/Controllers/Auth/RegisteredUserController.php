@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class RegisteredUserController extends Controller
 {
@@ -42,21 +43,45 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        if (app()->environment('prod', 'production')) {
+            
+            event(new Registered($user));
+        }
+        
 
         // Generate a referral code for the new user
-    $user->generateReferralCode();
+        $user->generateReferralCode();
 
     // Check if a referral code was used
-    if (!empty($data['referral_code'])) {
-        $referrer = User::where('referral_code', $data['referral_code'])->first();
+    if (!empty($request['referral_code'])) {
+        //First if is true
+        Log::info('First if is true');
+        $referrer = User::where('referral_code', $request['referral_code'])->first();
         if ($referrer) {
+            //Refferer is not empty
+            Log::info('Refferer is not empty');
             $user->referred_by = $referrer->id;
             $user->save();
+
+            if (app()->environment('local', 'development') || $referredUser->hasVerifiedEmail()) {
+                Log::info('In development mode');
+
+                // Check if the user was referred by someone
+                if ($user->referred_by) {
+                    Log::info('Someone referred the user');
+                    $referrer = User::find($user->referred_by);
+        
+                    // Award reputation to the referrer
+                    if ($referrer) {
+                        Log::info('The referrer is real');
+                        $referrer->updateReputation(50, 'Invited a new user who verified their email', $user);
+                    }
+                }
+            }
         }
     }
 
-        Auth::login($user);
+    Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
