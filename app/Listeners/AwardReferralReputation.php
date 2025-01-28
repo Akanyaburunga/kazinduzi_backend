@@ -17,7 +17,7 @@ class AwardReferralReputation
 
             // Award reputation to the referrer
             if ($referrer) {
-                $referrer->updateReputation(50, 'Invited a new user who verified their email', $user);
+                $referrer->updateReputation(5, 'Invited a new user who verified their email', $user);
             }
         }
     }
