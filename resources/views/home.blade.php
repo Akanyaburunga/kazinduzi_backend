@@ -1,44 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Welcome to Kazinduzi!</h1>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Welcome to Kazinduzi!</h1>
 
     <!-- Recent Contributions -->
-    <section class="my-5">
-        <h2>Recent Contributions</h2>
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Recent Contributions</h2>
         @if ($recentWords->isEmpty())
-            <p>No recent contributions found.</p>
+            <p class="text-gray-600">No recent contributions found.</p>
         @else
-            <ul class="list-group">
+            <ul class="space-y-4">
                 @foreach ($recentWords as $word)
-                <li class="list-group-item">
-                    <a href="{{ route('words.show', $word) }}">
-                        <strong>{{ $word->word }}</strong>
-                    </a>: {{ $word->meanings->first()->meaning ?? 'No meaning available' }}
-                    <br>
-                    <small>By {{ $word->user->name }} on {{ $word->created_at->format('F j, Y') }}</small>
+                <li class="p-4 bg-white rounded-lg shadow flex flex-col">
+                    <a href="{{ route('words.show', $word) }}" class="text-xl font-medium text-blue-600 hover:underline">
+                        {{ $word->word }}
+                    </a>
+                    <p class="text-gray-700 mt-2">{{ $word->meanings->first()->meaning ?? 'No meaning available' }}</p>
+                    <small class="text-gray-500 mt-1">By {{ optional($word->user)->name }} on {{ $word->created_at->format('F j, Y') }}</small>
                 </li>
                 @endforeach
             </ul>
             <!-- Pagination Links -->
-            <div class="mt-3">
-                {{ $recentWords->links() }}
+            <div class="mt-6">
+                {{ $recentWords->links('pagination::tailwind') }}
             </div>
         @endif
     </section>
 
     <!-- Top Contributors -->
-    <section class="my-5">
-        <h2>Top Contributors</h2>
+    <section>
+        <h2 class="text-2xl font-semibold mb-4">Top Contributors</h2>
         @if ($topContributors->isEmpty())
-            <p>No top contributors found.</p>
+            <p class="text-gray-600">No top contributors found.</p>
         @else
-            <ul class="list-group">
+            <ul class="space-y-4">
                 @foreach ($topContributors as $user)
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ $user->name }}
-                    <span class="badge bg-primary rounded-pill">{{ $user->words_count }} contributions</span>
+                <li class="p-4 bg-white rounded-lg shadow flex justify-between items-center">
+                    <span class="text-gray-800 font-medium">{{ $user->name }}</span>
+                    <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">{{ $user->words_count }} contributions</span>
                 </li>
                 @endforeach
             </ul>
