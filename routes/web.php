@@ -26,6 +26,9 @@ if (app()->environment('production')) {
 }
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/words', [WordController::class, 'index'])->name('words.index');
+//Searches for words
+Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 
 Route::middleware($middleware)->group(function () {
     //Profile
@@ -35,16 +38,12 @@ Route::middleware($middleware)->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
     //Words
-    Route::get('/words', [WordController::class, 'index'])->name('words.index');
     Route::get('/words/create', [WordController::class, 'create'])->name('words.create');
     Route::post('/words', [WordController::class, 'store'])->name('words.store');
     //Edit and delete words
     Route::get('/words/{word}/edit', [WordController::class, 'edit'])->name('words.edit');
     Route::put('/words/{word}', [WordController::class, 'update'])->name('words.update');
     Route::delete('/words/{word}', [WordController::class, 'destroy'])->name('words.destroy');
-
-    //Searches for words
-    Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 
     Route::post('/words/{word}/meanings', [MeaningController::class, 'store'])->name('meanings.store');
     
