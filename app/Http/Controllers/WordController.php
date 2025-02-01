@@ -14,14 +14,18 @@ class WordController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $query = Word::with('user')->latest();
 
-        if ($search) {
-            $query->where('word', 'like', '%' . $search . '%')
-                ->orWhere('meaning', 'like', '%' . $search . '%');
-        }
-
-        $words = $query->paginate(10);
+        $words = Word::with(['user', 'meanings'])
+        ->where(function ($query) use ($search) {
+            if ($search) {
+                $query->where('word', 'like', "%{$search}%")
+                    ->orWhereHas('meanings', function ($meaningQuery) use ($search) {
+                        $meaningQuery->where('meaning', 'like', "%{$search}%");
+                    });
+            }
+        })
+        ->latest()
+        ->paginate(10);
 
         return view('words.index', compact('words', 'search'));
     }
