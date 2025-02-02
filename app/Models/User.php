@@ -74,8 +74,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->reputationLogs()->create([
             'change' => $points,
             'reason' => $reason,
-            'related_id' => $related ? $related->id : null,
-            'related_type' => $related ? get_class($related) : null,
+            'related_id' => is_object($related) ? $related->id : $related, // Handle both cases
+            'related_type' => is_object($related) ? get_class($related) : null,
         ]);
 
     }
