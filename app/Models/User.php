@@ -70,12 +70,16 @@ class User extends Authenticatable implements MustVerifyEmail
             throw new InvalidArgumentException('Invalid related argument type.');
         }
 
+        if (is_int($related)) {
+            $related = Meaning::find($related); // Replace with the correct model if it's not 'Meaning'
+        }
+
         // Log the reputation change
         $this->reputationLogs()->create([
             'change' => $points,
             'reason' => $reason,
-            'related_id' => is_object($related) ? $related->id : $related, // Handle both cases
-            'related_type' => is_object($related) ? get_class($related) : null,
+            'related_id' => $related ? $related->id : null,
+            'related_type' => $related ? get_class($related) : null,
         ]);
 
     }
