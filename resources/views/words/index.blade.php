@@ -12,7 +12,13 @@
     </form>
 
     @if ($words->isEmpty())
-        <div class="alert alert-warning">No words found.</div>
+    <div class="mt-6 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
+            <p>No results found for <strong>"{{ $search }}"</strong>.</p>
+            <p>Would you like to contribute a new definition?</p>
+            <a href="{{ route('words.create', ['word' => $search]) }}" class="mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                Add "{{ $search }}"
+            </a>
+    </div>
     @else
         @foreach ($words as $word)
             <div class="card my-3">

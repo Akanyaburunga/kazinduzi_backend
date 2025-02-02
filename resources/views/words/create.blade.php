@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-3">
             <label for="word" class="form-label">Word</label>
-            <input type="text" name="word" id="word" class="form-control" required>
+            <input type="text" name="word" value="{{ request('word') }}" id="word" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="meaning" class="form-label">Meaning</label>
