@@ -59,12 +59,12 @@
                 @foreach ($recentContributions as $contribution)
                 <div class="card shadow-sm">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $word->word }}</h5>
-                                <p class="card-text">{{ Str::limit($word->meanings->first()->meaning, 120) }}</p>
+                                <h5 class="card-title">{{ $contribution->word }}</h5>
+                                <p class="card-text">{{ Str::limit($contribution->meanings->first()->meaning, 120) }}</p>
                                 <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Learn More</a>
                             </div>
                             <div class="card-footer text-muted">
-                                Added on {{ $word->created_at->format('F j, Y') }}
+                                Added on {{ $contribution->created_at->format('F j, Y') }}
                             </div>
                 </div>
                 @endforeach
