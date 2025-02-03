@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\MeaningController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\LeaderboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,8 @@ Route::middleware($middleware)->group(function () {
 
 Route::get('/words/{word}', [WordController::class, 'show'])->name('words.show');
 Route::get('/search', [WordController::class, 'search'])->name('words.search');
+Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 
 require __DIR__.'/auth.php';

@@ -32,6 +32,12 @@
                         {{ __('Browse') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('leaderboard.index')" :active="request()->routeIs('leaderboard.index')">
+                        {{ __('🏆 Leaderboard') }}
+                    </x-nav-link>
+                </div>
                 
             </div>
 
@@ -128,6 +134,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('words.index')" :active="request()->routeIs('words.index')">
                 {{ __('Browse') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('leaderboard.index')" :active="request()->routeIs('leaderboard.index')">
+                {{ __('🏆 Leaderboard') }}
             </x-responsive-nav-link>
         </div>
 

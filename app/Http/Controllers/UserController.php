@@ -15,5 +15,11 @@ class UserController extends Controller
 
         return view('dashboard', compact('user', 'contributions', 'referrals'));
     }
+
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
+    }
+    
 }
 
