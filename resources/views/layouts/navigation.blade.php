@@ -158,4 +158,10 @@
         </div>
         @endauth
     </div>
+
+    <!-- Dark Mode Toggle -->
+    <!-- <button id="dark-mode-toggle" class="btn btn-outline-secondary">
+    🌙 Dark Mode
+    </button>
+    -->
 </nav>

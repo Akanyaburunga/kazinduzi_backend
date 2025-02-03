@@ -26,6 +26,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -66,5 +68,32 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("dark-mode-toggle");
+        const body = document.body;
+
+        // Check if dark mode was previously enabled
+        if (localStorage.getItem("dark-mode") === "enabled") {
+            body.classList.add("dark-mode");
+            toggleButton.textContent = "☀️ Light Mode";
+        }
+
+        toggleButton.addEventListener("click", function () {
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                localStorage.setItem("dark-mode", "disabled");
+                toggleButton.textContent = "🌙 Dark Mode";
+            } else {
+                body.classList.add("dark-mode");
+                localStorage.setItem("dark-mode", "enabled");
+                toggleButton.textContent = "☀️ Light Mode";
+            }
+        });
+    });
+</script>
+
+
     </body>
 </html>
