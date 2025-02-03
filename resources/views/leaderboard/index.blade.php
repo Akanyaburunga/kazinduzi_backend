@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container my-4">
-    <h1 class="text-center mb-4">🏆 Leaderboard</h1>
+    <h1 class="text-center display-6 text-primary">🏆 Our leading contributors</h1>
     <div class="table-responsive">
         <table class="table table-hover leaderboard-table">
             <thead class="table-dark">
