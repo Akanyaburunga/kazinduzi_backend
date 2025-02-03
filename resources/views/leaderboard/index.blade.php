@@ -23,7 +23,8 @@
                             </strong>
                         </td>
                         <td>
-                            <img src="{{ $user->avatar ?? asset('images/default-avatar.png') }}" alt="Avatar" class="avatar">
+                        <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim($user->email))) }}?s=120&d=mp" 
+                        class="rounded-circle mb-3" alt="User Avatar">
                             <a href="{{ route('users.show', $user->id) }}" class="text-decoration-none">{{ $user->name }}</a>
                         </td>
                         <td><strong>{{ $user->reputation }}</strong> points</td>
