@@ -106,5 +106,18 @@ class WordController extends Controller
         return redirect()->route('dashboard')->with('success', 'Word deleted successfully!');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // Perform the search
+        $results = Word::with('meanings')
+                    ->where('word', 'like', '%' . $query . '%')
+                    ->get();
+
+        return view('words.search-results', compact('results', 'query'));
+    }
+
+
 
 }

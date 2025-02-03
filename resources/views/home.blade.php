@@ -1,48 +1,96 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">Welcome to Kazinduzi!</h1>
+<div class="container">
+    <!-- Hero Section with Search Bar -->
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-4 text-primary">Welcome Kazinduzi</h1>
+            <p class="lead text-muted">Define and explore words and their meanings, contributed by people like you!</p>
+            <form action="{{ route('words.search') }}" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="query" placeholder="Search for words..." aria-label="Search for words">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    <!-- Recent Contributions -->
-    <section class="mb-12">
-        <h2 class="text-2xl font-semibold mb-4">Recent Contributions</h2>
-        @if ($recentWords->isEmpty())
-            <p class="text-gray-600">No recent contributions found.</p>
-        @else
-            <ul class="space-y-4">
-                @foreach ($recentWords as $word)
-                <li class="p-4 bg-white rounded-lg shadow flex flex-col">
-                    <a href="{{ route('words.show', $word) }}" class="text-xl font-medium text-blue-600 hover:underline">
-                        {{ $word->word }}
-                    </a>
-                    <p class="text-gray-700 mt-2">{{ $word->meanings->first()->meaning ?? 'No meaning available' }}</p>
-                    <small class="text-gray-500 mt-1">By {{ optional($word->user)->name }} on {{ $word->created_at->format('F j, Y') }}</small>
-                </li>
+    <!-- Featured Words Section -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="h3 mb-3 text-muted">Featured Words</h2>
+            <div class="card-deck">
+                @foreach ($featuredWords as $word)
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $word->word }}</h5>
+                            <p class="card-text">{{ Str::limit($word->meanings->first()->meaning, 100) }}</p>
+                            <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">View</a>
+                        </div>
+                    </div>
                 @endforeach
-            </ul>
-            <!-- Pagination Links -->
-            <div class="mt-6">
-                {{ $recentWords->links('pagination::tailwind') }}
             </div>
-        @endif
-    </section>
+        </div>
+    </div>
 
-    <!-- Top Contributors -->
-    <section>
-        <h2 class="text-2xl font-semibold mb-4">Top Contributors</h2>
-        @if ($topContributors->isEmpty())
-            <p class="text-gray-600">No top contributors found.</p>
-        @else
-            <ul class="space-y-4">
-                @foreach ($topContributors as $user)
-                <li class="p-4 bg-white rounded-lg shadow flex justify-between items-center">
-                    <span class="text-gray-800 font-medium">{{ $user->name }}</span>
-                    <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">{{ $user->words_count }} contributions</span>
-                </li>
+    <!-- Trending Words Section -->
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="h3 mb-3 text-muted">Trending Words</h2>
+            <ul class="list-group">
+                @foreach ($trendingWords as $word)
+                    <li class="list-group-item">
+                        <strong>{{ $word->word }}</strong>
+                        <span class="text-muted"> - {{ $word->created_at->diffForHumans() }}</span>
+                    </li>
                 @endforeach
             </ul>
-        @endif
-    </section>
+        </div>
+    </div>
+
+    <!-- Recent Contributions Section -->
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="h3 mb-3 text-muted">Recent Contributions</h2>
+            <ul class="list-group">
+                @foreach ($recentContributions as $contribution)
+                <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $word->word }}</h5>
+                                <p class="card-text">{{ Str::limit($word->meanings->first()->meaning, 120) }}</p>
+                                <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Learn More</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Added on {{ $word->created_at->format('F j, Y') }}
+                            </div>
+                </div>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <!-- Top Contributors Section -->
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="h3 mb-3 text-muted">Top Contributors</h2>
+            <div class="list-group">
+                @foreach ($topContributors as $contributor)
+                <a href="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span>{{ $contributor->name }}</span>
+                            <span class="badge bg-primary">{{ $contributor->reputation }}</span>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action for Contributions -->
+    <div class="text-center my-5">
+        <a href="{{ route('words.create') }}" class="btn btn-success btn-lg">Start Contributing</a>
+    </div>
+
 </div>
 @endsection

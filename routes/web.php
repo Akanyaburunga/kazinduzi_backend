@@ -54,5 +54,7 @@ Route::middleware($middleware)->group(function () {
 });
 
 Route::get('/words/{word}', [WordController::class, 'show'])->name('words.show');
+Route::get('/search', [WordController::class, 'search'])->name('words.search');
+
 
 require __DIR__.'/auth.php';

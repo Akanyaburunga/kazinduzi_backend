@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-        <loc>http://localhost</loc>
-        <lastmod>2025-01-27T20:51:07+00:00</lastmod>
+        <loc>http://127.0.0.1:8001</loc>
+        <lastmod>2025-02-03T10:31:56+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
             </url>
     <url>
-        <loc>http://localhost/words/amahera</loc>
+        <loc>http://127.0.0.1:8001/words/amahera</loc>
         <lastmod>2025-01-15T11:35:31+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/ingoma</loc>
+        <loc>http://127.0.0.1:8001/words/ingoma</loc>
         <lastmod>2025-01-15T11:40:51+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/imigani</loc>
+        <loc>http://127.0.0.1:8001/words/imigani</loc>
         <lastmod>2025-01-18T22:43:38+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/ishano</loc>
+        <loc>http://127.0.0.1:8001/words/ishano</loc>
         <lastmod>2025-01-18T23:17:45+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/akabenzi</loc>
+        <loc>http://127.0.0.1:8001/words/akabenzi</loc>
         <lastmod>2025-01-26T15:43:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/ingona</loc>
+        <loc>http://127.0.0.1:8001/words/ingona</loc>
         <lastmod>2025-01-27T07:49:15+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/akayabu</loc>
+        <loc>http://127.0.0.1:8001/words/akayabu</loc>
         <lastmod>2025-01-27T08:30:19+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/uburimiro</loc>
+        <loc>http://127.0.0.1:8001/words/uburimiro</loc>
         <lastmod>2025-01-27T08:33:43+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://localhost/words/impene</loc>
+        <loc>http://127.0.0.1:8001/words/impene</loc>
         <lastmod>2025-01-27T08:40:34+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://127.0.0.1:8001/words/amakara</loc>
+        <lastmod>2025-02-02T22:32:50+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
             </url>
