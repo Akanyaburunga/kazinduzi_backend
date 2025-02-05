@@ -44,14 +44,14 @@ As you contribute, you’ll also be able to see how your actions impact the grow
 ### **Getting Started**
 To start contributing, follow these steps:
 
-1. **Sign Up**: Go to [Makira Signup Page](https://github.com/blasius/makira_backend_new) and create an account.
+1. **Sign Up**: Go to [Makira Signup Page](https://makira.org/register/) and create an account.
 2. **Start Contributing**: Add new words and their meanings or vote on existing ones.
 3. **Invite Friends**: Use your unique referral code to invite others to the platform and earn rewards!
 
 ---
 
 ### **Stay Connected**
-If you have any questions or suggestions, feel free to reach out to us at [support@makira.com] or follow us on our social media pages for updates and news.
+If you have any questions or suggestions, feel free to reach out to us at [support@makira.org] or follow us on our social media pages for updates and news.
 
 ---
 
