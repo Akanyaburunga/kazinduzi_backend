@@ -67,3 +67,23 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
+#search-results {
+    position: relative;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#search-results li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#search-results li:hover {
+    background-color: #f8f9fa;
+}
+

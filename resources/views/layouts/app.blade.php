@@ -30,6 +30,8 @@
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Include jQuery locally -->
+        <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     </head>
     <body>
         <div class="container my-5">
@@ -71,30 +73,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     
-        <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("dark-mode-toggle");
-        const body = document.body;
-
-        // Check if dark mode was previously enabled
-        if (localStorage.getItem("dark-mode") === "enabled") {
-            body.classList.add("dark-mode");
-            toggleButton.textContent = "☀️ Light Mode";
-        }
-
-        toggleButton.addEventListener("click", function () {
-            if (body.classList.contains("dark-mode")) {
-                body.classList.remove("dark-mode");
-                localStorage.setItem("dark-mode", "disabled");
-                toggleButton.textContent = "🌙 Dark Mode";
-            } else {
-                body.classList.add("dark-mode");
-                localStorage.setItem("dark-mode", "enabled");
-                toggleButton.textContent = "☀️ Light Mode";
-            }
-        });
-    });
-</script>
 @include('layouts.footer')
     </body>
 </html>

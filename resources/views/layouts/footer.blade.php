@@ -30,4 +30,12 @@
         <small>&copy; {{ date('Y') }} Makira. All rights reserved.</small>
     </div>
 </footer>
+
+<!-- JS scripts -->
+<!-- Scripts -->
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+<!-- Include jQuery locally -->
+<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('js/autocomplete.js') }}"></script>
+
 <!-- End Footer Section -->

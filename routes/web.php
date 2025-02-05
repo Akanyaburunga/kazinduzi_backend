@@ -30,6 +30,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/words', [WordController::class, 'index'])->name('words.index');
 //Searches for words
 Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
+Route::get('/words/autocomplete', [WordController::class, 'autocomplete'])->name('words.autocomplete');
 
 Route::middleware($middleware)->group(function () {
     //Profile

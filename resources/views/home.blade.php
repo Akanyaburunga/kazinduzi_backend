@@ -11,7 +11,8 @@
         <p class="lead text-muted">Imare amazinda nawe uyamare abandi mu guterera ico uzi kuri Kazinduzi!</p>
             <form action="{{ route('words.search') }}" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="query" placeholder="Search for words..." aria-label="Search for words">
+                    <input type="text" class="form-control" id="search-input" name="query" placeholder="Search for words..." aria-label="Search for words" autocomplete="off">
+                    <ul id="search-results" class="list-group mt-2" style="display: none;"></ul>
                     <button class="btn btn-primary" type="submit">Search</button>
                 </div>
             </form>
@@ -93,4 +94,42 @@
     </div>
 
 </div>
+
+<!-- Put this just before the closing </body> tag -->
+<script>
+    $(document).ready(function() {
+        $('#search-input').on('input', function() {
+            var query = $(this).val();
+
+            if (query.length > 0) {
+                $.ajax({
+                    url: "{{ route('words.autocomplete') }}",  // The route for autocomplete
+                    type: "GET",
+                    data: { query: query },
+                    success: function(data) {
+                        var results = data.results;
+                        $('#search-results').empty().show();
+                        if (results.length > 0) {
+                            results.forEach(function(result) {
+                                $('#search-results').append('<li class="list-group-item"><a href="/words/' + result.slug + '">' + result.word + '</a></li>');
+                            });
+                        } else {
+                            $('#search-results').append('<li class="list-group-item">No results found</li>');
+                        }
+                    }
+                });
+            } else {
+                $('#search-results').empty().hide();
+            }
+        });
+
+        // Hide search results when clicking outside
+        $(document).click(function(e) {
+            if (!$(e.target).closest('#search-input').length) {
+                $('#search-results').empty().hide();
+            }
+        });
+    });
+</script>
+
 @endsection

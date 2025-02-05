@@ -118,6 +118,16 @@ class WordController extends Controller
         return view('words.search-results', compact('results', 'query'));
     }
 
+    public function autocomplete(Request $request)
+    {
+        $query = $request->get('query');
 
+        // Fetch words that match the input query
+        $words = Word::where('word', 'like', "%$query%")
+                     ->limit(10)
+                     ->get(['word', 'slug']);  // You can add more fields if necessary
+
+        return response()->json(['results' => $words]);
+    }
 
 }
