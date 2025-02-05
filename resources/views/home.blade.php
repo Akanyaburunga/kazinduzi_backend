@@ -78,7 +78,7 @@
             <h2 class="h3 mb-3 text-muted">Top Contributors</h2>
             <div class="list-group">
                 @foreach ($topContributors as $contributor)
-                <a href="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="{{ route('users.show', $contributor->id) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             <span>{{ $contributor->name }}</span>
                             <span class="badge bg-primary">{{ $contributor->reputation }}</span>
                 </a>
