@@ -14,8 +14,8 @@ class LeaderboardController extends Controller
     public function index(Request $request, $filter = 'all-time')
     {
 
-    // Default to 'all_time' if no filter is provided
-    $filter = $request->input('filter', 'all_time');
+    // Default to 'this_week' if no filter is provided
+    $filter = $request->input('filter', 'this_week');
 
     // Define the start and end dates for each filter
     switch ($filter) {
@@ -42,17 +42,31 @@ class LeaderboardController extends Controller
             break;
     }
 
-    // Fetch users with total reputation, total words, and total meanings contributed
-    $users = User::leftJoin('reputation_logs', 'users.id', '=', 'reputation_logs.user_id')
-        ->leftJoin('words', 'users.id', '=', 'words.user_id') // Join to count words
-        ->leftJoin('meanings', 'users.id', '=', 'meanings.user_id') // Join to count meanings
-        ->select('users.id', 'users.name', 'users.email', 'users.reputation',
-            DB::raw('COALESCE(SUM(reputation_logs.change), 0) AS total_reputation'),
-            DB::raw('COUNT(DISTINCT words.id) AS total_words'),
-            DB::raw('COUNT(DISTINCT meanings.id) AS total_meanings')
-        )
-        ->whereBetween('reputation_logs.created_at', [$startDate, $endDate]) // Apply the date filter
-        ->groupBy('users.id', 'users.name', 'users.email', 'users.reputation')
+    // Fetch users with correctly computed total reputation, total words, and total meanings
+    $users = User::select('users.id', 'users.name', 'users.reputation')
+        // Get total reputation using a subquery
+        ->selectSub(function ($query) use ($startDate, $endDate) {
+            $query->from('reputation_logs')
+                ->whereColumn('reputation_logs.user_id', 'users.id')
+                ->whereBetween('reputation_logs.created_at', [$startDate, $endDate])
+                ->selectRaw('COALESCE(SUM(reputation_logs.change), 0)');
+        }, 'total_reputation')
+
+        // Get total words contributed by the user
+        ->selectSub(function ($query) {
+            $query->from('words')
+                ->whereColumn('words.user_id', 'users.id')
+                ->selectRaw('COUNT(*)');
+        }, 'total_words')
+
+        // Get total meanings contributed by the user
+        ->selectSub(function ($query) {
+            $query->from('meanings')
+                ->whereColumn('meanings.user_id', 'users.id')
+                ->selectRaw('COUNT(*)');
+        }, 'total_meanings')
+
+        ->havingRaw('total_reputation > 0') // Exclude users with zero or negative reputation
         ->orderByDesc('total_reputation')
         ->paginate(10);
 
