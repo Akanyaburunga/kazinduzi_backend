@@ -3,71 +3,57 @@
 @section('title', 'Leaderboard')
 
 @section('content')
-<div class="container my-4">
-    <h1 class="text-center display-6 text-primary">🏆 Our leading contributors</h1>
+<div class="container">
+    <h1 class="text-center mb-4">🏆 Leaderboard</h1>
+
+    <!-- Filter Form with predefined options -->
+    <div class="d-flex justify-content-center mb-4">
+        <form method="GET" action="{{ route('leaderboard.index') }}">
+            <select name="filter" class="form-control" onchange="this.form.submit()">
+                <option value="today" {{ $filter == 'today' ? 'selected' : '' }}>Today</option>
+                <option value="this_week" {{ $filter == 'this_week' ? 'selected' : '' }}>This Week</option>
+                <option value="this_month" {{ $filter == 'this_month' ? 'selected' : '' }}>This Month</option>
+                <option value="this_year" {{ $filter == 'this_year' ? 'selected' : '' }}>This Year</option>
+                <option value="all_time" {{ $filter == 'all_time' ? 'selected' : '' }}>All Time</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- Leaderboard Table -->
     <div class="table-responsive">
-        <table class="table table-hover leaderboard-table">
-            <thead class="table-dark">
+        <table class="table table-striped table-hover text-center">
+            <thead class="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>User</th>
-                    <th>Reputation</th>
+                    <th>Email</th>
+                    <th>Total Reputation</th>
+                    <th>Total Words</th>
+                    <th>Total Meanings</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($topUsers as $index => $user)
-                    <tr class="{{ $index == 0 ? 'gold' : ($index == 1 ? 'silver' : ($index == 2 ? 'bronze' : '')) }}">
-                        <td>
-                            <strong>
-                                @if($index == 0) 🥇 @elseif($index == 1) 🥈 @elseif($index == 2) 🥉 @else #{{ $index + 1 }} @endif
-                            </strong>
-                        </td>
-                        <td>
-                        <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim($user->email))) }}?s=120&d=mp" 
-                        class="rounded-circle mb-3" alt="User Avatar">
-                            <a href="{{ route('users.show', $user->id) }}" class="text-decoration-none">{{ $user->name }}</a>
-                        </td>
-                        <td><strong>{{ $user->reputation }}</strong> points</td>
+                @forelse($users as $index => $user)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+                        <td>{{ $user->email }}</td>
+                        <td><strong>{{ $user->total_reputation }}</strong></td>
+                        <td>{{ $user->total_words }}</td>
+                        <td>{{ $user->total_meanings }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-muted">No users found for the selected filter.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center">
+        {{ $users->links() }}
+    </div>
 </div>
-
-<style>
-    .leaderboard-table {
-        width: 100%;
-        max-width: 800px;
-        margin: auto;
-        background: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .table-dark {
-        background-color: #222;
-        color: white;
-    }
-
-    .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
-
-    .gold { background: #FFD700; color: black; }
-    .silver { background: #C0C0C0; color: black; }
-    .bronze { background: #CD7F32; color: black; }
-
-    tr.gold td, tr.silver td, tr.bronze td {
-        font-weight: bold;
-    }
-
-    tbody tr:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-</style>
 @endsection

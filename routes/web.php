@@ -57,7 +57,7 @@ Route::middleware($middleware)->group(function () {
 Route::get('/words/{word}', [WordController::class, 'show'])->name('words.show');
 Route::get('/search', [WordController::class, 'search'])->name('words.search');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
+Route::get('/leaderboard/{filter?}', [LeaderboardController::class, 'index'])->name('leaderboard');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-
 
 require __DIR__.'/auth.php';
