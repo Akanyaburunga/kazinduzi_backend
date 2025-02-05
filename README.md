@@ -1,66 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Makira: A Knowledge Sharing Platform for Kirundi
 
-## About Laravel
+**Makira** is an online platform designed to collect, share, and expand knowledge in the Kirundi language. Its goal is to create an accessible and comprehensive resource for Kirundi speakers, learners, and enthusiasts to collaborate and preserve the richness of their language, while also making it easier for everyone to contribute their knowledge.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### **What is Makira?**
+Makira is a collaborative encyclopedia-style platform where users can contribute by adding words and their meanings in Kirundi. This platform aims to build a living dictionary that will be accessible to everyone who speaks, learns, or is interested in Kirundi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The project focuses on:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Gathering knowledge**: Users can submit words and their meanings in Kirundi.
+- **Preserving Kirundi**: By contributing, users help preserve and share a major part of their cultural heritage.
+- **Collaboration**: The platform allows users to work together, share knowledge, and improve the collective understanding of Kirundi.
+- **Searchable content**: The platform provides an easy-to-use search feature to help users find specific words, meanings, or related content.
 
-## Learning Laravel
+### **How Does It Help the Community?**
+Makira offers a valuable tool for those interested in learning Kirundi, from beginners to advanced learners. The platform fosters collaboration between different generations, making it an ideal resource for:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Language preservation**: By documenting words and meanings, we create a lasting record of Kirundi language, which may otherwise be lost over time.
+- **Education**: Students, teachers, and language enthusiasts can use the platform as an educational tool for learning and understanding Kirundi.
+- **Cultural empowerment**: The project fosters a sense of pride and ownership over the Kirundi language and helps share it with a wider audience, both locally and internationally.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### **How Anyone Can Contribute**
+The platform allows anyone to contribute, whether you are a native speaker or someone learning the language. Here’s how you can contribute:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Create an Account**: Sign up by providing your name and email.
+2. **Add Words**: After logging in, you can submit new words and their meanings in Kirundi.
+3. **Share Knowledge**: If you know the meaning of a word, submit it to help others understand it better.
+4. **Vote on Meanings**: You can upvote or downvote meanings submitted by others, ensuring the quality of the content.
+5. **Invite Others**: Spread the word and invite others to join the platform to help grow the community.
 
-## Laravel Sponsors
+### **Incentives for Contributors**
+Makira rewards contributors for their valuable input in building and expanding the dictionary. The platform includes a **reputation system** where contributors can earn reputation points for their activities:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Adding Words**: Contributors gain reputation points each time they add a new word to the dictionary.
+- **Adding Meanings**: Contributors who submit meanings for words also earn reputation points.
+- **Voting on Contributions**: Voting up useful and accurate contributions also grants contributors additional reputation points.
+- **Referral Program**: Invite friends to join the platform and earn reputation when they verify their email.
+  
+As you contribute, you’ll also be able to see how your actions impact the growth of the platform through an activity log. Those with the highest reputation will gain visibility on the **Leaderboard**, encouraging healthy competition and continuous contribution.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### **Getting Started**
+To start contributing, follow these steps:
 
-## Contributing
+1. **Sign Up**: Go to [Makira Signup Page] and create an account.
+2. **Start Contributing**: Add new words and their meanings or vote on existing ones.
+3. **Invite Friends**: Use your unique referral code to invite others to the platform and earn rewards!
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+### **Stay Connected**
+If you have any questions or suggestions, feel free to reach out to us at [support@makira.com] or follow us on our social media pages for updates and news.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### **Contribute to the Project**
+This project is open source. Feel free to contribute to the development of the platform by submitting issues, pull requests, or suggestions. You can find the source code in the [Repository](https://github.com/blasius/makira_backend_new).
