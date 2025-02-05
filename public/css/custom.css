@@ -33,3 +33,37 @@ body {
 .dark-mode .btn:hover {
     background-color: #555;
 }
+
+footer {
+    background-color: #343a40; /* Dark background for footer */
+    color: #fff; /* White text */
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Custom container for footer */
+.container-custom {
+    max-width: 60%; /* Limit the width to 60% */
+    margin: 0 auto; /* Center the container */
+}
+
+footer {
+    background-color: #343a40; /* Dark background for footer */
+    color: #fff; /* White text */
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

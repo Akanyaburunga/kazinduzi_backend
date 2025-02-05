@@ -64,6 +64,8 @@
             </header>
         @endif
                 @yield('content')
+
+                
             </div>
             </div>
         </div>
@@ -93,7 +95,6 @@
         });
     });
 </script>
-
-
+@include('layouts.footer')
     </body>
 </html>
