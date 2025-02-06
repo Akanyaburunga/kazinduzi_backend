@@ -33,11 +33,14 @@ Uru rubuga rurorohereza uwo wese yipfuza guterera, waba uwusanzwe azi Ikirundi c
 **Ikidari ku baterera**
 
 **Makira** iraninahaza abaterera batitangiriye itama mu kwagura kazinduzi ku ngurukanabumenyi rusangi. Uwuterera cane kandi aterera ibijanye bishimwa n’umuryango araninahazwa ku rubuga rwacu mu guhabwa amanota: 
+
 **Mu guterera amajambo**: ijambo ryose ushira muri kazinduzi ya makira riguha amanota.
 **Guterera insiguro**:  Gushiramwo insiguro y’ijambo na vyo biguha amanota.
 **Guha amanota ivyatererewe**: Gutora insiguro nziza zibereye navyo bikwongera amanota.
 **Gutumira abagenzi**:  utumiye abagenzi navyo igihe binjiye ku rubuga bikwongera amanota
-Igikorwa uzokora cose kizoguma kigaragara ubone intererano urikoutratanga mu kwagura umuryango w’Abarundi b’umutima bipfuza kubona imico, akaranga, ndetse n’ururimi rwabo bishwara isi ku nguvu zacu twese. Abazoba bafise amanota menshi bazoguma baninahazwa ku rubuga rwa Makira.
+
+Igikorwa uzokora cose kizoguma kigaragara ubone intererano urikoutratanga mu kwagura umuryango w’Abarundi b’umutima bipfuza kubona imico, akaranga, ndetse n’ururimi rwabo bishwara isi ku nguvu zacu twese. Abazoba bafise amanota menshi bazoguma baninahazwa ku rubuga rwa Makira. 
+
 ---
 **Twagiye** 
 Wipfuza gutangura guterera, kurikira izi ntambuko:
