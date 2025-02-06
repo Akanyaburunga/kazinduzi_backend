@@ -1,59 +1,55 @@
 
-# Makira: A Knowledge Sharing Platform for Kirundi
+# Makira: Urubuga rwo guhanahana ubumenyi ku mico, akaranga n’ururimi rw’Ikirundi
 
-**Makira** is an online platform designed to collect, share, and expand knowledge in the Kirundi language. Its goal is to create an accessible and comprehensive resource for Kirundi speakers, learners, and enthusiasts to collaborate and preserve the richness of their language, while also making it easier for everyone to contribute their knowledge.
+**Makira** ni urubuga ngurukanabumenyi rwaganewe kwegeranya, gusabikanya no kugwiza ubumenyi ku mico, akaranga k’Abarundi hamwe n’ururimi rw’Ikirundi. Intego yarwo ni kworohereza abantu kuronka ubumenyi ku rurimi rw’Ikirundi, imico, imigenzo n’akaranga mu buryo bworoshe kandi butahuritse, haba ku basanzwe bavuga Ikirundi ndetse n’abaciga. Ruraha kandi akaryo uwo wese yipfuza guterera agacumu k’ubumwe mu kubungabunga ubutunzi n’akanovera k’Ururimi rw’Ikirundi, umwe wese ku bumenyi afise.   
 
-### **What is Makira?**
-Makira is a collaborative encyclopedia-style platform where users can contribute by adding words and their meanings in Kirundi. This platform aims to build a living dictionary that will be accessible to everyone who speaks, learns, or is interested in Kirundi.
+**Makira ni iki?**
 
-The project focuses on:
+Makira ni urubuga rusangi aho umuntu wese azi Ikirundi n’imico, imigenzo n’akaranga k’Abarundi ashobora guterera ubumenyi n’amajambo. Kugira duteze imbere ururimi, umwe wese ahamagariwe guterera amajambo n’insiguro yayo mu Kirundi. Uru rubuga rugamije kwubaka kazinduzi iri ku ngurukanabumenyi akndi isangiwe na bose, baba abazi ncanke abiga ikirundi. 
+Uwu mugambi ushingiye kuri izi nkingi nkurunkuru:
+**Kwegeranya ubumenyi**:  umuntu wese ashobora guterera amajambo y’Ikirundi n’insiguro yayo.
+**Kubungabunga Ikirundi**:  uwuterereye wese kuri Makira aba afashije lu kubungabunga no gusabikanya iragi twarazwe ari rwo rurimi ruduhuza. 
+**Kwunganiranira**: uru rubuga ruremerera abarukoresha gufashanya, basabikanya ubumenyi, no kuryohorera hamwe akanovera k’Ururimi twasigiwe na Sogokuru. 
+**Kworohereza abarondezi**: runo rubuga rurorohereza abantu bipfuza kuronka no kumenya amajambo n’insiguro yayo canke imico n’imigenzo ijanye na vyo. 
 
-- **Gathering knowledge**: Users can submit words and their meanings in Kirundi.
-- **Preserving Kirundi**: By contributing, users help preserve and share a major part of their cultural heritage.
-- **Collaboration**: The platform allows users to work together, share knowledge, and improve the collective understanding of Kirundi.
-- **Searchable content**: The platform provides an easy-to-use search feature to help users find specific words, meanings, or related content.
 
-### **How Does It Help the Community?**
-Makira offers a valuable tool for those interested in learning Kirundi, from beginners to advanced learners. The platform fosters collaboration between different generations, making it an ideal resource for:
+**Ni gute runo rubuga rufasha abarukoresha ?** 
 
-- **Language preservation**: By documenting words and meanings, we create a lasting record of Kirundi language, which may otherwise be lost over time.
-- **Education**: Students, teachers, and language enthusiasts can use the platform as an educational tool for learning and understanding Kirundi.
-- **Cultural empowerment**: The project fosters a sense of pride and ownership over the Kirundi language and helps share it with a wider audience, both locally and internationally.
+**Makira** ni intemere rusangi isangirwa n’abipfuza kwiga ikirundi, kuva ku batanguye kuciga n’abaconse bakivuka. Ni urubuga mpuzangeri rworosha ikiyago c’abato n’abakuru, rukagira uruhara ntangere mu: 
+**Kubungabunga ururimi**:  dushoboye kwegeranya amajambo n’insiguro yayo, tuzoba twubatse ikigega mbungabungakirundi na rirya urwo rurimi rwariko rugeramiwe. 
+**Kwigisha**:  abanyeshure, abigisha, n’abakunda ururimi bashobora gukoresha runo rubuga nk’isomero aho biga bakanigisha Ikirundi.
+**Kwiganzura bishitse**:  Makira ni urubuga ruje gufasha Abarundi kwiganzura bishitse mu gusangira guteza imbere ivyabo ku rwego rw’igihugu na mpuzamakungu. 
 
-### **How Anyone Can Contribute**
-The platform allows anyone to contribute, whether you are a native speaker or someone learning the language. Here’s how you can contribute:
+**Ni gute uwuvyipfuza aterera ?**
 
-1. **Create an Account**: Sign up by providing your name and email.
-2. **Add Words**: After logging in, you can submit new words and their meanings in Kirundi.
-3. **Share Knowledge**: If you know the meaning of a word, submit it to help others understand it better.
-4. **Vote on Meanings**: You can upvote or downvote meanings submitted by others, ensuring the quality of the content.
-5. **Invite Others**: Spread the word and invite others to join the platform to help grow the community.
+Uru rubuga rurorohereza uwo wese yipfuza guterera, waba uwusanzwe azi Ikirundi cane canke agerageza. Ng’uku uko bikorwa : 
+1.	**Kwugurura konti ku rubuga**:  iyandikishe mu kwandika izina n’agasandugu- baruwa ( imeyile).
+2.	**Terara amajambo**:  inyuma yo kwinjira mu rubuga nyezina, urashobora gutangura guterera amajambo y’Ikirundi n’insiguro yayo.
+3.	**Kwunganira**: Iyo ubonye insiguro itatanzwe neza, terera musi uzoba ukoze igikorwa ciza cane. 
+4.	**Guha amanota insiguro**: bivanye n’insiguro zatanzwe, ushobora kuziha amanota azibereye bigatuma abakoresha Makira bamenya insiguro iri yo n’iyitari yo. 
+5.	**Gutumira abandi**: ushobora gutumira abandi bagenzi mu kubasabikanya urwo rubuga kugira umuryango waguke.
 
-### **Incentives for Contributors**
-Makira rewards contributors for their valuable input in building and expanding the dictionary. The platform includes a **reputation system** where contributors can earn reputation points for their activities:
 
-- **Adding Words**: Contributors gain reputation points each time they add a new word to the dictionary.
-- **Adding Meanings**: Contributors who submit meanings for words also earn reputation points.
-- **Voting on Contributions**: Voting up useful and accurate contributions also grants contributors additional reputation points.
-- **Referral Program**: Invite friends to join the platform and earn reputation when they verify their email.
-  
-As you contribute, you’ll also be able to see how your actions impact the growth of the platform through an activity log. Those with the highest reputation will gain visibility on the **Leaderboard**, encouraging healthy competition and continuous contribution.
+**Ikidari ku baterera**
 
----
+**Makira** iraninahaza abaterera batitangiriye itama mu kwagura kazinduzi ku ngurukanabumenyi rusangi. Uwuterera cane kandi aterera ibijanye bishimwa n’umuryango araninahazwa ku rubuga rwacu mu guhabwa amanota: 
 
-### **Getting Started**
-To start contributing, follow these steps:
+**Mu guterera amajambo**: ijambo ryose ushira muri kazinduzi ya makira riguha amanota.
+**Guterera insiguro**:  Gushiramwo insiguro y’ijambo na vyo biguha amanota.
+**Guha amanota ivyatererewe**: Gutora insiguro nziza zibereye navyo bikwongera amanota.
+**Gutumira abagenzi**:  utumiye abagenzi navyo igihe binjiye ku rubuga bikwongera amanota
 
-1. **Sign Up**: Go to [Makira Signup Page](https://makira.org/register/) and create an account.
-2. **Start Contributing**: Add new words and their meanings or vote on existing ones.
-3. **Invite Friends**: Use your unique referral code to invite others to the platform and earn rewards!
+Igikorwa uzokora cose kizoguma kigaragara ubone intererano urikoutratanga mu kwagura umuryango w’Abarundi b’umutima bipfuza kubona imico, akaranga, ndetse n’ururimi rwabo bishwara isi ku nguvu zacu twese. Abazoba bafise amanota menshi bazoguma baninahazwa ku rubuga rwa Makira. 
 
 ---
-
-### **Stay Connected**
-If you have any questions or suggestions, feel free to reach out to us at [support@makira.org] or follow us on our social media pages for updates and news.
-
+**Twagiye** 
+Wipfuza gutangura guterera, kurikira izi ntambuko:
+1.	**Iyandikishe** kuri Makira Signup Page (https://makira.org/register/) wugurure ikonti y’umunyamuryango.
+2.	**Tangura guterera**:  Ongeramwo amajambo mashasha n’insiguro yayo canke uhe amanota ayamaze gutangwa. 
+3.	**Tumira abagenzi**:  tumira abagenzi baze mu muryango.
 ---
+**Tugumane**
+Ukagira akakubakiye canke intererano, ntiwitinye. Twandikire kuri [support@makira.org] canke udukurikirane ku mbuga hwaniro zacu aho tuja turashira bishasha.
 
-### **Contribute to the Project**
-This project is open source. Feel free to contribute to the development of the platform by submitting issues, pull requests, or suggestions. You can find the source code in the [Repository](https://github.com/blasius/makira_backend_new).
+**Guterera ku muzi w’umugambi**
+Igishitsi c’uyu mugambi cugururiwe bose. Ushobora kutwunganira mu guterera, gushikiriza amakenga n’ugusaba umuco. Mushobora guca hano mukaduterera agacumu k’ubumwe (https://github.com/blasius/makira_backend_new).
