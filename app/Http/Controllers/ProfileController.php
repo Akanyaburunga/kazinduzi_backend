@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -63,6 +64,33 @@ class ProfileController extends Controller
     {
         $logs = $user->reputationLogs()->latest()->paginate(10); // Show 10 logs per page
         return view('profile.show', compact('user', 'logs'));
+    }
+
+    public function change(Request $request)
+    {
+        $request->validate([
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user = auth()->user();
+
+        if ($request->hasFile('profile_picture')) {
+            // Delete old profile picture if exists
+            if ($user->profile_picture) {
+                Storage::delete('public/' . $user->profile_picture);
+            }
+
+            // Store new image
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $user->profile_picture = $path;
+            $user->save();
+        }
+
+        return redirect()->back()->with('success', 'Profile picture updated successfully.');
+    }
+
+    public function view() {
+        return view('profile.view');
     }
 
 }

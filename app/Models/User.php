@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'profile_picture',
     ];
 
     /**
@@ -108,6 +109,13 @@ class User extends Authenticatable implements MustVerifyEmail
     
         $this->referral_code = $code;
         $this->save();
+    }
+
+    public function getProfilePictureUrl()
+    {
+        return $this->profile_picture 
+            ? asset('storage/' . $this->profile_picture) 
+            : asset('images/default-profile.png');
     }
 
 }

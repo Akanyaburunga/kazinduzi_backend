@@ -34,10 +34,12 @@ Route::get('/words/autocomplete', [WordController::class, 'autocomplete'])->name
 
 Route::middleware($middleware)->group(function () {
     //Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/reputation', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::put('/profile/change', [ProfileController::class, 'change'])->name('profile.change');
+    Route::get('/profile/view', [ProfileController::class, 'view'])->name('profile.view');
 
     //Words
     Route::get('/words/create', [WordController::class, 'create'])->name('words.create');
