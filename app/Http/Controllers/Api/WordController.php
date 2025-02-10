@@ -15,15 +15,22 @@ class WordController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Word::query();
+        $query = Word::with(['meanings.user']); // ✅ Load meanings and contributor's user data
 
-        // 🔍 Check if there's a search query
+        // 🔍 Apply search filter if provided
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
             $query->where('word', 'LIKE', "%{$searchTerm}%");
         }
 
-        $words = $query->get(); // Retrieve matching words
+        $words = $query->get(); // Retrieve words with meanings
+
+        // Format the response to include contributor's name for each meaning
+        $words->each(function ($word) {
+            $word->meanings->each(function ($meaning) {
+                $meaning->contributor_name = $meaning->user->name; // Add contributor name
+            });
+        });
 
         return response()->json([
             'success' => true,
