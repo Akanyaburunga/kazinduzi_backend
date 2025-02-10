@@ -15,7 +15,7 @@ class WordController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Word::with(['meanings.user']); // ✅ Load meanings and contributor's user data
+        $query = Word::with(['meanings.user'])->orderBy('word', 'asc'); // ✅ Load meanings and contributor's user data
 
         // 🔍 Apply search filter if provided
         if ($request->has('search')) {
