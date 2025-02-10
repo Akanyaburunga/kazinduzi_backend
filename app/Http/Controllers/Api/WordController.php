@@ -11,11 +11,19 @@ use App\Http\Controllers\Controller;
 class WordController extends Controller
 {
     /**
-     * Display a listing of all words.
+     * Display a listing of words with search functionality.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $words = Word::all(); // Retrieve all words from the database
+        $query = Word::query();
+
+        // 🔍 Check if there's a search query
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where('word', 'LIKE', "%{$searchTerm}%");
+        }
+
+        $words = $query->get(); // Retrieve matching words
 
         return response()->json([
             'success' => true,

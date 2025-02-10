@@ -42,5 +42,5 @@ Route::prefix('users')->middleware('auth:sanctum', 'verified')->group(function (
 /**
  * 📖 Word & Meaning Management
  */
-// ✅ Get all words
+// ✅ Get all words with optional search query
 Route::get('/words', [WordController::class, 'index']);
