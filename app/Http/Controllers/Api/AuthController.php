@@ -8,6 +8,10 @@ use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerificationCodeMail; // Mail class
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -61,55 +65,87 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        // Validate request
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed'
         ]);
 
-        // Create user
+        // Generate 6-digit code
+        $verificationCode = mt_rand(100000, 999999);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'verification_code' => $verificationCode,
+            'verification_expires_at' => Carbon::now()->addMinutes(10) // Code expires in 10 min
         ]);
 
-        // Fire Registered event (Laravel will send a verification email)
-        event(new Registered($user));
+        // Send email
+        Mail::to($user->email)->send(new VerificationCodeMail($verificationCode));
 
         return response()->json([
-            'message' => 'User registered successfully. Please check your email for verification.',
+            'message' => 'Registration successful. A verification code has been sent to your email.'
         ], 201);
     }
 
-    public function verifyEmail(Request $request, $id, $hash)
+    public function verifyEmail(Request $request)
     {
-        $user = User::findOrFail($id);
+        $request->validate([
+            'email' => 'required|email',
+            'verification_code' => 'required|digits:6',
+        ]);
 
-        if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-            return response()->json(['message' => 'Invalid verification link.'], 400);
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
         }
 
-        if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Email already verified.'], 200);
+        // Check if code is correct and not expired
+        if ($user->verification_code !== $request->verification_code) {
+            return response()->json(['message' => 'Invalid verification code.'], 400);
         }
 
-        $user->markEmailAsVerified();
-        event(new Verified($user));
+        if (Carbon::now()->gt($user->verification_expires_at)) {
+            return response()->json(['message' => 'Verification code has expired.'], 400);
+        }
+
+        // Mark email as verified
+        $user->email_verified_at = Carbon::now();
+        $user->verification_code = null;
+        $user->verification_expires_at = null;
+        $user->save();
 
         return response()->json(['message' => 'Email verified successfully.'], 200);
     }
 
     // Resend Verification Email
-    public function resendVerificationEmail(Request $request)
+    public function resendVerificationCode(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        $request->validate(['email' => 'required|email']);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
+        }
+
+        if ($user->email_verified_at) {
             return response()->json(['message' => 'Email already verified.'], 200);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        // Generate new code
+        $verificationCode = mt_rand(100000, 999999);
+        $user->verification_code = $verificationCode;
+        $user->verification_expires_at = Carbon::now()->addMinutes(10);
+        $user->save();
 
-        return response()->json(['message' => 'Verification email resent.'], 200);
+        // Send email
+        Mail::to($user->email)->send(new VerificationCodeMail($verificationCode));
+
+        return response()->json(['message' => 'A new verification code has been sent.'], 200);
     }
+
 }
