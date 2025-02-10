@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationCodeMail; // Mail class
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App; // Import App facade
 
 class AuthController extends Controller
 {
@@ -83,7 +84,7 @@ class AuthController extends Controller
         ]);
 
         // Send email
-        Mail::to($user->email)->send(new VerificationCodeMail($user->verification_code));
+        $this->sendVerificationCode($user);
 
         return response()->json([
             'message' => 'Registration successful. A verification code has been sent to your email.'
@@ -143,9 +144,21 @@ class AuthController extends Controller
         $user->save();
 
         // Send email
-        Mail::to($user->email)->send(new VerificationCodeMail($verificationCode));
+        $this->sendVerificationCode($user);
 
         return response()->json(['message' => 'A new verification code has been sent.'], 200);
+    }
+
+    public function sendVerificationCode(User $user)
+    {
+        if (App::environment('production')) { 
+            // Send email only in production
+            Mail::to($user->email)->send(new VerificationCodeMail($user->verification_code));
+        } else {
+            // In dev mode, automatically mark the user as verified
+            $user->email_verified_at = now();
+            $user->save();
+        }
     }
 
 }
