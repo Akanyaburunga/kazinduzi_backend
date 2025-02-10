@@ -31,12 +31,15 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);        // User Login
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum'); // Logout
     Route::get('user', [AuthController::class, 'user'])->middleware('auth:sanctum'); // Get Authenticated User Info
+    //Email Verification
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
+    Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])->middleware('auth:sanctum');
 });
 
 /**
  * 👤 User Routes
  */
-Route::prefix('users')->middleware('auth:sanctum')->group(function () {
+Route::prefix('users')->middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/', [UserController::class, 'index']);     // List Users
     Route::get('{id}', [UserController::class, 'show']);   // Get Specific User
     Route::post('{id}/profile-picture', [UserController::class, 'updateProfilePicture']); // Update Profile Picture
@@ -54,7 +57,7 @@ Route::prefix('words')->group(function () {
     Route::get('search', [WordController::class, 'search']); // Search Words with Autocomplete
 });
 
-Route::prefix('meanings')->middleware('auth:sanctum')->group(function () {
+Route::prefix('meanings')->middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('{word_id}', [MeaningController::class, 'store']);  // Add Meaning to Word
     Route::put('{id}', [MeaningController::class, 'update']);       // Update Meaning
     Route::delete('{id}', [MeaningController::class, 'destroy']);   // Delete Meaning
@@ -67,14 +70,14 @@ Route::prefix('leaderboard')->group(function () {
     Route::get('/', [LeaderboardController::class, 'index']); // Get Leaderboard with Filters
 });
 
-Route::prefix('reputation')->middleware('auth:sanctum')->group(function () {
+Route::prefix('reputation')->middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/logs', [ReputationController::class, 'index']); // Get User Reputation Logs
 });
 
 /**
  * 🔗 Referral System
  */
-Route::prefix('referrals')->middleware('auth:sanctum')->group(function () {
+Route::prefix('referrals')->middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/', [ReferralController::class, 'index']); // List User's Referrals
     Route::get('/code', [ReferralController::class, 'getCode']); // Get User's Referral Code
 });
