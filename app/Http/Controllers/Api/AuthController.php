@@ -83,7 +83,7 @@ class AuthController extends Controller
         ]);
 
         // Send email
-        Mail::to($user->email)->send(new VerificationCodeMail($verificationCode));
+        Mail::to($user->email)->send(new VerificationCodeMail($user->verification_code));
 
         return response()->json([
             'message' => 'Registration successful. A verification code has been sent to your email.'
