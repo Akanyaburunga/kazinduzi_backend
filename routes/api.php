@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\WordController;
+use App\Http\Controllers\Api\LeaderboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,5 @@ Route::prefix('users')->middleware('auth:sanctum', 'verified')->group(function (
  */
 // ✅ Get all words with optional search query
 Route::get('/words', [WordController::class, 'index']);
+// ✅ Get top 10 contributors
+Route::get('leaderboard', [LeaderboardController::class, 'index']);
