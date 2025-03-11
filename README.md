@@ -5,10 +5,10 @@
 
 **Makira ni iki?**
 
-Makira ni urubuga rusangi aho umuntu wese azi Ikirundi n’imico, imigenzo n’akaranga k’Abarundi ashobora guterera ubumenyi n’amajambo. Kugira duteze imbere ururimi, umwe wese ahamagariwe guterera amajambo n’insiguro yayo mu Kirundi. Uru rubuga rugamije kwubaka kazinduzi iri ku ngurukanabumenyi akndi isangiwe na bose, baba abazi ncanke abiga ikirundi. 
+Makira ni urubuga rusangi aho umuntu wese azi Ikirundi n’imico, imigenzo n’akaranga k’Abarundi ashobora guterera ubumenyi n’amajambo. Kugira duteze imbere ururimi, umwe wese ahamagariwe guterera amajambo n’insiguro yayo mu Kirundi. Uru rubuga rugamije kwubaka kazinduzi iri ku ngurukanabumenyi kandi isangiwe na bose, baba abazi canke abiga ikirundi. 
 Uwu mugambi ushingiye kuri izi nkingi nkurunkuru:
 **Kwegeranya ubumenyi**:  umuntu wese ashobora guterera amajambo y’Ikirundi n’insiguro yayo.
-**Kubungabunga Ikirundi**:  uwuterereye wese kuri Makira aba afashije lu kubungabunga no gusabikanya iragi twarazwe ari rwo rurimi ruduhuza. 
+**Kubungabunga Ikirundi**:  uwuterereye wese kuri Makira aba afashije ku kubungabunga no gusabikanya iragi twarazwe ari rwo rurimi ruduhuza. 
 **Kwunganiranira**: uru rubuga ruremerera abarukoresha gufashanya, basabikanya ubumenyi, no kuryohorera hamwe akanovera k’Ururimi twasigiwe na Sogokuru. 
 **Kworohereza abarondezi**: runo rubuga rurorohereza abantu bipfuza kuronka no kumenya amajambo n’insiguro yayo canke imico n’imigenzo ijanye na vyo. 
 
@@ -39,7 +39,7 @@ Uru rubuga rurorohereza uwo wese yipfuza guterera, waba uwusanzwe azi Ikirundi c
 **Guha amanota ivyatererewe**: Gutora insiguro nziza zibereye navyo bikwongera amanota.
 **Gutumira abagenzi**:  utumiye abagenzi navyo igihe binjiye ku rubuga bikwongera amanota
 
-Igikorwa uzokora cose kizoguma kigaragara ubone intererano urikoutratanga mu kwagura umuryango w’Abarundi b’umutima bipfuza kubona imico, akaranga, ndetse n’ururimi rwabo bishwara isi ku nguvu zacu twese. Abazoba bafise amanota menshi bazoguma baninahazwa ku rubuga rwa Makira. 
+Igikorwa uzokora cose kizoguma kigaragara ubone intererano uriko uratanga mu kwagura umuryango w’Abarundi b’umutima bipfuza kubona imico, akaranga, ndetse n’ururimi rwabo bishwara isi ku nguvu zacu twese. Abazoba bafise amanota menshi bazoguma baninahazwa ku rubuga rwa Makira. 
 
 ---
 **Twagiye** 
