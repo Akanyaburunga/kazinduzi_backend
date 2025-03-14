@@ -30,7 +30,7 @@
                             <div>
                                 <a href="{{ route('words.edit', $word) }}" class="btn btn-sm btn-outline-warning">Edit</a>
                                 <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" 
-                                        data-id="{{ $word->id }}" data-word="{{ $word->word }}">
+                                        data-id="{{ $word->id }}" data-word="{{ $word->word }}" disabled>
                                     Delete
                                 </button>
                             </div>
