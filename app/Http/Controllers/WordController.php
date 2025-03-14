@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Word;
+use App\Models\Meaning;
 use App\Policies\WordPolicy;
 use Cache;
 
@@ -78,7 +79,13 @@ class WordController extends Controller
     public function edit(Word $word)
     {
         $this->authorize('update', $word); // Ensure the user owns the word
-        return view('words.edit', compact('word'));
+    
+        // Fetch the meaning that belongs to the authenticated user for this word
+        $userMeaning = Meaning::where('word_id', $word->id)
+        ->where('user_id', auth()->id())
+        ->first(); // Get only one record
+
+        return view('words.edit', compact('word', 'userMeaning'));
     }
 
     public function update(Request $request, Word $word)
