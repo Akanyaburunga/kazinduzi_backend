@@ -82,12 +82,47 @@
         <div class="card-header bg-info text-white">
             <h3>Your Referral Code</h3>
         </div>
-        <div class="card-body text-center">
-            <p>Share this code to invite others:</p>
-            <h4><strong>{{ $user->referral_code }}</strong></h4>
-            <p>Referral Link:</p>
-            <a href="{{ url('/register?ref=' . $user->referral_code) }}" class="text-decoration-none">{{ url('/register?ref=' . $user->referral_code) }}</a>
-        </div>
+        
+        <div class="share-buttons text-center mt-4">
+    <p class="fw-bold">Share your referral link:</p>
+
+    <!-- Referral Link Input with Copy Button -->
+    <div class="input-group mb-3">
+        <input type="text" id="referralLink" class="form-control" value="{{ url('/register?ref=' . Auth::user()->referral_code) }}" readonly>
+        <button class="btn btn-secondary" onclick="copyReferralLink()">
+            <i class="fas fa-copy"></i> Copy
+        </button>
+    </div>
+
+    <!-- Social Media Share Buttons -->
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+
+        <!-- WhatsApp -->
+        <a href="https://api.whatsapp.com/send?text=Join%20this%20awesome%20platform:%20{{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
+           target="_blank" class="btn btn-success">
+            <i class="fab fa-whatsapp"></i> Share on WhatsApp
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
+           target="_blank" class="btn btn-primary">
+            <i class="fab fa-facebook"></i> Share on Facebook
+        </a>
+
+        <!-- Twitter (X) -->
+        <a href="https://twitter.com/intent/tweet?text=Join%20this%20awesome%20platform%20{{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
+           target="_blank" class="btn btn-info text-white">
+            <i class="fab fa-x-twitter"></i> Share on Twitter
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
+           target="_blank" class="btn btn-primary" style="background-color: #0077B5; border-color: #0077B5;">
+            <i class="fab fa-linkedin"></i> Share on LinkedIn
+        </a>
+    </div>
+</div>
+
     </div>
 </div>
 

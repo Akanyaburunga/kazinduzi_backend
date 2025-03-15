@@ -87,3 +87,17 @@ footer a:hover {
     background-color: #f8f9fa;
 }
 
+.share-buttons .btn {
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.share-buttons .btn i {
+    font-size: 20px;
+}
