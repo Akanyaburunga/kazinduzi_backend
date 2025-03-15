@@ -23,7 +23,10 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
-                    <img src="{{ asset('images/kazinduzi_logo_gray.png') }}" alt="Kazinduzi logo" class="w-80 fill-current text-gray-500">
+                <img src="{{ asset('images/kazinduzi_logo_gray.png') }}" 
+     alt="Kazinduzi logo" 
+     class="img-fluid d-block mx-auto" style="max-width: 250px;">
+
                 </a>
             </div>
 
