@@ -50,4 +50,11 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div class="text-center mt-3">
+    <p>Don't have an account? 
+        <a href="{{ route('register') }}" class="btn btn-sm btn-outline-primary">Sign Up</a>
+    </p>
+</div>
+
 </x-guest-layout>
