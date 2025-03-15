@@ -54,7 +54,7 @@
 
                         <x-text-input id="referral_code" class="block mt-1 w-full"
                                         type="text"
-                                        name="referral_code" value="{{ old('referral_code') }}" />
+                                        name="referral_code" value="{{ request('ref') }}" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
