@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Profile - ' . $user->name)
+
 @section('content')
 <div class="container my-5" style="max-width: 60%;">
     <div class="text-center mb-5">

@@ -20,7 +20,7 @@
         <meta name="twitter:image" content="@yield('meta-image', asset('default-image.jpg'))" />
 
 
-        <title>{{ config('app.name', 'Kazinduzi') }}</title>
+        <title>@yield('title') | Kazinduzi</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

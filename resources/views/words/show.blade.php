@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', $word->word) <!-- Dynamic Page Title -->
+
 @section('meta-description', Str::limit($word->meanings->pluck('meaning')->join(', '), 150)) <!-- Meta Description -->
 
 @section('content')
