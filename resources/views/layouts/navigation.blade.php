@@ -58,11 +58,11 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('login')">
-                            {{ __('Login') }}
+                            <i class="fas fa-sign-in-alt"></i> {{ __('Login') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('register')">
-                            {{ __('Register') }}
+                            <i class="fas fa-user-plus"></i> {{ __('Register') }}
                         </x-dropdown-link>
                         
                     </x-slot>
@@ -89,11 +89,11 @@
                     <x-slot name="content">
                         
                         <x-dropdown-link :href="route('profile.view')">
-                            {{ __('Profile') }}
+                            <i class="fas fa-user-circle mr-2"></i> {{ __('Profile') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Reputation') }}
+                        <i class="fas fa-star mr-2"></i> {{ __('Reputation') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -103,7 +103,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                <i class="fas fa-sign-out-alt mr-2"></i> {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -158,11 +158,11 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.view')">
-                    {{ __('Profile') }}
+                        <i class="fas fa-user-circle mr-2"></i> {{ __('Profile') }}
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Reputation') }}
+                    <i class="fas fa-star mr-2"></i> {{ __('Reputation') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -172,7 +172,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        <i class="fas fa-sign-out-alt mr-2"></i> {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
