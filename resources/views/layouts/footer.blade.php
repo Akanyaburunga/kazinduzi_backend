@@ -16,18 +16,35 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h5>Follow Us</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Facebook</a></li>
-                    <li><a href="#" class="text-white">Twitter</a></li>
-                    <li><a href="#" class="text-white">Instagram</a></li>
-                    <li><a href="#" class="text-white">LinkedIn</a></li>
-                </ul>
-            </div>
+    <h5 class="text-white mb-3">Follow Us</h5>
+    <ul class="list-unstyled">
+        <li class="mb-2">
+            <a href="https://www.facebook.com/akanyaburunga" class="text-white text-decoration-none" target="_blank">
+                <i class="fab fa-facebook me-2"></i> Facebook
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="https://x.com/akanyaburunga" class="text-white text-decoration-none" target="_blank">
+                <i class="fab fa-x-twitter me-2"></i> Twitter
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="https://www.instagram.com/akanyaburunga/" class="text-white text-decoration-none" target="_blank">
+                <i class="fab fa-instagram me-2"></i> Instagram
+            </a>
+        </li>
+        <li class="mb-2">
+            <a href="https://github.com/Akanyaburunga/kazinduzi_backend" class="text-white text-decoration-none" target="_blank">
+                <i class="fab fa-github me-2"></i> GitHub
+            </a>
+        </li>
+    </ul>
+</div>
+
         </div>
     </div>
     <div class="text-center py-2">
-        <small>&copy; {{ date('Y') }} Makira. All rights reserved.</small>
+        <small>&copy; {{ date('Y') }} Akanyaburunga. All rights reserved.</small>
     </div>
 </footer>
 
