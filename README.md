@@ -43,13 +43,16 @@ Igikorwa uzokora cose kizoguma kigaragara ubone intererano uriko uratanga mu kwa
 
 ---
 **Twagiye** 
+
 Wipfuza gutangura guterera, kurikira izi ntambuko:
-1.	**Iyandikishe** kuri Kazinduzi Signup Page (https://Kazinduzi.org/register/) wugurure ikonti y’umunyamuryango.
+1.	**Iyandikishe** ku rupapuro rwo kwiyandikisha (https://www.kazinduzi.org/register/) wugurure ikonti y’umunyamuryango.
 2.	**Tangura guterera**:  Ongeramwo amajambo mashasha n’insiguro yayo canke uhe amanota ayamaze gutangwa. 
 3.	**Tumira abagenzi**:  tumira abagenzi baze mu muryango.
 ---
 **Tugumane**
-Ukagira akakubakiye canke intererano, ntiwitinye. Twandikire kuri [support@Kazinduzi.org] canke udukurikirane ku mbuga hwaniro zacu aho tuja turashira bishasha.
+
+Ukagira akakubakiye canke intererano, ntiwitinye. Twandikire kuri [support@kazinduzi.org] canke udukurikirane ku mbuga hwaniro zacu aho tuja turashira bishasha.
 
 **Guterera ku muzi w’umugambi**
-Igishitsi c’uyu mugambi cugururiwe bose. Ushobora kutwunganira mu guterera, gushikiriza amakenga n’ugusaba umuco. Mushobora guca hano mukaduterera agacumu k’ubumwe (https://github.com/blasius/Kazinduzi_backend_new).
+
+Igishitsi c’uyu mugambi cugururiwe bose. Ushobora kutwunganira mu guterera, gushikiriza amakenga n’ugusaba umuco. Mushobora guca hano mukaduterera agacumu k’ubumwe (https://github.com/Akanyaburunga/kazinduzi_backend).
