@@ -7,8 +7,8 @@
     <!-- Hero Section with Search Bar -->
     <div class="row justify-content-center my-5">
         <div class="col-lg-8 text-center">
-        <h1 class="display-4 text-primary">Kaze kuri Kazinduzi</h1>
-        <p class="lead text-muted">Imare amazinda nawe uyamare abandi mu guterera ico uzi kuri Kazinduzi!</p>
+        <h1 class="display-4 text-primary">Kaze kuri Kazīndūzi</h1>
+        <p class="lead text-muted">Imare amazinda nawe uyamare abandi mu guterera ico uzi kuri Kazīndūzi!</p>
             <form action="{{ route('words.search') }}" method="GET">
                 <div class="input-group">
                     <input type="text" class="form-control" id="search-input" name="query" placeholder="Search for words..." aria-label="Search for words" autocomplete="off">
