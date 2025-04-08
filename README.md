@@ -56,3 +56,9 @@ Ukagira akakubakiye canke intererano, ntiwitinye. Twandikire kuri [support@kazin
 **Guterera ku muzi w’umugambi**
 
 Igishitsi c’uyu mugambi cugururiwe bose. Ushobora kutwunganira mu guterera, gushikiriza amakenga n’ugusaba umuco. Mushobora guca hano mukaduterera agacumu k’ubumwe (https://github.com/Akanyaburunga/kazinduzi_backend).
+
+### 📜 License
+
+This project is open-sourced under the [MIT license](https://github.com/Akanyaburunga/kazinduzi_backend/blob/main/LICENSE).
+
+---
