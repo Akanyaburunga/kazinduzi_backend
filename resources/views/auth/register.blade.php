@@ -68,6 +68,11 @@
                             {{ __('Register') }}
                         </x-primary-button>
                     </div>
+
+                    <div class="mt-4">
+                        <!-- Turnstile widget -->
+                    <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.sitekey') }}"></div>
+                    </div>
                 </form>
                 </div>
             </div>

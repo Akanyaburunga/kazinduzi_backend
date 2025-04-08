@@ -54,5 +54,6 @@
 <!-- Include jQuery locally -->
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('js/autocomplete.js') }}"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <!-- End Footer Section -->
