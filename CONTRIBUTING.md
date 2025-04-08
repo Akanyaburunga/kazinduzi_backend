@@ -94,4 +94,4 @@ If you’re stuck, open an issue or start a discussion. We're happy to assist an
 
 ## 📜 License
 
-By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
+By contributing, you agree that your contributions will be licensed under the [MIT license](https://github.com/Akanyaburunga/kazinduzi_backend/blob/master/LICENSE.md).
