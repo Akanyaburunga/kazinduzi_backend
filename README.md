@@ -59,6 +59,6 @@ Igishitsi c’uyu mugambi cugururiwe bose. Ushobora kutwunganira mu guterera, gu
 
 ### 📜 License
 
-This project is open-sourced under the [MIT license](https://github.com/Akanyaburunga/kazinduzi_backend/blob/master/LICENSE).
+This project is open-sourced under the [MIT license](https://github.com/Akanyaburunga/kazinduzi_backend/blob/master/LICENSE.md).
 
 ---
