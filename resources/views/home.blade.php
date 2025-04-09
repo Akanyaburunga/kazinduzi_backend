@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Ishikiro')
 
 @section('content')
 <div class="container">
@@ -11,9 +11,9 @@
         <p class="lead text-muted">Imare amazinda nawe uyamare abandi mu guterera ico uzi kuri Kazīndūzi!</p>
             <form action="{{ route('words.search') }}" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="search-input" name="query" placeholder="Search for words..." aria-label="Search for words" autocomplete="off">
+                    <input type="text" class="form-control" id="search-input" name="query" placeholder="Rondera ijambo wipfuza" aria-label="Rondera ijambo wipfuza" autocomplete="off">
                     <ul id="search-results" class="list-group mt-2" style="display: none;"></ul>
-                    <button class="btn btn-primary" type="submit">Search</button>
+                    <button class="btn btn-primary" type="submit">Rondera</button>
                 </div>
             </form>
         </div>
@@ -22,14 +22,14 @@
     <!-- Featured Words Section -->
     <div class="row">
         <div class="col-12">
-            <h2 class="h3 mb-3 text-muted">Featured Words</h2>
+            <h2 class="h3 mb-3 text-muted">Amajambo twabatoreye</h2>
             <div class="card-deck">
                 @foreach ($featuredWords as $word)
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $word->word }}</h5>
                             <p class="card-text">{{ Str::limit($word->meanings->first()->meaning, 100) }}</p>
-                            <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">View</a>
+                            <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Raba</a>
                         </div>
                     </div>
                 @endforeach
@@ -40,7 +40,7 @@
     <!-- Trending Words Section -->
     <div class="row my-5">
         <div class="col-12">
-            <h2 class="h3 mb-3 text-muted">Trending Words</h2>
+            <h2 class="h3 mb-3 text-muted">Amajambo akunzwe muri aka kanya</h2>
             <ul class="list-group">
                 @foreach ($trendingWords as $word)
                     <li class="list-group-item">
@@ -55,17 +55,17 @@
     <!-- Recent Contributions Section -->
     <div class="row my-5">
         <div class="col-12">
-            <h2 class="h3 mb-3 text-muted">Recent Contributions</h2>
+            <h2 class="h3 mb-3 text-muted">Amajambo muheruka guterera</h2>
             <ul class="list-group">
                 @foreach ($recentContributions as $contribution)
                 <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $contribution->word }}</h5>
                                 <p class="card-text">{{ Str::limit($contribution->meanings->first()->meaning, 120) }}</p>
-                                <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Learn More</a>
+                                <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary"></a>
                             </div>
                             <div class="card-footer text-muted">
-                                Added on {{ $contribution->created_at->format('F j, Y') }}
+                                Ryagiyeko ku wa {{ $contribution->created_at->format('F j, Y') }}
                             </div>
                 </div>
                 @endforeach
@@ -76,7 +76,7 @@
     <!-- Top Contributors Section -->
     <div class="row my-5">
         <div class="col-12">
-            <h2 class="h3 mb-3 text-muted">Top Contributors</h2>
+            <h2 class="h3 mb-3 text-muted">Abaterereye menshi</h2>
             <div class="list-group">
                 @foreach ($topContributors as $contributor)
                 <a href="{{ route('users.show', $contributor->id) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -90,7 +90,7 @@
 
     <!-- Call to Action for Contributions -->
     <div class="text-center my-5">
-        <a href="{{ route('words.create') }}" class="btn btn-success btn-lg">Start Contributing</a>
+        <a href="{{ route('words.create') }}" class="btn btn-success btn-lg">Tanga intererano yawe</a>
     </div>
 
 </div>

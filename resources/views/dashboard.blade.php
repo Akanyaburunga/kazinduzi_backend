@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Urugănda')
 
 @section('content')
 <div class="container my-5" style="max-width: 60%;">
     <div class="text-center mb-5">
-        <h1 class="display-4">Welcome, {{ $user->name }}</h1>
-        <p class="text-muted">Manage your contributions and referrals below.</p>
+        <h1 class="display-4">Ikâzé, {{ $user->name }}</h1>
+        <p class="text-muted">Tunganya intererano zawe n'abatumire.</p>
     </div>
 
     <div class="card shadow-sm mb-5">
         <div class="card-header bg-primary text-white">
-            <h3>Your Contributions</h3>
+            <h3>Ivyo waterereye</h3>
         </div>
         <div class="card-body">
             @if($contributions->isEmpty())
-                <p class="text-center">You haven't added any words yet. Start contributing <a href="{{ route('words.create') }}" class="text-primary">here</a>.</p>
+                <p class="text-center">Nta ntererano uratanga🥲 Terera ijambo rya mbere🤗 <a href="{{ route('words.create') }}" class="text-primary">here</a>.</p>
             @else
                 <ul class="list-group">
                     @foreach($contributions as $word)
@@ -25,10 +25,10 @@
                                     <strong>{{ $word->word }}</strong>
                                 </a>: {{ $word->meaning }}
                                 <br>
-                                <small class="text-muted">Added on {{ $word->created_at->format('F j, Y') }}</small>
+                                <small class="text-muted">Ryatererewe ku wa {{ $word->created_at->format('F j, Y') }}</small>
                             </div>
                             <div>
-                                <a href="{{ route('words.edit', $word) }}" class="btn btn-sm btn-outline-warning">Edit</a>
+                                <a href="{{ route('words.edit', $word) }}" class="btn btn-sm btn-outline-warning">Hubūra</a>
                                 <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" 
                                         data-id="{{ $word->id }}" data-word="{{ $word->word }}" disabled>
                                     Delete
@@ -46,17 +46,17 @@
 
     <div class="card shadow-sm mb-5">
         <div class="card-header bg-success text-white">
-            <h3>Your Referrals</h3>
+            <h3>Abo watumiye</h3>
         </div>
         <div class="card-body">
             @if ($referrals->isEmpty())
-                <p class="text-center">No referrals yet. Share your referral code to invite others!</p>
+                <p class="text-center">Ntabo uratumira. Sabikanya ubutulire mu bagenzi!</p>
             @else
                 <table class="table table-hover">
                     <thead class="table-light">
                         <tr>
-                            <th>Name</th>
-                            <th>Status</th>
+                            <th>Izina</th>
+                            <th>Uko biri</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,9 +65,9 @@
                                 <td>{{ $referral->name }}</td>
                                 <td>
                                     @if ($referral->email_verified_at)
-                                        <span class="badge bg-success">Verified</span>
+                                        <span class="badge bg-success">Yasūzumwe</span>
                                     @else
-                                        <span class="badge bg-danger">Not Verified</span>
+                                        <span class="badge bg-danger">Ntarasūzumwa</span>
                                     @endif
                                 </td>
                             </tr>
@@ -80,17 +80,17 @@
 
     <div class="card shadow-sm">
         <div class="card-header bg-info text-white">
-            <h3>Your Referral Code</h3>
+            <h3>Kode y'ubutumire</h3>
         </div>
         
         <div class="share-buttons text-center mt-4">
-    <p class="fw-bold">Share your referral link:</p>
+    <p class="fw-bold">Sabikanya agahora k'ubutumire:</p>
 
     <!-- Referral Link Input with Copy Button -->
     <div class="input-group mb-3">
         <input type="text" id="referralLink" class="form-control" value="{{ url('/register?ref=' . Auth::user()->referral_code) }}" readonly>
         <button class="btn btn-secondary" onclick="copyReferralLink()">
-            <i class="fas fa-copy"></i> Copy
+            <i class="fas fa-copy"></i> Abūra
         </button>
     </div>
 
@@ -100,25 +100,25 @@
         <!-- WhatsApp -->
         <a href="https://api.whatsapp.com/send?text=Join%20this%20awesome%20platform:%20{{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
            target="_blank" class="btn btn-success">
-            <i class="fab fa-whatsapp"></i> Share on WhatsApp
+            <i class="fab fa-whatsapp"></i> Sabikanya kuri WhatsApp
         </a>
 
         <!-- Facebook -->
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
            target="_blank" class="btn btn-primary">
-            <i class="fab fa-facebook"></i> Share on Facebook
+            <i class="fab fa-facebook"></i> Sabikanya kuri Facebook
         </a>
 
         <!-- Twitter (X) -->
         <a href="https://twitter.com/intent/tweet?text=Join%20this%20awesome%20platform%20{{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
            target="_blank" class="btn btn-info text-white">
-            <i class="fab fa-x-twitter"></i> Share on Twitter
+            <i class="fab fa-x-twitter"></i> Sabikanya kuri X
         </a>
 
         <!-- LinkedIn -->
         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url('/register?ref=' . Auth::user()->referral_code)) }}" 
            target="_blank" class="btn btn-primary" style="background-color: #0077B5; border-color: #0077B5;">
-            <i class="fab fa-linkedin"></i> Share on LinkedIn
+            <i class="fab fa-linkedin"></i> Sabikanya kuri LinkedIn
         </a>
     </div>
 </div>
@@ -131,18 +131,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Emeza</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete <strong id="wordToDelete"></strong>?
+                Koko wipfuza gufuta ? <strong id="wordToDelete"></strong>?
             </div>
             <div class="modal-footer">
                 <form id="deleteForm" method="POST" action="">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ndabivuyemwo</button>
+                    <button type="submit" class="btn btn-danger">Futa</button>
                 </form>
             </div>
         </div>
