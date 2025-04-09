@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Email Verification</title>
+    <title>Kwemeza Email yawe</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -87,16 +87,16 @@
         <!-- Content -->
         <div class="content">
             <p>Hello,</p>
-            <p>Thank you for signing up! To complete your registration, please verify your email by entering the following code:</p>
+            <p>Urakoze kwiyandikisha! Kugira urangize kwiyandikisha, emeza email yawe ukoresheje ikigiharuro kabanga:</p>
             <p class="code">{{ $code }}</p>
-            <p>This code will expire in <strong>10 minutes</strong>.</p>
-            <p>Didn't request this? Ignore this email.</p>
-            <a href="{{ env('APP_URL') }}" class="cta-button">Go to {{ env('APP_NAME') }}</a>
+            <p>Iki giharuro gita igihe inyuma y' <strong>iminota 10</strong>.</p>
+            <p>Si we wasavye kwiyandikisha ?  Ihoze ubu butumwa canke usuzume ko ata muntu yoba ariko agerageza gukoresha email yawe.</p>
+            <a href="{{ env('APP_URL') }}" class="cta-button">Genda kuri👉🏿 {{ env('APP_NAME') }}</a>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            &copy; {{ date('Y') }} <a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>. All rights reserved.
+            &copy; {{ date('Y') }} <a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>. Uburenganzira bwose burakingiwe.
         </div>
     </div>
 </body>
