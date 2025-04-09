@@ -3,20 +3,20 @@
     <div class="container-custom">
         <div class="row">
             <div class="col-md-4">
-                <h5>About Us</h5>
-                <p>We aim to contribute to preserving the Kirundi language.</p>
+                <h5>Turi bande? </h5>
+                <p>Dufise intumbero yo gutsimbataza imico, imigenzo n'akaranga k'Uburundi hamwe n'ururimi rw'Ikirundi.</p>
             </div>
             <div class="col-md-4">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">About</a></li>
-                    <li><a href="#" class="text-white">Terms & Conditions</a></li>
-                    <li><a href="#" class="text-white">Privacy Policy</a></li>
-                    <li><a href="#" class="text-white">Contact Us</a></li>
+                    <li><a href="#" class="text-white">Abo turi</a></li>
+                    <li><a href="#" class="text-white">Amategeko ngenderwako</a></li>
+                    <li><a href="#" class="text-white">Ingingo nyebanga</a></li>
+                    <li><a href="#" class="text-white">Twandikire</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
-    <h5 class="text-white mb-3">Follow Us</h5>
+    <h5 class="text-white mb-3">Dukurikirane</h5>
     <ul class="list-unstyled">
         <li class="mb-2">
             <a href="https://www.facebook.com/akanyaburunga" class="text-white text-decoration-none" target="_blank">
@@ -25,8 +25,7 @@
         </li>
         <li class="mb-2">
             <a href="https://x.com/akanyaburunga" class="text-white text-decoration-none" target="_blank">
-                <i class="fab fa-x-twitter me-2"></i> Twitter
-            </a>
+                <i class="fab fa-x-twitter me-2"></i> X
         </li>
         <li class="mb-2">
             <a href="https://www.instagram.com/akanyaburunga/" class="text-white text-decoration-none" target="_blank">
@@ -44,7 +43,7 @@
         </div>
     </div>
     <div class="text-center py-2">
-        <small>&copy; {{ date('Y') }} Akanyaburunga. All rights reserved.</small>
+        <small>&copy; {{ date('Y') }} Akanyaburunga. Uburenganzira bwose burakingiwe.</small>
     </div>
 </footer>
 
