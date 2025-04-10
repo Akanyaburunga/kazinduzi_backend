@@ -14,28 +14,28 @@
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
+                        {{ __('Ishikiro') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Urugănda') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('words.create')" :active="request()->routeIs('words.create')">
-                        {{ __('Contribute') }}
+                        {{ __('Tērēra') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('words.index')" :active="request()->routeIs('words.index')">
-                        {{ __('Browse') }}
+                        {{ __('Rondera ijambo') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('leaderboard.index')" :active="request()->routeIs('leaderboard.index')">
-                        {{ __('🏆 Leaderboard') }}
+                        {{ __('🏆 Abarusha abandi mu guterera') }}
                     </x-nav-link>
                 </div>
                 
@@ -58,11 +58,11 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('login')">
-                            <i class="fas fa-sign-in-alt"></i> {{ __('Login') }}
+                            <i class="fas fa-sign-in-alt"></i> {{ __('Injira') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('register')">
-                            <i class="fas fa-user-plus"></i> {{ __('Register') }}
+                            <i class="fas fa-user-plus"></i> {{ __('Iyandikishe') }}
                         </x-dropdown-link>
                         
                     </x-slot>
@@ -89,11 +89,11 @@
                     <x-slot name="content">
                         
                         <x-dropdown-link :href="route('profile.view')">
-                            <i class="fas fa-user-circle mr-2"></i> {{ __('Profile') }}
+                            <i class="fas fa-user-circle mr-2"></i> {{ __('Ibindanga') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('profile.edit')">
-                        <i class="fas fa-star mr-2"></i> {{ __('Reputation') }}
+                        <i class="fas fa-star mr-2"></i> {{ __('Amanota mfise') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -103,7 +103,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                <i class="fas fa-sign-out-alt mr-2"></i> {{ __('Log Out') }}
+                                <i class="fas fa-sign-out-alt mr-2"></i> {{ __('Gusohoka') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -127,24 +127,24 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Urugănda') }}
             </x-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('words.create')" :active="request()->routeIs('words.create')">
-                {{ __('Contibute') }}
+                {{ __('Tērēra') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('words.index')" :active="request()->routeIs('words.index')">
-                {{ __('Browse') }}
+                {{ __('Rondera ijambo') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('leaderboard.index')" :active="request()->routeIs('leaderboard.index')">
-                {{ __('🏆 Leaderboard') }}
+                {{ __('🏆 Abarusha abandi mu guterera') }}
             </x-responsive-nav-link>
         </div>
 
@@ -152,17 +152,17 @@
         @auth
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ explode(' ', auth()->user()->name)[0] }} ({{ auth()->user()->reputation }} points)</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ explode(' ', auth()->user()->name)[0] }} ({{ auth()->user()->reputation }} amanota)</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.view')">
-                        <i class="fas fa-user-circle mr-2"></i> {{ __('Profile') }}
+                        <i class="fas fa-user-circle mr-2"></i> {{ __('Ibindanga') }}
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    <i class="fas fa-star mr-2"></i> {{ __('Reputation') }}
+                    <i class="fas fa-star mr-2"></i> {{ __('Amanota mfise') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -172,7 +172,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt mr-2"></i> {{ __('Log Out') }}
+                        <i class="fas fa-sign-out-alt mr-2"></i> {{ __('Gusohoka') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
