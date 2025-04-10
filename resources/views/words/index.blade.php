@@ -4,14 +4,19 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4">Words List</h1>
+<div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+        <h3 class="display-4 text-primary">Words list</h3>
 
-    <form action="{{ route('words.index') }}" method="GET" class="mb-4">
+        <form action="{{ route('words.index') }}" method="GET" class="mb-4">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Search for a word..." value="{{ request('search') }}">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
-    </form>
+        </form>
+        
+        </div>
+    </div>
 
     @if ($words->isEmpty())
     <div class="mt-6 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
