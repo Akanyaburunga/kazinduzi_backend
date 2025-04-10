@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="@yield('meta-description', 'Kazinduzi ni urubuga rwo kwiyibutsa amajambo n'insiguro yayo mu Kirundi')">
+        <meta name="description" content="{{ e($__env->yieldContent('meta-description', "Kazinduzi ni urubuga rwo kwiyibutsa amajambo n'insiguro yayo mu Kirundi")) }}">
 
         <!-- Open Graph -->
         <meta property="og:title" content="@yield('title', 'Kazinduzi')" />
-        <meta property="og:description" content="@yield('meta-description', 'Default description for the Kazinduzi')" />
+        <meta property="og:description"  content="{{ e($__env->yieldContent('meta-description', "Kazinduzi ni urubuga rwo kwiyibutsa amajambo n'insiguro yayo mu Kirundi")) }}" />
         <meta property="og:url" content="{{ url()->current() }}" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="@yield('meta-image', asset('default-image.jpg'))" />
@@ -16,7 +16,7 @@
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="@yield('title', 'Kazinduzi')" />
-        <meta name="twitter:description" content="@yield('meta-description', 'Default description for the Kazinduzi')" />
+        <meta name="twitter:description"  content="{{ e($__env->yieldContent('meta-description', "Kazinduzi ni urubuga rwo kwiyibutsa amajambo n'insiguro yayo mu Kirundi")) }}" />
         <meta name="twitter:image" content="@yield('meta-image', asset('default-image.jpg'))" />
 
 
