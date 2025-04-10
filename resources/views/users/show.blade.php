@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $user->name . "'s Profile")
+@section('title', $user->name . "'s Umwidondoro")
 
 @section('content')
 <div class="container py-4">
@@ -14,10 +14,10 @@
                          class="rounded-circle mb-3" alt="User Avatar">
                     
                     <h2 class="mb-1">{{ $user->name }}</h2>
-                    <p class="text-muted">Member since {{ $user->created_at->format('F Y') }}</p>
+                    <p class="text-muted">Ndi umunyamuryango kuva {{ $user->created_at->format('F Y') }}</p>
 
                     <!-- Reputation Badge -->
-                    <span class="badge bg-success fs-5">Reputation: {{ $user->reputation }}</span>
+                    <span class="badge bg-success fs-5">Amanota afise: {{ $user->reputation }}</span>
 
                     <hr>
 
@@ -25,15 +25,15 @@
                     <div class="row">
                         <div class="col">
                             <h5>{{ $user->words->count() }}</h5>
-                            <p class="text-muted">Contributions</p>
+                            <p class="text-muted">Ayo maze guterera</p>
                         </div>
                         <div class="col">
                             <h5>{{ $user->meanings->count() }}</h5>
-                            <p class="text-muted">Meanings Added</p>
+                            <p class="text-muted">Insiguro maze gutanga</p>
                         </div>
                         <div class="col">
                             <h5>{{ $user->received_votes_count ?? 0 }}</h5>
-                            <p class="text-muted">Votes Received</p>
+                            <p class="text-muted">Amajwi maze kuronka</p>
                         </div>
                     </div>
                 </div>
@@ -41,10 +41,10 @@
 
             <!-- Recent Contributions -->
             <div class="mt-4">
-                <h4>Recent Contributions</h4>
+                <h4>Intererano mperuka gutanga</h4>
 
                 @if($user->words->isEmpty())
-                    <p class="alert alert-info">No contributions yet.</p>
+                    <p class="alert alert-info">Nta ntererano ndatanga.</p>
                 @else
                     <ul class="list-group">
                         @foreach ($user->words as $word)
