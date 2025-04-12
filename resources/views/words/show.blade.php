@@ -9,7 +9,7 @@
     <h1 class="text-3xl font-bold text-gray-800">{{ $word->word }}</h1>
 
     <!-- Meanings Section -->
-    <h3 class="mt-4 text-xl font-semibold text-gray-700">Meanings:</h3>
+    <h3 class="mt-4 text-xl font-semibold text-gray-700">Insiguro:</h3>
 
     <ul class="mt-3 space-y-3">
         @foreach ($word->meanings as $meaning)
@@ -35,7 +35,7 @@
                             </button>
                         </form>
                     @else
-                        <p class="text-gray-400 text-sm">Login to vote.</p>
+                        <p class="text-gray-400 text-sm">Injira kugira utore.</p>
                     @endauth
                     <span class="text-sm font-bold text-gray-700 px-2 py-1 bg-blue-100 rounded-md">
                         {{ $meaning->votes->sum(fn($vote) => $vote->vote === 'up' ? 1 : -1) }}
@@ -52,7 +52,7 @@
                 @csrf
                 <textarea name="meaning" class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300" rows="3" placeholder="Add your meaning..."></textarea>
                 <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                    Submit Meaning
+                    Rungika insiguro
                 </button>
             </form>
         </div>
