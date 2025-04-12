@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kwemeza Email yawe</title>
+    <title>Kwemeza Imeyile yawe</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -82,7 +82,7 @@
         </a>
 
         <!-- Header -->
-        <div class="header">{{ env('APP_NAME') }} - Verify Your Email</div>
+        <div class="header">{{ env('APP_NAME') }} - Kwemeza Imeyile yawe</div>
 
         <!-- Content -->
         <div class="content">
