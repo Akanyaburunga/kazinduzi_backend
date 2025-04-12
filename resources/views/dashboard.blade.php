@@ -50,7 +50,7 @@
         </div>
         <div class="card-body">
             @if ($referrals->isEmpty())
-                <p class="text-center">Ntabo uratumira. Sabikanya ubutulire mu bagenzi!</p>
+                <p class="text-center">Ntabo uratumira. Sabikanya ubutumire mu bagenzi!</p>
             @else
                 <table class="table table-hover">
                     <thead class="table-light">
