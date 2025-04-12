@@ -1,33 +1,33 @@
 @extends('layouts.app')
 
-@section('title', 'Leaderboard')
+@section('title', 'Abahizi')
 
 @section('content')
 <div class="container mt-4">
-    <h1 class="text-center mb-4">🏆 Leaderboard 🏆</h1>
+    <h1 class="text-center mb-4">🏆 Abahizi 🏆</h1>
 
     <!-- Filters -->
     <div class="d-flex justify-content-center mb-4">
         <div class="btn-group">
             <a href="{{ route('leaderboard.index', ['filter' => 'today']) }}" 
                 class="btn btn-sm {{ $filter == 'today' ? 'btn-primary' : 'btn-outline-primary' }}">
-                Today
+                Uno musi
             </a>
             <a href="{{ route('leaderboard.index', ['filter' => 'this_week']) }}" 
                 class="btn btn-sm {{ $filter == 'this_week' ? 'btn-primary' : 'btn-outline-primary' }}">
-                This Week
+                Iyi ndwi
             </a>
             <a href="{{ route('leaderboard.index', ['filter' => 'this_month']) }}" 
                 class="btn btn-sm {{ $filter == 'this_month' ? 'btn-primary' : 'btn-outline-primary' }}">
-                This Month
+               Uku kwezi
             </a>
             <a href="{{ route('leaderboard.index', ['filter' => 'this_year']) }}" 
                 class="btn btn-sm {{ $filter == 'this_year' ? 'btn-primary' : 'btn-outline-primary' }}">
-                This Year
+                Uyu mwaka
             </a>
             <a href="{{ route('leaderboard.index', ['filter' => 'all_time']) }}" 
                 class="btn btn-sm {{ $filter == 'all_time' ? 'btn-primary' : 'btn-outline-primary' }}">
-                All Time
+                Ibihe vyose
             </a>
         </div>
     </div>
@@ -64,7 +64,7 @@
                 @empty
                     <tr>
                         <td colspan="5" class="text-muted text-center py-3">
-                            No users have earned reputation yet for this period.
+                            Nta muntu araronka amanota muri kino kiringo.
                         </td>
                     </tr>
                 @endforelse

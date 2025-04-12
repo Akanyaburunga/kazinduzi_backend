@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Uru rubuga rurangwa n'umutekano. Mushiremwo ijambo kabanga ryanyu imbere yo kubandanya.') }}
+        {{ __('Uru rubuga rurangwa n'umutekano. Mushiremwo icandiko-kabanga ryanyu imbere yo kubandanya.') }}
     </div>
 
     <form method="POST" action="{{ route('password.confirm') }}">
