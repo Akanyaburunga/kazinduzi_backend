@@ -1,13 +1,13 @@
 @extends('layouts.app') <!-- Extends your main layout -->
 
-@section('title', 'Register')
+@section('title', 'Iyandikishe')
 
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header text-center">{{ __('Register') }}</div>
+                <div class="card-header text-center">{{ __('Iyandikishe') }}</div>
 
                 <div class="card-body">
                 <form method="POST" action="{{ route('register') }}">
@@ -61,11 +61,11 @@
 
                     <div class="flex items-center justify-end mt-4">
                         <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                            {{ __('Already registered?') }}
+                            {{ __('Uramaze kwiyandikisha?') }}
                         </a>
 
                         <x-primary-button class="ms-4">
-                            {{ __('Register') }}
+                            {{ __('Iyandikishe') }}
                         </x-primary-button>
                     </div>
 
