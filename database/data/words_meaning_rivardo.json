@@ -1092,43 +1092,33 @@
     "definitions": "inda nini cane iremereye ak.: guhaga imbuzakwatsa"
   },
   {
-    "word": "[Alternative]_Inturatura",
-    "type": "",
+    "word": "Inturatura",
+    "type": "izina",
     "definitions": "Umuntu avugana isoni nke, avuga cane iyo ariko aravuga ivyo batumvikanako n'abandi."
   },
   {
-    "word": "",
-    "type": "ki)-īza (ingereka",
-    "definitions": "gisa neza, cākâka, gifise akamaro"
-  },
-  {
-    "word": "",
-    "type": "ki)(ha)(mu)-bi (ingereka",
-    "definitions": "gikenye ubwiza, kitagira akamaro, kitabereye kurāba"
-  },
-  {
-    "word": "[Alternative] Gucûra",
-    "type": "",
+    "word": "Gucûra",
+    "type": "irivuga",
     "definitions": "Kuja kugarukana umugore wari waramwirukanye akaja iwabo"
   },
   {
-    "word": "[Alternative]_Gutegura",
-    "type": "",
+    "word": "Gutegura",
+    "type": "irivuga",
     "definitions": "Gukuraho umutego, umunangiro ariwo mushibuka"
   },
   {
-    "word": "[Alternative]_Inyomvyi",
+    "word": "Inyomvyi",
     "type": "",
     "definitions": "Inyoni ivuga mu bucaca Amajambo akomotse ko: Gukoroka mu nyomvyi = Gukoroka ijoro, kugenda kare cane"
   },
   {
-    "word": "[Alternative][Alternative]Ibuye",
-    "type": "",
+    "word": "Ibuye",
+    "type": "izina",
     "definitions": "Ibohero, agasho, umunyororo"
   },
   {
-    "word": "[Alternative]Ibuye",
-    "type": "",
+    "word": "Ibuye",
+    "type": "izina",
     "definitions": "Ikintu gikogwa mu mahinguriro, bashira mu nsamirizi zidakoresha umuyagankuba zikavuga"
   },
   {
@@ -1485,12 +1475,12 @@
   },
   {
     "word": "Barosa",
-    "type": "kwosa) (",
+    "type": "",
     "definitions": "bafata udushitsi tumota bakadushira mu kantu kameze nk'akabehe canke ku rujo bakaduturira. Umwotsi watwo ni wo wamotesha ivyambarwa"
   },
   {
     "word": "Bibiliya",
-    "type": "",
+    "type": "izina",
     "definitions": "igitabu abakirisu bakoresha mu gusenga."
   },
   {
@@ -2222,8 +2212,8 @@
   },
   {
     "word": "Icakunze",
-    "type": "icansi) (",
-    "definitions": "ni igikoresho bakamiramwo amata, kandi bakakiyanywesha."
+    "type": "izina",
+    "definitions": "Canke icansi, ni igikoresho bakamiramwo amata, kandi bakakiyanywesha."
   },
   {
     "word": "Icanya",
@@ -2362,7 +2352,7 @@
     "type": "",
     "definitions": [
       "Igikoresho bakoreesha muguteerera amata.",
-      "Igitsina c'umugore. baraciita kaandi ikivyeeyi; igisuundi; igituba"
+      "Igitsina c'umugore. baraciita kaandi ikivyeeyi"
     ]
   },
   {
@@ -2404,11 +2394,6 @@
     "word": "Igisizimwe",
     "type": "",
     "definitions": "Igikoko kinini cane cavurwa kera ko carya abantu. Tuvyumva mu migani n'ibitito birya abana, abagore, n'abagabo."
-  },
-  {
-    "word": "Igisundi",
-    "type": "",
-    "definitions": "igihimba c'irondoka c'umugore. Iri jambo ntiribereye gukoreshwabmu mvugo mbabarira matwi"
   },
   {
     "word": "Igitabo",
@@ -2470,11 +2455,6 @@
     "word": "Igitongati",
     "type": "",
     "definitions": "Igiti gifise amababi maremare bakunda gutera impande y'ibarabara iyo umutware agira arengane canke ahantu habera umusi mukuru"
-  },
-  {
-    "word": "Igituba",
-    "type": "",
-    "definitions": "igisundi"
   },
   {
     "word": "Igitwengerabarozi",
