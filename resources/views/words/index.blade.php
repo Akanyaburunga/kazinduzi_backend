@@ -6,12 +6,12 @@
 <div class="container">
 <div class="row justify-content-center my-5">
         <div class="col-lg-8 text-center">
-        <h3 class="display-4 text-primary">Words list</h3>
+        <h3 class="display-4 text-primary">Urutonde rw'amajambo</h3>
 
         <form action="{{ route('words.index') }}" method="GET" class="mb-4">
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Search for a word..." value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary">Rondera</button>
         </div>
         </form>
         
@@ -20,10 +20,10 @@
 
     @if ($words->isEmpty())
     <div class="mt-6 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
-            <p>No results found for <strong>"{{ $search }}"</strong>.</p>
-            <p>Would you like to contribute a new definition?</p>
+            <p>Ijambo <strong> ntiribonetse"{{ $search }}"</strong>.</p>
+            <p>Woshobora kuriterera ?</p>
             <a href="{{ route('words.create', ['word' => $search]) }}" class="mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                Add "{{ $search }}"
+                Riterere! "{{ $search }}"
             </a>
     </div>
     @else
