@@ -4,7 +4,13 @@
 
 @section('content')
 <div class="container">
-    <h1>Hubūra</h1>
+
+    <div class="row justify-content-center my-5">
+            <div class="col-lg-8 text-center">
+            <h3 class="display-6 text-primary">Hubūra</h3>
+            </div>
+    </div>
+
     <form method="POST" action="{{ route('words.update', $word) }}">
         @csrf
         @method('PUT')
