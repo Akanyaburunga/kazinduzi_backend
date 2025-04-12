@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class WordsFromJsonSeeder extends Seeder
 {
@@ -19,62 +22,85 @@ class WordsFromJsonSeeder extends Seeder
         }
 
         $admin = User::where('email', 'admin@kazinduzi.org')->first();
-
         if (!$admin) {
             $this->command->error("Admin user not found. Please seed the admin user first.");
             return;
         }
 
         $data = json_decode(File::get($jsonPath), true);
-        $addedCount = 0;
 
-        foreach ($data as $entry) {
-            if (!isset($entry['word'], $entry['type'], $entry['definitions'])) {
-                continue; // Skip invalid entries
+        $added = 0;
+        $skipped = 0;
+        $invalid = 0;
+
+        $this->command->info("Seeding words, please wait...");
+
+        // Optional: Wrap in transaction for rollback on error
+        DB::beginTransaction();
+
+        try {
+            $bar = $this->command->getOutput()->createProgressBar(count($data));
+            $bar->start();
+
+            foreach ($data as $entry) {
+                $bar->advance();
+
+                // Check structure
+                if (!isset($entry['word'], $entry['type'], $entry['definitions'])) {
+                    Log::warning("Invalid entry: " . json_encode($entry));
+                    $invalid++;
+                    continue;
+                }
+
+                $baseWord = trim($entry['word']);
+                $baseType = trim($entry['type']);
+                $slug = Str::slug($baseWord);
+
+                // Skip if already exists
+                if (Word::where('slug', $slug)->exists()) {
+                    $skipped++;
+                    continue;
+                }
+
+                // Create word
+                $word = $admin->words()->create([
+                    'word' => $baseWord,
+                    'type' => $baseType,
+                    'slug' => $slug,
+                ]);
+
+                // Extract first meaning
+                $definition = is_array($entry['definitions'])
+                    ? trim($entry['definitions'][0] ?? '')
+                    : trim($entry['definitions']);
+
+                if (!empty($definition)) {
+                    $word->meanings()->create([
+                        'meaning' => $definition,
+                        'user_id' => $admin->id,
+                    ]);
+
+                }
+
+                $admin->updateReputation(10, 'Submitted a new word', $word);
+
+                $added++;
             }
-        
-            $formattedWord = trim($entry['word']) . ' (' . trim($entry['type']) . ')';
-            $duplicateWord = Word::where('word', $formattedWord)->first();
-        
-            // Check for duplicates
-            $existingWord = Word::whereRaw('LOWER(word) = ?', [strtolower($duplicateWord)])->first();
 
-            if ($existingWord) continue;
+            $bar->finish();
+            $this->command->newLine(2);
 
-            $baseWord = trim($entry['word']);
-            $slug = \Str::slug($baseWord);
+            DB::commit();
 
-            // Skip duplicates by slug
-            if (Word::where('slug', $slug)->exists()) {
-                continue;
-            }
+            $this->command->info("✅ Seeding completed.");
+            $this->command->info("🟢 Added: $added");
+            $this->command->info("🟡 Skipped (duplicates): $skipped");
+            $this->command->info("🔴 Invalid entries: $invalid");
 
-            if (Word::where('word', $formattedWord)->exists()) {
-                continue;
-            }
-        
-            // Create the word
-            $word = $admin->words()->firstOrCreate([
-                'word' => $formattedWord,
-                'slug' => $slug,
-                'user_id' => $admin->id,
-            ]);
-        
-            // Add definition as meaning
-            $word->meanings()->create([
-                'meaning' => is_array($entry['definitions']) 
-                ? trim($entry['definitions'][0] ?? '')  // Use the first meaning if it's an array
-                : trim($entry['definitions']),
-                'user_id' => $admin->id,
-            ]);
-        
-            // Apply reputation logic
-            // Define your point system
-        $admin->updateReputation(10, 'Submitted a new word', $word);
-        
-        $addedCount++;
-        }                
-
-        $this->command->info("Seeding completed. {$addedCount} new words added.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $this->command->error("❌ Seeding failed: " . $e->getMessage());
+            Log::error('Seeder error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+        }
     }
 }
