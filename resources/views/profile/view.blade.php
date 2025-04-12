@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Profile settings')
+@section('title', 'Uruganda ndangamuntu')
 
 @section('content')
 <div class="container">
-    <h1>Profile Settings</h1>
+    <h1>Uruganda ndangamuntu</h1>
 
     <div class="card p-4">
         <img src="{{ auth()->user()->getProfilePictureUrl() }}" alt="Profile Picture" 
@@ -15,11 +15,11 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label class="form-label">Change Profile Picture</label>
+                <label class="form-label">Hindura ishusho yawe</label>
                 <input type="file" name="profile_picture" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-primary">Emeza ivyo wahinduye!</button>
         </form>
     </div>
 </div>
