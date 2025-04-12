@@ -6,17 +6,17 @@
 <div class="container my-5" style="max-width: 60%;">
     <div class="text-center mb-5">
         <h1 class="display-4">{{ $user->name }}</h1>
-        <p class="lead">Reputation: <strong class="text-primary">{{ $user->reputation }}</strong></p>
+        <p class="lead">Amanota: <strong class="text-primary">{{ $user->reputation }}</strong></p>
     </div>
 
     <div class="card shadow-sm">
         <div class="card-header bg-info text-white">
-            <h3 class="mb-0">Activity Log</h3>
+            <h3 class="mb-0">Ivyo waterereye</h3>
         </div>
         <div class="card-body">
             @if ($logs->isEmpty())
                 <div class="alert alert-info text-center">
-                    No reputation activity yet. Start contributing to earn reputation points!
+                    Ntaco uraterera kugeza ubu. Terera ijambo wironkere amanota y'ubuhizi!
                 </div>
             @else
                 <ul class="list-group list-group-flush">
