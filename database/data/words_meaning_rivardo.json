@@ -1,0 +1,5900 @@
+[
+  {
+    "word": "Inkware",
+    "type": "izina",
+    "definitions": "ubwoko bw'igikoko c'inyeshamba kimeze nk'inkoko. inkware zizwi ko nyaruka kandi mbere zishobora no kuguruka."
+  },
+  {
+    "word": "Umushokanyo",
+    "type": "izina",
+    "definitions": "igihimba c'irondoka c'umugore, bumwe mu bwoko bwavyo"
+  },
+  {
+    "word": "Umutunati",
+    "type": "izina",
+    "definitions": "Icitiranwa c'igihimba c'irondoka c'umugore"
+  },
+  {
+    "word": "Uruhumyi",
+    "type": "izina",
+    "definitions": "ingwara yo guhuma"
+  },
+  {
+    "word": "Agahenga",
+    "type": "izina",
+    "definitions": [
+      "agakoko gato k'amabara atukura n'ayirabura.",
+      "akana kavyibushe cane"
+    ]
+  },
+  {
+    "word": "Mu nyomvyi",
+    "type": "iryungikane",
+    "definitions": "kare cane, inyomvyi zikivuga"
+  },
+  {
+    "word": "Mu nkoko",
+    "type": "iryungikane",
+    "definitions": "kare cane"
+  },
+  {
+    "word": "Gusigingira",
+    "type": "irivuga",
+    "definitions": "kumera nabi, kuvyimbagana biteye ubwoba"
+  },
+  {
+    "word": "Lkigerigeri",
+    "type": "izina",
+    "definitions": "umubiko w'isake"
+  },
+  {
+    "word": "Gusukura",
+    "type": "irivuga",
+    "definitions": "kugira isuku"
+  },
+  {
+    "word": "Gukoropa",
+    "type": "irivuga",
+    "definitions": "gusukura inzu canke ahandi hantu ukoresheje amazi"
+  },
+  {
+    "word": "Amakônderá",
+    "type": "izina",
+    "definitions": "amajwi arenga kandi ajwiragira y'udukoko twitwa imijogoja"
+  },
+  {
+    "word": "Gushigisha",
+    "type": "irivuga",
+    "definitions": "gukora urushigisho, umusururu"
+  },
+  {
+    "word": "Umusururu",
+    "type": "izina",
+    "definitions": "urushigisho"
+  },
+  {
+    "word": "Urushigisho",
+    "type": "izina",
+    "definitions": "umusururu w'impeke, uburo canke ibigori"
+  },
+  {
+    "word": "Gukondera",
+    "type": "irivuga",
+    "definitions": "gushira urushigisho mu nzoga kugira uyisubize ubushuhe ishe neza kandi igire uburyohe"
+  },
+  {
+    "word": "Mucece",
+    "type": "izina ry'uruzi",
+    "definitions": "uruzi rwari rufise ikibanza kinini mu buzima bwa cami nko mw'iyimikwa"
+  },
+  {
+    "word": "I Nkondo",
+    "type": "izina ry' ahantu",
+    "definitions": "ikibanza gikomeye muri kabisa k'uburundi canecane ku ntwaro ya cami aho habaye n'indwano hagati y'abezi n'abatare"
+  },
+  {
+    "word": "Inkondo",
+    "type": "izina",
+    "definitions": "igihimba gifatanya icamwa n'igiti camyeko, ikijumbu n'umubuto"
+  },
+  {
+    "word": "Gukondora",
+    "type": "irivuga",
+    "definitions": [
+      "kuvuna",
+      "gukurako inkondo"
+    ]
+  },
+  {
+    "word": "Nyamunyamu",
+    "type": "izina",
+    "definitions": "agafi gatoya katarakura"
+  },
+  {
+    "word": "Agahuzo",
+    "type": "izina",
+    "definitions": "agafi gatoya cane"
+  },
+  {
+    "word": "Gufutura",
+    "type": "irivuga",
+    "definitions": "gusura umusuzi utavuga"
+  },
+  {
+    "word": "Inkavyi",
+    "type": "izina",
+    "definitions": "ikivyimba katababaza cizana ku mubiri ntikiveho. kugira kiveho bakoresha imiti iyonza canke bakakiyonza."
+  },
+  {
+    "word": "Agahenera",
+    "type": "izina",
+    "definitions": "agaherehere kaza ku kigohegohe c'ijisho. bivugwa ko kandukira umuntu atwenze uwukagwaye. karateye isoni."
+  },
+  {
+    "word": "Agaherehere",
+    "type": "izina",
+    "definitions": "akavyimba kizana ku mubiri kababaza canke katababaza. karateba kakameneka"
+  },
+  {
+    "word": "Guha ibinoko",
+    "type": "urwungikane /imperekerane",
+    "definitions": "kwereka umuntu ijisho n'ibigohe bihinduriye vyerekana ko wamugaye wamuhanye n'imbwa"
+  },
+  {
+    "word": "Kunokora",
+    "type": "irivuga",
+    "definitions": [
+      "gukura amaso hagasigara ibinokora",
+      "gukubita cane"
+    ]
+  },
+  {
+    "word": "Iyugi",
+    "type": "izina",
+    "definitions": "igicurarangisho kijegera abatamvyi bambara ku maguru ngo ngo bikomeze umudiho"
+  },
+  {
+    "word": "Injati",
+    "type": "izina",
+    "definitions": "utuvyi twanyuma tuza umuntu ariko arituma"
+  },
+  {
+    "word": "Ikinoko",
+    "type": "izina",
+    "definitions": "ijisho (imvugo itisoneye itisoneye) ijisho ukuyeko ikigohegohe."
+  },
+  {
+    "word": "Impunzi",
+    "type": "izina",
+    "definitions": "umuntu yahunze iyo avuka akaja ahandi kubera intambara"
+  },
+  {
+    "word": "Inzamba",
+    "type": "izina",
+    "definitions": "igikoresho gusohora amajwi bakoresha mu guhamagara abantu bahunge . gikozwe mw'ihembe"
+  },
+  {
+    "word": "Amayaya",
+    "type": "izina",
+    "definitions": "1) intambo yo mu mugamba inyaruka cane 2) inyifato y'uwunezerewe"
+  },
+  {
+    "word": "Kwizera",
+    "type": "irivuga",
+    "definitions": "kugira umutima witeze ivyiza muri kazoza"
+  },
+  {
+    "word": "Kwimbura",
+    "type": "irivuga",
+    "definitions": "gusarura ivyo warimye"
+  },
+  {
+    "word": "Kwimba",
+    "type": "irivuga",
+    "definitions": [
+      "kurima isi ikagira ikinogo",
+      "kurondera ubuzima"
+    ]
+  },
+  {
+    "word": "Kwisazura",
+    "type": "irivuga",
+    "definitions": "kugira amabanga y'abubatse n'umwana akiri muto nawe ushaje"
+  },
+  {
+    "word": "Guparangana",
+    "type": "irivuga",
+    "definitions": [
+      "(ikintu) kureka gukora kubera kugorodoba akanya gato",
+      "(umuntu) gucanganirwa akamera nk'uwasaze."
+    ]
+  },
+  {
+    "word": "Imfyeteri",
+    "type": "izina",
+    "definitions": "ikinyobwa, ikiribwa kidafashe, kitagira akamaro kanini mu mubiri."
+  },
+  {
+    "word": "Gusabagira",
+    "type": "irivuga",
+    "definitions": "kunywa amazi canke amata ukoresheje ururimi. bivugwa ku mbwa n'akayabu"
+  },
+  {
+    "word": "Guhimbira",
+    "type": "irivuga",
+    "definitions": "gutereka umushatsi mwinshi kandi bitakubereye"
+  },
+  {
+    "word": "Urugirye",
+    "type": "izina",
+    "definitions": "umunshatsi mwinshi kandi ubihiye uwawuteretse"
+  },
+  {
+    "word": "Ibisaganya",
+    "type": "izina",
+    "definitions": "ubwoya bwinshi, (umushatsi mwinshi) busambaguye"
+  },
+  {
+    "word": "Uruzya",
+    "type": "izina",
+    "definitions": "bwi. inzya. ubwoya bumera hafi y'igitsina mw'iboco, ku musumbi no hagati y'amaguru."
+  },
+  {
+    "word": "Itengatwa",
+    "type": "izina",
+    "definitions": "ivya"
+  },
+  {
+    "word": "Guca wahiba",
+    "type": "iryungikane",
+    "definitions": "guca akajuju, guca agateete"
+  },
+  {
+    "word": "Guhiba",
+    "type": "irivuga",
+    "definitions": "kugendera ubwishime"
+  },
+  {
+    "word": "Kudurarara",
+    "type": "irivuga",
+    "definitions": "guhaaga bikwiye utarengeje urugero"
+  },
+  {
+    "word": "Gufōkora",
+    "type": "irivuga",
+    "definitions": "kurya vyinshi n'akayabagu gakwiye gushika udurarare."
+  },
+  {
+    "word": "Incuramayagwa",
+    "type": "izina",
+    "definitions": "ingabiran umuntu aba afise imutuma ashobora gukora amayagwa"
+  },
+  {
+    "word": "Icuramayagwa",
+    "type": "izina",
+    "definitions": "igikorwa co gukora amayagwa"
+  },
+  {
+    "word": "Ubuke",
+    "type": "izina",
+    "definitions": "urugero rw'igitigiri gitoya, c'ibintu, abantu,..."
+  },
+  {
+    "word": "Ubwinshi",
+    "type": "izina",
+    "definitions": "urugero bw'igitigiri kinini, c'ibintu, abantu, ..."
+  },
+  {
+    "word": "Kenshi",
+    "type": "intumbuzi",
+    "definitions": "incuro nyinshi"
+  },
+  {
+    "word": "Ntangere",
+    "type": "intumbuzi",
+    "definitions": "vyinshi, bitagira urugero"
+  },
+  {
+    "word": "Kwehera",
+    "type": "irivuga",
+    "definitions": [
+      "kwiruka cane",
+      "gukora cane ikintu, mu bubangutsi ntangere"
+    ]
+  },
+  {
+    "word": "Gusambura",
+    "type": "irivuga",
+    "definitions": [
+      "gutandukanya ikintu cari cubatse",
+      "kugubita cane ukamena, gusanzaza",
+      "kwahukana (abantu bubakanye)"
+    ]
+  },
+  {
+    "word": "Gusama umutima",
+    "type": "iryungikane",
+    "definitions": "gufungura washonje cane kandi ugafungura duke"
+  },
+  {
+    "word": "Kwîsama",
+    "type": "irivuga",
+    "definitions": "gusama umutima, gufungura washonje cane kandi ugafungura duke"
+  },
+  {
+    "word": "Imvumuure",
+    "type": "gutaha) (iryungikane",
+    "definitions": "gutaha uko waje, ataco uronse, nk'uwaragiriye inarume"
+  },
+  {
+    "word": "Inkongooro",
+    "type": "izina",
+    "definitions": "ikirahuri canke icansi umwana ashobora kunyweramwo amata"
+  },
+  {
+    "word": "Inkokora",
+    "type": "izina",
+    "definitions": "ihurio ry'ibice bibiri bigize ukuboko"
+  },
+  {
+    "word": "Ahadata",
+    "type": "izina",
+    "definitions": "ahantu hahishije kandi hatekanye uhashinguye ikintu kitazimira"
+  },
+  {
+    "word": "Uburiza",
+    "type": "izina",
+    "definitions": "inyana yambere, imfura y'inka"
+  },
+  {
+    "word": "Gukênga",
+    "type": "irivuga",
+    "definitions": "kwicura ikintu , kwikeka"
+  },
+  {
+    "word": "Kuzingurura",
+    "type": "irivuga",
+    "definitions": "kugorora icari kizinze"
+  },
+  {
+    "word": "Kuzinga",
+    "type": "irivuga",
+    "definitions": [
+      "(ikintu) gukubiranya ikintu ukigira gito ngo corohe kubika canke gutwara",
+      "(umuntu) kumurenganya ku kintu yari afiseko uruhara"
+    ]
+  },
+  {
+    "word": "Kugôfeera",
+    "type": "irivuga",
+    "definitions": "kwanka gutsindwa"
+  },
+  {
+    "word": "Icukiro",
+    "type": "izina",
+    "definitions": [
+      "ahantu harunze amase menshi batera ibitegwa bikenera amase menshi nk'inzuzi",
+      "ikirundo c'amase menshi",
+      "ikirundo c'amazirantoke"
+    ]
+  },
+  {
+    "word": "Urwembe",
+    "type": "izina",
+    "definitions": [
+      "akantu gakozwe mu cuma gakarishe cane impande zose bakoresha mu guca inzara canke indasago",
+      "ikintu gikarishe cane"
+    ]
+  },
+  {
+    "word": "Urugemwe",
+    "type": "izina",
+    "definitions": "umuvyaro w'igitegwa babadika"
+  },
+  {
+    "word": "Umudogonya",
+    "type": "izina",
+    "definitions": "ikintu kitarakura cane, kitarakomorora, kikiri gito cane : umwana, inyana, urugemwe"
+  },
+  {
+    "word": "Rwuba",
+    "type": "izina",
+    "definitions": "rwuba rwa bigata: imana mbi"
+  },
+  {
+    "word": "Shirinyuma",
+    "type": "izina",
+    "definitions": "mu kwemera kw'abasogokuru, imana ituma umuvyeyi yibaruka ntashikane"
+  },
+  {
+    "word": "Kuramburura",
+    "type": "irivuga",
+    "definitions": "igitungwa: kuvyara icapfuye"
+  },
+  {
+    "word": "Kurazangana",
+    "type": "irivuga",
+    "definitions": "kugenda urahenuka canke uhakwa kwinaga ubitumwe n'utuyoga, ingwara canke isari"
+  },
+  {
+    "word": "Kuremvaguza",
+    "type": "irivuga",
+    "definitions": [
+      "inka: kurisha idakuzako, ibuca hejuru",
+      "gukora ikintu utagiserekeye cane, uca hejuru, vy'imirenzako"
+    ]
+  },
+  {
+    "word": "Kugongora",
+    "type": "irivuga",
+    "definitions": [
+      "kugorora icagovye : isuka, umuhoro, imodokari,...",
+      "kwigisha umunyeshure w'ikijuju"
+    ]
+  },
+  {
+    "word": "Kugonanwa",
+    "type": "irivuga",
+    "definitions": "kwumva inguvu nke zo gukora ikintu ukanavyerekana"
+  },
+  {
+    "word": "Guhigimanga",
+    "type": "irivuga",
+    "definitions": "kunihanga, kugonanwa gukora ikintu"
+  },
+  {
+    "word": "Kubwasura",
+    "type": "irivuga",
+    "definitions": "kumena ikintu kigasaba gose kugasanzara kandi kikavuza urwamo"
+  },
+  {
+    "word": "Kubwasa",
+    "type": "irivuga",
+    "definitions": "kumena, gukubita"
+  },
+  {
+    "word": "Umwiriri",
+    "type": "izina",
+    "definitions": "igufa rijana ku zuru"
+  },
+  {
+    "word": "Isosó",
+    "type": "izina",
+    "definitions": "umwanya utagira umushatsi winjira mu mutwe uva mu gahanga"
+  },
+  {
+    "word": "Guhisha",
+    "type": "irivuga",
+    "definitions": "kunyegeza"
+  },
+  {
+    "word": "Guteterwa",
+    "type": "irivuga",
+    "definitions": "kumaramara"
+  },
+  {
+    "word": "Gushishitira",
+    "type": "irivuga",
+    "definitions": "gukorako buhoro buhoro ahantu hariko harababara"
+  },
+  {
+    "word": "Gupfunagirika",
+    "type": "irivuga",
+    "definitions": "kurira udashikana"
+  },
+  {
+    "word": "Gutsitara",
+    "type": "irivuga",
+    "definitions": "gukubita ukuguru na cane cane ikirenge ku kintu"
+  },
+  {
+    "word": "Ibikoba",
+    "type": "izina",
+    "definitions": "ibishato vy'ibikoko"
+  },
+  {
+    "word": "Kuvuvudikira",
+    "type": "irivuga",
+    "definitions": "gupfa ico uhitanye wabuze ico warondera"
+  },
+  {
+    "word": "Amarara",
+    "type": "izina",
+    "definitions": "amero"
+  },
+  {
+    "word": "Amero",
+    "type": "izina",
+    "definitions": "gukunda ikintu cane ukibonye bikanka ko wokwihangana"
+  },
+  {
+    "word": "Akaregeya",
+    "type": "izina",
+    "definitions": "agatoke, akano canke akantu kamera ku gutwi karenga kutwo abandi baba bafise kandi kenshi katagiramwo igufa"
+  },
+  {
+    "word": "Gutâtuura",
+    "type": "irivuga",
+    "definitions": "gutandukanya abantu bariko baratâta; kubûzuriza"
+  },
+  {
+    "word": "Ubutasi",
+    "type": "izina",
+    "definitions": [
+      "ukurondera amakuru y'umwansi wawe mu kinyegero kugire umwirinde, umwitange canke umugwanye bitakugoye",
+      "kuja kurondera amakuru y'uwo ugomba kwûbiira: abasuma b'inka"
+    ]
+  },
+  {
+    "word": "Igendereza",
+    "type": "izina",
+    "definitions": "(gikomooka mu kinyarwanda) ukurodera amakuru y'umwansi kugire ntagutere utiteguye"
+  },
+  {
+    "word": "Iperereza",
+    "type": "izina",
+    "definitions": "ni ugutororokanya amakuru, igendereza, ubutasi"
+  },
+  {
+    "word": "Ipine",
+    "type": "izina",
+    "definitions": "Igice c'ingendeshwa kizunguruka bwa rujegwe kandi kigomakomeye gikozwe mu cum n'igikabuco"
+  },
+  {
+    "word": "Impunzi",
+    "type": "izina",
+    "definitions": "umuntu yahunze iyo avuka akaja ahandi kubera intambara"
+  },
+  {
+    "word": "Inzamba",
+    "type": "izina",
+    "definitions": "igikoresho gusohora amajwi bakoresha mu guhamagara abantu bahunge . gikozwe mw'ihembe"
+  },
+  {
+    "word": "Amayaya",
+    "type": "izina",
+    "definitions": "1) intambo yo mu mugamba inyaruka cane 2) inyifato y'uwunezerewe"
+  },
+  {
+    "word": "Kwizera",
+    "type": "irivuga",
+    "definitions": "kugira umutima witeze ivyiza muri kazoza"
+  },
+  {
+    "word": "Kwimbura",
+    "type": "irivuga",
+    "definitions": "gusarura ivyo warimye"
+  },
+  {
+    "word": "Kwimba",
+    "type": "irivuga",
+    "definitions": [
+      "kurima isi ikagira ikinogo",
+      "kurondera ubuzima"
+    ]
+  },
+  {
+    "word": "Kwisazura",
+    "type": "irivuga",
+    "definitions": "kugira amabanga y'abubatse n'umwana akiri muto nawe ushaje"
+  },
+  {
+    "word": "Guparangana",
+    "type": "irivuga",
+    "definitions": [
+      "(ikintu) kureka gukora kubera kugorodoba akanya gato",
+      "(umuntu) gucanganirwa akamera nk'uwasaze."
+    ]
+  },
+  {
+    "word": "Imfyeteri",
+    "type": "izina",
+    "definitions": "ikinyobwa, ikiribwa kidafashe, kitagira akamaro kanini mu mubiri."
+  },
+  {
+    "word": "Gusabagira",
+    "type": "irivuga",
+    "definitions": "kunywa amazi canke amata ukoresheje ururimi. bivugwa ku mbwa n'akayabu"
+  },
+  {
+    "word": "Guhimbira",
+    "type": "irivuga",
+    "definitions": "gutereka umushatsi mwinshi kandi bitakubereye"
+  },
+  {
+    "word": "Urugirye",
+    "type": "izina",
+    "definitions": "umunshatsi mwinshi kandi ubihiye uwawuteretse"
+  },
+  {
+    "word": "Ibisaganya",
+    "type": "izina",
+    "definitions": "ubwoya bwinshi, (umushatsi mwinshi) busambaguye"
+  },
+  {
+    "word": "Uruzya",
+    "type": "izina",
+    "definitions": "bwi. inzya. ubwoya bumera hafi y'igitsina mw'iboco, ku musumbi no hagati y'amaguru."
+  },
+  {
+    "word": "Itengatwa",
+    "type": "izina",
+    "definitions": "ivya"
+  },
+  {
+    "word": "Guca wahiba",
+    "type": "iryungikane",
+    "definitions": "guca akajuju, guca agateete"
+  },
+  {
+    "word": "Guhiba",
+    "type": "irivuga",
+    "definitions": "kugendera ubwishime"
+  },
+  {
+    "word": "Kudurarara",
+    "type": "irivuga",
+    "definitions": "guhaaga bikwiye utarengeje urugero"
+  },
+  {
+    "word": "Gufōkora",
+    "type": "irivuga",
+    "definitions": "kurya vyinshi n'akayabagu gakwiye gushika udurarare."
+  },
+  {
+    "word": "Incuramayagwa",
+    "type": "izina",
+    "definitions": "ingabiran umuntu aba afise imutuma ashobora gukora amayagwa"
+  },
+  {
+    "word": "Icuramayagwa",
+    "type": "izina",
+    "definitions": "igikorwa co gukora amayagwa"
+  },
+  {
+    "word": "Ubuke",
+    "type": "izina",
+    "definitions": "urugero rw'igitigiri gitoya, c'ibintu, abantu,..."
+  },
+  {
+    "word": "Ubwinshi",
+    "type": "izina",
+    "definitions": "urugero bw'igitigiri kinini, c'ibintu, abantu, ..."
+  },
+  {
+    "word": "Kenshi",
+    "type": "intumbuzi",
+    "definitions": "incuro nyinshi"
+  },
+  {
+    "word": "Ntangere",
+    "type": "intumbuzi",
+    "definitions": "vyinshi, bitagira urugero"
+  },
+  {
+    "word": "Kwehera",
+    "type": "irivuga",
+    "definitions": [
+      "kwiruka cane",
+      "gukora cane ikintu, mu bubangutsi ntangere"
+    ]
+  },
+  {
+    "word": "Gusambura",
+    "type": "irivuga",
+    "definitions": [
+      "gutandukanya ikintu cari cubatse",
+      "kugubita cane ukamena, gusanzaza",
+      "kwahukana (abantu bubakanye)"
+    ]
+  },
+  {
+    "word": "Gusama umutima",
+    "type": "iryungikane",
+    "definitions": "gufungura washonje cane kandi ugafungura duke"
+  },
+  {
+    "word": "Kwîsama",
+    "type": "irivuga",
+    "definitions": "gusama umutima, gufungura washonje cane kandi ugafungura duke"
+  },
+  {
+    "word": "Imvumuure",
+    "type": "gutaha) (iryungikane",
+    "definitions": "gutaha uko waje, ataco uronse, nk'uwaragiriye inarume"
+  },
+  {
+    "word": "Inkongooro",
+    "type": "izina",
+    "definitions": "ikirahuri canke icansi umwana ashobora kunyweramwo amata"
+  },
+  {
+    "word": "Inkokora",
+    "type": "izina",
+    "definitions": "ihurio ry'ibice bibiri bigize ukuboko"
+  },
+  {
+    "word": "Ahadata",
+    "type": "izina",
+    "definitions": "ahantu hahishije kandi hatekanye uhashinguye ikintu kitazimira"
+  },
+  {
+    "word": "Uburiza",
+    "type": "izina",
+    "definitions": "inyana yambere, imfura y'inka"
+  },
+  {
+    "word": "Gukênga",
+    "type": "irivuga",
+    "definitions": "kwicura ikintu , kwikeka"
+  },
+  {
+    "word": "Kuzingurura",
+    "type": "irivuga",
+    "definitions": "kugorora icari kizinze"
+  },
+  {
+    "word": "Kuzinga",
+    "type": "irivuga",
+    "definitions": [
+      "(ikintu) gukubiranya ikintu ukigira gito ngo corohe kubika canke gutwara",
+      "(umuntu) kumurenganya ku kintu yari afiseko uruhara"
+    ]
+  },
+  {
+    "word": "Kugôfeera",
+    "type": "irivuga",
+    "definitions": "kwanka gutsindwa"
+  },
+  {
+    "word": "Icukiro",
+    "type": "izina",
+    "definitions": [
+      "ahantu harunze amase menshi batera ibitegwa bikenera amase menshi nk'inzuzi",
+      "ikirundo c'amase menshi",
+      "ikirundo c'amazirantoke"
+    ]
+  },
+  {
+    "word": "Urwembe",
+    "type": "izina",
+    "definitions": [
+      "akantu gakozwe mu cuma gakarishe cane impande zose bakoresha mu guca inzara canke indasago",
+      "ikintu gikarishe cane"
+    ]
+  },
+  {
+    "word": "Urugemwe",
+    "type": "izina",
+    "definitions": "umuvyaro w'igitegwa babadika"
+  },
+  {
+    "word": "Umudogonya",
+    "type": "izina",
+    "definitions": "ikintu kitarakura cane, kitarakomorora, kikiri gito cane : umwana, inyana, urugemwe"
+  },
+  {
+    "word": "Rwuba",
+    "type": "izina",
+    "definitions": "rwuba rwa bigata: imana mbi"
+  },
+  {
+    "word": "Shirinyuma",
+    "type": "izina",
+    "definitions": "mu kwemera kw'abasogokuru, imana ituma umuvyeyi yibaruka ntashikane"
+  },
+  {
+    "word": "Kuramburura",
+    "type": "irivuga",
+    "definitions": "igitungwa: kuvyara icapfuye"
+  },
+  {
+    "word": "Kurazangana",
+    "type": "irivuga",
+    "definitions": "kugenda urahenuka canke uhakwa kwinaga ubitumwe n'utuyoga, ingwara canke isari"
+  },
+  {
+    "word": "Kuremvaguza",
+    "type": "irivuga",
+    "definitions": [
+      "inka: kurisha idakuzako, ibuca hejuru",
+      "gukora ikintu utagiserekeye cane, uca hejuru, vy'imirenzako"
+    ]
+  },
+  {
+    "word": "Kugongora",
+    "type": "irivuga",
+    "definitions": [
+      "kugorora icagovye : isuka, umuhoro, imodokari,...",
+      "kwigisha umunyeshure w'ikijuju"
+    ]
+  },
+  {
+    "word": "Kugonanwa",
+    "type": "irivuga",
+    "definitions": "kwumva inguvu nke zo gukora ikintu ukanavyerekana"
+  },
+  {
+    "word": "Guhigimanga",
+    "type": "irivuga",
+    "definitions": "kunihanga, kugonanwa gukora ikintu"
+  },
+  {
+    "word": "Kubwasura",
+    "type": "irivuga",
+    "definitions": "kumena ikintu kigasaba gose kugasanzara kandi kikavuza urwamo"
+  },
+  {
+    "word": "Kubwasa",
+    "type": "irivuga",
+    "definitions": "kumena, gukubita"
+  },
+  {
+    "word": "Umwiriri",
+    "type": "izina",
+    "definitions": "igufa rijana ku zuru"
+  },
+  {
+    "word": "Isosó",
+    "type": "izina",
+    "definitions": "umwanya utagira umushatsi winjira mu mutwe uva mu gahanga"
+  },
+  {
+    "word": "Guhisha",
+    "type": "irivuga",
+    "definitions": "kunyegeza"
+  },
+  {
+    "word": "Guteterwa",
+    "type": "irivuga",
+    "definitions": "kumaramara"
+  },
+  {
+    "word": "Gushishitira",
+    "type": "irivuga",
+    "definitions": "gukorako buhoro buhoro ahantu hariko harababara"
+  },
+  {
+    "word": "Gupfunagirika",
+    "type": "irivuga",
+    "definitions": "kurira udashikana"
+  },
+  {
+    "word": "Gutsitara",
+    "type": "irivuga",
+    "definitions": "gukubita ukuguru na cane cane ikirenge ku kintu"
+  },
+  {
+    "word": "Ibikoba",
+    "type": "izina",
+    "definitions": "ibishato vy'ibikoko"
+  },
+  {
+    "word": "Kuvuvudikira",
+    "type": "irivuga",
+    "definitions": "gupfa ico uhitanye wabuze ico warondera"
+  },
+  {
+    "word": "Amarara",
+    "type": "izina",
+    "definitions": "amero"
+  },
+  {
+    "word": "Amero",
+    "type": "izina",
+    "definitions": "gukunda ikintu cane ukibonye bikanka ko wokwihangana"
+  },
+  {
+    "word": "Akaregeya",
+    "type": "izina",
+    "definitions": "agatoke, akano canke akantu kamera ku gutwi karenga kutwo abandi baba bafise kandi kenshi katagiramwo igufa"
+  },
+  {
+    "word": "Gutâtuura",
+    "type": "irivuga",
+    "definitions": "gutandukanya abantu bariko baratâta; kubûzuriza"
+  },
+  {
+    "word": "Ubutasi",
+    "type": "izina",
+    "definitions": [
+      "ukurondera amakuru y'umwansi wawe mu kinyegero kugire umwirinde, umwitange canke umugwanye bitakugoye",
+      "kuja kurondera amakuru y'uwo ugomba kwûbiira: abasuma b'inka"
+    ]
+  },
+  {
+    "word": "Igendereza",
+    "type": "izina",
+    "definitions": "(gikomooka mu kinyarwanda) ukurodera amakuru y'umwansi kugire ntagutere utiteguye"
+  },
+  {
+    "word": "Iperereza",
+    "type": "izina",
+    "definitions": "ni ugutororokanya amakuru, igendereza, ubutasi"
+  },
+  {
+    "word": "Ipine",
+    "type": "izina",
+    "definitions": "Igice c'ingendeshwa kizunguruka bwa rujegwe kandi kigomakomeye gikozwe mu cum n'igikabuco"
+  },
+  {
+    "word": "Isatamubiri",
+    "type": "izina",
+    "definitions": "ubushobozi bwo kwumva ikintu ku vy'umubiri, ukubabara, ugusha, ubushuhe, ..."
+  },
+  {
+    "word": "Ururimi",
+    "type": "izina",
+    "definitions": "inyama iba mu kanwa ifise isatamubiri ikoreshwa mu kuvuga, mu guhonja ibintu no mu gufungura"
+  },
+  {
+    "word": "Igitsure",
+    "type": "izina",
+    "definitions": "indabo itera ubwoba"
+  },
+  {
+    "word": "Kuraba",
+    "type": "irivuga",
+    "definitions": "gukoresha amaso ico yagenewe; kwitegereza"
+  },
+  {
+    "word": "Indaabo",
+    "type": "izina",
+    "definitions": "ukuntu umuntu araaba"
+  },
+  {
+    "word": "Itanure",
+    "type": "izina",
+    "definitions": "igitôngorero"
+  },
+  {
+    "word": "Igitôngoorero",
+    "type": "izina",
+    "definitions": "urubeya rwinshi cane"
+  },
+  {
+    "word": "Gusususmira",
+    "type": "irivuga",
+    "definitions": "kujugumira intoke iyo ugiye guterura ikintu"
+  },
+  {
+    "word": "Agasuzuguro",
+    "type": "izina",
+    "definitions": "ifatwa nabi ry'umuntu canke ikintu nk'uko ata kamaro afise (gifise)"
+  },
+  {
+    "word": "Guhêngeeshanya",
+    "type": "irivuga",
+    "definitions": "kurindira gukora ikintu; kureka, kwiyumviitanya"
+  },
+  {
+    "word": "Guheema",
+    "type": "izina",
+    "definitions": [
+      "guhuumeeka",
+      "(ikinyabuzima) kugira ubuzima",
+      "gusura"
+    ]
+  },
+  {
+    "word": "Guhema",
+    "type": "irivuga",
+    "definitions": "guhenda umuntu ngo uramushakira ineza, uramukunda,... naho atari vyo"
+  },
+  {
+    "word": "Agahemo",
+    "type": "izina",
+    "definitions": "ikinyoma c'inyifato; guhenda umuntu mu mvugo umwereka ko mushiranyeko naho atarivyo; kweza akarimi ku muntu"
+  },
+  {
+    "word": "Agatsengeneke",
+    "type": "izina",
+    "definitions": "agahemo kavanze n'agasuzuguro mu ndabo"
+  },
+  {
+    "word": "Umujejuru",
+    "type": "izina",
+    "definitions": "ahantu haduga cane, ku gatumba karekare gahakwa gukora kw'ijuru"
+  },
+  {
+    "word": "Ijeenda",
+    "type": "izina",
+    "definitions": "ahantu hamanuka cane nk'uwuja mu nda y'umusozi"
+  },
+  {
+    "word": "Kuberagura",
+    "type": "irivuga",
+    "definitions": "kuberaangura"
+  },
+  {
+    "word": "Kuberaangura",
+    "type": "irivuga",
+    "definitions": [
+      "(inkoko) kumena amagi ikurayo ubuswi bugeze kuba kw'isi",
+      "(umuntu) kwibaruka abana benshi mu gihe gito"
+    ]
+  },
+  {
+    "word": "Imbere",
+    "type": "intumbuzi",
+    "definitions": [
+      "ahantu hahera mu maso y'umuntu, ikintu canke ahantu",
+      "igihe gitangurira ikindi"
+    ]
+  },
+  {
+    "word": "Inyuma",
+    "type": "intuumbuzi",
+    "definitions": [
+      "ahantu hahera i mugongo w'ikintu, umuntu canke ahantu",
+      "umwanya uza ukurikira uwundi"
+    ]
+  },
+  {
+    "word": "Gufashako",
+    "type": "irivuga",
+    "definitions": "kugenda wihuta, utumbereye izira utaraba inyuma"
+  },
+  {
+    "word": "Amandazi",
+    "type": "izina",
+    "definitions": "igitumbura (imvugo y'abaswahili baba mu burundi)"
+  },
+  {
+    "word": "Igitûmbura",
+    "type": "izina",
+    "definitions": "ikiribwa gicumbwa mu mavuta n'ifu kenshi bita ifarini bakabumbagira kakaba agatore"
+  },
+  {
+    "word": "Akanywababo",
+    "type": "izina",
+    "definitions": "akanama k'abasangiye ibintu; begeranye"
+  },
+  {
+    "word": "Gutuumbagana",
+    "type": "irivuga",
+    "definitions": [
+      "kuvyimba kubera ivyo wariye canke imbeho",
+      "gushavura cane umutwe ugakakama"
+    ]
+  },
+  {
+    "word": "Gucumbika",
+    "type": "irivuga",
+    "definitions": "kuba ahantu ukahagira iwawe"
+  },
+  {
+    "word": "Igikûbikûbi",
+    "type": "intumbuzi",
+    "definitions": "rimwe na rimwe"
+  },
+  {
+    "word": "Gucereza",
+    "type": "irivuga",
+    "definitions": "kuja mu gacerere igikûbikûbi"
+  },
+  {
+    "word": "Kuziinduura",
+    "type": "irivuga",
+    "definitions": "gukura amazinda umuntu"
+  },
+  {
+    "word": "Umucekanzogera",
+    "type": "izina",
+    "definitions": [
+      "imbwa",
+      "umuntu abayabaye"
+    ]
+  },
+  {
+    "word": "Imbuzakwatsa",
+    "type": "izina",
+    "definitions": "inda nini cane iremereye ak.: guhaga imbuzakwatsa"
+  },
+  {
+    "word": "[Alternative]_Inturatura",
+    "type": "",
+    "definitions": "Umuntu avugana isoni nke, avuga cane iyo ariko aravuga ivyo batumvikanako n'abandi."
+  },
+  {
+    "word": "",
+    "type": "ki)-īza (ingereka",
+    "definitions": "gisa neza, cākâka, gifise akamaro"
+  },
+  {
+    "word": "",
+    "type": "ki)(ha)(mu)-bi (ingereka",
+    "definitions": "gikenye ubwiza, kitagira akamaro, kitabereye kurāba"
+  },
+  {
+    "word": "[Alternative] Gucûra",
+    "type": "",
+    "definitions": "Kuja kugarukana umugore wari waramwirukanye akaja iwabo"
+  },
+  {
+    "word": "[Alternative]_Gutegura",
+    "type": "",
+    "definitions": "Gukuraho umutego, umunangiro ariwo mushibuka"
+  },
+  {
+    "word": "[Alternative]_Inyomvyi",
+    "type": "",
+    "definitions": "Inyoni ivuga mu bucaca Amajambo akomotse ko: Gukoroka mu nyomvyi = Gukoroka ijoro, kugenda kare cane"
+  },
+  {
+    "word": "[Alternative][Alternative]Ibuye",
+    "type": "",
+    "definitions": "Ibohero, agasho, umunyororo"
+  },
+  {
+    "word": "[Alternative]Ibuye",
+    "type": "",
+    "definitions": "Ikintu gikogwa mu mahinguriro, bashira mu nsamirizi zidakoresha umuyagankuba zikavuga"
+  },
+  {
+    "word": "Ababo",
+    "type": "",
+    "definitions": "abantu bamuka mu ntara kama y'Imbo"
+  },
+  {
+    "word": "Abahizi",
+    "type": "",
+    "definitions": "intore, intwari"
+  },
+  {
+    "word": "Abakirisu",
+    "type": "",
+    "definitions": "Abantu bagendera ku nyigisho za Yezu(-su) Kirisu"
+  },
+  {
+    "word": "Abana",
+    "type": "rudende: Umwana) (",
+    "definitions": [
+      "(Imyaka)Umuntu afise imyaka iri hagati y'umunsi umwe gushika ko myaka mirongo ibiri n'umwe",
+      "(ubucuti) Umuntu avyarwa n'uwundi, ashobora no kuba amufasha vyose: uburaro, imfungurwa, ivyambarwa, n'ibindi.",
+      "(indenzamvugo) Umuntu afise mu mutwe hadakuze, afise ivyiyumviro nk'ivy'umwana. Afyina, adembwa, akora nk'ivy'umuntu afise imyaka mike"
+    ]
+  },
+  {
+    "word": "Agaciwe karuma",
+    "type": "",
+    "definitions": "ikintu cari giharawe kirashobora gusubizwa hasi, kikibagirwa"
+  },
+  {
+    "word": "Agafuni",
+    "type": "",
+    "definitions": "isuka ishaje imaze ikagabanuka ikaba ntoyibakoresha mu kubagara ibiharage"
+  },
+  {
+    "word": "Agafyiiri",
+    "type": "izina",
+    "definitions": [
+      "ibara ryiirabura.",
+      "inka yiirabura iri jambo barabikoresha kandi iyo bavuga kukireeré iyo ciirabuye kubera imvura igire irwe."
+    ]
+  },
+  {
+    "word": "Agahama",
+    "type": "izina",
+    "definitions": [
+      "ibara risa n'amaraso.",
+      "ivu bimba risa n'amaraso rikoreshwa mugushariza inzu ."
+    ]
+  },
+  {
+    "word": "Agakininti",
+    "type": "",
+    "definitions": "agace k'ikintu, akamaramuziro, akagegene"
+  },
+  {
+    "word": "Agaséma",
+    "type": "",
+    "definitions": [
+      "Ikimenyetso c'ikintu kibi kizooshika canke kiza gushika. Iki kimenyetso gishobora kuba igikoko uboonye; wuumviise; canke igikorwa umuntu akoze canke ico avuze. Ut.",
+      "Kwumva inturatura ivuga",
+      "Umuntu akomye induru ataco ivuuyeko",
+      "Kwumva igihuna kivuga",
+      "Kubona ikiriirahabiri"
+    ]
+  },
+  {
+    "word": "Agasongero",
+    "type": "",
+    "definitions": "Agace k'inzu gahereza hejuru rwose,kenshi kaba gasongoye."
+  },
+  {
+    "word": "Agataka",
+    "type": "izina",
+    "definitions": "isi ndimwa, itongo"
+  },
+  {
+    "word": "Agatoboro",
+    "type": "",
+    "definitions": "Intoboro ntoya"
+  },
+  {
+    "word": "Agaturuturu",
+    "type": "",
+    "definitions": "Mu gatondo ka kare"
+  },
+  {
+    "word": "Agatutuma",
+    "type": "ubuhinga bwa none) (",
+    "definitions": "Akantu gasongoye usanga kw'iradiyo canke amaterefone ndetse n'ibindi bikoresho vy'ubuhinga bwa none, gafasha mu gusama ubuhuha ngo amajwi canke ivyo urondera gupakurura uvana mu kirere bikunde binyaruke."
+  },
+  {
+    "word": "akabande",
+    "type": "",
+    "definitions": "ahantu hegereye umwonga hacokeye ,uwuhamagaye ari hejuru ku musozi amajwi arasamirana. Mugihe c'ici akabande kaba karimwo ubwatsi butotahaye"
+  },
+  {
+    "word": "Akabati",
+    "type": "",
+    "definitions": "uruhimbi rwa kijambere rukozwe mu mbaho bashingurawo ibikoresho bafungurirako canke banyweramwo"
+  },
+  {
+    "word": "Akabayi",
+    "type": "",
+    "definitions": "Akajambo umuntu avuga mukwikebanura"
+  },
+  {
+    "word": "Akajisho ari murye",
+    "type": "",
+    "definitions": "ijisho rikaze kandi rikerebutse ryeraguza icoseruka"
+  },
+  {
+    "word": "Akanyabobo",
+    "type": "",
+    "definitions": "akana k'uruswa"
+  },
+  {
+    "word": "Akanyoonzwa",
+    "type": "izina",
+    "definitions": "akanya k=gato cane uronse kagoranye kugire ukore ikintu kitari ku rutonde rw'ivyo ukora"
+  },
+  {
+    "word": "Akaririmbo",
+    "type": "",
+    "definitions": "(amay.) Ni ururirimbo rutoya kandi ruryoshe"
+  },
+  {
+    "word": "Akaroruhore",
+    "type": "",
+    "definitions": "ikintu ciza cane (Raba uhore)"
+  },
+  {
+    "word": "Akayabu",
+    "type": "",
+    "definitions": "Igikooko c'igituungano gitoya; gifise amaguru ane n'umuriizo mureemure; kikagira amaso manini kaandi kiba muunzu hamwe n'abantu kikaba kibaangamira imbeba."
+  },
+  {
+    "word": "Akayago kakaba umunoni",
+    "type": "",
+    "definitions": "bayaga bashira hamwe"
+  },
+  {
+    "word": "Akayigo",
+    "type": "",
+    "definitions": "inzigo idacika"
+  },
+  {
+    "word": "Akazeeze",
+    "type": "izina",
+    "definitions": "agakoko ko mumirima caanke mwishamba, gakuunda kuvuga mwiijoro. abaruundi bakaazi nk'ikimenyetso c'uukwo hari umuntu caanke ikintu gishasha kiri mukibanza kanaka."
+  },
+  {
+    "word": "Akazïhebe",
+    "type": "izina",
+    "definitions": [
+      "agakono gatoya cane",
+      "agakono k'umurozi"
+    ]
+  },
+  {
+    "word": "Akaziikira",
+    "type": "inzigo y'-) (",
+    "definitions": "Inzigo idacika, inzogo idahera"
+  },
+  {
+    "word": "Akazu ka samandari",
+    "type": "",
+    "definitions": "mu kugaha iryo zina, vyavuye kuri wa mugani wa Samandari yubaka inzu yiwe mu ngoro y'umwami"
+  },
+  {
+    "word": "Amabano",
+    "type": "",
+    "definitions": "Amahembe y'inka."
+  },
+  {
+    "word": "Amabano",
+    "type": "y'inka) (",
+    "definitions": "amahembe"
+  },
+  {
+    "word": "Amabati",
+    "type": "",
+    "definitions": "ibisakazo vya kizungu bikoze mucuma kitaremereye."
+  },
+  {
+    "word": "Amacucu",
+    "type": "",
+    "definitions": "amase y'inyana yonka umuhondo. Kenshi usanga asa n'umuhondo."
+  },
+  {
+    "word": "Amadasahurwa",
+    "type": "",
+    "definitions": "Amavyi"
+  },
+  {
+    "word": "Amaganya",
+    "type": "",
+    "definitions": "amagorwa"
+  },
+  {
+    "word": "Amagara aruta amajana",
+    "type": "",
+    "definitions": "amagara aruta itunga"
+  },
+  {
+    "word": "Amahembe",
+    "type": "",
+    "definitions": "Igice c'inka kiri ku mutwe. Amahembe usanga akomeye cane yumye. Inka ikomeye iba ifise amahembe abiri."
+  },
+  {
+    "word": "Amahera",
+    "type": "",
+    "definitions": "Ikimenyetso igihugu gishinga ngo kizoje kirakaabiishwa ibiintu vyoose biguriishwa . Amahera ashobora kuba akozwe muumpapuro caanke mubutare."
+  },
+  {
+    "word": "Amakaba",
+    "type": "",
+    "definitions": "amata yambere bakama inka zigitaha canke zikivyuka mu gitondo. Ayandi ni amarindira, bayakama inyana zimaze gusubira kwonka."
+  },
+  {
+    "word": "Amakama",
+    "type": "",
+    "definitions": "igihe c'ugukama"
+  },
+  {
+    "word": "Amakanda",
+    "type": "y'inka) (",
+    "definitions": "ni harya inka zahonyoye"
+  },
+  {
+    "word": "Amakara",
+    "type": "izina",
+    "definitions": "igikoresho co gucana kiva mu biti vyacaniriwe ariko ntibabireke ngo bitokombere bihere. abarundi muri rusangi ntibacana amakara ku buryo hamwe hamwe abayacana usanga bafatwa nk'abasirimu."
+  },
+  {
+    "word": "Amakebano",
+    "type": "",
+    "definitions": "amakazanga, arimwo amavuta yo kwisiga"
+  },
+  {
+    "word": "Amakuba",
+    "type": "",
+    "definitions": "ivyago."
+  },
+  {
+    "word": "Amakwangu",
+    "type": "",
+    "definitions": "ubwihusi, ubukubaganyi"
+  },
+  {
+    "word": "amakwaza",
+    "type": "",
+    "definitions": "igihe c'umugoroba gishira ubwira mugihe inka ziba zigire zitahe zitanguye kwegera imihana izindi zaretse no kurisha"
+  },
+  {
+    "word": "Amakwegarugi",
+    "type": "",
+    "definitions": "Inzoga umuntu anywa iyo bwije cane kandi yamaze guhimba."
+  },
+  {
+    "word": "Amaribori",
+    "type": "izina",
+    "definitions": "imirongo yicapa ku mubiri w'umuntu cane cane umukobwa. abarundi baho hambere bavuga ko yerekana ubwiza"
+  },
+  {
+    "word": "Amarindira",
+    "type": "",
+    "definitions": "Amata bakama inyana zibanje gusubira kwonka."
+  },
+  {
+    "word": "Amarori",
+    "type": "",
+    "definitions": "Ibiyo ngendanwa umuntu yambara ku maso mu gihe agwaye canke agomba gushaza n'ukwikingira izuba."
+  },
+  {
+    "word": "Amasama yaanutse",
+    "type": "",
+    "definitions": "ibara ryaguye"
+  },
+  {
+    "word": "Amasebura",
+    "type": "",
+    "definitions": "imyaba basoromyemwo"
+  },
+  {
+    "word": "Amasebura",
+    "type": "",
+    "definitions": "imyaba basoromyemwo ibijumbu, bakayiteramwo izindi mbuto"
+  },
+  {
+    "word": "Amasezerano",
+    "type": "",
+    "definitions": "amajambo abantu bavugana iyo bemeranije ibintu batazorengako Ak. Iyo umugore n'umugabo bagira bubakane imbere y'amategeko barahana amasezerano imbere y'ivyabona"
+  },
+  {
+    "word": "Amashinga",
+    "type": "yose) (",
+    "definitions": "intara, ibihugu"
+  },
+  {
+    "word": "Amasoobe",
+    "type": "",
+    "definitions": "Umwaanda mutooya w'umuuntu umeze nk'aamaazi uzanana muunzanyi caanke mugisaabo."
+  },
+  {
+    "word": "Amata",
+    "type": "",
+    "definitions": "Ikinyobwa gifise ubutunzi bwinshi ndemamubiri, bakama mu nka yavyaye."
+  },
+  {
+    "word": "Amatahankoni",
+    "type": "",
+    "definitions": "amata baha abungere iyo bacuye"
+  },
+  {
+    "word": "Amategura",
+    "type": "-tigura) (",
+    "definitions": "ibisakazo bikoze mwibumba rituriye."
+  },
+  {
+    "word": "Amateke",
+    "type": "rud.iteke) (",
+    "definitions": "Igiterwa camera mu kuzimu kimeze. Ivyamwa vyaco bitemba ifu ariko ntibisoosa nk'ibijumbu. Amababi yavyo barayarya nk'imboga"
+  },
+  {
+    "word": "Amavyi",
+    "type": "",
+    "definitions": "Umwaanda uva mukibuno c'umuuntu."
+  },
+  {
+    "word": "Amaziinda",
+    "type": "",
+    "definitions": [
+      "Ubushobozi buke bwo kuvuga wungikanya amajambo, ukudidinganya",
+      "Amakenga Ak.: Ufise amazinda atubwire"
+    ]
+  },
+  {
+    "word": "Amazirantoke",
+    "type": "",
+    "definitions": "Amadasahurwa, amavyi"
+  },
+  {
+    "word": "Amunguranka niyo mazituvya",
+    "type": "",
+    "definitions": "uwurondeye vyinshi ku buryo butari bwo, abura n'ivyo yari afise"
+  },
+  {
+    "word": "Barigana umugani wa Sarukwavu n'ibindi bikoko",
+    "type": "",
+    "definitions": "Bagira ibirori vyerekana ico ivyo bikoko bikora"
+  },
+  {
+    "word": "Barosa",
+    "type": "kwosa) (",
+    "definitions": "bafata udushitsi tumota bakadushira mu kantu kameze nk'akabehe canke ku rujo bakaduturira. Umwotsi watwo ni wo wamotesha ivyambarwa"
+  },
+  {
+    "word": "Bibiliya",
+    "type": "",
+    "definitions": "igitabu abakirisu bakoresha mu gusenga."
+  },
+  {
+    "word": "Bibiriya",
+    "type": "",
+    "definitions": "Igitabu ceranda abakirisu bakoresha"
+  },
+  {
+    "word": "Bidaharirumugenzi",
+    "type": "",
+    "definitions": "imbwa idashaka ko hari iyindi yoyitanga gufata igikoko"
+  },
+  {
+    "word": "Bidaharirumugenzi",
+    "type": "",
+    "definitions": "imbwa idashaka ko hari iyindi yoyitanga gufata igikoko"
+  },
+  {
+    "word": "Bike",
+    "type": "ingereka",
+    "definitions": "ibintu vy'imparurwa"
+  },
+  {
+    "word": "Bishihana n'iyo ija gushika",
+    "type": "",
+    "definitions": "imbwa irwana n'inyamaswa, ya mbwa ikaruhira kuyitsinda, hanyuma ikayirya"
+  },
+  {
+    "word": "Bitisigira ku nzira",
+    "type": "",
+    "definitions": "imbwa itanuranura"
+  },
+  {
+    "word": "Bitisigira ku nzira",
+    "type": "",
+    "definitions": "imbwa itanuranura"
+  },
+  {
+    "word": "Bura bwanje",
+    "type": "",
+    "definitions": "bashaka kuvuga yuko ari we yamwibarutse"
+  },
+  {
+    "word": "Cenda",
+    "type": "",
+    "definitions": "Raba Icenda"
+  },
+  {
+    "word": "Coonze",
+    "type": "ingereka",
+    "definitions": "ijambo dukoresha mukuvuga ko umuntu afise akabiri kadatootahaye."
+  },
+  {
+    "word": "Cumye",
+    "type": "ingereka",
+    "definitions": "ijambo dukoresha mukuvuga ko ikintu cavuuyemwo amazi kuko caanikiwe caanke kuko kitagifise ubuzima."
+  },
+  {
+    "word": "Data",
+    "type": "",
+    "definitions": "Ijambo umwana akoresha mu guhamagara Se wiwe."
+  },
+  {
+    "word": "Gataanu",
+    "type": "",
+    "definitions": "Igiharuro kigira gatanu. Mu nyadiko ni 5"
+  },
+  {
+    "word": "Gatandatu",
+    "type": "",
+    "definitions": "Igiharuro kigira gatandatu. Candikwa 6"
+  },
+  {
+    "word": "Gatatu",
+    "type": "",
+    "definitions": "Igiharuro kigira gatatu. Mu nyandiko ni 3"
+  },
+  {
+    "word": "Gati ka waga",
+    "type": "",
+    "definitions": "bashaka kuvuga ko umuvyeyi ataravyara aba ari inyakamwe"
+  },
+  {
+    "word": "Guca amacukiro",
+    "type": "",
+    "definitions": "kurunda amase aho bazotera inzuzi"
+  },
+  {
+    "word": "Guca amahani",
+    "type": "",
+    "definitions": "kurahiza umuntu ngo ntaze arenge amasezerano."
+  },
+  {
+    "word": "Guca ibibatsi",
+    "type": "",
+    "definitions": "Kwakaka"
+  },
+  {
+    "word": "Guca mu canzo",
+    "type": "",
+    "definitions": "Kugenda winyegeje canke guhakwa"
+  },
+  {
+    "word": "Guca rwa ngondagonde",
+    "type": "",
+    "definitions": "guca urubaza uhengamiye ku ruhande rumwe"
+  },
+  {
+    "word": "Gucokomera",
+    "type": "",
+    "definitions": "Kugenda mugishishi, imvura igwa canke mu muhiduko, hakanye"
+  },
+  {
+    "word": "Gucungura",
+    "type": "",
+    "definitions": [
+      "Gukora ico uwundi yari gukora: kuragira, kurima, kuvoma. Ak.: Mawe, reka kugenda kuvooma ndagucungure urarushe!",
+      "Bivurwa kandi iyo ari kwakira ico uwundi yariko arakora Ak.: Mbe mwana, Kariyo ntaraza kugucungura ngo uje gufungura?"
+    ]
+  },
+  {
+    "word": "Gucûra",
+    "type": "",
+    "definitions": [
+      "(Inka) Gushikana inka I muhira uzikuye kurîsha",
+      "Gusuka amata mu cakirizo uvuye gukama canke mu gisabo iyo ugire canke uhejeje guterera",
+      "Kuzana umugore yari yararongowe igihe umugabo w'iwe yashengeye"
+    ]
+  },
+  {
+    "word": "Gufinda",
+    "type": "",
+    "definitions": "Kubaza umuntu, uhinyuza ko abizi"
+  },
+  {
+    "word": "Gufita amezi",
+    "type": "",
+    "definitions": "Kwibungega; bivugwa ku nka."
+  },
+  {
+    "word": "Gufotora",
+    "type": "",
+    "definitions": "gufata amasanamu ukoresheje icuma cabigenewe"
+  },
+  {
+    "word": "Gufungura",
+    "type": "amata) (",
+    "definitions": "Gucanga amata n'amazi."
+  },
+  {
+    "word": "Gufutsa umutima",
+    "type": "",
+    "definitions": "kunywa unyotewe cane."
+  },
+  {
+    "word": "gufwangagura",
+    "type": "",
+    "definitions": "gutwenga canke kuvuga ibitaroranye n'ivyo bakubwiye"
+  },
+  {
+    "word": "Guhaandira",
+    "type": "",
+    "definitions": "Kwimya inyana itaragera."
+  },
+  {
+    "word": "Guhana isango",
+    "type": "",
+    "definitions": "guhana indagano."
+  },
+  {
+    "word": "Guhanda",
+    "type": "",
+    "definitions": "kurima wubika ibisinde udakangaza."
+  },
+  {
+    "word": "Guhaza",
+    "type": "",
+    "definitions": "gukama."
+  },
+  {
+    "word": "Guhehemura",
+    "type": "",
+    "definitions": "kugira mu nda hatohato"
+  },
+  {
+    "word": "Guhera nk'ifu y’imijira",
+    "type": "",
+    "definitions": "Guhera isorosoro, kamwe kamwe, atawubiciye n'ikanda; mu kayombekero. Iryo jambo rero ryoba ryavuye ku kuntu ifu iguruwe n’umuyaga igenda. Ni ivyo twokwita ingereranyo y’igikorwa."
+  },
+  {
+    "word": "Guherura",
+    "type": "",
+    "definitions": "Gusya utanoza Ak.: Reka wamwana we guherura!"
+  },
+  {
+    "word": "Guhirira",
+    "type": "",
+    "definitions": "Kugona usohora amajwi y'impwemu zinjira canke zisohoka"
+  },
+  {
+    "word": "Guhodoka",
+    "type": "",
+    "definitions": "ni harya inka zihejeje kunywa amazi, zihaze, inyota iheze."
+  },
+  {
+    "word": "Guhonyanga uburenganzira bw'umuntu",
+    "type": "",
+    "definitions": "kurengera umuntu ico amategeko amurekurira"
+  },
+  {
+    "word": "Guhumba",
+    "type": "izuba ) (",
+    "definitions": "harya izuba ritakibabaza, ritagikaze."
+  },
+  {
+    "word": "Guhumba",
+    "type": "izuba ) (",
+    "definitions": "harya izuba ritakibabaza, ritagikaze."
+  },
+  {
+    "word": "Guhurumbira",
+    "type": "",
+    "definitions": "kwirukira"
+  },
+  {
+    "word": "Guhweza imikurira",
+    "type": "",
+    "definitions": "gucutsa inyana."
+  },
+  {
+    "word": "Gukaka",
+    "type": "",
+    "definitions": "kurya utabagura nk'inyamaswa"
+  },
+  {
+    "word": "Gukamiririza ibijumbu",
+    "type": "",
+    "definitions": "kurima ibijumbu igihe imvura iriko iracika."
+  },
+  {
+    "word": "Gukata ibumba",
+    "type": "",
+    "definitions": "kurikanyaga (baja bararisombirako n'agatsintsiri kamwe)"
+  },
+  {
+    "word": "Gukoma ishwashwa",
+    "type": "",
+    "definitions": "kuganiriza umuntu ari wenyene"
+  },
+  {
+    "word": "Gukomoza",
+    "type": "",
+    "definitions": "gusaba ngo bagusubize ivyo wanyazwe."
+  },
+  {
+    "word": "Gukomoza",
+    "type": "",
+    "definitions": "gusaba ngo bagusubize ivyo wanyazwe."
+  },
+  {
+    "word": "Gukoonja",
+    "type": "izina",
+    "definitions": [
+      "gukanya caane kubera imbeho,igikonyozi canke imvura yakunyaagiye.",
+      "guhora goose igihe abaandi bariko barerekana ubukerebutsi."
+    ]
+  },
+  {
+    "word": "Gukorora inda",
+    "type": "",
+    "definitions": "Gukurayo imbanyi itageze"
+  },
+  {
+    "word": "Gukubita imiribo",
+    "type": "",
+    "definitions": "harya inzuzi zizana imitwe."
+  },
+  {
+    "word": "Gukubita intahe mu gahanga",
+    "type": "",
+    "definitions": "umucamanza amenyesha umuntu ko atsinzwe mu rubanza"
+  },
+  {
+    "word": "Gukugira",
+    "type": "",
+    "definitions": "gukura ivyondo n'ivyatsi mu mugazo bakabishira ku mpande zose z'umwaba"
+  },
+  {
+    "word": "Gukunguta",
+    "type": "",
+    "definitions": "kuzungagiza, gukunkumura"
+  },
+  {
+    "word": "Gukwaya",
+    "type": "",
+    "definitions": "kurima mu kiyogori canke mu gishakara"
+  },
+  {
+    "word": "Gukwega ibirenge",
+    "type": "",
+    "definitions": "gukora ibintu witonze kubera ubunebwe"
+  },
+  {
+    "word": "Gukwirikira agahari",
+    "type": "",
+    "definitions": "kwigana ivyo abandi bagira utaravye ko ari vyiza"
+  },
+  {
+    "word": "Gupakira/gupakurura",
+    "type": "imodokari) (",
+    "definitions": "Kurundamwo ibintu/ kubikuramwo go ibitware/ibishikanye aho bija"
+  },
+  {
+    "word": "Gupakira/gupakurura",
+    "type": "ubuhinga bwa none) (",
+    "definitions": "Gushira canke gukura ibintu (amasanamu, amajwi canke ivyandiko) ku ngurukanabumenyi kugire uzobikoreshe igihe kigeze ubibike mu nyabwonko yawe"
+  },
+  {
+    "word": "Guruguru",
+    "type": "",
+    "definitions": "Urubuga rwa none rufasha abaserangura ku ngurukana bumenyi"
+  },
+  {
+    "word": "Gusakara",
+    "type": "",
+    "definitions": "Gushira ubwatsi,amabati, canke amategura(-tigura) hejuru y'inzu kugira ntive."
+  },
+  {
+    "word": "Gusasanura urwamfu",
+    "type": "",
+    "definitions": "gukubisha intimatima y'urwamfu ngo rworohe"
+  },
+  {
+    "word": "Gusenya urwuzuye",
+    "type": "",
+    "definitions": "gusambura"
+  },
+  {
+    "word": "Gusenyera ku mugozi umwe",
+    "type": "",
+    "definitions": "gukorera hamwe ibikorwa."
+  },
+  {
+    "word": "Gusharura",
+    "type": "",
+    "definitions": "gushira amazi mu nzoga"
+  },
+  {
+    "word": "Gushaya ku muntu",
+    "type": "",
+    "definitions": "kugirira nabi umuntu"
+  },
+  {
+    "word": "Gushikuka",
+    "type": "",
+    "definitions": "kuza muri benshi, kuraba ikintu, canke gutabaza"
+  },
+  {
+    "word": "Gushinga imizi",
+    "type": "",
+    "definitions": "gukomera cane"
+  },
+  {
+    "word": "Gushinga umuganda",
+    "type": "",
+    "definitions": "kwicara ataco winona"
+  },
+  {
+    "word": "Gushiruka amazinda",
+    "type": "",
+    "definitions": "ni ukumenya kwigana ivyo uzi, wabonye canke wumvise, udatinya kandi utibagira na kimwe."
+  },
+  {
+    "word": "Gushisha",
+    "type": "",
+    "definitions": "kumanika ibiharage ku rugo."
+  },
+  {
+    "word": "Gushóbora",
+    "type": "irivuga",
+    "definitions": "kugira ubukomezi n'amahirwe yo kurāngūra ikintu kigashika"
+  },
+  {
+    "word": "Gushumuntuka",
+    "type": "",
+    "definitions": "kurehuka"
+  },
+  {
+    "word": "Gushuukwa",
+    "type": "",
+    "definitions": "Gushaaka kuraanguura amabaanga mpuuzabitsina. Bibonekera kunzanyi ihaguruka ikamera nk'umurisho w'ingoma, canke igisaabo kivyiimba kikamera nk'ingumu."
+  },
+  {
+    "word": "Gushwabagura",
+    "type": "",
+    "definitions": "gutabagura mu dutabu dutoduto"
+  },
+  {
+    "word": "Gusiganya abandi",
+    "type": "",
+    "definitions": "gushaka ko uwundi ariwe akora igikorwa mu kibanza cawe"
+  },
+  {
+    "word": "Gusīmbura",
+    "type": "irivuga",
+    "definitions": "kuvuga umuntu yapfûye, gucúza"
+  },
+  {
+    "word": "Gusiriha",
+    "type": "",
+    "definitions": "gukina cane (bivugwa ku bana)."
+  },
+  {
+    "word": "Gusobanya",
+    "type": "",
+    "definitions": [
+      "Kuzibira ibirengero vy'urugo canke uruzitiro ukoresheje usobanywa",
+      "Kwinjirira umugore w'uwundi mu gihe yapfuye canke ari kure canke"
+    ]
+  },
+  {
+    "word": "Gusoboka",
+    "type": "",
+    "definitions": "Kugenda bukebuke udakubuta umurindi"
+  },
+  {
+    "word": "Gusohora amasuka",
+    "type": "",
+    "definitions": "kuja kurima ubwa mbere haheze igihe kinini batarima."
+  },
+  {
+    "word": "Gusohora ukuboko kumwe",
+    "type": "",
+    "definitions": "kurima uri umwe"
+  },
+  {
+    "word": "Gusonga",
+    "type": "",
+    "definitions": "Kwongereza ububabare mu bundi, ingorane mu zindi Ak: Umuntu anciye ku ukuboko aransonze yemwe!"
+  },
+  {
+    "word": "Gusooba",
+    "type": "",
+    "definitions": "Gusohora umwanda muto; (nger.kwihandura)"
+  },
+  {
+    "word": "Gusora",
+    "type": "",
+    "definitions": "gusoromesha isuka ibiyoba."
+  },
+  {
+    "word": "Gusubiriza mu nkoko uwundi",
+    "type": "",
+    "definitions": "kumwishura ico yakugiriye"
+  },
+  {
+    "word": "Gusuhuza",
+    "type": "",
+    "definitions": "kuja kuraba umuntu arwaye"
+  },
+  {
+    "word": "Gusura",
+    "type": "",
+    "definitions": "kwimba ivu"
+  },
+  {
+    "word": "Guta",
+    "type": "",
+    "definitions": "Guheba, guhuba ku kintu wariko urakora, kureka ikintu n'ibigirankana canke utakizi"
+  },
+  {
+    "word": "Guta umutwe",
+    "type": "",
+    "definitions": "Kuburanirwa, kurwa mu yabira"
+  },
+  {
+    "word": "Guta utora",
+    "type": "",
+    "definitions": "Kubura ico ukora ngo umare; kuvuga canke gukora kukintu ugita utora ikindi"
+  },
+  {
+    "word": "Guta wakuba",
+    "type": "",
+    "definitions": "igihe umuntu ariko agerageza ibintu bitagikunda,amazi yamaze kurenga inkombe"
+  },
+  {
+    "word": "Gutaamaaza",
+    "type": "",
+    "definitions": "Gushika ahantu nko mw'irembo aho ubona urugo ugana Ak.: Nabonye ataamaaje aza mu bikingi nca nyoka wese nza kumusanganira."
+  },
+  {
+    "word": "Gutaba",
+    "type": "",
+    "definitions": "gutegura ikibanza co kubakamwo inzu."
+  },
+  {
+    "word": "Gutabaruka",
+    "type": "",
+    "definitions": "gukira urugamba."
+  },
+  {
+    "word": "Gutakaza",
+    "type": "",
+    "definitions": "Kubura ikintu cawe waba ucibwe canke kikunyerurukanye kigakoroka. Guta Ak.: Nataye amarori, Natakaje amarori"
+  },
+  {
+    "word": "Gutamarira",
+    "type": "",
+    "definitions": "gutangara ubonye ikintu canke umuntu"
+  },
+  {
+    "word": "Gutamba inzu",
+    "type": "",
+    "definitions": "kugera inzu"
+  },
+  {
+    "word": "Gutana imbu",
+    "type": "",
+    "definitions": "gukiranwa gukora ikintu kimwe"
+  },
+  {
+    "word": "Gutanga",
+    "type": "",
+    "definitions": [
+      "Kwitangiza imbere Ak.: Nabatanze bose",
+      "Guha ikintu, ahantu, umuntu canke iciyumviro umuntu canke igikoko Ak.: Natanze ya nkooko",
+      "(Umwami) Kwiha ubuki akava ku ngoma agasubirirwa n'uwundi mwami"
+    ]
+  },
+  {
+    "word": "Gutata ikibanza",
+    "type": "",
+    "definitions": "kurondera ikibanza c'ico ushaka (ngaha ni ibumba)"
+  },
+  {
+    "word": "Gutegura",
+    "type": "",
+    "definitions": "Kwimenyereza, gukora ikintu imbere y'uko isango nyezina yo kugikora ishika"
+  },
+  {
+    "word": "Gutembera",
+    "type": "",
+    "definitions": [
+      "Kugendagenda uja kuramukanya canke kuruhurira umutwe atakinini ugiye gukora",
+      "Kuvyara ku mugore ati uwawe"
+    ]
+  },
+  {
+    "word": "Gutembera imbere",
+    "type": "",
+    "definitions": "kugendera imbere"
+  },
+  {
+    "word": "Gutera",
+    "type": "batera) (",
+    "definitions": "gushira (bashira)"
+  },
+  {
+    "word": "Gutera imbere",
+    "type": "",
+    "definitions": "bivugwa yungutse ugereranije n'uko yahora amerewe"
+  },
+  {
+    "word": "Gutereza amaso",
+    "type": "",
+    "definitions": "kuraba ahantu (hepfo, haruguru, inyuma)"
+  },
+  {
+    "word": "Guterwa imibungo",
+    "type": "",
+    "definitions": "guterwa iteka."
+  },
+  {
+    "word": "Gutigita",
+    "type": "irivuga",
+    "definitions": [
+      "(inkono itētse) guhinda kubera ubushuhe bw'amazi",
+      "imvura igire igwe, guhīnda"
+    ]
+  },
+  {
+    "word": "Gutimamukwa",
+    "type": "",
+    "definitions": "Kugira ugihababu kubera umunoho canke ubwoba. Ak. Kibondo canje ntuzosubire gutimamukwa ubonye inyama."
+  },
+  {
+    "word": "Gutita",
+    "type": "ka) (",
+    "definitions": "kwigana igitito (ko)."
+  },
+  {
+    "word": "Gutituka",
+    "type": "",
+    "definitions": "Gushira uburyohe, gutakaza agaciro"
+  },
+  {
+    "word": "Gutonda umurara",
+    "type": "",
+    "definitions": "gutondesha amasaka aho azokwumira"
+  },
+  {
+    "word": "Gutongera",
+    "type": "",
+    "definitions": "Kuvuga ivyipfuzo bibi ku buzima bw'umuntu canke ikintu wanka."
+  },
+  {
+    "word": "Gutorogana",
+    "type": "",
+    "definitions": "Gutukana, gutera urwamo rwinshi, gushwana"
+  },
+  {
+    "word": "Gutuma urwano",
+    "type": "",
+    "definitions": "Bivugwa iyo inka idashikira ivyatsi canke ibindi iba iriko irarisha canke inywa ikabanza kugorora izosi. Ku muntu naho, ni kugorora izosi uriko ugomba gusuma urusaku wumviriza canke uraba n'amaso ibiri kure yiwe."
+  },
+  {
+    "word": "Gutumwatumwa",
+    "type": "",
+    "definitions": "guhemagirika udashikana kubera guhaga cane canke ubwoba"
+  },
+  {
+    "word": "Gutunda",
+    "type": "",
+    "definitions": "gukanya cane (ubusage burajoba, bugakanya, bugafatana)"
+  },
+  {
+    "word": "Gutunura amâso",
+    "type": "",
+    "definitions": "Gukanura; babikoresha mu mvugo yo gutukana"
+  },
+  {
+    "word": "Guturitsa",
+    "type": "",
+    "definitions": [
+      "Kumena ikintu giturika kikavuza urwamo",
+      "(ingereranyo) Gukora ikintu n'inguvu: kwiga, kwandika, kuvuza ingoma,... Amajambo: -Guturitsa ingoma, Guturitsa icigwa, guturitsa igitsina (kurangura amabanga y'abubatse), guturitsa ikiribwa (gufungura)"
+    ]
+  },
+  {
+    "word": "Guturubika",
+    "type": "",
+    "definitions": "Gufata nabi, Guhuhika"
+  },
+  {
+    "word": "Guturubika",
+    "type": "Umuntu)(umwana) (",
+    "definitions": "Gufata nabi"
+  },
+  {
+    "word": "Gututuza",
+    "type": "",
+    "definitions": "(Igiterwa) Kuva mw'ivu, gukura"
+  },
+  {
+    "word": "Gutuzuka",
+    "type": "",
+    "definitions": "Guseruka ahantu atawari akwiteze canke yiteze ico kintu"
+  },
+  {
+    "word": "Gutyoza ahateka k'umuntu",
+    "type": "",
+    "definitions": "gufata nabi umuntu"
+  },
+  {
+    "word": "I Buha",
+    "type": "",
+    "definitions": "intara yo mu buseruko no mu bumanuko bw' Uburundi"
+  },
+  {
+    "word": "Ibabi",
+    "type": "",
+    "definitions": [
+      "Igihimba c'igiterwa canke igiti gisa n'urwatsi rutoto. Gifise akamaro ko gusama umuco ukagaburira umutumba n'ivyamwa vy'ico giterwa",
+      "Impuzu ntoya cane, kenshi na kenshi idafashe"
+    ]
+  },
+  {
+    "word": "Ibara",
+    "type": "izina",
+    "definitions": "ikimenyetso ceerekana ukwo ikiintu gisa ."
+  },
+  {
+    "word": "Ibicaniro",
+    "type": "",
+    "definitions": "ivyatsi bakoresha mu gucanira inka."
+  },
+  {
+    "word": "Ibikwakwa",
+    "type": "izina",
+    "definitions": "inkooko"
+  },
+  {
+    "word": "Ibisakazo",
+    "type": "",
+    "definitions": "ubwatsi canke ibindi bikoresho bakoresha mugusakara inzu"
+  },
+  {
+    "word": "Ibisusu",
+    "type": "",
+    "definitions": "Igihiimba c'umubiri w'umuuntu akoresha mukwiicara."
+  },
+  {
+    "word": "Iboondo",
+    "type": "",
+    "definitions": [
+      "Inda y'inka",
+      "(Ngereranyo) Inda y'umuntu (mu cubahiro)"
+    ]
+  },
+  {
+    "word": "Ibuguma",
+    "type": "",
+    "definitions": "Inka ishaje, inamvye"
+  },
+  {
+    "word": "iburi",
+    "type": "",
+    "definitions": "n'ivu begeranya kugira bateremwo imibuto y'ibijumbu canke ibikotikoti vy'imyumbati. (amaburi mu bwinshi)"
+  },
+  {
+    "word": "Ibutura",
+    "type": "",
+    "definitions": "Impuzu bambara ku gice co hepfo c'umubiri ariko idafuka amaguru hose"
+  },
+  {
+    "word": "Ibuye",
+    "type": "",
+    "definitions": "ubutare bugumye bukoreshwa cane muvyo kwubaka"
+  },
+  {
+    "word": "Icakunze",
+    "type": "icansi) (",
+    "definitions": "ni igikoresho bakamiramwo amata, kandi bakakiyanywesha."
+  },
+  {
+    "word": "Icanya",
+    "type": "",
+    "definitions": "icibare inka z'umwami zarishamwo"
+  },
+  {
+    "word": "Icanzo",
+    "type": "",
+    "definitions": "akarembo gatoyi kaba mukigo bacamwo iyo bagiye inyuma y'urugo"
+  },
+  {
+    "word": "Icenda",
+    "type": "",
+    "definitions": "Kenshi bavuga cenda; ni igiharuro kigira cenda bandika 9"
+  },
+  {
+    "word": "Icese",
+    "type": "",
+    "definitions": "Urukurikirane rw'amajambo aryoheye ugutwi kandi afise insiguro zifise akamaro avugwa kugira ateramishe canke yigishe abayumviriza"
+  },
+  {
+    "word": "Icîbo",
+    "type": "izina",
+    "definitions": "inkooko ntoya bahakurirako ubutsima bwa senaka"
+  },
+  {
+    "word": "Icobo",
+    "type": "",
+    "definitions": "ikinogo bahambamwo umuntu yapfuye"
+  },
+  {
+    "word": "Icubwa",
+    "type": "",
+    "definitions": "ni umuntu afise imbaga nto kandi mugufi ata magara afise"
+  },
+  {
+    "word": "Idirisha",
+    "type": "",
+    "definitions": "Akaryango gatoya kaba ku nzu kugire gatange akayaga n'umuco mu cumba"
+  },
+  {
+    "word": "Idodo",
+    "type": "izina",
+    "definitions": "icitiranwa c'inyabutongo"
+  },
+  {
+    "word": "Igaba",
+    "type": "",
+    "definitions": "Bw. amagaba icitiranwa c'icumu"
+  },
+  {
+    "word": "Igicaniro",
+    "type": "",
+    "definitions": "Ahantu murugo bacana inka kugire zisusuruke mbere n'abateramyi bakaba baratera ijoro ijambo. Igicaniro cari ikimenyetso c'urugo rurimwo inka."
+  },
+  {
+    "word": "Igicugu",
+    "type": "",
+    "definitions": "Ijoro ryirabura cane, ijoro ry'umuniha, mu masaha yitereye cane"
+  },
+  {
+    "word": "Igifaransa",
+    "type": "",
+    "definitions": "Ururimi ruvugwa n'abafaransa."
+  },
+  {
+    "word": "Igifuruguto",
+    "type": "",
+    "definitions": "Ni umugani abavyeyi bacira abana babo bateramye, igitito gitandukanye n'umugani kuko gifise uturirimbo hagati"
+  },
+  {
+    "word": "Igifushi",
+    "type": "",
+    "definitions": "Igihanaguzo bakoresha muguhanagura ikibaho mw'isomero."
+  },
+  {
+    "word": "Igifutiisho",
+    "type": "",
+    "definitions": "Igifushi"
+  },
+  {
+    "word": "Igiharoharo",
+    "type": "",
+    "definitions": "ahantu hahora imirima y'ibiharage ubwishaza canke uburo."
+  },
+  {
+    "word": "Igihendabaja",
+    "type": "",
+    "definitions": "ni harya akazuba kaka rigira rirenge ukama ugira ngo haracari kare."
+  },
+  {
+    "word": "Igihengeri",
+    "type": "",
+    "definitions": [
+      "Ikirengero gikeneye kuzibirwa",
+      "Ikosa rikeneye gukosorwa; bivugwa kenshi mu muryango canke ishirahamwe ryitunganije ariko hakaba agahaze"
+    ]
+  },
+  {
+    "word": "Igihoro",
+    "type": "",
+    "definitions": "ikinogo kiri mu mutumba w'igiti gihagaze"
+  },
+  {
+    "word": "Igihugu",
+    "type": "izina",
+    "definitions": "igice c'isi gifise imbibe,amategeko,intwaro n'ubwigenge."
+  },
+  {
+    "word": "Igihume",
+    "type": "",
+    "definitions": [
+      "ikintu kitagira imero bwite",
+      "ikintu giteye ubwoba",
+      "Umuntu yigenza nk'igikoko Ak. Umugore n'igihume yemwe! Yaraye anize abana biwe babiri"
+    ]
+  },
+  {
+    "word": "Igihuna",
+    "type": "",
+    "definitions": "Inyoni yo mwiishaamba ifise isuunzu kandi iagira amaaso manini asa n'ay'akayaabu.Iyi nyoni ikuunda kuja ahabona mwiijoro kaandi bavuga ko ari agasema."
+  },
+  {
+    "word": "Igihungurabayi",
+    "type": "",
+    "definitions": "imvura ya mbere irwa mu ci."
+  },
+  {
+    "word": "Igisa",
+    "type": "",
+    "definitions": "Ibihwanye nivyo umuntu afungura agahaga. Ak. Mwese mufungure umwe wese nkuko igisa ciwe kiri."
+  },
+  {
+    "word": "Igisaabo",
+    "type": "",
+    "definitions": [
+      "Igikoresho bakoreesha muguteerera amata.",
+      "Igitsina c'umugore. baraciita kaandi ikivyeeyi; igisuundi; igituba"
+    ]
+  },
+  {
+    "word": "Igisabiko",
+    "type": "",
+    "definitions": "igisate bakuza umutsima ku mwuko"
+  },
+  {
+    "word": "Igisabo kitagira umurando",
+    "type": "",
+    "definitions": "igisabo kitagira umugaga."
+  },
+  {
+    "word": "Igisamba",
+    "type": "",
+    "definitions": "igiseke batwaramwo umwavu"
+  },
+  {
+    "word": "Igisangaza",
+    "type": "",
+    "definitions": "ikivumvu kinini cane, igishwaburira kijishwe mu migano canke mu mivumu."
+  },
+  {
+    "word": "Igishinwa",
+    "type": "izina",
+    "definitions": "ururimi rukomôka mu gihugu c'ubushinwa"
+  },
+  {
+    "word": "Igishushungwe",
+    "type": "",
+    "definitions": "umuntu (umwana) yataye umryango wiwe agafata intumbero mbi"
+  },
+  {
+    "word": "Igisiimbo",
+    "type": "",
+    "definitions": "Nico kimwe n'inkangara, gusa igisimbo kiba kijishwe mu bwatsi. hari n'abashirako inyuzi z'imifunko."
+  },
+  {
+    "word": "Igisizimwe",
+    "type": "",
+    "definitions": "Igikoko kinini cane cavurwa kera ko carya abantu. Tuvyumva mu migani n'ibitito birya abana, abagore, n'abagabo."
+  },
+  {
+    "word": "Igisundi",
+    "type": "",
+    "definitions": "igihimba c'irondoka c'umugore. Iri jambo ntiribereye gukoreshwabmu mvugo mbabarira matwi"
+  },
+  {
+    "word": "Igitabo",
+    "type": "",
+    "definitions": "ni ahantu haba hari igiti c'umumanda canke c'umurinzi baterekereramwo, bakahambariza Kiranga"
+  },
+  {
+    "word": "Igitambambuga",
+    "type": "",
+    "definitions": "Umwana ariko arahoha kugenda, aguma atembera yitembagaza ku mbuga"
+  },
+  {
+    "word": "Igitāmbara",
+    "type": "izina",
+    "definitions": [
+      "icämbarwa co ku mutwe batenga, cāmbarwa n'abagore",
+      "impuzu batarâkata ngo babarîre"
+    ]
+  },
+  {
+    "word": "Igitanda",
+    "type": "",
+    "definitions": "uburiri bwa kijambere"
+  },
+  {
+    "word": "Igitantahe",
+    "type": "",
+    "definitions": "Umwigeme atagira urupfasoni"
+  },
+  {
+    "word": "Igitari",
+    "type": "",
+    "definitions": "inanga y'ikizungu, ikozwe mu giti kimeze nk'igikono, ikagira umwashi uriko intsinga bavuza zigasohora amajwi"
+  },
+  {
+    "word": "Igiti",
+    "type": "",
+    "definitions": [
+      "Igiterwa ico arico cose",
+      "Icicaro, ikibanza c'umunyacubahiro mu ntwaro Ak.: Ndiko nkora cane kugira bazompe igiti sha."
+    ]
+  },
+  {
+    "word": "Igitiba",
+    "type": "",
+    "definitions": "akagega gatoyi bashingura mu nzu, bakakimburiramwo."
+  },
+  {
+    "word": "Igitika",
+    "type": "",
+    "definitions": "Imboga z'amababi y'amateke"
+  },
+  {
+    "word": "Igitito",
+    "type": "",
+    "definitions": "Igifuruguto"
+  },
+  {
+    "word": "Igitongati",
+    "type": "",
+    "definitions": "Igiti gifise amababi maremare bakunda gutera impande y'ibarabara iyo umutware agira arengane canke ahantu habera umusi mukuru"
+  },
+  {
+    "word": "Igituba",
+    "type": "",
+    "definitions": "igisundi"
+  },
+  {
+    "word": "Igitwengerabarozi",
+    "type": "",
+    "definitions": "Umwana ataraca ubwenge atwengera abo abonye bose. Ataratandukanya icatsi n'ururo, umukunzi n'umwansi."
+  },
+  {
+    "word": "Ijambo",
+    "type": "",
+    "definitions": [
+      "mu rurimi ni umurwi w'indome zifise insiguro yikwiye",
+      "(mu rubanza) ni ubutumwa bwo kuryosha urubanza butangwa na bene urubanza bahanahana. (Ijambo ryo gushima, gukeza)",
+      "[mw'ikoraniro, inama] ubutumwa uwutongoye inama canke ikoraniro ashikiriza abari mu nama bagaheza bagakoma amashi."
+    ]
+  },
+  {
+    "word": "Ijana",
+    "type": "",
+    "definitions": [
+      "Igiharuro ijana",
+      "Inka nyinshi cane ( bakunda kuvugira mu bwinshi ngo amajana)"
+    ]
+  },
+  {
+    "word": "Ijisho",
+    "type": "",
+    "definitions": "igihimba c'umubiri kidufasha kubona. Bwi. Amaso"
+  },
+  {
+    "word": "Ijunja",
+    "type": "",
+    "definitions": "igihagararo"
+  },
+  {
+    "word": "Ikaka",
+    "type": "",
+    "definitions": "Igitsina c'inshuri, impfizi"
+  },
+  {
+    "word": "Ikaye",
+    "type": "",
+    "definitions": "igikoresho co kw'ishuri bandikamwo"
+  },
+  {
+    "word": "Iki",
+    "type": "ijambo ridahiinduka",
+    "definitions": [
+      "ni akajambo kadahiinduka dukoresha mukubaza. turagakoresha kubiintu caanke ibikorwa. uturorero:",
+      "ushaka gukora iki?",
+      "inco ufise ni iki?"
+    ]
+  },
+  {
+    "word": "Ikibuguru",
+    "type": "",
+    "definitions": "icana c'ingwe"
+  },
+  {
+    "word": "Ikibuno",
+    "type": "",
+    "definitions": "Igihiimba c'umubiri c'umuuntu gisohora umwanda uva muumfungurwa. Ikibuno kiri hagati y'amaguru amaja inyuma."
+  },
+  {
+    "word": "Ikigazi",
+    "type": "",
+    "definitions": "igiti gifise ivyamwa bivamwo amavuta y'amamesa."
+  },
+  {
+    "word": "Ikigobe",
+    "type": "",
+    "definitions": "ikibanza kiri hagati y'inziguzingu y'uruzi"
+  },
+  {
+    "word": "Ikigoyi",
+    "type": "",
+    "definitions": "inzara nyishi"
+  },
+  {
+    "word": "Ikigwa",
+    "type": "",
+    "definitions": "uburiri bw'umuntu mukuru"
+  },
+  {
+    "word": "Ikijumbu",
+    "type": "",
+    "definitions": "igiterwa mbumbarugo gifise agasosera bafungura kitetswe canke kibisi"
+  },
+  {
+    "word": "Ikindi",
+    "type": "",
+    "definitions": "inyama botsa bagaca bayibika ku rusenge ikamara imisi"
+  },
+  {
+    "word": "Ikinono",
+    "type": "",
+    "definitions": "Ikirenge c'inka, c'impene, c'intama canke n'ikindi gikoko cose. Usanga gikomantaye, kitoroshe nk'ic'umuntu."
+  },
+  {
+    "word": "Ikinyigiimbe / Urunyigiimbe",
+    "type": "",
+    "definitions": "Ikiintu kimeze nk'amaazi manovu."
+  },
+  {
+    "word": "Ikirambi",
+    "type": "",
+    "definitions": "Agitanda abana baryamako"
+  },
+  {
+    "word": "Ikirasi",
+    "type": "",
+    "definitions": "(rikomoka mu gifaransa) Isomero"
+  },
+  {
+    "word": "Ikirengero",
+    "type": "",
+    "definitions": "Igitoboro kiri ku ruzitiro rw'imirima canke rw'ikigo ibitungwa canke abantu bashobora gucamwo ahandi hose hazitiye. Ak.: Zibira kirya kirengero ahandi ho inka zizokumarira imirima ndakurahiye"
+  },
+  {
+    "word": "Ikiriimbi",
+    "type": "",
+    "definitions": "Igiti c'umugano canke c'umukaratusi bashiinga hanyuma bakagisobanirizako mu kwubaka urugo. Urugo rwuzuzwa n'ibirimbi vyinshi cane"
+  },
+  {
+    "word": "Ikirindi",
+    "type": "",
+    "definitions": "Igihimba c'igiti canke ikindi kintu bashira ku muhoro, umupanga canke imbugita kugire bikingire. Ikirindi nico bafata iyo bariko barakoresha ivyo vyuma. Ak.: Nyane imbugita ni uwuyifashe ikirindi."
+  },
+  {
+    "word": "Ikirundi",
+    "type": "",
+    "definitions": "Ururimi ruvugwa mu Burundi"
+  },
+  {
+    "word": "Ikirwarudubi",
+    "type": "mu bwinshi : ibirwarudubi) (",
+    "definitions": "uwita mu bitamuraba"
+  },
+  {
+    "word": "Ikiziga",
+    "type": "",
+    "definitions": "Umuntu yamaze gupfa."
+  },
+  {
+    "word": "Ikori",
+    "type": "",
+    "definitions": "amahera umuntu atanga kw'itegeko cane cane iyo ari umudandaza yinjiza inyungu."
+  },
+  {
+    "word": "Ikorowani",
+    "type": "",
+    "definitions": "Igitabu ceranda c'abisilamu"
+  },
+  {
+    "word": "Ilelesi",
+    "type": "izina",
+    "definitions": "amasanamu avuga kandi yateeranijwe kuburyo atanga iciiyumviro cuuzuye."
+  },
+  {
+    "word": "Imarankoni",
+    "type": "",
+    "definitions": "Inyoni itanyaruka cane yibera mu mashami y'ibitu"
+  },
+  {
+    "word": "Imba",
+    "type": "",
+    "definitions": "Uducaafu tugoomba kweera twiibonekeza mumishatsi, mumugaara, muunzya canke mubwanwa buvuuye kudukooko turi mumubiri."
+  },
+  {
+    "word": "Imbago",
+    "type": "",
+    "definitions": "icuma bakuza amenyo, ariko ngaha bavuga igiti babaje nk'umudahara bagazuza ibumba"
+  },
+  {
+    "word": "Imbago",
+    "type": "",
+    "definitions": "icuma bokoza ibindi vyuma biyukuye iyo bariko baracura."
+  },
+  {
+    "word": "Imbeba",
+    "type": "izina",
+    "definitions": "agakoko kaba mw'ishamba canke mu nzu"
+  },
+  {
+    "word": "Imbimbiri",
+    "type": "",
+    "definitions": "Agahimba gatoya bakoresha mu gukoma ibiti bariko barashinga nk'ibirimbi vy'urugo canke inking z'inzu n'indâro"
+  },
+  {
+    "word": "Imbonwa ya mbungo",
+    "type": "",
+    "definitions": "Nkunzi, mizero y'umuryango cane cane uwubafitiye akamaro"
+  },
+  {
+    "word": "Imboro",
+    "type": "",
+    "definitions": "igihimba c'irondoka c'umugabo"
+  },
+  {
+    "word": "Imbubusi",
+    "type": "",
+    "definitions": "Inera, ikinyaganwanka, ..."
+  },
+  {
+    "word": "Imbugita",
+    "type": "",
+    "definitions": "Icuma bakoresha mu guhwata, canke gukerera ubwatsi nk'urukangaga n'ibindi"
+  },
+  {
+    "word": "Imbundege",
+    "type": "",
+    "definitions": "Imbunuza, Ubuntu ataco ashoboye, ataco amaze, atagira ijambo."
+  },
+  {
+    "word": "Imbunuza",
+    "type": "",
+    "definitions": "Umuntu w'imbundege, ataco yitaho, ataco anezwe, uwo bakunda kwita umuhimbiri"
+  },
+  {
+    "word": "Imburabugirire",
+    "type": "",
+    "definitions": "umuntu canke ikintu gihindagurika cane"
+  },
+  {
+    "word": "Imburakimazi",
+    "type": "",
+    "definitions": "Umuntu atacoamaze"
+  },
+  {
+    "word": "Imbuto",
+    "type": "",
+    "definitions": "Intanga z'umugabo, zivamwo umwana"
+  },
+  {
+    "word": "Imbuúri",
+    "type": "izina",
+    "definitions": "ijambo rivuga ikigire gishike"
+  },
+  {
+    "word": "Imende",
+    "type": "izina",
+    "definitions": "agakoko kameze nk'imbeba gafise imirongo yera"
+  },
+  {
+    "word": "Imfura",
+    "type": "",
+    "definitions": "umwana wa mbere"
+  },
+  {
+    "word": "Imiguta y'inka",
+    "type": "",
+    "definitions": "inka zonze cane"
+  },
+  {
+    "word": "Iminzerere",
+    "type": "",
+    "definitions": "Amajwi y'utuntu tw'udukoko tujwigira mw'ishamba canke ku mutumba mu gihe ari ku murango."
+  },
+  {
+    "word": "Imitobe",
+    "type": "",
+    "definitions": "ibiharage vyo ku mitwetwe bikiri bitoto, bitarahishira."
+  },
+  {
+    "word": "Imitunu",
+    "type": "",
+    "definitions": "Amaso y'umuntu; iri jambo barikoresha mu mvugo yo gutukana"
+  },
+  {
+    "word": "Imitura",
+    "type": "",
+    "definitions": "imfungurwa zitetse ariko zidahiye neza. Barakoresha kenshi iri jambo ku bijumbu n'ibiharage."
+  },
+  {
+    "word": "Imoko",
+    "type": "",
+    "definitions": "Isonga ry'ibere aho umwana yonka"
+  },
+  {
+    "word": "Imonyi",
+    "type": "",
+    "definitions": "ibuye ryoroshe, rivungagurika"
+  },
+  {
+    "word": "Impeke",
+    "type": "",
+    "definitions": "inzoga y'amasaka Ic. Ubuheke, indimano"
+  },
+  {
+    "word": "Impembwe",
+    "type": "",
+    "definitions": "Ubwanwa bw'umusore akiri muto, bukiri ubumerera, butaramobwa na rimwe"
+  },
+  {
+    "word": "Impingwe",
+    "type": "",
+    "definitions": "inzuki zitagira imboyi, ziduma mu kirere canecane mu gihe c'amashoka y'inka"
+  },
+  {
+    "word": "Impwerume",
+    "type": "",
+    "definitions": "Imbwa,indura, Intozo y'ingabo"
+  },
+  {
+    "word": "Imva",
+    "type": "izina",
+    "definitions": "ikinogo bashinguramwo umuntu yapfuye"
+  },
+  {
+    "word": "Imvaanda",
+    "type": "izina",
+    "definitions": "imishatsi y'uruyoya"
+  },
+  {
+    "word": "Imvi",
+    "type": "izina",
+    "definitions": "imishatsi yeera."
+  },
+  {
+    "word": "Imvugo mbabariramwatwi",
+    "type": "",
+    "definitions": "imvugo itadudurirako mu gutinya ko uwubwiwe ijambo ashobora kutarinezerererwa"
+  },
+  {
+    "word": "Imvumba",
+    "type": "",
+    "definitions": "gushira ivyatsi vyumye hejuru y'ibitiba vyuzuye ubwishaza, bagahoma n'amase."
+  },
+  {
+    "word": "Imvyarabibondo",
+    "type": "",
+    "definitions": "Igihimba c'irondoka c'umugabo"
+  },
+  {
+    "word": "Imyugariro",
+    "type": "",
+    "definitions": "ibiti bakoresha mu kwugara irembo iyo bwije inka zimaze gutaha."
+  },
+  {
+    "word": "Inanga",
+    "type": "",
+    "definitions": "Igicurarangisho kavukire c'Uburundi bavuza bugorovye baherekeresha akavyino bongorera"
+  },
+  {
+    "word": "inararibonye",
+    "type": "",
+    "definitions": "umutama canke umutamakazi akuze ,ageze muzabukuru, azi vyinshi kuri kahise k'igihugu"
+  },
+  {
+    "word": "Incuro",
+    "type": "",
+    "definitions": "Igihe ikintu kija kirisubiriza kuba Ak.: Ndamusumba incuro cumi."
+  },
+  {
+    "word": "Inda y'amagaga",
+    "type": "",
+    "definitions": "Igitsina gore c'inka, ihene canke intama"
+  },
+  {
+    "word": "Indagano",
+    "type": "",
+    "definitions": "igihe abantu baraganye gukorerako ibintu."
+  },
+  {
+    "word": "Indagano",
+    "type": "",
+    "definitions": "igihe abantu baraganye gukorerako ibintu."
+  },
+  {
+    "word": "Indangurakintu",
+    "type": "",
+    "definitions": "Insiguro itanga ido n'ido y'ikintu: iyo cavuye, ico gisigura, uko gikoreshwa, n'ibindi"
+  },
+  {
+    "word": "Indarangavye",
+    "type": "",
+    "definitions": "umuntu yama agavye yama maso"
+  },
+  {
+    "word": "Indâro",
+    "type": "",
+    "definitions": "Inzu iraramwo abana batarasohoka (batarubaka izabo)"
+  },
+  {
+    "word": "Indâro",
+    "type": "",
+    "definitions": "Inzu iraramwo abana batarasohoka (batarubaka izabo)"
+  },
+  {
+    "word": "Indarukazi",
+    "type": "",
+    "definitions": "Imbwa, intozo, indura, intore y'ingore"
+  },
+  {
+    "word": "Indava",
+    "type": "",
+    "definitions": [
+      "ahantu hashashe cane",
+      "ikirago"
+    ]
+  },
+  {
+    "word": "Indegeya",
+    "type": "izina",
+    "definitions": "amano canke intoke zitagiramwo igufa; kenshi ziba ziri kuzindi ntoke canke ayandi mano zirereta. ku bana bamwebamwe baca abazikata zitarakura."
+  },
+  {
+    "word": "Indero",
+    "type": "",
+    "definitions": [
+      "Inyifato nziza ibereye",
+      "Igisata c'inyigisho"
+    ]
+  },
+  {
+    "word": "Indeshi",
+    "type": "",
+    "definitions": "inzoga canke ivyokurya bazanira uwavyaye"
+  },
+  {
+    "word": "Indodo",
+    "type": "",
+    "definitions": "Inyoni ikunda kudomagura igiti ngo iharikire"
+  },
+  {
+    "word": "Indongoozi",
+    "type": "izina",
+    "definitions": "icitiranwa c'umurongoozi"
+  },
+  {
+    "word": "Indoro",
+    "type": "",
+    "definitions": "ivu abana barya igihe bavura"
+  },
+  {
+    "word": "Induhuro",
+    "type": "",
+    "definitions": "ibintu umuntu agenda ajanye agiye ahantu kure vyaba ibinyobwa canke ibiribwa..., mu bihe vy'ubu umuntu ajana amafaranga"
+  },
+  {
+    "word": "Indwi",
+    "type": "",
+    "definitions": [
+      "Igiharuro kigira indwi . Candikwa 7",
+      "Igiringo c'iminsi indwi"
+    ]
+  },
+  {
+    "word": "Ingamira",
+    "type": "",
+    "definitions": "imbwa idatinya kandi ibangutse"
+  },
+  {
+    "word": "Ingangura",
+    "type": "",
+    "definitions": "icuma kimeze nk'urukero. Cari ico gukerera izosi ry'inkozi y'ikibi."
+  },
+  {
+    "word": "Inganzamarumbo",
+    "type": "",
+    "definitions": "Igiti kininiya cane"
+  },
+  {
+    "word": "Ingara",
+    "type": "",
+    "definitions": "ni amashami y'umunyinya ateze araba hejuru"
+  },
+  {
+    "word": "Ingasiiro",
+    "type": "",
+    "definitions": "Ibuye ritoya rifyase ku ruhande rumwe bakoresha mugusya ibigori, amasaka canke uburo ku rusyo Ak.: Mpa mwananje iyo ngasiro yanje mbe ndaherura na dukeya"
+  },
+  {
+    "word": "Ingemu",
+    "type": "ngaha) (",
+    "definitions": "ivyokurya bashira ababumvyi ngo babahe inkono"
+  },
+  {
+    "word": "Ingendeshwa",
+    "type": "",
+    "definitions": "imodoka,umuduga"
+  },
+  {
+    "word": "Ingere",
+    "type": "",
+    "definitions": "urugero, urunganwe"
+  },
+  {
+    "word": "Ingeso",
+    "type": "",
+    "definitions": "kamere ka muntu gatuma akora ibintu vyiza canke bibi"
+  },
+  {
+    "word": "Ingoma",
+    "type": "",
+    "definitions": [
+      "Intwaro (bivugwa ku bami)",
+      "Icebe ry'inka",
+      "Igicurarangisho kavukire c'Uburundi"
+    ]
+  },
+  {
+    "word": "Ingona",
+    "type": "Izina",
+    "definitions": "Igikoko kiba mu mazi kimeze nk'umuserebanyi gitinywa n'abantu cane kuko kiryana."
+  },
+  {
+    "word": "Ingoona",
+    "type": "",
+    "definitions": "Igikoko gisa n'umuserebanyi gifise amenyo akarishe kiba mu mazi. Cirira udukoko nk'udufi, utunyoni canke abantu iyo kibaronse"
+  },
+  {
+    "word": "Ingoro",
+    "type": "",
+    "definitions": "inzu y'umuntu mukuru"
+  },
+  {
+    "word": "Ingwa",
+    "type": "izina",
+    "definitions": [
+      "ivyondo vyera biimba mumwoonga caanke mumucamo bakayikorasha mugushariza inzu.",
+      "uturisho dutooduto tuvuunguka dukoreshwa mukwaandika kukibaaho."
+    ]
+  },
+  {
+    "word": "Injishi",
+    "type": "",
+    "definitions": "ni umugozi utsivye babohesha inka ku maguru iyo bagomba kuyikama. Babigira ku nka igoye gukama, itera."
+  },
+  {
+    "word": "Inkandamavya",
+    "type": "",
+    "definitions": "inzoga abiwabo w'umukobwa bagemurira umukwe wabo iyo ubugeni bwaraye bubaye."
+  },
+  {
+    "word": "Inkaranobe",
+    "type": "",
+    "definitions": "Ni uduhimba tw'ibinono c'inka duherereye inyuma, tugizwe n'utugufa dutoduto. Tumeze nk'utuzara mugabo turegarega."
+  },
+  {
+    "word": "Inkezi",
+    "type": "",
+    "definitions": "Agakôko ko mu bwoko bw'ubusurira gato cane"
+  },
+  {
+    "word": "Inkindi",
+    "type": "",
+    "definitions": "insato z'ingwe canke z'ivyuya intore zambara"
+  },
+  {
+    "word": "Inkingi",
+    "type": "",
+    "definitions": "igiti gikomeye kiba gishinze hagati munzu kigarukira mw'ikoma gishigikira inzu kugira igume. Munyubako za none inkingi zubakishwa amatafari canke isima kandi zishobora no kuba nyinshi kunzu imwe"
+  },
+  {
+    "word": "Inkofero",
+    "type": "",
+    "definitions": "Ni icambarwa basku mutwe ngo bikingire izuba canke bagaragaze umugwi barimwo nk'umugambwe, idini, n'ibindi"
+  },
+  {
+    "word": "Inkomanzi",
+    "type": "",
+    "definitions": "ikintu kibuza umuntu gukora ico yifuza gukora"
+  },
+  {
+    "word": "Inkooko",
+    "type": "izina",
+    "definitions": "igikoresho bajisha mu rwamfu bakagikoresha mu kukirirako ubugari, kurumya ibintu, n'ibindi."
+  },
+  {
+    "word": "Inkoombe",
+    "type": "",
+    "definitions": [
+      "Ku mububare w'ibarabara canke w'uruzi",
+      "(Umuntu) Isura ifise agahanga gahanamiye amaso kamaze nk'icugamo"
+    ]
+  },
+  {
+    "word": "Inkuba",
+    "type": "",
+    "definitions": "ikoranako ry'ibicu vy' imvura hakaka amasase mbere ico biguyeko bigasha"
+  },
+  {
+    "word": "inkuyo",
+    "type": "",
+    "definitions": "ivyatsi, ikiremo canke ikindi kintu cose bahanaguza inka kugira bazigirire isuku"
+  },
+  {
+    "word": "Insiturakirambi",
+    "type": "",
+    "definitions": "Inzoga batereka bariko barasezera umusore canke inkumi agire aje kwubaka urw'iwe"
+  },
+  {
+    "word": "Intambamyi",
+    "type": "",
+    "definitions": "ingorane zituma umuntu adakora uko agomba"
+  },
+  {
+    "word": "Intamyi",
+    "type": "",
+    "definitions": "udusate tw'intimbura basataguye, bagasasanura"
+  },
+  {
+    "word": "Intanage",
+    "type": "",
+    "definitions": "umwampi bashizeko amababa kugira ngo ugende utumbereye; ikintu gikorotse neza"
+  },
+  {
+    "word": "Intanga",
+    "type": "",
+    "definitions": "Imbuto z'umugabo."
+  },
+  {
+    "word": "Intangaro",
+    "type": "",
+    "definitions": "mu rugo imbere y'ingoro"
+  },
+  {
+    "word": "Intantu",
+    "type": "",
+    "definitions": "Ni igihimba c'umubiri kiri hejuru y'igitsina haba ku mukobwa canke ku muhungu. Ku mwana akuze niho hamera inzya."
+  },
+  {
+    "word": "Intererano",
+    "type": "",
+    "definitions": "Ikintu cunganira haba mu gikorwa, mu kiyago canke amafaranga."
+  },
+  {
+    "word": "Intica ntikize",
+    "type": "",
+    "definitions": "utwokurya dukeyi tutamara inzara, ariko umuntu ntapfe"
+  },
+  {
+    "word": "Intimbura",
+    "type": "",
+    "definitions": "imfunzo ntonto kandi ntoto"
+  },
+  {
+    "word": "Intoboro",
+    "type": "",
+    "definitions": "Ikineka kiri ku ruhome canke hasi canke ku kintu canke ku muntu Ak.: ugutwi, izuru, idirisha, ..."
+  },
+  {
+    "word": "Intongangira",
+    "type": "",
+    "definitions": [
+      "Ikigori gifise intete ziteye ibitagaga ku gitiritiri",
+      "Ingwara yo ku rukoba irangwa n'ubuherehere budahera, butava amaraso"
+    ]
+  },
+  {
+    "word": "Intoongaangira",
+    "type": "",
+    "definitions": "Ingwara y'amasununu ku mubiri"
+  },
+  {
+    "word": "Intosho",
+    "type": "",
+    "definitions": "Igihimba c'igiti biraririza kugire bagikubite abasuma canke ibikoko"
+  },
+  {
+    "word": "Intotera",
+    "type": "",
+    "definitions": "ifu y'ibiyoba bashigisha igaheza ikaba inkozo."
+  },
+  {
+    "word": "intsindagirabigega",
+    "type": "",
+    "definitions": "imvura igwa ubwa kabiri bamaze kwimbura mu bigega."
+  },
+  {
+    "word": "Intumwa",
+    "type": "izina",
+    "definitions": [
+      "umuntu yarungikanywe ijambo mu rubanza canke mu wundi munsi mukuru, uwari kurivuga atâhashitse",
+      "ico barumisha igisabo",
+      "mu biganiro bihuza ibihugu canke imigwi iri mu ntambara, uja guseruka muri ivyo iganiro"
+    ]
+  },
+  {
+    "word": "Intunduruka",
+    "type": "",
+    "definitions": "Ibintu vyinshi cane"
+  },
+  {
+    "word": "Inturatura",
+    "type": "",
+    "definitions": "Inyoni iba kenshi mubiti birebire, ifise ijwi rirenga cane. Iyo nyoni ifise isuura mbi mumibereho y'abarundi kuko baavuga ko ari agasema."
+  },
+  {
+    "word": "Intureka",
+    "type": "",
+    "definitions": "Akajagari kagizwe n'urwamo rwinshi rurengeje."
+  },
+  {
+    "word": "Intureka irese",
+    "type": "",
+    "definitions": "Batase cane, bagomba kurwana"
+  },
+  {
+    "word": "Inturíre",
+    "type": "izina",
+    "definitions": "inzoga,"
+  },
+  {
+    "word": "Intutuma",
+    "type": "inkangara) (",
+    "definitions": "Igiseke kijishe mu migano gifise umurumyo uhagurutse bagemuramwo ibintu canke iyo bagiye kuramukanya."
+  },
+  {
+    "word": "Intuzeya",
+    "type": "",
+    "definitions": "Ijambo rikoreshwa iyo umuntu abuze irindi akoresha kuko yibagiye irindi ribereye. Iyo wibagiye izina ry'umuntu, umwita ntuzeya"
+  },
+  {
+    "word": "Inyabarega",
+    "type": "",
+    "definitions": "Ikinogo cagenew gutabwamwo umwavu."
+  },
+  {
+    "word": "Inyabutongo",
+    "type": "izina",
+    "definitions": "ubwoko bw'imboga zifise amababi y'urwatsi rutoto kandi atagumye. mu kuziteka kenshi bazigereka ku biharage canke izindi ntete z'ubwoko bwose. ivy. idodo, i lenglenga"
+  },
+  {
+    "word": "Inyagara",
+    "type": "izina",
+    "definitions": "igicurarāngīsho kavukire gikozwe n'akarende bashiramwo utubuye. umupfumu yarakunda kugikorēsha mu kuragura."
+  },
+  {
+    "word": "Inyamiramabi",
+    "type": "",
+    "definitions": "igipolisi kijejwe kurwanya inkozi z'ikibi"
+  },
+  {
+    "word": "Inyomvyi",
+    "type": "",
+    "definitions": "Inyoni ivuga mu bucaca"
+  },
+  {
+    "word": "Inyonga",
+    "type": "",
+    "definitions": "ibirenge vy'umwami"
+  },
+  {
+    "word": "Inyongori",
+    "type": "",
+    "definitions": "agakoko kikwega hasi gafise amaguru menshi cane agoye guharura"
+  },
+  {
+    "word": "Inyoni",
+    "type": "",
+    "definitions": "Agakoko kari mu murwi w'ibiguruka kaba ku biti mu mashamba. Inyoni zirajwiragira"
+  },
+  {
+    "word": "Inyonko",
+    "type": "izina",
+    "definitions": "indwara ituma umuntu ameneka umutwe akadahwa ibintu birura kandi bisa n'umuhondo"
+  },
+  {
+    "word": "Inyundo",
+    "type": "",
+    "definitions": "Igikoresho c'icuma kiremye bakoresha mugukomera umusumari canke guhonda"
+  },
+  {
+    "word": "Inzanyi",
+    "type": "",
+    "definitions": "igihimba c'irondoka c'umugabo."
+  },
+  {
+    "word": "Inzigo",
+    "type": "",
+    "definitions": "Inyifato yo kwanka abandi, ntiwipfuze ko batera imbere"
+  },
+  {
+    "word": "inzivyi",
+    "type": "",
+    "definitions": "Ubwirabure burengeje urugero"
+  },
+  {
+    "word": "Inzivyi",
+    "type": "ubuzima) (",
+    "definitions": "Igikoko cirabura cane kiryana, ntikikibaho"
+  },
+  {
+    "word": "Inziya",
+    "type": "",
+    "definitions": "Inyoni ivuga kenshi cane kandi iyo itanguye itaruhuka"
+  },
+  {
+    "word": "Inzoga",
+    "type": "",
+    "definitions": "Ikinyobwa kiganye gikaze cane, kirimwo ubukari bwinshi. Ishobora kuba iganywe mu mpeke, igitoke, uburo,..."
+  },
+  {
+    "word": "Inzogera ya Runyonga rwanje ni yaca urwevu izovuga",
+    "type": "",
+    "definitions": "uvuze ugishika hari akantu ni wamenyera"
+  },
+  {
+    "word": "Inzya",
+    "type": "",
+    "definitions": "Umushatsi umera ku gitsina c'umuntu"
+  },
+  {
+    "word": "Ipfupfu",
+    "type": "",
+    "definitions": "Ni inyama ivyibushe kandi inuze iba hagati na hagati mu bituu vy'inka na canecane impfizi igenda irahibagirana iyo inka itambutse. Iboneka canke ku mpfizi yahatuye."
+  },
+  {
+    "word": "Irango",
+    "type": "",
+    "definitions": "ihembe ry'inka canke ry'impongo abahigi bavuza mu kurarikana n'iyo bahingukanye igikoko. Rimeze nk'inzamba"
+  },
+  {
+    "word": "Iraro ry'inka",
+    "type": "",
+    "definitions": "Urugo rwuzuye inka"
+  },
+  {
+    "word": "Irembo",
+    "type": "",
+    "definitions": "iyinjiriro ry'urugo"
+  },
+  {
+    "word": "Irengarenga",
+    "type": "izina",
+    "definitions": "icitiranwa c'inyabutongo"
+  },
+  {
+    "word": "Irido",
+    "type": "",
+    "definitions": "igitambara bashira kw'idirisha kugira kugira gikinge umuco w'izuba kikongera kikaba n'igisharizo"
+  },
+  {
+    "word": "Irimbi",
+    "type": "",
+    "definitions": "ikibanza bashinguramwo abapfuye"
+  },
+  {
+    "word": "Irtyazo",
+    "type": "",
+    "definitions": "Ibuye rikomeye ry'isare canke ubundi bwoko bakarishako imihoro, amacumu , amasuka n'ibindi bikoresho vy'ivyuma"
+  },
+  {
+    "word": "Isâvé",
+    "type": "izina",
+    "definitions": [
+      "inka ishaajé itaavyaye.",
+      "muumvugo y'ingereranyo ni umukobwa yashâje atavyâyé."
+    ]
+  },
+  {
+    "word": "Isazi",
+    "type": "",
+    "definitions": "agakoko gatoyi gakunda ahantu hari umwanda"
+  },
+  {
+    "word": "Isenema",
+    "type": "",
+    "definitions": [
+      "Ireresi",
+      "Ikintu gitangaje kuraba"
+    ]
+  },
+  {
+    "word": "Isengeri",
+    "type": "",
+    "definitions": "agahuzu katagira amaboko kambarwa musi y'ishati"
+  },
+  {
+    "word": "Iserere",
+    "type": "isereri) (",
+    "definitions": "Ukuzungurirwa bivuye ku ngwara canke ukuruha ugahakwa gutemba"
+  },
+  {
+    "word": "Isharigeri",
+    "type": "",
+    "definitions": "agakoresho bakoresha mukwinjisha umuriro w'umuyagankuba muri telephone"
+  },
+  {
+    "word": "Ishati",
+    "type": "",
+    "definitions": "Impuzu ifise ibipesi Bambara hejuru. Bashatse barayisobeka."
+  },
+  {
+    "word": "Ishiga",
+    "type": "",
+    "definitions": "BW. Amashiga , amabuye batekako"
+  },
+  {
+    "word": "Ishoka",
+    "type": "",
+    "definitions": "Igikoresho bakoresha mu gusatura ibiti. kiba gikwikijwe umuhini w'igiti canke w'icuma. Ivy. Imbezi, imarabwira, imarabiti, indyankwi"
+  },
+  {
+    "word": "Ishuka",
+    "type": "",
+    "definitions": "igitambara kinini co kwisasira canke kwiyorosa"
+  },
+  {
+    "word": "Isimbarubebe",
+    "type": "",
+    "definitions": "Umukobwa adatekereza kandi avuga amajambo urudaca"
+  },
+  {
+    "word": "Isobanywa",
+    "type": "",
+    "definitions": "Ni ibiti bifise amababi, vy'imigano canke ibindi basobanisha urugo canke uruzitiro"
+  },
+  {
+    "word": "Isongo",
+    "type": "",
+    "definitions": "inzoga y'ibitoke itigeze yongegwamwo amazi"
+  },
+  {
+    "word": "isugi",
+    "type": "",
+    "definitions": "ikintu kitarononekara"
+  },
+  {
+    "word": "Isuka",
+    "type": "",
+    "definitions": "igikoresho bakoresha mu kurima, kwimba. Kiba gikwikiye mu giti"
+  },
+  {
+    "word": "Isutwa",
+    "type": "",
+    "definitions": "Umukobwa akubagana cane"
+  },
+  {
+    "word": "Isuunzu",
+    "type": "",
+    "definitions": [
+      "Akantu gasongoye bashira ku nzu baheje kuyisakara",
+      "(Ca kera)Umushatsi basiga mu gahanga iyo bamoye umwana; ni inzira yo gushaza Umwibutsa: Umwana w'isure avuukana isuunzu"
+    ]
+  },
+  {
+    "word": "Itadoba",
+    "type": "",
+    "definitions": "agatara gatoyi gakoresha mazutu , kenshi kaba gakozwe mugakopo canke icupa Ivy. Ikoroboyi, Igorodoba"
+  },
+  {
+    "word": "Itara ry'umukono",
+    "type": "",
+    "definitions": "itara rifise igikono kijamwo peterori, rikagira urutambi n'ikiyo c'iburungushuye, hamwe naho umwotsi usohokera"
+  },
+  {
+    "word": "Ivya gusa",
+    "type": "",
+    "definitions": "ivyo umuntu atakoreye"
+  },
+  {
+    "word": "Ivyahi",
+    "type": "",
+    "definitions": "ibisaswa vy'uruyoya"
+  },
+  {
+    "word": "Ivyambo",
+    "type": "",
+    "definitions": "utwokurya canke udukoko bashira kw'igera ngo ifi zize kurya, zice zifatwa"
+  },
+  {
+    "word": "Iyinga",
+    "type": "",
+    "definitions": "Indwi, ikiringo c'iminsi indwi"
+  },
+  {
+    "word": "Kabiri",
+    "type": "",
+    "definitions": "Igiharuro kigira kabiri mu guharura. Mu nyandiko bandika 2"
+  },
+  {
+    "word": "Kamere",
+    "type": "",
+    "definitions": "ni inyifato mvukanwa iranga umuntu akanonekera muvyo akora vyose"
+  },
+  {
+    "word": "Kane",
+    "type": "",
+    "definitions": "Igiharuro kigira kane. Bandika 4"
+  },
+  {
+    "word": "Kanyanga",
+    "type": "",
+    "definitions": "inzoga ikaze bakora mu mwanda wa nyabarega"
+  },
+  {
+    "word": "Kavorivori",
+    "type": "",
+    "definitions": "ni akajambo umuvyeyi akoresha mu guhoza umwana kerekana urukundo amufitiye"
+  },
+  {
+    "word": "Kazibe",
+    "type": "",
+    "definitions": "hora ! ntusubire kuvuga"
+  },
+  {
+    "word": "Kazinduuzi",
+    "type": "",
+    "definitions": "Igitabo nkoranyabumenyi kidoondora insiguuro y'amajaambo agize ururimi kaanaka caanke amajaambo akoreshwa mugisata kaanaaka."
+  },
+  {
+    "word": "Kazinduzi",
+    "type": "",
+    "definitions": "igitabu cerekana insiguro y'amajambo."
+  },
+  {
+    "word": "Kinovu",
+    "type": "",
+    "definitions": "Ikinyoobwa ciifatafashe; canke kiryooshe gusumba ukwo caategerezwa"
+  },
+  {
+    "word": "Kiranga",
+    "type": "izina",
+    "definitions": "umukandizi abarundi baho hambere bacako mu gusaba imana imigisha, itunga, abana, amagara meza, n'ibindi"
+  },
+  {
+    "word": "Kivyibushe",
+    "type": "ingereka",
+    "definitions": "ijambo dukoresha mukwerekana ko ikiintu gifise akabiri keeza ."
+  },
+  {
+    "word": "Kizigeénza",
+    "type": "",
+    "definitions": [
+      "Umuntu aroongôra abandi kandi afise ijambo",
+      "Inka yama irongoye izindi"
+    ]
+  },
+  {
+    "word": "Kizimvye",
+    "type": "ingereka",
+    "definitions": "ijambo rikoreshwa mukuvuga kubijanye n'ibiciiro.ikintu kizimvye kiba kigurwa amafaranga menshi."
+  },
+  {
+    "word": "Ku kirimba",
+    "type": "",
+    "definitions": "kw'irembo ry'umuntu mukuru."
+  },
+  {
+    "word": "Ku muhingamo",
+    "type": "",
+    "definitions": "ni hagati y'umurango n'umugoroba."
+  },
+  {
+    "word": "Kuba gahuzamiryango",
+    "type": "",
+    "definitions": "gutuma imiryango ikundana"
+  },
+  {
+    "word": "Kubaangamira",
+    "type": "",
+    "definitions": "Kubeera ingoorane umuuntu caanke ikiintu."
+  },
+  {
+    "word": "Kubangama",
+    "type": "",
+    "definitions": "Kuba intambamyi; gutuma igikorwa kaanaka kidakuunda; gutuma ikiintu kidateera imbere caanke kitanabaho."
+  },
+  {
+    "word": "Kubanguka",
+    "type": "",
+    "definitions": "Gukerebuka, Kutumika vyoroshe."
+  },
+  {
+    "word": "Kubengagira",
+    "type": "",
+    "definitions": "guca ibibatsi, kuyagayaga"
+  },
+  {
+    "word": "Kubingagira",
+    "type": "",
+    "definitions": "kuvyibuha, gusa neza."
+  },
+  {
+    "word": "kubonekesha",
+    "type": "",
+    "definitions": "kuvugira amazina inka ziriko ziranywa amazi"
+  },
+  {
+    "word": "Kuboroka",
+    "type": "",
+    "definitions": "Gufata ku mutwe. Bivugwa ku banyeshure."
+  },
+  {
+    "word": "Kubukura mu cibo",
+    "type": "",
+    "definitions": "kuronka inyama zo gukoza ubutsima"
+  },
+  {
+    "word": "Kuburagiza",
+    "type": "",
+    "definitions": "kubuza umuntu kurangura umurimo wiwe"
+  },
+  {
+    "word": "Kubwatabwata",
+    "type": "",
+    "definitions": "kugenda vyanka utava aho uri. Biva ku guhaga cane canke ku bunini"
+  },
+  {
+    "word": "Kudahwa",
+    "type": "",
+    "definitions": "Kugarukana ivyo wafuunguye kubera ingwaara caanke kuko wariiye umureengera."
+  },
+  {
+    "word": "Kudedemura",
+    "type": "",
+    "definitions": "Kwica umuntu umunize, umufashe mu kanigo"
+  },
+  {
+    "word": "Kudendereza",
+    "type": "",
+    "definitions": "kubeshera umuntu, kumuremeka ivyo atakoze kugira bamugirire nabi"
+  },
+  {
+    "word": "Kudendura",
+    "type": "",
+    "definitions": "Kwica ugashikana icari kigeze kure."
+  },
+  {
+    "word": "Kudindiza",
+    "type": "",
+    "definitions": "Gutevya gukora igikorwa."
+  },
+  {
+    "word": "Kudoha",
+    "type": "",
+    "definitions": "kuvyibuha cane"
+  },
+  {
+    "word": "Kudwega",
+    "type": "",
+    "definitions": "kuboha cane"
+  },
+  {
+    "word": "Kugaduka",
+    "type": "",
+    "definitions": "kuma cane"
+  },
+  {
+    "word": "Kugandagura",
+    "type": "",
+    "definitions": [
+      "(umuntu, igikoko)Kwica",
+      "(umugambi) Gufuta canke gusubiza inyuma umugambi",
+      "(indya n'ibinyobwa) kumara isahani y'indya canke amacupa y'ibinyobwa"
+    ]
+  },
+  {
+    "word": "Kugenda amaguru adakora hasi",
+    "type": "",
+    "definitions": "kunyaruka cane."
+  },
+  {
+    "word": "Kugenzanya",
+    "type": "",
+    "definitions": "kurerekana n'uwundi umushakira ikibi"
+  },
+  {
+    "word": "Kugeramira",
+    "type": "",
+    "definitions": "kwitegurira kugirira nabi umuntu atabizi"
+  },
+  {
+    "word": "Kugesera",
+    "type": "",
+    "definitions": "kwica umwami, gukora amakosa adasanzwe, kumenja"
+  },
+  {
+    "word": "Kugira ivyo utanga nivyo usigarana",
+    "type": "",
+    "definitions": "kuba ufise ibintu bigutunga n'ibindi ushobora guha abandi"
+  },
+  {
+    "word": "Kugira mitende",
+    "type": "",
+    "definitions": "igihe umurwayi ariko arakira"
+  },
+  {
+    "word": "Kugira umuyabagu",
+    "type": "",
+    "definitions": "kuribwaribwa ushaka kurwana"
+  },
+  {
+    "word": "Kugodoka",
+    "type": "",
+    "definitions": "guhagarika ikivi wariko urakora ukaja kuruhuka iyo urushe canke bugorovye. Mu bihe vya none abakora ubuzi bwa leta bafise amasaha batahirako bavuye ku kazi."
+  },
+  {
+    "word": "Kugona",
+    "type": "",
+    "definitions": "Guhirira usinziriye"
+  },
+  {
+    "word": "Kugorodoba",
+    "type": "",
+    "definitions": "kumererwa nabi, gutakaza inguvu"
+  },
+  {
+    "word": "Kugumbaha",
+    "type": "",
+    "definitions": "Kutavyara ( ku gikoko) canke kutagwira ku biterwa"
+  },
+  {
+    "word": "Kuguruguza",
+    "type": "",
+    "definitions": "Guserangura ku ngurukanabumenyi ukoresheje guruguru"
+  },
+  {
+    "word": "Kuguruguza",
+    "type": "",
+    "definitions": "Guhamagara inkoko ngo uzigaburire; uvuga ngo guru guru guru"
+  },
+  {
+    "word": "Kugwa isari",
+    "type": "",
+    "definitions": "Kuraba kubera inzara n'inyota"
+  },
+  {
+    "word": "Kugwa mu gahundwe",
+    "type": "",
+    "definitions": "gutanganzwa n'ico ubonye"
+  },
+  {
+    "word": "Kuja mu vyambu",
+    "type": "",
+    "definitions": "kurondera hose"
+  },
+  {
+    "word": "kujana nyabahururu",
+    "type": "",
+    "definitions": "kwemera ibintu bishobora kukugirira nabi utabanje kwiyumvira neza"
+  },
+  {
+    "word": "Kujana ubuvyeyi",
+    "type": "",
+    "definitions": "kuja kwerekana umwana kwa ba sekuru."
+  },
+  {
+    "word": "Kujebajeba",
+    "type": "",
+    "definitions": "Kuzemazema; gukora ikintu nk'igihwiiji"
+  },
+  {
+    "word": "Kujema",
+    "type": "",
+    "definitions": "Gukomeretsa ukoresheje isuka."
+  },
+  {
+    "word": "Kujenama",
+    "type": "",
+    "definitions": "Guhendahenda umuntu umusaba ico yokumarira"
+  },
+  {
+    "word": "Kujisha",
+    "type": "irivuga",
+    "definitions": [
+      "kuzirika inka n'injishi",
+      "guhuza intamu n'inshingo canke urwamfu, kugire ukore igiseke, ikirago canke ibindi.",
+      "kugobeera umuntu mpaka yemeye ico wamusaba",
+      "kuboha cane"
+    ]
+  },
+  {
+    "word": "Kumanya ibidogeza",
+    "type": "",
+    "definitions": "kwica abarwanyi badaketebutse mu rugamba"
+  },
+  {
+    "word": "Kumara umwaga umwampi",
+    "type": "",
+    "definitions": "kurekura umuheto wose"
+  },
+  {
+    "word": "Kumerereza",
+    "type": "",
+    "definitions": "Kumera magabo"
+  },
+  {
+    "word": "Kumimina",
+    "type": "",
+    "definitions": "Gusuka utandukanya canke utonganura amazi meza n'ibihunguka vyayagiyemwo"
+  },
+  {
+    "word": "Kumimina",
+    "type": "Kuminina) (",
+    "definitions": "Gutandukanya amazi, amata canke ibindi binyobwa n'imicafu"
+  },
+  {
+    "word": "Kumondora",
+    "type": "",
+    "definitions": "Kumena ibanga"
+  },
+  {
+    "word": "Kumota",
+    "type": "",
+    "definitions": "gusohora umwuka mwiza Ic. Kumoga Ig. Kunuka"
+  },
+  {
+    "word": "Kumunga",
+    "type": "",
+    "definitions": "kurya umuntu bukebuke gushika aho amererwa nabi cane"
+  },
+  {
+    "word": "Kunagura",
+    "type": "irivuga",
+    "definitions": "gusubiza itoto ikintu gishaje;"
+  },
+  {
+    "word": "Kunegura",
+    "type": "",
+    "definitions": "kugaya ikintu canke abantu"
+  },
+  {
+    "word": "Kunihiza mu nkago",
+    "type": "",
+    "definitions": "ni harya umwampi winjira mu mubiri w'umuntu ugasiga umutoboye"
+  },
+  {
+    "word": "Kunuka",
+    "type": "",
+    "definitions": "gusohora umwuka mubi"
+  },
+  {
+    "word": "Kunyaga",
+    "type": "",
+    "definitions": "gutwara inka z'uwundi ku gahahazo."
+  },
+  {
+    "word": "Kunyaga urukombamazi",
+    "type": "",
+    "definitions": "gutwara inka zose ntihasigare n'imwe."
+  },
+  {
+    "word": "Kunyiririka",
+    "type": "",
+    "definitions": "ni iyo amazi ariko aratemba bukebuke mu twonga twaga no mu mabuye"
+  },
+  {
+    "word": "Kunyomoza",
+    "type": "",
+    "definitions": "kurenza urugero, kurenza aho abantu bari biteze"
+  },
+  {
+    "word": "Kunyuragiranwa",
+    "type": "",
+    "definitions": "ni iyo bimwe bigenda, ibindi bikaza urutavanako"
+  },
+  {
+    "word": "Kuraba imirazi",
+    "type": "",
+    "definitions": "bivugwa ku muntu afise ubumuga bw'amaso, aho usanga amaso y'umuntu ataraba hamwe"
+  },
+  {
+    "word": "Kurabirana",
+    "type": "",
+    "definitions": "gucika inkokora, kutanonoka"
+  },
+  {
+    "word": "Kuragara",
+    "type": "",
+    "definitions": "kunyoterwa cane"
+  },
+  {
+    "word": "Kurahira wanana",
+    "type": "",
+    "definitions": "kurahira ushimitse wiregura"
+  },
+  {
+    "word": "Kuranda",
+    "type": "",
+    "definitions": "kubarira ahasadutse (urwato, umukuza, igisabo...)"
+  },
+  {
+    "word": "Kurarira",
+    "type": "",
+    "definitions": "gutemba ugwa kure cane"
+  },
+  {
+    "word": "Kurasa impongo",
+    "type": "",
+    "definitions": "Kwihagarika"
+  },
+  {
+    "word": "Kureganuka",
+    "type": "",
+    "definitions": "kuvunika ukaregarega"
+  },
+  {
+    "word": "Kuregeshura",
+    "type": "",
+    "definitions": "Kuziyagura, kuvuga menshi"
+  },
+  {
+    "word": "Kuregeteranya",
+    "type": "",
+    "definitions": "Kuregeshura, kuziyagura, kuvuga urudaca"
+  },
+  {
+    "word": "Kurekura",
+    "type": "",
+    "definitions": "Gukura amaboko ku kintu wari ufashe canke gutanga uruhusha rurekura ikintu wari ufashe kubandanya (umugambi, iciyumviro,...)"
+  },
+  {
+    "word": "Kurema",
+    "type": "",
+    "definitions": "kutagira ubwoba bw'ibishobora kugushikira"
+  },
+  {
+    "word": "Kurenza",
+    "type": "",
+    "definitions": "kugazura ivyondo bashira ku bikangaga batemye"
+  },
+  {
+    "word": "Kureremura",
+    "type": "induru) (",
+    "definitions": "Kuvuza induru cane"
+  },
+  {
+    "word": "Kurokora igufa",
+    "type": "",
+    "definitions": "gukiza amagara uhunga"
+  },
+  {
+    "word": "Kurumba",
+    "type": "",
+    "definitions": "Guhomba. Bivurwa iyo igiterwa kidakuze canke umuntu atarondotse"
+  },
+  {
+    "word": "Kurunga",
+    "type": "",
+    "definitions": "kuvanga indya n'amavuta y'inka akuze"
+  },
+  {
+    "word": "Kuvumeera",
+    "type": "",
+    "definitions": [
+      "Kuvuga (Umwami)",
+      "Bivugwa harya inka yabira irondera inyana yayo.",
+      "Gusaasiira, kuvuga (ingoma)"
+    ]
+  },
+  {
+    "word": "Kuvumereza igisabo",
+    "type": "",
+    "definitions": "guterera"
+  },
+  {
+    "word": "Kuvuna amaboko",
+    "type": "",
+    "definitions": "kugirira ineza abandi yamara uzi ko batazoyigushimira canke ngo bayigusubize."
+  },
+  {
+    "word": "Kuvuna umuheto",
+    "type": "",
+    "definitions": "kubura umwana w’ imfura"
+  },
+  {
+    "word": "Kuvuruganya",
+    "type": "",
+    "definitions": "gukamisha amaboko yompi"
+  },
+  {
+    "word": "Kuvyagira",
+    "type": "",
+    "definitions": "ni harya inka ziruhuka zihodotse, zimwe ziraryama izindi zikaguma zihagaze."
+  },
+  {
+    "word": "Kuvyagiza",
+    "type": "",
+    "definitions": "kuvyara inka nyishi cane, kugwira"
+  },
+  {
+    "word": "Kuvyibuha ubuvyimbe",
+    "type": "",
+    "definitions": "kuvyimbagana ubitewe n'indwara abakubona bakagira ngo uravyibushe."
+  },
+  {
+    "word": "Kuyerera",
+    "type": "",
+    "definitions": "Kugenda ahantu udafise intumbero canke utazi niyo ugiye"
+  },
+  {
+    "word": "Kuyoba",
+    "type": "",
+    "definitions": "Kugenda, kuva aho wari ntibasubire kukubona"
+  },
+  {
+    "word": "Kuyoberwa",
+    "type": "",
+    "definitions": "Kunanirwa, babivuga mw'ishure canke nko mu kibazo kindi ico arico cöse"
+  },
+  {
+    "word": "Kuyobora",
+    "type": "irivuga",
+    "definitions": "kuba umukuru w'abandi; kwereka inzira nziza abantu canke ibikoko bikuri inyuma"
+  },
+  {
+    "word": "Kuyōka",
+    "type": "",
+    "definitions": [
+      "Kwuma kw'imirima na canecane ibiterwa bikiri bitoya",
+      "(Umuntu) Kuva hasi n'igishika cinshi kubera hari uwo ugiye kuramutsa wari ukumbuye canke igikorwa ugiye kuranguura cihuta Ak.: Numvise ashitse ntarahisha nca nyooka wëse ngo ndamushuhirize ivyaraaye."
+    ]
+  },
+  {
+    "word": "Kuyombekera",
+    "type": "",
+    "definitions": "babivuga ku mazi atemba bukebuke ahantu h'ikiyaya"
+  },
+  {
+    "word": "Kuyooka",
+    "type": "",
+    "definitions": "554 . Kuzemazema () : Kugenda ahantu canke gukora ikintu atangoga ubishiramwo, ujujuta, wikwegura ugatako ntugire ico umara"
+  },
+  {
+    "word": "Kuzigura",
+    "type": "irivuga",
+    "definitions": "guca kure kugira ushike ahaantu caanke gutarira caane ico ushâka kuvuga."
+  },
+  {
+    "word": "Kuzinduka",
+    "type": "",
+    "definitions": "Kuvyuka kare; gukora ikintu hakiri kare"
+  },
+  {
+    "word": "Kuzindwa",
+    "type": "",
+    "definitions": "Kugira ingorane zo gutora amajambo ukoresha ugaca udidinganya"
+  },
+  {
+    "word": "Kuziraniza",
+    "type": "",
+    "definitions": "Kugira inzigo. Bivugwa ku n'icakomerekeje umuntu na cane cane umuntu yatumye uwundi akomereka. Ni ukuvuga umukoshi wo kudakira n'ingoga. Ak.: Urya muntu araziraniza ga yemwe! Yaranjemye n'isuka none haboze."
+  },
+  {
+    "word": "Kuzirika ku catsi",
+    "type": "",
+    "definitions": "Gutanga amasezerano ntuyashitse Ak. Yambwiye ngo ndamurindirire ngaha ariko ntiyaje, emwe yanziritse ku catsi"
+  },
+  {
+    "word": "Kuziririza",
+    "type": "",
+    "definitions": "Kwemera ugakurikiza imiziro Ak.: Abarundi b'aho hambere batunzwe no kuziririza."
+  },
+  {
+    "word": "Kuziyagura",
+    "type": "",
+    "definitions": "Kuvuga urudaca"
+  },
+  {
+    "word": "Kwabura",
+    "type": "",
+    "definitions": "kurahura, kuvoma ubwenge, ubuhinga canke ubumenyi ku bandi ukaja kubukoresha iwawe."
+  },
+  {
+    "word": "Kwahura inyana mu kibara",
+    "type": "",
+    "definitions": "kuzirekurira ahantu hari ubwatsi buremvye hahoze umurima."
+  },
+  {
+    "word": "Kwatiramwo imboga",
+    "type": "",
+    "definitions": "gushira imboga hagati mu mutsima"
+  },
+  {
+    "word": "Kwaza hasi",
+    "type": "",
+    "definitions": "kugabura mukanganya"
+  },
+  {
+    "word": "Kwegeka",
+    "type": "",
+    "definitions": "Kworora inzuki"
+  },
+  {
+    "word": "Kwegenyeza/Kwenyegeza",
+    "type": "",
+    "definitions": [
+      "Kwuuhiira inkwi mu ziko iyo ucanye waba wota canke uriko urateka.",
+      "(ngereranyo) kumara, guheraheza, gutoza, kwemvemvura",
+      "Gusogongeza uteranya abantu, ushusha ishavu"
+    ]
+  },
+  {
+    "word": "Kwema",
+    "type": "",
+    "definitions": "Guhagarara warikanuye"
+  },
+  {
+    "word": "Kwemera",
+    "type": "",
+    "definitions": [
+      "Kwumva kumwe n'umuntu canke kwumva umugambi ukawushira mu ngiro",
+      "(umutima) Umutima wo kwubaha Imana"
+    ]
+  },
+  {
+    "word": "Kwemera",
+    "type": "Inka) (",
+    "definitions": "Kuragira inka ahantu hari haheze iminsi himiriye, hari ubwatsi buremvye cane"
+  },
+  {
+    "word": "Kwemera inka ku muvumba",
+    "type": "",
+    "definitions": "kuragira inka ahegereye imirima."
+  },
+  {
+    "word": "Kwenda",
+    "type": "",
+    "definitions": [
+      "gukora imibonano mpuzabitsina hagati y'umugabo n'umugore",
+      "Kwakira Ak. Enda kano gakuza ube urasoma dukeyi"
+    ]
+  },
+  {
+    "word": "Kwenura",
+    "type": "",
+    "definitions": "kugurukana ubukuba (bivugwa ku nyoni igurutse)"
+  },
+  {
+    "word": "Kweraguza",
+    "type": "",
+    "definitions": "Kuraba irya n'ino urondera umuntu, ahantu canke ikintu cazimiye"
+  },
+  {
+    "word": "Kweya",
+    "type": "",
+    "definitions": "guca ibibatsi, kwakaka."
+  },
+  {
+    "word": "Kwibonerako ishano",
+    "type": "",
+    "definitions": "kubona amagorwa yose utari bwabone"
+  },
+  {
+    "word": "Kwibuka",
+    "type": "",
+    "definitions": [
+      "Kugarukana mu bwenge ikintu uba waribagiye",
+      "Umunsi wo guhimbaza icabaye muri kahise caba ari kibi canke ciza"
+    ]
+  },
+  {
+    "word": "Kwica inzehe",
+    "type": "",
+    "definitions": "kwigira uwutaco uzi imbere y'umuntu kandi ubizi vyose"
+  },
+  {
+    "word": "Kwidegemvya",
+    "type": "",
+    "definitions": "gukora ico ushaka mugabo kidateye kubiri n'amategeko"
+  },
+  {
+    "word": "Kwifyenguura",
+    "type": "",
+    "definitions": "Kwikwegura n'amafyeri menshi"
+  },
+  {
+    "word": "Kwihagarika",
+    "type": "",
+    "definitions": [
+      "Gusoba",
+      "Kuja ku mwanda muto"
+    ]
+  },
+  {
+    "word": "Kwikora mu kwaha",
+    "type": "",
+    "definitions": "kwiyicira umwana"
+  },
+  {
+    "word": "Kwikumira",
+    "type": "",
+    "definitions": "kutagendana canke ngo ugume hamwe n'abandi"
+  },
+  {
+    "word": "Kwikwegura",
+    "type": "",
+    "definitions": "Kugenda canke gukorana ingoga nke"
+  },
+  {
+    "word": "Kwima",
+    "type": "",
+    "definitions": [
+      "Kwanka guha umuntu ikintu ufise",
+      "(umwami) kuja ku ngoma",
+      "(Igikoko ) Gusama imbanyi"
+    ]
+  },
+  {
+    "word": "Kwima",
+    "type": "kwimya) (",
+    "definitions": "Kurondoka ku nka, ihene, intama canke ikindi gikoko. Impfizi irimya, imvyazi ikima."
+  },
+  {
+    "word": "Kwima",
+    "type": "-na) (",
+    "definitions": "Kwigungirako. Ak.: Yanyimye yakanzu yiwe."
+  },
+  {
+    "word": "Kwimuka",
+    "type": "",
+    "definitions": [
+      "Kwunguruzwa mw'ishure",
+      "Kuva aho wahora uba ukaja gucumbika ahandi"
+    ]
+  },
+  {
+    "word": "Kwinika",
+    "type": "",
+    "definitions": "Babivuga ku mpuzu bameshe canke bagomba kumesa; ku mpeke canke ibindi vyose"
+  },
+  {
+    "word": "Kwitanga utiziganya",
+    "type": "",
+    "definitions": "gukora cane utaruhuka"
+  },
+  {
+    "word": "Kwivuna umusase",
+    "type": "",
+    "definitions": "gufungura ivyokurya bikeyi ku musase, ni ukuvuga imbere y'isaha zitandatu"
+  },
+  {
+    "word": "Kwizigura",
+    "type": "",
+    "definitions": "gukaraba."
+  },
+  {
+    "word": "Kwomboka",
+    "type": "",
+    "definitions": "Gusoboka"
+  },
+  {
+    "word": "Kwomoka",
+    "type": "",
+    "definitions": "guhunga"
+  },
+  {
+    "word": "Kwubuka",
+    "type": "",
+    "definitions": "guseruka ku kintu utari witeze"
+  },
+  {
+    "word": "Kwumva",
+    "type": "",
+    "definitions": "Kwakira no gutahura amajwi"
+  },
+  {
+    "word": "Kwuzukuza",
+    "type": "",
+    "definitions": "gufyina kuri sogokuru canke nyogokuru"
+  },
+  {
+    "word": "Macumi",
+    "type": "",
+    "definitions": "umwana agira uw'icumi mu muryango Ivy. Bucumi"
+  },
+  {
+    "word": "Makuruki",
+    "type": "",
+    "definitions": "Rumwe mu mbuga za none zikoreshwa mu gutumatumanako amakuru vyihuse bakoresheje ibitigiri vya ngendanwa"
+  },
+  {
+    "word": "Malariya",
+    "type": "izina",
+    "definitions": "indwara iterwa n'imibu, iyo umuntu ayirwaye aradahwa, akagira umucanwa, akameneka umutwe,akarura mu kanwa"
+  },
+  {
+    "word": "Mama",
+    "type": "",
+    "definitions": "Ijambo umwana akoresha mu guhamagara nyina wiwe."
+  },
+  {
+    "word": "Mawe ntituzomuhweza",
+    "type": "",
+    "definitions": "mawe ntazoramba"
+  },
+  {
+    "word": "Minani",
+    "type": "",
+    "definitions": "umwana agira uw'umunani mu muryango Ivy. Banani, Kanani"
+  },
+  {
+    "word": "Mpanda, Ntahangwa, Rusizi",
+    "type": "",
+    "definitions": "amazina y'inzuzi"
+  },
+  {
+    "word": "Mu cico",
+    "type": "",
+    "definitions": "aho ica ipfa ningoga"
+  },
+  {
+    "word": "Mu gaturuturu",
+    "type": "",
+    "definitions": "mu gihe bugire buce, ariko hatarabona neza"
+  },
+  {
+    "word": "Mu gicugu",
+    "type": "",
+    "definitions": "bavuga mu gicugu harya ijoro rigeze hagati"
+  },
+  {
+    "word": "Mu masohoka",
+    "type": "",
+    "definitions": "igihe inyana zisubira kurisha. Haba ari nk'isaha y'icenda."
+  },
+  {
+    "word": "Mu mboneko",
+    "type": "",
+    "definitions": "ukwezi kwabonetse gusa n'ikirezi."
+  },
+  {
+    "word": "Mu mfato",
+    "type": "",
+    "definitions": "ukwezi gusa n'igice c'umuzingi."
+  },
+  {
+    "word": "Mu mpito",
+    "type": "",
+    "definitions": "ukwezi guseruka buri mu guca gusa n'ikirezi gihinduriye."
+  },
+  {
+    "word": "Mu mugarira",
+    "type": "",
+    "definitions": "ni igihe bugarira irembo inka zitashe."
+  },
+  {
+    "word": "Munyinya w'ingara",
+    "type": "",
+    "definitions": "umuvyeyi iyo yibarutse umutima uraja hamwe, umwana akaba amukingiye uruvugo"
+  },
+  {
+    "word": "Mushikawe",
+    "type": "",
+    "definitions": "Umukobwa muva mu nda imwe."
+  },
+  {
+    "word": "Musumba, Rukiga, Muganza",
+    "type": "",
+    "definitions": "amazina y'imisozi"
+  },
+  {
+    "word": "Mutaga",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mwaka w' 1580-1600"
+  },
+  {
+    "word": "Mutaga Mbikije",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1908 gushika 1916"
+  },
+  {
+    "word": "Mutaga Senyamwiza",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1739-1767"
+  },
+  {
+    "word": "Mutsama",
+    "type": "",
+    "definitions": "izina bita inka"
+  },
+  {
+    "word": "Muzazi",
+    "type": "",
+    "definitions": "uruzi ruri hagati ya Muzinda na Bujumbura"
+  },
+  {
+    "word": "Mw'itaba ry'inganji",
+    "type": "",
+    "definitions": "agahinga imbwa yatsinzemwo inyamaswa"
+  },
+  {
+    "word": "Mwambutsa",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1600-1620"
+  },
+  {
+    "word": "Mwambutsa Bangiricenge",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1916 gushika 1966"
+  },
+  {
+    "word": "Mwambutsa Mbariza",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1767 gushika 1796"
+  },
+  {
+    "word": "Mwenewanyu",
+    "type": "",
+    "definitions": "uwo muvukana"
+  },
+  {
+    "word": "Mwezi",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1550-1580"
+  },
+  {
+    "word": "Mwezi Gisabo",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w'1850 gushika 1908"
+  },
+  {
+    "word": "Mwezi Ndagushimiye",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w'1709-1739"
+  },
+  {
+    "word": "Na yo ikaba ihigisha Runyonga rwawe",
+    "type": "",
+    "definitions": "nanje nzoba namenyerejwe n'umuhungu wawe"
+  },
+  {
+    "word": "Ncabiti, Ncabigango",
+    "type": "",
+    "definitions": "imbwa itagera umutwe ishamba iyo ririmwo igikoko"
+  },
+  {
+    "word": "Ncabiti, Ncabigango",
+    "type": "",
+    "definitions": "imbwa itagera umutwe ishamba iyo ririmwo igikoko"
+  },
+  {
+    "word": "Ndibanje",
+    "type": "",
+    "definitions": "umwana w'umuhungu w'imfura."
+  },
+  {
+    "word": "Ndwi",
+    "type": "",
+    "definitions": "Raba Indwi"
+  },
+  {
+    "word": "Newengetereye",
+    "type": "",
+    "definitions": "mpoze"
+  },
+  {
+    "word": "Nsizendayiheneye",
+    "type": "",
+    "definitions": "umwana avutse ubwanyuma , kenshi nyina abamaze gukura abona ko atagishoboye kuvyara uwundi mwana"
+  },
+  {
+    "word": "Ntare Rugamba",
+    "type": "izina",
+    "definitions": "umwami yatwaye uburundi kuva mu mwaka w' 1796 gushika 1850"
+  },
+  {
+    "word": "Ntare Rushatsi Cambarantama",
+    "type": "izina",
+    "definitions": "umwami wa mbere yatwaye uburundi kuva mu mwaka wa 1530-1550"
+  },
+  {
+    "word": "Ntarye urubutiro",
+    "type": "",
+    "definitions": "ntasonzere mu kiriri"
+  },
+  {
+    "word": "Nyabenda",
+    "type": "",
+    "definitions": "umwana agira gatandatu"
+  },
+  {
+    "word": "Nyamusi",
+    "type": "",
+    "definitions": "urupfu"
+  },
+  {
+    "word": "Nyamwigendako ntiyarimiye impeshi",
+    "type": "",
+    "definitions": "umuntu yigendako, adafashanya n'abandi ntashobora kurangura ibikorwa vyiwe vyose wenyene"
+  },
+  {
+    "word": "Nyandwi",
+    "type": "",
+    "definitions": "umwana agira indwi"
+  },
+  {
+    "word": "Nyokorome",
+    "type": "",
+    "definitions": "Musaza wa nyoko."
+  },
+  {
+    "word": "Nyokwanyu",
+    "type": "",
+    "definitions": "Umukobwa avukana na Mama wawe."
+  },
+  {
+    "word": "nzyoye",
+    "type": "",
+    "definitions": "mvuge"
+  },
+  {
+    "word": "Rimwe",
+    "type": "",
+    "definitions": "Igiharuro ca mbere"
+  },
+  {
+    "word": "Rukiga, Muganza",
+    "type": "",
+    "definitions": "amazina y'imisozi"
+  },
+  {
+    "word": "Rumenyi",
+    "type": "",
+    "definitions": "Umupfumu Rumenyi amenyera abandi ntiyimenyere[umupfumu ashobora kuvura abandi ariko we ntiyivure]"
+  },
+  {
+    "word": "Rusehabaniha",
+    "type": "",
+    "definitions": "Imodoka itwara indembe kwa muganga"
+  },
+  {
+    "word": "Rusengo",
+    "type": "",
+    "definitions": "(amazi ya) Amazi bavoma mumugano wubakiye ahantu mw'isoko k'umucamo"
+  },
+  {
+    "word": "Rutamumpinga bagahita kuyiraba noneho",
+    "type": "",
+    "definitions": "imbwa yiruka cane inyuma y'igikoko, abantu bakaza kuyirorera"
+  },
+  {
+    "word": "Rutamumpinga bagahita kuyiraba noneho",
+    "type": "",
+    "definitions": "imbwa yiruka cane inyuma y'igikoko, abantu bakaza kuyirorera"
+  },
+  {
+    "word": "Rutihimirindi",
+    "type": "",
+    "definitions": "imbwa idapfa guhunga igikomye cose"
+  },
+  {
+    "word": "Rwinengera amakombe",
+    "type": "",
+    "definitions": "imbwa yica ibikoko bikomeye"
+  },
+  {
+    "word": "Rwuba rwa bigata",
+    "type": "",
+    "definitions": "Shetani"
+  },
+  {
+    "word": "Senaka",
+    "type": "",
+    "definitions": "Nyenurugo"
+  },
+  {
+    "word": "sesa nkuyoze",
+    "type": "",
+    "definitions": "umushukanyi;uwukubwira ukore ivyo nawe atokora"
+  },
+  {
+    "word": "Shaásha",
+    "type": "ingereka",
+    "definitions": "ikintu kikīza, kigezweho"
+  },
+  {
+    "word": "Sindabibazwa",
+    "type": "",
+    "definitions": "umuntu ataco anezwe"
+  },
+  {
+    "word": "Somambike",
+    "type": "",
+    "definitions": "abakunzi bashika ku mutima"
+  },
+  {
+    "word": "Taba ritavye imigongo",
+    "type": "",
+    "definitions": "inka ivyibushe, uruti rw'umugongo ntiruboneka."
+  },
+  {
+    "word": "Tanganyika",
+    "type": "",
+    "definitions": "ikiyaga kiri mu burengero bw'Uburundi, gihana urubibe na repubulika iharanira demokarasi ya Kongo, Tanzaniya, na Zambiya. Kera ngo carazira ko Umwami abona Tanganyika yaca apfa"
+  },
+  {
+    "word": "Tubakiranure",
+    "type": "",
+    "definitions": "tubatature"
+  },
+  {
+    "word": "Ubugaragwa",
+    "type": "",
+    "definitions": "ahantu humye cane ata binyabuzima biriho"
+  },
+  {
+    "word": "Ubugi",
+    "type": "",
+    "definitions": "Igihimba gikarishe c'imbugita, urwembe, umuhoro, umupanga canke ikindi cuma cose"
+  },
+  {
+    "word": "Ubugirigiri bugira babiri",
+    "type": "",
+    "definitions": "ico umuntu atokwishoboza agifatanya n'uwundi"
+  },
+  {
+    "word": "Ubugwegwe",
+    "type": "",
+    "definitions": "imigozi iva mu ngagari, mu ntimatima y'ibitoke canke mu mababi y'ibitongati"
+  },
+  {
+    "word": "Ubugwegwe",
+    "type": "",
+    "definitions": "imigozi iva mu ngagari, mu ntimatima y'ibitoke canke mu mababi y'ibitongati"
+  },
+  {
+    "word": "Ubuhanuzi",
+    "type": "",
+    "definitions": "Ubutumwa Imana irungikana umuntu ngo abwire abandi, ubuvugishwa"
+  },
+  {
+    "word": "Ubuheta",
+    "type": "",
+    "definitions": "umwana agira kabiri"
+  },
+  {
+    "word": "Ubuhetanguzi",
+    "type": "",
+    "definitions": "umwana agira gatatu"
+  },
+  {
+    "word": "Ubujorojoro",
+    "type": "",
+    "definitions": "Iminzerere ivuga mw'ijoro. Hari n'igihe usanga hariko havuga ibindi bikoko ariko bikumvikana ko ari mw'ijoro"
+  },
+  {
+    "word": "Ubukerebutsi",
+    "type": "",
+    "definitions": "Umwete wo gukora ibikorwa vyawe nivyo abandi udakwenga ibirenge."
+  },
+  {
+    "word": "Ubumara",
+    "type": "",
+    "definitions": "umuti wica basiga ku myampi no ku macumu, babiteye ibikoko canke umuntu bigaca bipfa, n'iyo vyoba vyakomeretse buhorobuhoro"
+  },
+  {
+    "word": "Ubumenyi",
+    "type": "",
+    "definitions": "Ibintu umuntu azi."
+  },
+  {
+    "word": "Ubunebwe",
+    "type": "",
+    "definitions": "Kutanonokerwa mugukora ivyo wari utegerezwa gukora ."
+  },
+  {
+    "word": "Ubuntu",
+    "type": "",
+    "definitions": "inyifato y'urukundo n'imigenderanire myiza n'abandi bantu."
+  },
+  {
+    "word": "Uburuhukiro",
+    "type": "",
+    "definitions": "Icumba gikanye co kwa muganga babikamwo ibiziga birindiriye kuja gushingurwa"
+  },
+  {
+    "word": "Ubushorishori",
+    "type": "",
+    "definitions": "Isunwe ry'igiti."
+  },
+  {
+    "word": "Ubutaka",
+    "type": "",
+    "definitions": "ubwatsi bwo kurima"
+  },
+  {
+    "word": "Ubutare",
+    "type": "",
+    "definitions": "Ivu rifise agaciiro kanini rishobora guhiinguurwamwo ivyuuma bitaandukanye caanke ibitaako abaantu baambara ngo baberwe caanke beerekane ko batuunze."
+  },
+  {
+    "word": "Ubwaakwaha",
+    "type": "",
+    "definitions": "Ubwoya bumera mukwaaha iyo umuuntu ataanguye gukura."
+  },
+  {
+    "word": "Ubwanwa",
+    "type": "",
+    "definitions": "Umushatsi umera ku munwa canke ku matama y'umugabo. Abagore bamera ubwanwa ni bake. Ariko hari n'abagabo batabumera."
+  },
+  {
+    "word": "Ubwatuzo",
+    "type": "",
+    "definitions": "(Ind.) Ni utumenyetso bashira kw'ijwi rivuga mu Kirundi tukamenyesha uko iryo jwi rivugwa"
+  },
+  {
+    "word": "Ubwenge buva hasi",
+    "type": "",
+    "definitions": "umwana aca ubwenge akiri muto"
+  },
+  {
+    "word": "Ubwenge buva i muhana",
+    "type": "",
+    "definitions": "umuntu acishwa ubwenge n'abandi"
+  },
+  {
+    "word": "Ubwira",
+    "type": "",
+    "definitions": "Umwete wo gukora udukorwa utaruha."
+  },
+  {
+    "word": "Ubwonko",
+    "type": "",
+    "definitions": "Igihimba c'umubiri kiri mu mutwe kidufasha kwiyumvira no kubika ibumenyi."
+  },
+  {
+    "word": "Udushino",
+    "type": "",
+    "definitions": "Iminwa y'igitsina c'umugore."
+  },
+  {
+    "word": "Ugushiruka amazinda",
+    "type": "",
+    "definitions": "kugira umwete"
+  },
+  {
+    "word": "Ugutara",
+    "type": "",
+    "definitions": "kwanka kugwa (imvura)"
+  },
+  {
+    "word": "Ugutwi",
+    "type": "",
+    "definitions": "igihimba c'umubiri kidufasha kwumva"
+  },
+  {
+    "word": "Ukurinda",
+    "type": "",
+    "definitions": "kutagira ubwoba."
+  },
+  {
+    "word": "Umubaji",
+    "type": "",
+    "definitions": "umuhinga akora ibikoresho bitandukanye mu biti"
+  },
+  {
+    "word": "Umubavu",
+    "type": "",
+    "definitions": "agafu k'ibiti baturira kugira bamoteshe mu nzu canke bakagahuhera ku mpuzu kugira zimoge."
+  },
+  {
+    "word": "Umubindi",
+    "type": "",
+    "definitions": "ubwoko bw'inkono bakoresha mu kuvoma no gushingura amazi.Ariko kandi barayikoresha no mu kwenga , gushingura no kugemura inzoga"
+  },
+  {
+    "word": "Umudêri",
+    "type": "",
+    "definitions": "Ubwoko bw'ikintu: inyambaro, imodokari, n'ibindi"
+  },
+  {
+    "word": "umudidizo",
+    "type": "",
+    "definitions": "uburyo bwo gusekura ku rugero."
+  },
+  {
+    "word": "Umudigadizi",
+    "type": "izina",
+    "definitions": "umuntu akora akazi ko guteramisha abantu abatweenza."
+  },
+  {
+    "word": "Umuduri",
+    "type": "",
+    "definitions": "Igicurarangisho kavukire gifise utirende n'umurya umwe bavugisha udukoni tubiri"
+  },
+  {
+    "word": "Umuforoma",
+    "type": "",
+    "definitions": "Umuntu afashanya na muganga mu kuvura abarwayi"
+  },
+  {
+    "word": "Umugaara",
+    "type": "",
+    "definitions": "Ubwoya bumera kugikiriza, kuunda canke mumugoongo h'umusore iyo ataanguye gukura."
+  },
+  {
+    "word": "Umugambwe",
+    "type": "izina",
+    "definitions": "umurwi w'abantu bahuuriye kuvyiiyumviiro bimwe vy'ipolitike (ntwaaro ) y'igihugu."
+  },
+  {
+    "word": "Umugani",
+    "type": "",
+    "definitions": "Inkuru itabaye canke ifatiye ku bintu vyabaye abantu batera abana canke abakuze kugira batange inyigisho zishobora gufasha mu buzima"
+  },
+  {
+    "word": "Umugara",
+    "type": "izina",
+    "definitions": "ifi zitarakura."
+  },
+  {
+    "word": "Umugenzi ni kirumara",
+    "type": "",
+    "definitions": "umugenzi afise akamara kanini"
+  },
+  {
+    "word": "Umugesera",
+    "type": "",
+    "definitions": "Umuntu. Umwicanyi. Iryo jambo kera barikoresha bagomba kuvuga kwica umwami. Kera vyarashitse uwishe umwami aba ava mu ntara ya bugesera baca bavuga ngo ku gesera ni kwica umwami. Umugesera rero ryagumye rikoreshwa nk'umwicanyi yishe umwami mugabo mu nyuma ryaciye rikoreshwa ku mwicanyi uwo ariwe wese."
+  },
+  {
+    "word": "Umugina",
+    "type": "izina",
+    "definitions": [
+      "umwoobo murereme caane wiimbwa n'imiswa canke utundi dukooko tuba mukuzimu.",
+      "mumvugo itisoneye ni ingereranya y'inda y'umuntu arya caane."
+    ]
+  },
+  {
+    "word": "Umugorigori",
+    "type": "",
+    "definitions": "inzoga y'ibigori"
+  },
+  {
+    "word": "Umugungiro",
+    "type": "",
+    "definitions": "umwaba bateramwo ibijumbu ukikijwe n'imigazo bagazuyemwo ivyondo barenza ku bikangaga batemye"
+  },
+  {
+    "word": "Umuhango",
+    "type": "",
+    "definitions": "Ni igikorwa ciza umuntu yemerera kuzokorera mugenzi we canke akaganuke. AK. Baca umugani mu kirundi ngo \"uwutaronse umuhango ntagabana\""
+  },
+  {
+    "word": "Umuhererezi",
+    "type": "",
+    "definitions": "umwana aheruka kw'ibere kandi inyuma yiwe atawundi yigeze avuka"
+  },
+  {
+    "word": "Umuhezagiro",
+    "type": "",
+    "definitions": "ijambo rivugwa rigamije kwipfuriza imigisha uwuribwiwe"
+  },
+  {
+    "word": "Umuhigi ari amarere",
+    "type": "",
+    "definitions": "abangutse"
+  },
+  {
+    "word": "umuhimbabweze",
+    "type": "umudahara) (",
+    "definitions": "agakoresho kabaje mu giti bakoresha mugucumba umutsima. Kitwa umuhimbabweze kuko iyo ibigori canke ingano vyeze ,baguma bagakoresha"
+  },
+  {
+    "word": "Umuhoho",
+    "type": "",
+    "definitions": "umuheto"
+  },
+  {
+    "word": "Umuhondo",
+    "type": "",
+    "definitions": "ni amata ya mbere inka ikamwa ikivyara. Kenshi na kenshi asa n'umuhondo."
+  },
+  {
+    "word": "Umuhondo w'amahonda",
+    "type": "",
+    "definitions": "inzoga banywa mu masaka baciye ubwa mbere."
+  },
+  {
+    "word": "Umuhoondo",
+    "type": "izina",
+    "definitions": [
+      "ibara risa n'imicuucu.",
+      "amata yaambere inka iba ifise ikivyaara. aba asa n'umuhondo."
+    ]
+  },
+  {
+    "word": "Umuhoro",
+    "type": "",
+    "definitions": "Icuma gikwikiye bakoresha mu guca ibiti canke ibindi gifise izuru rigoramye riraba imbere. Ak.: Kadoyi ahereje umuhoro gatogato."
+  },
+  {
+    "word": "Umuhwi",
+    "type": "izina",
+    "definitions": "igitoke gihiye, kimaze imisi gisoromwe maze kigahindura ibara kigasigara gisa n'umuhondo kikongera kigasosa"
+  },
+  {
+    "word": "Umukani w'izuru",
+    "type": "",
+    "definitions": "Umwiriri w'izuru; bivugwa ku nka"
+  },
+  {
+    "word": "Umukaratusi",
+    "type": "",
+    "definitions": "igiti cazanywe nabadagi gifise amababi afise ibara ry'urwatsi rutoto ariko ritanoze kikgira nudutete dutoduto cane"
+  },
+  {
+    "word": "Umukinyi w'ivyese",
+    "type": "izina",
+    "definitions": "umuuntu akora akazi ko guteramisha abantu mubikino, ivyese n'amalelesi."
+  },
+  {
+    "word": "umukobeko",
+    "type": "",
+    "definitions": "ni umuserege baca ahantu hashunguruka kugira ntihatwagwe n'amazi y-imvura."
+  },
+  {
+    "word": "Umukobwa",
+    "type": "",
+    "definitions": "Umwigeme, umunyakigo"
+  },
+  {
+    "word": "Umukondo",
+    "type": "",
+    "definitions": "Ni agahimba k'umubiri kari hagati na hagati mu nda; haruguru y'intantu kepfo y'agakoratima"
+  },
+  {
+    "word": "Umukororajipo",
+    "type": "",
+    "definitions": "inzoga ikaze cane ituma umuntu ata ubwenge"
+  },
+  {
+    "word": "Umukungwe",
+    "type": "",
+    "definitions": "uruzogi rw'inyana y'inka."
+  },
+  {
+    "word": "Umumanda",
+    "type": "",
+    "definitions": "igiti c'imeza abasogokuru bahora bakoramwo impuzu. Ic. Umuvumu, umuvumuvumu"
+  },
+  {
+    "word": "Umumenja",
+    "type": "",
+    "definitions": "Umuntu.Umwicanyi canke inkozi y'ikibi irengeje."
+  },
+  {
+    "word": "Umunani",
+    "type": "",
+    "definitions": "Igiharuro kigira umunani. Mu nyandiko ni 8"
+  },
+  {
+    "word": "Umunega",
+    "type": "",
+    "definitions": "izina ry'icubahiro umugore ahamagara umugabo wiwe"
+  },
+  {
+    "word": "Umunwa",
+    "type": "",
+    "definitions": "igihimba c'umubiri dukoresha mu kuvuga no mugufungura, nibindi"
+  },
+  {
+    "word": "umunyenga",
+    "type": "",
+    "definitions": "amaraha, iyo umuntu akurekuriye ukagenda mu modokari, ikinga, ipikipiki canke ikindi cose co kwiyunguruza udatanze amahera. Kenshi bavuga umunyenga iyo atamvo nini igutumye ubikora."
+  },
+  {
+    "word": "Umunyika",
+    "type": "",
+    "definitions": "harya hegereye uruzi, bashobora kurima canke bakaharagira ibitungwa"
+  },
+  {
+    "word": "Umunyinya",
+    "type": "",
+    "definitions": "ubwoko bw'igiti gifise amahwa n'amashami menshi ategeye hejuru"
+  },
+  {
+    "word": "Umupanga",
+    "type": "",
+    "definitions": "Icuma kimeze nk'umuhoro kiminiye inyuma"
+  },
+  {
+    "word": "Umupfumu",
+    "type": "",
+    "definitions": "Umuntu aragura"
+  },
+  {
+    "word": "Umupfûndiko",
+    "type": "",
+    "definitions": "Umurizo w'inka."
+  },
+  {
+    "word": "Umuragurabana",
+    "type": "",
+    "definitions": "Umupfumu adakora akazi ko kuvura ariko ashobora guhishura ibintu bizoba muri kazoza"
+  },
+  {
+    "word": "Umuravyo",
+    "type": "",
+    "definitions": "Umuco mwinshi utukura uvuye kw'ikoranako ry'ibicu"
+  },
+  {
+    "word": "Umurizo",
+    "type": "",
+    "definitions": [
+      "Igice c'umubiri w'igikoko giherereye inyuma gikoresha mu kwiyama insaazi",
+      "Igitsina c'umugabo"
+    ]
+  },
+  {
+    "word": "Umuroongozi",
+    "type": "izina",
+    "definitions": "umuntu arongôra abandi arangwa no kwerekana akarorero keza abo akuriye"
+  },
+  {
+    "word": "Umuryango",
+    "type": "",
+    "definitions": "Umurwi w'abantu basangiye amaraso, bafitaniye isano. Ariko kandi umuryango ushobora kuba umurwi w'abantu bagiye hamwe mu bikorwa bagasenyera k'umugozi umwe. Ak. Umuryango utabara imbabare."
+  },
+  {
+    "word": "Umusave",
+    "type": "",
+    "definitions": "igiti cimeza kandi gikomeye cane ababaji bakunda gukoramwo ibikoresho bitanduknaye"
+  },
+  {
+    "word": "Umusazi",
+    "type": "",
+    "definitions": "Umuntu afise ubumuga bwo mu mutwe, yavukanye canke vyamufashe akuze ugasanga aguma avuga canke akora ibidasa n'ivy'abakomeye."
+  },
+  {
+    "word": "Umusegetera",
+    "type": "",
+    "definitions": "urusenga rukoreshwa mu kwikinga imibu iyo imuntu aryamye. kenshi ruba rufise ishusho y'urukiramende canke umuzingi"
+  },
+  {
+    "word": "Umuseké",
+    "type": "",
+    "definitions": "Kare cane. (ayakomotseko: Kuzinduka umuseke, gukoroka umuseke)"
+  },
+  {
+    "word": "Umushamvo",
+    "type": "",
+    "definitions": "Indwi, iyinga; igihe kingana iminsi indwi"
+  },
+  {
+    "word": "Umushikirizamanza",
+    "type": "izina",
+    "definitions": "umuntu aburanira leta"
+  },
+  {
+    "word": "umushinge",
+    "type": "",
+    "definitions": "intambwe ya mbere yo kubaka inzu, iremezo ry'inzu. ak: imbere yuko umuntu aduza inzu abanza kubaka umushinge"
+  },
+  {
+    "word": "Umushingwamanza",
+    "type": "izina",
+    "definitions": "umuntu akora akazi ko kuburanira abandi"
+  },
+  {
+    "word": "Umushishito",
+    "type": "",
+    "definitions": "igihimba c'umubiri gishikiramwo ivyo kurya iyo umuntu afunguye"
+  },
+  {
+    "word": "Umushumi, umushumiko",
+    "type": "",
+    "definitions": "Umurizo w'imbwa."
+  },
+  {
+    "word": "Umushweena",
+    "type": "izina",
+    "definitions": "mumvugo itiisoneye ni inda y'umuntu arya caane."
+  },
+  {
+    "word": "Umusuzi",
+    "type": "",
+    "definitions": "Umwuuka uzanana mukibuno."
+  },
+  {
+    "word": "Umutaravaayeri",
+    "type": "",
+    "definitions": "Umuntu akora kwa.muganga afasha ibikorwa vy'isuku"
+  },
+  {
+    "word": "Umutege",
+    "type": "",
+    "definitions": "inkono batarashirako imbiga."
+  },
+  {
+    "word": "umutima ntuba mworo",
+    "type": "",
+    "definitions": "umutima utuma umuntu atihebura naho yoba agowe"
+  },
+  {
+    "word": "Umuturagaro",
+    "type": "",
+    "definitions": "Urwamo rukomeye cane ruvuga iyo ibicu bikoranyeko."
+  },
+  {
+    "word": "Umutwaro",
+    "type": "izina",
+    "definitions": [
+      "ikintu kiremereye cane, kigoye gutwara",
+      "ikintu kibabaje umutima"
+    ]
+  },
+  {
+    "word": "Umutwenzi w'imbwa",
+    "type": "",
+    "definitions": "harya abahigi batanguye kwambika imbwa inzogera, bazinduka guhiga."
+  },
+  {
+    "word": "Umuvuba",
+    "type": "",
+    "definitions": "ico bavugutisha mu kwatsa amakara iyo bariko baracura"
+  },
+  {
+    "word": "Umuvuzi",
+    "type": "",
+    "definitions": "umuntu avura akoresheje imiti y'ikirundi."
+  },
+  {
+    "word": "Umuvyiindi",
+    "type": "",
+    "definitions": "Ubwooko bw'umwaanda mukuru usohoka wiibuumvye."
+  },
+  {
+    "word": "Umuyigwe",
+    "type": "",
+    "definitions": "umurima w'ibigori canke w'amasaka menshi cane, umuntu awugiyemwo ataboneka."
+  },
+  {
+    "word": "Umuyobozi",
+    "type": "izina",
+    "definitions": "umuntu ayobôye abandi"
+  },
+  {
+    "word": "Umuyonga",
+    "type": "",
+    "definitions": "Ahantu ku mitumba baturira ubwatsi kugire hamere bushasha .Baturira umuyonga imvura igire itasure,rimwe na rimwe umuriro waratema ugatongora ibintu bigatikira Nico gituma ubu bibujijwe guturira umuyonga"
+  },
+  {
+    "word": "Umuzi",
+    "type": "",
+    "definitions": "bw. Imizi igihimba cagiti gifatiye mukuzimu ari naco kikigaburira kikongera kikagishigikira"
+  },
+  {
+    "word": "Umuziro",
+    "type": "",
+    "definitions": "Ikintu kitarengwa; itegeko rigenga abantu mu kibano kenshi bafatirako no mu kurahira (Bw.: Imiziro)"
+  },
+  {
+    "word": "Umwando",
+    "type": "",
+    "definitions": "agatsima k'umwana"
+  },
+  {
+    "word": "Umwandu",
+    "type": "",
+    "definitions": "iragi"
+  },
+  {
+    "word": "Umwaritsi",
+    "type": "",
+    "definitions": "umwigeme afasha uwavyaye akiri mu kiriri"
+  },
+  {
+    "word": "Umwashi",
+    "type": "izina",
+    "definitions": "igikoresho gifasha inkingi gufata ikoma ry'inzu gurtyo inzu igakomera"
+  },
+  {
+    "word": "Umwenge",
+    "type": "",
+    "definitions": "Ni agatoboro kari ku mubiri canke ku nzu,..."
+  },
+  {
+    "word": "Umwete",
+    "type": "",
+    "definitions": "Kutagira ubunebwe."
+  },
+  {
+    "word": "Umwibutsa",
+    "type": "",
+    "definitions": "Iryungane ririmwo inyigisho. Ak. Uwutarima ntakarye."
+  },
+  {
+    "word": "Umwijima",
+    "type": "",
+    "definitions": "ibura ry'umuco"
+  },
+  {
+    "word": "Umwimbu",
+    "type": "",
+    "definitions": "Umusaruro, ivyo umuntu akuye mu gikorwa camubijije akuya: kurima, kwiga, gukora akazi? n'ibindi"
+  },
+  {
+    "word": "Umwiryane",
+    "type": "",
+    "definitions": "Amatati ari hagati y'abantu bavukana. Canke basangiye umuryango"
+  },
+  {
+    "word": "Umwishwa:",
+    "type": "",
+    "definitions": [
+      "Umwana wa mushiki w'umuntu kanaka",
+      "Igiterwa cimeza kirandarara ku bisaka gisanzwe gikoreshwa mu buvuzi kama bw'i kirundi."
+    ]
+  },
+  {
+    "word": "Umwumwa",
+    "type": "",
+    "definitions": "inyota nyinshi cane"
+  },
+  {
+    "word": "Urazirikanye",
+    "type": "",
+    "definitions": "urategera. Bishobora gusigura kandi Nyakwubahwa ."
+  },
+  {
+    "word": "Urubâho",
+    "type": "",
+    "definitions": "Igihome canke ikintu bashira ku gihome, kenshi usanga cirabura, bandika ko mw'isomero."
+  },
+  {
+    "word": "Urubari",
+    "type": "",
+    "definitions": "Urutsinga rufise amahwa bazitiza ku ngo zo mu gisagara canke ku nzitiro z'imirima."
+  },
+  {
+    "word": "Urubaya",
+    "type": "",
+    "definitions": "Urugabuzo"
+  },
+  {
+    "word": "Urubere",
+    "type": "",
+    "definitions": "amasaka y'intete zigomba kwera yava i Buha n' Imbo"
+  },
+  {
+    "word": "Urubumbiro",
+    "type": "",
+    "definitions": "Akantu kazingurije iziko gakinga ko umucanwa wakira ahariho hose"
+  },
+  {
+    "word": "Urucaniye",
+    "type": "urugo) (",
+    "definitions": "urutahamwo inka"
+  },
+  {
+    "word": "Urudaca",
+    "type": "kuvuga) (",
+    "definitions": "Kuvuga udahagarika"
+  },
+  {
+    "word": "Urugabuzo",
+    "type": "",
+    "definitions": "Urwato"
+  },
+  {
+    "word": "Uruganda",
+    "type": "",
+    "definitions": "Aho bacurira"
+  },
+  {
+    "word": "Urugenyo",
+    "type": "",
+    "definitions": "umuhongo umeze nk'umunoni canke agasate bakoresha mu gusarura inkono"
+  },
+  {
+    "word": "Urugo",
+    "type": "",
+    "definitions": "uruzitiro rwubakishijwe ibiti canke imbingo, imigano, ... ruzunguruka inzu ya Senaka."
+  },
+  {
+    "word": "Uruhimbi",
+    "type": "",
+    "definitions": "ni agasenge kubakiye mu nzu kagenewe gutetekwako ivyakunze, ibiseke, igisabo n'ibindi..."
+  },
+  {
+    "word": "Uruhinja",
+    "type": "",
+    "definitions": "Umwana akivuka"
+  },
+  {
+    "word": "Uruhome",
+    "type": "",
+    "definitions": "igice c'inzu cubakishijw ivyondo canke, amatafari. Ishimikiro ry'inzu."
+  },
+  {
+    "word": "Uruhorihori",
+    "type": "",
+    "definitions": "ubwonko bw'umwana batarakomera buguma butera indihaguzi"
+  },
+  {
+    "word": "Urukanka",
+    "type": "",
+    "definitions": "inzu yuzuye idasakaye"
+  },
+  {
+    "word": "Urukariha",
+    "type": "",
+    "definitions": "akabugita bakarisha bakagakoresha mu kumwa. Ivyitiranwa vyarwo : urugongo, intakare"
+  },
+  {
+    "word": "Urukiramenge",
+    "type": "",
+    "definitions": "ishushanyo ifise impande zine. Zibiri zibiri zingana,ubwaguke bukangana ,uburebure bukangana. uburebure nibwo butegrezwa gusumba ubwaguke."
+  },
+  {
+    "word": "Urupimo",
+    "type": "",
+    "definitions": "Urugero rw'ubwaguke, uburebure canke ubwaguke bw'ikintu canke ahantu"
+  },
+  {
+    "word": "Ururirimbo",
+    "type": "",
+    "definitions": "(amay.) Ni itondekwa ry'amajwi bimwe binyura amatwi, bahibongoza kenshi ugasanga bakurikiza umudiho kanaka"
+  },
+  {
+    "word": "Urusato rw'imbaragasa rwifuka batanu",
+    "type": "",
+    "definitions": "iyo hari urukundo abantu benshi barakwirwa n'ibintu bike cane"
+  },
+  {
+    "word": "Urusenge",
+    "type": "",
+    "definitions": "agaserama bubaka hejuru yiziko babikako inkono canke bagatariko ibitoke"
+  },
+  {
+    "word": "Uruswa",
+    "type": "",
+    "definitions": "Bw. Inswa agakoko karibwa kava mu mugina cane cane iyo hageze igihe imvuye itasuye"
+  },
+  {
+    "word": "Urusyo",
+    "type": "",
+    "definitions": "Ibuye rininiya basyako ibigori, uburo, ingano canke ikindi cose basya bakoresheje ingasiiro Ak.: urusyo gwacu ntirugica noneho."
+  },
+  {
+    "word": "Urutonde",
+    "type": "",
+    "definitions": "Ikurikirana ry'ibiintu"
+  },
+  {
+    "word": "Uruvyino",
+    "type": "",
+    "definitions": "Ni co kimwe n'ururirimbo ariko uruvyino ruba rufise utwitabirizo twinshi"
+  },
+  {
+    "word": "Uruyoya",
+    "type": "",
+    "definitions": "Umwana akivuka"
+  },
+  {
+    "word": "Urwâmo",
+    "type": "izina",
+    "definitions": "ijambo rikoreshwa mukwerekana urugero ikintu gisohora ijwi caanke umuntu ageza ."
+  },
+  {
+    "word": "Urwangara",
+    "type": "",
+    "definitions": "Ubunebwe bwo gushishikara. Umuntu w'urwangara yama atakaza ibintu vy'iwe vyinshi."
+  },
+  {
+    "word": "Urwano",
+    "type": "",
+    "definitions": "Izosi ry'inka"
+  },
+  {
+    "word": "Urwâra",
+    "type": "izina",
+    "definitions": "(bwinshi: inzâra) igice c'umubiri giherereye ku busunwe bw'urutoke canke bw'ino"
+  },
+  {
+    "word": "Urwarwa",
+    "type": "",
+    "definitions": "inzoga y'ibitoke Ic. Urugondamano"
+  },
+  {
+    "word": "Urwato",
+    "type": "",
+    "definitions": "igice c'umukuza batemyemwo kubiri bakagikoresha mu kunywa inzoga canke amazi"
+  },
+  {
+    "word": "Urwego",
+    "type": "izina",
+    "definitions": [
+      "igiti gifise amahango bakoresha mu gushigikira igitoke",
+      "umutegetsi, umutware",
+      "umurwi w'abantu basangiye umwuga ak. urwego rw'abashingwamanza, urwego rw'abamenyesha amakuru,..."
+    ]
+  },
+  {
+    "word": "Urwuute",
+    "type": "",
+    "definitions": "Umwaanda mukuru usohotse wooroshe ufataanganye ari ikinyigiimbe."
+  },
+  {
+    "word": "Waga",
+    "type": "",
+    "definitions": "izina ry'uruzi"
+  },
+  {
+    "word": "Waraje",
+    "type": "",
+    "definitions": "Nico kimwe na Makuruki, gusa iri ni izina ry'abakiri bato"
+  },
+  {
+    "word": "Waranshoje nshonje",
+    "type": "",
+    "definitions": "ni ukuvuga ko iyo nka vavyaye mu mapfa, nyeneyo akahakirira."
+  },
+  {
+    "word": "Zirakoba zirakobora",
+    "type": "",
+    "definitions": "imbwa zirakuga zigomba gucakira impongo, impongo na yo ikaza kuziseka, zigasubiza umugongo inyuma, ivyara bishishimura hasi, zongera zisimba gufata ya mpongo"
+  },
+  {
+    "word": "Sida",
+    "type": "izina",
+    "definitions": "indwara iterwa n'umugera utuma igabanuka ry'ukwigwanira kw'umubiri"
+  },
+  {
+    "word": "Ikoraniro",
+    "type": "izina",
+    "definitions": "ihuriro ry'abantu"
+  },
+  {
+    "word": "Agahumbezi",
+    "type": "izina",
+    "definitions": "igihe buriko burira hatabona neza akaba arinaco gihe abasuma bashobora kwiba"
+  },
+  {
+    "word": "Imburamaboko",
+    "type": "izina",
+    "definitions": "umuntu w'ikinebwe"
+  },
+  {
+    "word": "Umukenke",
+    "type": "izina",
+    "definitions": "agakoresho ko kunywa inzoga karekare gafise umuheha"
+  },
+  {
+    "word": "Gusabika",
+    "type": "irivuga",
+    "definitions": "gushusha n'amazi"
+  },
+  {
+    "word": "Umuti",
+    "type": "izina",
+    "definitions": "ikintu icarico cose gifise ububasha bwo gukinga canke kuvura indwara"
+  },
+  {
+    "word": "Akamaramuziro",
+    "type": "izina",
+    "definitions": "akantu gatoyi ataco kamaze"
+  },
+  {
+    "word": "Kwamama",
+    "type": "irivuga",
+    "definitions": "kugarura inka ngo ntishikure imirima"
+  },
+  {
+    "word": "Ikigongwe",
+    "type": "izina",
+    "definitions": "ukureka kwishura uwakugiriye ikosa canke gusubira kwumvikana n'uwakugiriye ikosa"
+  },
+  {
+    "word": "Kutadumwadumwa",
+    "type": "irivuga",
+    "definitions": "kutagira akagorane na gato muvyo uriko urakora"
+  },
+  {
+    "word": "Guhimakara",
+    "type": "irivuga",
+    "definitions": "kubaho neza atakikugora"
+  },
+  {
+    "word": "Guhibongoza",
+    "type": "irivuga",
+    "definitions": "kuririmba ushira mu gahogo n'akajwi kaduga cane"
+  },
+  {
+    "word": "Isiyankanga",
+    "type": "izina",
+    "definitions": "abantu benshi cane"
+  },
+  {
+    "word": "Ukuri",
+    "type": "izina",
+    "definitions": "ibintu bitunganye atagasembwa,atamahinyu"
+  },
+  {
+    "word": "Imvugakuri",
+    "type": "izina",
+    "definitions": "umuntu avuga ukuri,akira ibigororotse"
+  },
+  {
+    "word": "Agahimbo",
+    "type": "izina",
+    "definitions": "guhaga cane ndetse ivyushigaje ugasesa ukibagira abandi"
+  },
+  {
+    "word": "Mitego",
+    "type": "izina",
+    "definitions": "inzu y'ikirundi y'ivyatsi."
+  },
+  {
+    "word": "Imbiga",
+    "type": "izina",
+    "definitions": "urwinjiriro rw'ikintu: inkono, umubindi, n'ibindi"
+  },
+  {
+    "word": "Guhemuka",
+    "type": "irivuga",
+    "definitions": "gusohora impwemu ziva mu mahaha."
+  },
+  {
+    "word": "Umukanakmyi",
+    "type": "izina",
+    "definitions": "umuntu w'umuhinga yihindura mu gikoko akaja arakanga abantu mu kajoro."
+  },
+  {
+    "word": "Ibihano",
+    "type": "izina",
+    "definitions": "uburozi butanzwe mu ndya canke mu nyobwa."
+  },
+  {
+    "word": "Umudiho",
+    "type": "izina",
+    "definitions": "ukuntu uruvyino canke ururirimbo rugenda, umuvuduko wavyo"
+  },
+  {
+    "word": "Kurimarima",
+    "type": "irivuga",
+    "definitions": "kubura umwimbu kandi wari wararimye"
+  },
+  {
+    "word": "Kubwagura",
+    "type": "izina",
+    "definitions": "kuvyayra kw'imbwa."
+  },
+  {
+    "word": "Kurarura",
+    "type": "irivuga",
+    "definitions": "gusoroma ibitoki vyinshi vyo kuganamwo inzoga"
+  },
+  {
+    "word": "Umuribate",
+    "type": "izina",
+    "definitions": "inyana y'inka yapfuye."
+  },
+  {
+    "word": "Insazi",
+    "type": "izina",
+    "definitions": "agakoko gato gakunda ahanuka no kugurukira ku masahani"
+  },
+  {
+    "word": "Umurondo",
+    "type": "izina",
+    "definitions": "umwana w'umukobwa."
+  },
+  {
+    "word": "Gushika umuhindo",
+    "type": "iryungikane",
+    "definitions": "kurongora bidaciye mu mategeko."
+  },
+  {
+    "word": "Gucikiza",
+    "type": "irivuga",
+    "definitions": "kuzana umugore bidaciye mu mategeko."
+  },
+  {
+    "word": "Gucikira",
+    "type": "irivuga",
+    "definitions": "kuja ku kwubaka bidaciye mu mategeko, kwijana ku mugabo. icit. : kwigemura."
+  },
+  {
+    "word": "Kurongorwa",
+    "type": "irivuga",
+    "definitions": "kwabirwa n'umugabo."
+  },
+  {
+    "word": "Kurongora",
+    "type": "irivuga",
+    "definitions": "kwabira umugore."
+  },
+  {
+    "word": "Guteka",
+    "type": "irivuga",
+    "definitions": "guhingura ibifungurwa ubanje kubicisha kuziko."
+  },
+  {
+    "word": "Gusya",
+    "type": "irivuga",
+    "definitions": "kuhindera ifu y'ibintu nk'amasaka canke uburo ukoresheje urusyo n'ingasiro."
+  },
+  {
+    "word": "Gurtyaza",
+    "type": "irivuga",
+    "definitions": "gukarisha icuma ku rtyazo"
+  },
+  {
+    "word": "Umugororotsi",
+    "type": "izina",
+    "definitions": "umuntu arangwa n'ukugendera ubuntu muvyo akora n'ivyo avuga"
+  },
+  {
+    "word": "Ingata",
+    "type": "izina",
+    "definitions": "ikintu kibaze mu vyatsi bakoresha mu kwikorera ibintu kibakingira kubabara ku mutwe"
+  },
+  {
+    "word": "Gukoomoora",
+    "type": "irivuga",
+    "definitions": "gutuka umuntu ataco umusigarije"
+  },
+  {
+    "word": "Gukomora",
+    "type": "irivuga",
+    "definitions": "kuruma ikintu canke umuntu ukoresheje amenyo"
+  },
+  {
+    "word": "Gutwenga",
+    "type": "irivuga",
+    "definitions": "guserura umunezero uturutse ku co wibutsem ku co ubariwe, canke bakudidadize, bikabonekera ku kwasama bujana no gutura akamo werekana amenyo."
+  },
+  {
+    "word": "Ikigendabunyovu",
+    "type": "izina",
+    "definitions": "igisiga cirabura gishusha n'inyanana gikunda gutembera mu nyovu"
+  },
+  {
+    "word": "Ruvyironza",
+    "type": "izina",
+    "definitions": "uruzi ruri mu gihugu hagati rutemba ruja kwisuka muri ruvubu"
+  },
+  {
+    "word": "Umusozo",
+    "type": "izina",
+    "definitions": "igisiga cera giteye bwa nyanana gikunda kuba mu biti canke ku mwonga nko ku cambu c'inka"
+  },
+  {
+    "word": "Kwiha ubuki",
+    "type": "iryungikane",
+    "definitions": "gutanga ku muntu mukuru, cane cane umwami."
+  },
+  {
+    "word": "Inyanana",
+    "type": "izina",
+    "definitions": "igisiga c'umunwa muremure cirabura gikunda kuba mu mwonga canaga"
+  },
+  {
+    "word": "Umupfakare",
+    "type": "izina",
+    "definitions": "umugabo umugore wiwe atakiriho, yapfuye."
+  },
+  {
+    "word": "Umupfakazi",
+    "type": "izina",
+    "definitions": "umugore umugabo wiwe atakiriho, yapfuye."
+  },
+  {
+    "word": "Ingeri",
+    "type": "izina",
+    "definitions": "ni umugende kavukire w'amazi wibonekeza kenshi na kenshi hagati y'umutumba n'uwundi."
+  },
+  {
+    "word": "Umugogo",
+    "type": "izina",
+    "definitions": "ni igiti batambika ku ngeri kugira vyorohe kujabuka."
+  },
+  {
+    "word": "Gutega amashi",
+    "type": "izina",
+    "definitions": "gusabiririza kubera ubukene canke ingeso mbi yo gusenga"
+  },
+  {
+    "word": "Kuraguza",
+    "type": "irivuga",
+    "definitions": "kuja ku mupfumu"
+  },
+  {
+    "word": "Kuragura",
+    "type": "irivuga",
+    "definitions": "kuvuga ibizoba ku muntu, ku muryango canke ku gihugu canke ivyabaye vyari bigoye kumenya."
+  },
+  {
+    "word": "Igishishi",
+    "type": "izina",
+    "definitions": "ihundo ry'ashaka bakuyeko intete."
+  },
+  {
+    "word": "Gusatira",
+    "type": "irivuga",
+    "definitions": "gusugereza"
+  },
+  {
+    "word": "Gucira inyeri",
+    "type": "iryungikane",
+    "definitions": "gucira amate ucishije mu menyo, n'ifyeri"
+  },
+  {
+    "word": "Inzovu",
+    "type": "izina",
+    "definitions": "igikoko kinini cane gifise amenyo abiri maremare"
+  },
+  {
+    "word": "Igihwankara",
+    "type": "izina",
+    "definitions": "iibabi ryumye ry'igitoke."
+  },
+  {
+    "word": "Umutoto",
+    "type": "izina",
+    "definitions": "ibabi ry'igitoke."
+  },
+  {
+    "word": "Igihuhusi",
+    "type": "izina",
+    "definitions": "umuyaga ugenda ku muvuduko munini cane ku buryo wonona ibintu."
+  },
+  {
+    "word": "Ikiyaga",
+    "type": "izina",
+    "definitions": "uruzi runiniya cane rurimwo amazi menshi, izindi nzuzi zisukamwo"
+  },
+  {
+    "word": "Gutaka utakamba",
+    "type": "iryunikane",
+    "definitions": "Gusaba ushimitse urondera kwumvirwa canke urondera gutabarwa."
+  },
+  {
+    "word": "Ubwangushi",
+    "type": "izina",
+    "definitions": "ububeshi"
+  },
+  {
+    "word": "Kurobeza",
+    "type": "irivuga",
+    "definitions": "kugendura imihana urondera ivyokurya n'umunoho mwinshi"
+  },
+  {
+    "word": "Kuvavanura",
+    "type": "irivuga",
+    "definitions": "guheba burundu."
+  },
+  {
+    "word": "Kurangarira",
+    "type": "irivuga",
+    "definitions": "kunyzoterwa birernze urugero. icit. : gusaragara"
+  },
+  {
+    "word": "Kwifata ku munwa",
+    "type": "iryungikane",
+    "definitions": "gushira urushi ku munwa kubera ukumaramara"
+  },
+  {
+    "word": "Kirumara",
+    "type": "izina",
+    "definitions": "ikintu gifise akamaro kanini"
+  },
+  {
+    "word": "Ubutambiro",
+    "type": "izina",
+    "definitions": "inzu abantu batambiramwo bidagadura kenshi na kensi mu gasozayinga canke iyo bugorovye"
+  },
+  {
+    "word": "Impembo",
+    "type": "izina",
+    "definitions": "agashimwe gahabwa umuntu ku co yakoze."
+  },
+  {
+    "word": "Injugu",
+    "type": "izina",
+    "definitions": "inkarange z'ibigori"
+  },
+  {
+    "word": "Gusenya",
+    "type": "irivuga",
+    "definitions": "kwegeranya inkwi zo gucana"
+  },
+  {
+    "word": "Igori",
+    "type": "izina",
+    "definitions": [
+      "Igihande c'impuzu kenshi na kenshi ishati canke agapira giherera mw'izosi",
+      "Mu rukino rw'umupira, aho binjiza igitsindo",
+      "Igitsindo mu rukino rw'umupira kenshi w'amaguru"
+    ]
+  },
+  {
+    "word": "Isango",
+    "type": "izina",
+    "definitions": "Indagano"
+  },
+  {
+    "word": "Gutengata",
+    "type": "irivuga",
+    "definitions": "gutwara ibintu mu maboko iyo ufise ibindi ku mutwe."
+  },
+  {
+    "word": "Gutongana",
+    "type": "irivuga",
+    "definitions": "kuvugana nabi n'umuntu, muharuka mwongera mutukana."
+  },
+  {
+    "word": "Ikorovati",
+    "type": "izina",
+    "definitions": "akantu gateye bwa mweko bambara mw'izosi hejuru y'igori ry'ishati kugire bashaze baberwe. ishobora kuba ndende canke agatangurirwa"
+  },
+  {
+    "word": "Gusimbiza",
+    "type": "irivuga",
+    "definitions": [
+      "kuduza umwana uhetse mu mugongo kugire aryame neza yagire akoroke",
+      "gutambukira ku gikurikira mu gihe uriko urigisha, ubara inkuru canke uganira bisanzwe"
+    ]
+  },
+  {
+    "word": "Ikanya",
+    "type": "izina",
+    "definitions": "ni isuka ifise amenyo atatu canke ane."
+  },
+  {
+    "word": "Umumezo",
+    "type": "izina",
+    "definitions": "agati karinganije neza kandi baha isuka ngo babone kuyirimisha"
+  },
+  {
+    "word": "Inkono",
+    "type": "izina",
+    "definitions": "ni igikoresho gikozwe mw'ibumba, ciburungushuruye kqndi gifukuye imbere ku buryo bashobora kugishonguramwo amazi, ibiharage, n'ibindi... bashobora kandi kugiteka;wo infungurwa."
+  },
+  {
+    "word": "Impetso",
+    "type": "izina",
+    "definitions": "insimbizo, urushato rw'impene canke impuzu bashirako imicisho bagahekamwo umwana"
+  },
+  {
+    "word": "Icugamo",
+    "type": "irivuga",
+    "definitions": "umutaka, umwumvuri"
+  },
+  {
+    "word": "Umutaka",
+    "type": "izina",
+    "definitions": "umwumvuri, icugamo ngendanwa"
+  },
+  {
+    "word": "Gutumbereza ijambo",
+    "type": "iryungikane",
+    "definitions": "kuvuga ukuri, kudahengama mu vyo uvuga."
+  },
+  {
+    "word": "Gucisha",
+    "type": "irivuga",
+    "definitions": [
+      "kwambara imicisho uhetse umwana",
+      "kujana ikintu canke umuntu ahantu kanaka kuko horoheje ugamije kukijana canke kumujana ahandi ak.: nahavuye ndamucisha mw'isomero gatoya."
+    ]
+  },
+  {
+    "word": "Gutumbereza",
+    "type": "irivuga",
+    "definitions": "kurabisha ikintu iyo kija, kukigorora."
+  },
+  {
+    "word": "Umucisho",
+    "type": "izina",
+    "definitions": [
+      "imigozi iri ku mpuzu bakoresha mu guheka umwana bigatuma adakorokera hasi",
+      "(iryungikane): kugira umucisho: kugira umugisha ku ruvyaro rwawe; ak.: nk'iyo umuntu yari mu ngorane zomutwara n'ubuzima, iyo arusimvye bamubwira bati, umuvyeyi wawe aracari n'umucisho"
+    ]
+  },
+  {
+    "word": "Intango",
+    "type": "izina",
+    "definitions": "itanguriro"
+  },
+  {
+    "word": "Indondabihugu",
+    "type": "izina",
+    "definitions": "icigwa cigisha ingene isi imeze nuko ibihugu biyiriko bimeze"
+  },
+  {
+    "word": "Intege",
+    "type": "izina",
+    "definitions": "igice c'umubiri w'umuntu kiri mw'ipfunyiro ry'ukuguru ahagana inyuma y'ivi heruguru y'inyama ya kibizi."
+  },
+  {
+    "word": "Insimbizo",
+    "type": "izina",
+    "definitions": "impuzu ifise imicisho bakoresha mu gufata umwana ari mu mugongo"
+  },
+  {
+    "word": "Igisuguti",
+    "type": "izina",
+    "definitions": "ikiribwa gikozwe mw'ifarini, isukari, n'amagi, baikoramwo umutsima bakawotsa mw'ufuru kikavayo c'umye"
+  },
+  {
+    "word": "Guheka",
+    "type": "irivuga",
+    "definitions": [
+      "gutwara umwana mu mugongo umufatishije insimbizo",
+      "guhagarikira umuntu ku ntahe canke irindi banga gishingantahe"
+    ]
+  },
+  {
+    "word": "Intano",
+    "type": "izina",
+    "definitions": "umwana abuze nyina akiri muto cane agasigara ararerwa na se."
+  },
+  {
+    "word": "Impongano",
+    "type": "izina",
+    "definitions": "inzoga canke ibindi bintu utanga kugira w'imenjure iyo wakoshereje umuntu"
+  },
+  {
+    "word": "Kumemera",
+    "type": "irivuga",
+    "definitions": [
+      "(imvura) kugwa bukebuke",
+      "gushira amazi canke ifu ku bindi bintu bukebuke"
+    ]
+  },
+  {
+    "word": "Igitikakitika",
+    "type": "izina",
+    "definitions": "ibabi ry'iteke."
+  },
+  {
+    "word": "Igitiritiri",
+    "type": "izina",
+    "definitions": "ni kirya gisigara ku kugori iyo bagikuyeko intete."
+  }
+]

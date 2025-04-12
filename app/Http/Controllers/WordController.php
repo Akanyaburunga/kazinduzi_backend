@@ -40,6 +40,7 @@ class WordController extends Controller
     {
         $validated = $request->validate([
             'word' => 'required|string|max:255|unique:words,word',
+            'type' => 'required|string|max:50',
             'meaning' => 'required|string|max:1000',
         ], [
             'word.unique' => 'This word has already been added. Please consider adding a new meaning instead.',
@@ -55,6 +56,7 @@ class WordController extends Controller
 
         $word = Word::create([
             'word' => $validated['word'],
+            'type' => $validated['type'],
             'user_id' => auth()->id(),
         ]);
 

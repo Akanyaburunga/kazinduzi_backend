@@ -4,16 +4,16 @@
 
 @section('content')
 <div class="container">
-<div class="row justify-content-center my-5">
+    <div class="row justify-content-center my-5">
         <div class="col-lg-8 text-center">
-        <h3 class="display-4 text-primary">Words list</h3>
+            <h3 class="display-4 text-primary">Words list</h3>
 
-        <form action="{{ route('words.index') }}" method="GET" class="mb-4">
-        <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Search for a word..." value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-        </form>
+            <form action="{{ route('words.index') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search for a word..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+            </form>
         
         </div>
     </div>
