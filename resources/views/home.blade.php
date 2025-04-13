@@ -62,7 +62,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $contribution->word }}</h5>
                                 <p class="card-text">{{ Str::limit($contribution->meanings->first()->meaning, 120) }}</p>
-                                <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary"></a>
+                                <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Soma vyose</a>
                             </div>
                             <div class="card-footer text-muted">
                                 Ryagiyeko ku wa {{ $contribution->created_at->format('F j, Y') }}
