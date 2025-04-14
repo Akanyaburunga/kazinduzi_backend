@@ -16,11 +16,13 @@
                         <div class="form-group mb-3">
                             <label for="email">{{ __('Imeyile') }}</label>
                             <input id="email" type="email" class="form-control" name="email" required autofocus>
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="password">{{ __('Icandiko-kabanga') }}</label>
                             <input id="password" type="password" class="form-control" name="password" required>
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
 
                         <div class="form-group mb-3 text-center">
