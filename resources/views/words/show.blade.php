@@ -15,6 +15,17 @@
         @foreach ($word->meanings as $meaning)
             <li class="p-4 bg-gray-100 rounded-lg shadow-sm flex justify-between items-start">
                 <div>
+                @php
+                    $canModerate = auth()->check() && auth()->user()->reputation >= env('MODERATION_REPUTATION_THRESHOLD', 500);
+                @endphp
+
+                @if ($canModerate && !auth()->user()->is_banned)
+                        <form action="{{ route('moderation.ban', $word->user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to ban this user?');">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">🚫 Ban User</button>
+                        </form>
+                @endif
+                    <span class="text-sm text-gray-500">{{ $meaning->created_at->diffForHumans() }}</span>
                     <span class="text-sm text-gray-500">By <strong>{{ $meaning->user->name }}</strong></span>
                     <p class="text-gray-800">{{ $meaning->meaning }}</p>
                 </div>
