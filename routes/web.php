@@ -9,6 +9,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\MeaningController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\ModerationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,13 @@ Route::middleware($middleware)->group(function () {
     Route::delete('/words/{word}', [WordController::class, 'destroy'])->name('words.destroy');
 
     Route::post('/words/{word}/meanings', [MeaningController::class, 'store'])->name('meanings.store');
+
+    //Moderation
+    Route::post('/moderation/ban/{user}', [ModerationController::class, 'banUser'])->name('moderation.ban');
+
+    Route::post('/moderation/suspend/word/{word}', [ModerationController::class, 'suspendWord'])->name('moderation.suspend.word');
+
+    Route::post('/moderation/suspend/meaning/{meaning}', [ModerationController::class, 'suspendMeaning'])->name('moderation.suspend.meaning');
     
     //Votes
     Route::post('/meanings/{meaning}/vote', [VoteController::class, 'store'])
@@ -62,9 +70,5 @@ Route::get('/search', [WordController::class, 'search'])->name('words.search');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/leaderboard/{filter?}', [LeaderboardController::class, 'index'])->name('leaderboard');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-
-Route::post('/moderation/ban/{user}', [App\Http\Controllers\ModerationController::class, 'banUser'])
-    ->middleware(['auth'])
-    ->name('moderation.ban');
 
 require __DIR__.'/auth.php';

@@ -27,7 +27,17 @@
                 @foreach ($featuredWords as $word)
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $word->word }}</h5>
+                        <h5 class="card-title">{{ $word->word }}</h5>
+                            @php
+                                $canModerate = auth()->check() && auth()->user()->reputation >= env('MODERATION_REPUTATION_THRESHOLD', 500);
+                            @endphp
+
+                            @if ($canModerate && !$word->is_suspended)
+                            <form action="{{ route('moderation.suspend.word', $word->slug) }}" method="POST" onsubmit="return confirm('Suspend this word?');">
+                                @csrf
+                                <button type="submit" class="btn btn-warning btn-sm">⚠️ Suspend Word</button>
+                            </form>
+                            @endif
                             <p class="card-text">{{ Str::limit($word->meanings->first()->meaning, 100) }}</p>
                             <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Raba</a>
                         </div>
