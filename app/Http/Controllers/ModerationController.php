@@ -48,6 +48,7 @@ class ModerationController extends Controller
 
         ModerationLog::create([
             'action_by' => auth()->id(),
+            'target_user' => $word->user_id,
             'word_id' => $word->id,
             'action' => 'suspend_word',
             'reason' => $request->input('reason') ?? 'Suspended by high-reputation user',
