@@ -28,6 +28,13 @@
                     <span class="text-sm text-gray-500">{{ $meaning->created_at->diffForHumans() }}</span>
                     <span class="text-sm text-gray-500">By <strong>{{ $meaning->user->name }}</strong></span>
                     <p class="text-gray-800">{{ $meaning->meaning }}</p>
+
+            @if ($canModerate && !$meaning->is_suspended)
+                <form action="{{ route('moderation.suspend.meaning', $meaning->id) }}" method="POST" onsubmit="return confirm('Suspend this meaning?');">
+                    @csrf
+                    <button type="submit" class="btn btn-warning btn-sm">⚠️ Suspend Meaning</button>
+                </form>
+            @endif
                 </div>
                 <div class="flex items-center space-x-2">
                     @auth
