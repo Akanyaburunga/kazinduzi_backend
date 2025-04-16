@@ -25,16 +25,34 @@
                             <button type="submit" class="btn btn-danger btn-sm">🚫 Ban User</button>
                         </form>
                 @endif
+                    
+                @if ($canModerate)
                     <span class="text-sm text-gray-500">{{ $meaning->created_at->diffForHumans() }}</span>
                     <span class="text-sm text-gray-500">By <strong>{{ $meaning->user->name }}</strong></span>
                     <p class="text-gray-800">{{ $meaning->meaning }}</p>
 
-            @if ($canModerate && !$meaning->is_suspended)
-                <form action="{{ route('moderation.suspend.meaning', $meaning->id) }}" method="POST" onsubmit="return confirm('Suspend this meaning?');">
-                    @csrf
-                    <button type="submit" class="btn btn-warning btn-sm">⚠️ Suspend Meaning</button>
-                </form>
-            @endif
+                    @if (!$meaning->is_suspended)
+                        <form action="{{ route('moderation.suspend.meaning', $meaning->id) }}" method="POST" onsubmit="return confirm('Suspend this meaning?');">
+                            @csrf
+                            <button type="submit" class="btn btn-warning btn-sm">⚠️ Suspend Meaning</button>
+                        </form>
+                    @else
+                        <form action="{{ route('moderation.unsuspend.meaning', $meaning->id) }}" method="POST" onsubmit="return confirm('Unsuspend this meaning?');">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm">✅ Unsuspend Meaning</button>
+                        </form>
+                    @endif
+
+                @else
+                    @if (!$meaning->is_suspended)
+                        <span class="text-sm text-gray-500">{{ $meaning->created_at->diffForHumans() }}</span>
+                        <span class="text-sm text-gray-500">By <strong>{{ $meaning->user->name }}</strong></span>
+                        <p class="text-gray-800">{{ $meaning->meaning }}</p>
+                    @else
+                        <span class="badge bg-danger">This meaning is suspended.</span>
+                    @endif
+                @endif
+
                 </div>
                 <div class="flex items-center space-x-2">
                     @auth

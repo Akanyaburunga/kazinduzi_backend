@@ -37,6 +37,11 @@
                                 @csrf
                                 <button type="submit" class="btn btn-warning btn-sm">⚠️ Suspend Word</button>
                             </form>
+                            @elseif ($canModerate && $word->is_suspended)
+                                <form action="{{ route('moderation.unsuspend.word', $word->slug) }}" method="POST" onsubmit="return confirm('Unsuspend this word?');">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">✅ Unsuspend Word</button>
+                                </form>
                             @endif
                             <p class="card-text">{{ Str::limit($word->meanings->first()->meaning, 100) }}</p>
                             <a href="{{ route('words.show', $word) }}" class="btn btn-outline-primary">Raba</a>

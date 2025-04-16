@@ -54,10 +54,11 @@ Route::middleware($middleware)->group(function () {
 
     //Moderation
     Route::post('/moderation/ban/{user}', [ModerationController::class, 'banUser'])->name('moderation.ban');
-
     Route::post('/moderation/suspend/word/{word}', [ModerationController::class, 'suspendWord'])->name('moderation.suspend.word');
-
     Route::post('/moderation/suspend/meaning/{meaning}', [ModerationController::class, 'suspendMeaning'])->name('moderation.suspend.meaning');
+
+    Route::post('/moderation/unsuspend/word/{word}', [ModerationController::class, 'unsuspendWord'])->name('moderation.unsuspend.word');
+    Route::post('/moderation/unsuspend/meaning/{meaning}', [ModerationController::class, 'unsuspendMeaning'])->name('moderation.unsuspend.meaning');
     
     //Votes
     Route::post('/meanings/{meaning}/vote', [VoteController::class, 'store'])

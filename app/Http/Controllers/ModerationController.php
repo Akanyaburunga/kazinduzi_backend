@@ -77,4 +77,46 @@ class ModerationController extends Controller
 
         return back()->with('success', 'Meaning has been suspended.');
     }
+
+    public function unsuspendWord(Request $request, Word $word)
+    {
+        if (auth()->user()->reputation < env('MODERATION_REPUTATION_THRESHOLD', 500)) {
+            abort(403);
+        }
+
+        $word->is_suspended = false;
+        $word->save();
+
+        ModerationLog::create([
+            'action_by' => auth()->id(),
+            'word_id' => $word->id,
+            'target_user' => $word->user_id,
+            'action' => 'unsuspend_word',
+            'reason' => $request->input('reason') ?? 'Unsuspended by moderator',
+        ]);
+
+        return back()->with('success', 'Word has been unsuspended.');
+    }
+
+    public function unsuspendMeaning(Request $request, Meaning $meaning)
+    {
+        if (auth()->user()->reputation < env('MODERATION_REPUTATION_THRESHOLD', 500)) {
+            abort(403);
+        }
+
+        $meaning->is_suspended = false;
+        $meaning->save();
+
+        ModerationLog::create([
+            'action_by' => auth()->id(),
+            'meaning_id' => $meaning->id,
+            'target_user' => $meaning->user_id,
+            'word_id' => $meaning->word_id,
+            'action' => 'unsuspend_meaning',
+            'reason' => $request->input('reason') ?? 'Unsuspended by moderator',
+        ]);
+
+        return back()->with('success', 'Meaning has been unsuspended.');
+    }
+
 }

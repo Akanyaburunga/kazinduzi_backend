@@ -75,13 +75,6 @@ class WordController extends Controller
 
     public function show(Word $word)
     {
-        // Remove meanings that are suspended
-        $word->meanings = $word->meanings()
-            ->where('is_suspended', false)
-            ->with('user')
-            ->latest()
-            ->get();
-
         return view('words.show', compact('word'));
     }
 
