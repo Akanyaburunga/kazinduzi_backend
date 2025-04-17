@@ -59,7 +59,7 @@
             <ul class="list-group">
                 @foreach ($trendingWords as $word)
                     <li class="list-group-item">
-                        <strong>{{ $word->word }}</strong>
+                        <strong><a href="{{ route('words.show', $word) }}">{{ $word->word }}</a></strong>
                         <span class="text-muted"> - {{ $word->created_at->diffForHumans() }}</span>
                     </li>
                 @endforeach
