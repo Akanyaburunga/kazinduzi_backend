@@ -16,8 +16,11 @@ Uwu mugambi ushingiye kuri izi nkingi nkurunkuru:
 **Ni gute runo rubuga rufasha abarukoresha ?** 
 
 **Kazinduzi** ni intemere rusangi isangirwa n’abipfuza kwiga ikirundi, kuva ku batanguye kuciga n’abaconse bakivuka. Ni urubuga mpuzangeri rworosha ikiyago c’abato n’abakuru, rukagira uruhara ntangere mu: 
+
 **Kubungabunga ururimi**:  dushoboye kwegeranya amajambo n’insiguro yayo, tuzoba twubatse ikigega mbungabungakirundi na rirya urwo rurimi rwariko rugeramiwe. 
+
 **Kwigisha**:  abanyeshure, abigisha, n’abakunda ururimi bashobora gukoresha runo rubuga nk’isomero aho biga bakanigisha Ikirundi.
+
 **Kwiganzura bishitse**:  Kazinduzi ni urubuga ruje gufasha Abarundi kwiganzura bishitse mu gusangira guteza imbere ivyabo ku rwego rw’igihugu na mpuzamakungu. 
 
 **Ni gute uwuvyipfuza aterera ?**
