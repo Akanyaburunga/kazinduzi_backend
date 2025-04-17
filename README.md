@@ -1,67 +1,208 @@
+# Kazinduzi
 
-# Kazinduzi: Urubuga rwo guhanahana ubumenyi ku mico, akaranga n’ururimi rw’Ikirundi
+**Kazinduzi** is a community-driven platform for documenting and preserving the **Kirundi** language — powered by open-source technology, cultural pride, and collective knowledge.
 
-**Kazinduzi** ni urubuga ngurukanabumenyi rwaganewe kwegeranya, gusabikanya no kugwiza ubumenyi ku mico, akaranga k’Abarundi hamwe n’ururimi rw’Ikirundi. Intego yarwo ni kworohereza abantu kuronka ubumenyi ku rurimi rw’Ikirundi, imico, imigenzo n’akaranga mu buryo bworoshe kandi butahuritse, haba ku basanzwe bavuga Ikirundi ndetse n’abaciga. Ruraha kandi akaryo uwo wese yipfuza guterera agacumu k’ubumwe mu kubungabunga ubutunzi n’akanovera k’Ururimi rw’Ikirundi, umwe wese ku bumenyi afise.   
+> 📄 [Soma mu Kirundi](README_KIRUNDI.md)
 
-**Kazinduzi ni iki?**
-
-Kazinduzi ni urubuga rusangi aho umuntu wese azi Ikirundi n’imico, imigenzo n’akaranga k’Abarundi ashobora guterera ubumenyi n’amajambo. Kugira duteze imbere ururimi, umwe wese ahamagariwe guterera amajambo n’insiguro yayo mu Kirundi. Uru rubuga rugamije kwubaka kazinduzi iri ku ngurukanabumenyi kandi isangiwe na bose, baba abazi canke abiga ikirundi. 
-Uwu mugambi ushingiye kuri izi nkingi nkurunkuru:
-**Kwegeranya ubumenyi**:  umuntu wese ashobora guterera amajambo y’Ikirundi n’insiguro yayo.
-**Kubungabunga Ikirundi**:  uwuterereye wese kuri Kazinduzi aba afashije ku kubungabunga no gusabikanya iragi twarazwe ari rwo rurimi ruduhuza. 
-**Kwunganiranira**: uru rubuga ruremerera abarukoresha gufashanya, basabikanya ubumenyi, no kuryohorera hamwe akanovera k’Ururimi twasigiwe na Sogokuru. 
-**Kworohereza abarondezi**: runo rubuga rurorohereza abantu bipfuza kuronka no kumenya amajambo n’insiguro yayo canke imico n’imigenzo ijanye na vyo. 
-
-
-**Ni gute runo rubuga rufasha abarukoresha ?** 
-
-**Kazinduzi** ni intemere rusangi isangirwa n’abipfuza kwiga ikirundi, kuva ku batanguye kuciga n’abaconse bakivuka. Ni urubuga mpuzangeri rworosha ikiyago c’abato n’abakuru, rukagira uruhara ntangere mu: 
-
-**Kubungabunga ururimi**:  dushoboye kwegeranya amajambo n’insiguro yayo, tuzoba twubatse ikigega mbungabungakirundi na rirya urwo rurimi rwariko rugeramiwe. 
-
-**Kwigisha**:  abanyeshure, abigisha, n’abakunda ururimi bashobora gukoresha runo rubuga nk’isomero aho biga bakanigisha Ikirundi.
-
-**Kwiganzura bishitse**:  Kazinduzi ni urubuga ruje gufasha Abarundi kwiganzura bishitse mu gusangira guteza imbere ivyabo ku rwego rw’igihugu na mpuzamakungu. 
-
-**Ni gute uwuvyipfuza aterera ?**
-
-Uru rubuga rurorohereza uwo wese yipfuza guterera, waba uwusanzwe azi Ikirundi cane canke agerageza. Ng’uku uko bikorwa : 
-1.	**Kwugurura konti ku rubuga**:  iyandikishe mu kwandika izina n’agasandugu- baruwa ( imeyile).
-2.	**Terara amajambo**:  inyuma yo kwinjira mu rubuga nyezina, urashobora gutangura guterera amajambo y’Ikirundi n’insiguro yayo.
-3.	**Kwunganira**: Iyo ubonye insiguro itatanzwe neza, terera musi uzoba ukoze igikorwa ciza cane. 
-4.	**Guha amanota insiguro**: bivanye n’insiguro zatanzwe, ushobora kuziha amanota azibereye bigatuma abakoresha Kazinduzi bamenya insiguro iri yo n’iyitari yo. 
-5.	**Gutumira abandi**: ushobora gutumira abandi bagenzi mu kubasabikanya urwo rubuga kugira umuryango waguke.
-
-
-**Ikidari ku baterera**
-
-**Kazinduzi** iraninahaza abaterera batitangiriye itama mu kwagura kazinduzi ku ngurukanabumenyi rusangi. Uwuterera cane kandi aterera ibijanye bishimwa n’umuryango araninahazwa ku rubuga rwacu mu guhabwa amanota: 
-
-**Mu guterera amajambo**: ijambo ryose ushira muri kazinduzi ya Kazinduzi riguha amanota.
-**Guterera insiguro**:  Gushiramwo insiguro y’ijambo na vyo biguha amanota.
-**Guha amanota ivyatererewe**: Gutora insiguro nziza zibereye navyo bikwongera amanota.
-**Gutumira abagenzi**:  utumiye abagenzi navyo igihe binjiye ku rubuga bikwongera amanota
-
-Igikorwa uzokora cose kizoguma kigaragara ubone intererano uriko uratanga mu kwagura umuryango w’Abarundi b’umutima bipfuza kubona imico, akaranga, ndetse n’ururimi rwabo bishwara isi ku nguvu zacu twese. Abazoba bafise amanota menshi bazoguma baninahazwa ku rubuga rwa Kazinduzi. 
+It allows users to collaboratively contribute Kirundi words, meanings, and linguistic context. It promotes learning, preserves heritage, and encourages engagement through gamification, mobile access, and community moderation.
 
 ---
-**Twagiye** 
 
-Wipfuza gutangura guterera, kurikira izi ntambuko:
-1.	**Iyandikishe** ku rupapuro rwo kwiyandikisha (https://www.kazinduzi.org/register/) wugurure ikonti y’umunyamuryango.
-2.	**Tangura guterera**:  Ongeramwo amajambo mashasha n’insiguro yayo canke uhe amanota ayamaze gutangwa. 
-3.	**Tumira abagenzi**:  tumira abagenzi baze mu muryango.
+## 🌍 Explore the Kazinduzi Platform
+
+The official Kazinduzi platform is live at:
+
+👉 **[https://www.kazinduzi.org](https://www.kazinduzi.org)**
+
+This is not just a demo — it is the **core destination** for discovering, contributing, and preserving **Kirundi** words, expressions, and meanings. Every feature you see in the repository is actively powering the live platform:
+
+- 📚 Browse a growing database of Kirundi words
+- ✍️ Add your own meanings and suggestions
+- 🗳 Vote on the best definitions and boost quality
+- 🏅 Climb the leaderboard and earn reputation
+- 🤝 Invite others through referral links
+- 🛡 Help moderate content as a trusted contributor
+
+Whether you're a native speaker, language learner, linguist, teacher, or developer, **Kazinduzi.org** is built for you. Join us in building a public, digital resource for Kirundi — one word at a time.
+
+> “Uwutazi ikirundi akirundararamwo.”
+
 ---
-**Tugumane**
 
-Ukagira akakubakiye canke intererano, ntiwitinye. Twandikire kuri [support@kazinduzi.org] canke udukurikirane ku mbuga hwaniro zacu aho tuja turashira bishasha.
+## ✨ Features
 
-**Guterera ku muzi w’umugambi**
-
-Igishitsi c’uyu mugambi cugururiwe bose. Ushobora kutwunganira mu guterera, gushikiriza amakenga n’ugusaba umuco. Mushobora guca hano mukaduterera agacumu k’ubumwe (https://github.com/Akanyaburunga/kazinduzi_backend).
-
-### 📜 License
-
-This project is open-sourced under the [MIT license](https://github.com/Akanyaburunga/kazinduzi_backend/blob/master/LICENSE.md).
+- 📚 Submit and search **Kirundi words** with rich meanings
+- 🔄 Each word can have **multiple meanings** by different users
+- 🗳 Voting system for meanings (StackOverflow-style)
+- 🏆 **Reputation system** to reward contributors
+- 🎯 **Referral program** with bonus points for verified invites
+- 🔍 Search with **autocomplete** and smart filtering
+- 🌐 API endpoints for all core features
+- 🛡 **Community moderation**: trusted users can suspend content and users
+- ⚡ Featured, Trending, and Recent words on homepage
+- 🌗 Dark mode toggle
+- 💬 Social sharing buttons for referral links
+- 📊 Leaderboard with time-based filters (Today, This Week, All Time)
 
 ---
+
+## 🏗 Tech Stack
+
+- **Backend**: Laravel 10.x (PHP 8+)
+- **Frontend**: Blade + Bootstrap 5
+- **Database**: MySQL / MariaDB
+- **Mobile Client**: Android (Java, RealmDB, WorkManager)
+- **Sync Mechanism**: Custom API sync for words, meanings, votes, and users
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Akanyaburunga/kazinduzi_backend.git
+cd kazinduzi_backend
+```
+
+### 2. Install Dependencies
+
+```bash
+composer install
+npm install && npm run dev
+```
+
+### 3. Environment Setup
+
+Create your `.env` file:
+
+```bash
+cp .env.example .env
+```
+
+Make sure you give values to these keys in `.env`:
+
+```env
+APP_NAME=
+DEFAULT_ADMIN_EMAIL=
+DEFAULT_ADMIN_NAME=
+DEFAULT_ADMIN_PASSWORD=
+TURNSTILE_SITEKEY=
+TURNSTILE_SECRET=
+MODERATION_REPUTATION_THRESHOLD=
+```
+
+Then run:
+
+```bash
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
+
+✅ This will create a default admin user and seed curated Kirundi words from a pre-compiled JSON file.
+
+---
+
+## 📱 Android Client
+
+A fully functional Android app (Java + Realm) is under development. It supports:
+- Offline viewing and searching
+- Background syncing of new and updated words/meanings
+- On This Day + mini-leaderboard on homepage
+- Dark mode and search filters
+
+> Source to be published separately soon.
+
+---
+
+## 🔒 Authentication
+
+- Email verification required in **production**
+- Optional 6-digit verification code (instead of links)
+- Users must be verified to vote, contribute, or invite
+
+---
+
+## 🧠 Reputation System
+
+Users gain reputation points by:
+- Adding new words and meanings
+- Getting upvotes
+- Inviting verified users via referral links
+
+Users with high reputation (configurable via `.env`) gain **moderation privileges**:
+- Ban users
+- Suspend/unsuspend content (words and meanings)
+
+All moderation actions are logged and reversible.
+
+---
+
+## 🤝 Contributing
+
+We welcome your help! Whether you're a:
+- Developer (Laravel, Android)
+- Translator or Kirundi language expert
+- Teacher, linguist, or cultural ambassador
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
+
+You can also join our community on **[Discord](https://discord.gg/7ZE6BQkW)** or **[WhatsApp](https://chat.whatsapp.com/EMbBX8nuVr42Tyovkcy3gP)**.
+
+---
+
+## 📚 Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for upcoming features and goals.
+
+Some planned features:
+- In-app notifications
+- Profile pages and badges
+- Cultural examples and word categories
+- Speech input for pronunciation
+- Word games and quizzes
+
+---
+
+## 🧪 Testing
+
+Run tests (if applicable):
+
+```bash
+php artisan test
+```
+
+---
+
+## 📄 License
+
+This project is open-sourced under the [MIT License](https://github.com/Akanyaburunga/kazinduzi_backend/blob/master/LICENSE.md).
+
+---
+
+## ❤️ Credits
+
+Kazinduzi is created and maintained by [Akanyaburunga](https://github.com/Akanyaburunga), with love for the Kirundi language and Burundian heritage.
+
+## 🌱 About Akanyaburunga
+
+**Akanyaburunga** is a nonprofit organization registered in **Burundi** with a mission to **revive, preserve, and promote Burundian cultural heritage**. We believe that language is a living vessel of identity, wisdom, and belonging — and that by protecting it, we reconnect with who we are.
+
+**Kazinduzi** is one of Akanyaburunga’s flagship initiatives, designed to:
+
+- 🌍 Preserve and celebrate the **Kirundi language**
+- 🧠 Make local knowledge **freely accessible**
+- 🤝 Empower communities to contribute and shape their own cultural resources
+- 💡 Harness technology for language revival and education
+
+> Through Kazinduzi, Akanyaburunga envisions a generation of Burundians who are not only fluent in Kirundi but also proud of the cultural legacy it carries.
+
+📢 Learn more about Akanyaburunga and our initiatives at  
+👉 [https://kazinduzi.org](https://kazinduzi.org) *(more resources coming soon)*.
+
+Contributors are welcome and celebrated!
+
+> “The death of a language is the death of the soul of a people.” — Ngũgĩ wa Thiong'o, Kenyan writer and language advocate
+> 
+> “If you talk to a man in a language he understands, that goes to his head. If you talk to him in his language, that goes to his heart.” — Nelson Mandela
