@@ -21,7 +21,7 @@ class WordsFromJsonSeeder extends Seeder
             return;
         }
 
-        $admin = User::where('email', 'admin@kazinduzi.org')->first();
+        $admin = User::where('email', env('DEFAULT_ADMIN_EMAIL'))->first();
         if (!$admin) {
             $this->command->error("Admin user not found. Please seed the admin user first.");
             return;

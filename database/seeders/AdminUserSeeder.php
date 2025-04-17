@@ -11,13 +11,25 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         // Create default admin user if it doesn't already exist
+        $email = env('DEFAULT_ADMIN_EMAIL');
+        $name = env('DEFAULT_ADMIN_NAME');
+        $password = env('DEFAULT_ADMIN_PASSWORD');
+
+        if (!$email || !$name || !$password) {
+            $this->command->error('Missing default admin credentials in .env file.');
+            return;
+        }
+
         User::firstOrCreate(
-            ['email' => 'admin@kazinduzi.org'],
+            ['email' => $email],
             [
-                'name' => 'Admin',
-                'password' => Hash::make(env('DEFAULT_ADMIN_PASSWORD', '12345678@@v')),
+                'name' => $name,
+                'password' => Hash::make($password),
                 'email_verified_at' => now(),
             ]
         );
+
+        $this->command->info('Default admin created or already exists.');
+
     }
 }
