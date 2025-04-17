@@ -13,6 +13,12 @@
         <meta property="og:type" content="website" />
         <meta property="og:image" content="@yield('meta-image', asset('default-image.jpg'))" />
 
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('images/icons/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('images/icons/favicon-32x32.png') }}" sizes="32x32" type="image/png">
+        <link rel="icon" href="{{ asset('images/icons/favicon.svg') }}" type="image/svg+xml">
+
+
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="@yield('title', 'Kazinduzi')" />
