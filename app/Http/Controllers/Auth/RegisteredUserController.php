@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class RegisteredUserController extends Controller
 {
@@ -74,7 +75,7 @@ class RegisteredUserController extends Controller
             $user->referred_by = $referrer->id;
             $user->save();
 
-            if (app()->environment('local', 'development') || $referredUser->hasVerifiedEmail()) {
+            if (app()->environment('local', 'development') || $user->hasVerifiedEmail()) {
                 Log::info('In development mode');
 
                 // Check if the user was referred by someone
