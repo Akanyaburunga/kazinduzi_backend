@@ -43,17 +43,20 @@
             <div class="mt-4">
                 <h4>Intererano mperuka gutanga</h4>
 
-                @if($user->words->isEmpty())
+                @if($contributions->isEmpty())
                     <p class="alert alert-info">Nta ntererano ndatanga.</p>
                 @else
                     <ul class="list-group">
-                        @foreach ($user->words as $word)
+                        @foreach ($contributions as $word)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="{{ route('words.show', $word) }}" class="fw-bold text-decoration-none">{{ $word->word }}</a>
                                 <small class="text-muted">{{ $word->created_at->format('M d, Y') }}</small>
                             </li>
                         @endforeach
                     </ul>
+                    <p>
+                        {{ $contributions->links() }}
+                    </p>
                 @endif
             </div>
         </div>

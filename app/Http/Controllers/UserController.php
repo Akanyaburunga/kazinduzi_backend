@@ -19,7 +19,8 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $contributions = $user->words()->latest()->paginate(10); // Fetch user's words
+        return view('users.show', compact('user', 'contributions'));
     }
     
 }
