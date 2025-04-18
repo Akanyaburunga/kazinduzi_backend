@@ -1,4 +1,4 @@
-# Kazinduzi
+# Kazinduzi: a modern, digital home for the Kirundi language
 
 **Kazinduzi** is a community-driven platform for documenting and preserving the **Kirundi** language — powered by open-source technology, cultural pride, and collective knowledge.
 
