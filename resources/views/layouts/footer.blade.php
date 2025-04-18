@@ -37,6 +37,11 @@
                 <i class="fab fa-github me-2"></i> GitHub
             </a>
         </li>
+        <li class="mb-2">
+            <a href="https://discord.gg/7ZE6BQkW" class="text-white text-decoration-none" target="_blank">
+                <i class="fab fa-discord me-2"></i> Discord
+            </a>
+        </li>
     </ul>
 </div>
 
