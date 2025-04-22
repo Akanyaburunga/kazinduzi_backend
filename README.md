@@ -199,7 +199,7 @@ Kazinduzi is created and maintained by [Akanyaburunga](https://github.com/Akanya
 > Through Kazinduzi, Akanyaburunga envisions a generation of Burundians who are not only fluent in Kirundi but also proud of the cultural legacy it carries.
 
 📢 Learn more about Akanyaburunga and our initiatives at  
-👉 [https://kazinduzi.org](https://kazinduzi.org) *(more resources coming soon)*.
+👉 [https://akanyaburunga.org](https://akanyaburunga.org) *(more resources coming soon)*.
 
 Contributors are welcome and celebrated!
 
