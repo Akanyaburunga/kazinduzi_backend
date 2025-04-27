@@ -10,7 +10,7 @@
 
         <form action="{{ route('words.index') }}" method="GET" class="mb-4">
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Search for a word..." value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="Rondera ijambo wipfuza..." value="{{ request('search') }}">
             <button type="submit" class="btn btn-primary">Rondera</button>
         </div>
         </form>
