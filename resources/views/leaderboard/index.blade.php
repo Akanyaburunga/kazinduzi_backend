@@ -37,11 +37,11 @@
         <table class="table table-hover table-bordered text-center">
             <thead class="table-dark">
                 <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Reputation</th>
-                    <th>Total Words</th>
-                    <th>Total Meanings</th>
+                    <th>Urugero</th>
+                    <th>Izina</th>
+                    <th>Amanota</th>
+                    <th>Amajambo amaze guterera yose</th>
+                    <th>Insiguro zose amaze guterera</th>
                 </tr>
             </thead>
             <tbody>
