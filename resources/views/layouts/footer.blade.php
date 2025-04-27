@@ -7,7 +7,7 @@
                 <p>Dufise intumbero yo gutsimbataza imico, imigenzo n'akaranga k'Uburundi hamwe n'ururimi rw'Ikirundi.</p>
             </div>
             <div class="col-md-4">
-                <h5>Links</h5>
+                <h5>Uduhora nkenerwa</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-white">Abo turi</a></li>
                     <li><a href="#" class="text-white">Amategeko ngenderwako</a></li>
