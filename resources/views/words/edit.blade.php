@@ -28,5 +28,18 @@
         <button type="submit" class="btn btn-primary">Ndêmeje ivyahinduwe</button>
         <a href="{{ route('dashboard') }}" class="btn btn-secondary">Ndisubiyeko</a>
     </form>
+
+    <script>
+        const easyMDE = new EasyMDE({
+            element: document.getElementById("meaning"),
+            spellChecker: false,
+            autosave: {
+                enabled: false,
+                delay: 1000,
+                uniqueId: "meaning"
+            },
+            placeholder: "Andika insiguro yawe hano..."
+        });
+    </script>
 </div>
 @endsection

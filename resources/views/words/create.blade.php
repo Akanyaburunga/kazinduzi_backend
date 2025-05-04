@@ -39,9 +39,22 @@
         </div>
         <div class="mb-3">
             <label for="meaning" class="form-label">Insiguro</label>
-            <textarea name="meaning" id="meaning" class="form-control" rows="4" required></textarea>
+            <textarea id="meaning" class="form-control" rows="4" name="meaning">{{ request('meaning') }}</textarea>
         </div>
         <button type="submit" class="btn btn-success">Ndaterereye 🤩</button>
     </form>
+
+    <script>
+        const easyMDE = new EasyMDE({
+            element: document.getElementById("meaning"),
+            spellChecker: false,
+            autosave: {
+                enabled: false,
+                delay: 1000,
+                uniqueId: "meaning"
+            },
+            placeholder: "Write your article in Markdown..."
+        });
+    </script>
 </div>
 @endsection
