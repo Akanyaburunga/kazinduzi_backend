@@ -29,7 +29,7 @@
                 @if ($canModerate)
                     <span class="text-sm text-gray-500">{{ $meaning->created_at->diffForHumans() }}</span>
                     <span class="text-sm text-gray-500">By <strong>{{ $meaning->user->name }}</strong></span>
-                    <p class="text-gray-800">{{ $meaning->meaning }}</p>
+                    <p class="text-gray-800">{!! $meaning->html !!}</p>
 
                     @if (!$meaning->is_suspended)
                         <form action="{{ route('moderation.suspend.meaning', $meaning->id) }}" method="POST" onsubmit="return confirm('Suspend this meaning?');">
@@ -47,7 +47,7 @@
                     @if (!$meaning->is_suspended)
                         <span class="text-sm text-gray-500">{{ $meaning->created_at->diffForHumans() }}</span>
                         <span class="text-sm text-gray-500">By <strong>{{ $meaning->user->name }}</strong></span>
-                        <p class="text-gray-800">{{ $meaning->meaning }}</p>
+                        <p class="text-gray-800">{!! $meaning->html !!}</p>
                     @else
                         <span class="badge bg-danger">This meaning is suspended.</span>
                     @endif
@@ -86,11 +86,24 @@
         <div class="mt-6">
             <form action="{{ route('meanings.store', $word) }}" method="POST" class="space-y-3">
                 @csrf
-                <textarea name="meaning" class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300" rows="3" placeholder="Add your meaning..."></textarea>
+                <textarea name="meaning" id="meaning" class="w-full p-3 border rounded-lg focus:ring focus:ring-blue-300" rows="3" placeholder="Add your meaning..."></textarea>
                 <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
                     Rungika insiguro
                 </button>
             </form>
+
+            <script>
+                const easyMDE = new EasyMDE({
+                    element: document.getElementById("meaning"),
+                    spellChecker: false,
+                    autosave: {
+                        enabled: false,
+                        delay: 1000,
+                        uniqueId: "meaning"
+                    },
+                    placeholder: "Write your article in Markdown..."
+                });
+            </script>
         </div>
     @endauth
 </div>

@@ -7,6 +7,11 @@ use App\Models\Word;
 use App\Models\Meaning;
 use App\Policies\WordPolicy;
 use Cache;
+use Illuminate\Support\Facades\Log;
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use Throwable;
 
 class WordController extends Controller
 {
@@ -40,8 +45,8 @@ class WordController extends Controller
     {
         $validated = $request->validate([
             'word' => 'required|string|max:255|unique:words,word',
-            'type' => 'required|string|max:50',
-            'meaning' => 'required|string|max:1000',
+            'type' => 'required|string|max:100',
+            'meaning' => 'required|string|max:10000',
         ], [
             'word.unique' => 'This word has already been added. Please consider adding a new meaning instead.',
         ]);
@@ -49,32 +54,76 @@ class WordController extends Controller
         $existingWord = Word::whereRaw('LOWER(word) = ?', [strtolower($validated['word'])])->first();
 
         if ($existingWord) {
-            // Redirect to the page to add a meaning for this word
+            Log::info("Duplicate word attempted: {$validated['word']}");
             return redirect()->route('words.show', $existingWord->id)
                 ->with('info', 'This word already exists. You can add your meaning here.');
         }
 
-        $word = Word::create([
-            'word' => $validated['word'],
-            'type' => $validated['type'],
-            'user_id' => auth()->id(),
-        ]);
+        try {
+            $word = Word::create([
+                'word' => $validated['word'],
+                'type' => $validated['type'],
+                'user_id' => auth()->id(),
+            ]);
 
-        $word->meanings()->create([
-            'meaning' => $validated['meaning'],
-            'user_id' => auth()->id(),
-        ]);
+            $converter = new CommonMarkConverter();
+            $html = $converter->convertToHtml($validated['meaning']);
 
-        auth()->user()->updateReputation(10, 'Submitted a new word', $word); // Add 10 points for submitting a word
+            $word->meanings()->create([
+                'meaning' => $validated['meaning'],
+                'user_id' => auth()->id(),
+            ]);
 
-        // Clear the top contributors cache
-        Cache::forget('top_contributors');
+            auth()->user()->updateReputation(10, 'Submitted a new word', $word);
 
-        return redirect()->route('words.index')->with('success', 'Word and meaning added successfully!');
+            Cache::forget('top_contributors');
+
+            Log::info("Word created successfully", [
+                'word_id' => $word->id,
+                'user_id' => auth()->id(),
+                'word' => $validated['word']
+            ]);
+
+            return redirect()->route('words.index')->with('success', 'Word and meaning added successfully!');
+        } catch (Throwable $e) {
+            Log::error("Failed to save word", [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'user_id' => auth()->id(),
+                'input' => $validated,
+            ]);
+
+            return back()->withErrors(['error' => 'An error occurred while saving the word. Please try again.']);
+        }
     }
 
     public function show(Word $word)
     {
+        $word->load('meanings');
+
+        $environment = new Environment([
+            'commonmark' => [
+                'enable_em' => true,
+                'enable_strong' => true,
+                'use_asterisk' => true,
+                'use_underscore' => true,
+                'unordered_list_markers' => ['-', '*', '+'],
+                'enable_html_input' => true,
+                'allow_unsafe_links' => false,
+                'renderer' => [
+                    'soft_break' => "<br>\n",  // ✅ Render single newlines as <br>
+                ],
+            ],
+        ]);
+        
+        $environment->addExtension(new CommonMarkCoreExtension());
+        
+        $converter = new CommonMarkConverter([], $environment);
+
+        foreach ($word->meanings as $meaning) {
+            $meaning->html = $converter->convertToHtml($meaning->meaning);
+        }
+
         return view('words.show', compact('word'));
     }
 
@@ -101,8 +150,23 @@ class WordController extends Controller
 
         $word->update([
             'word' => $request->word,
-            'meaning' => $request->meaning,
         ]);
+
+        // Update the meaning for the authenticated user
+        $userMeaning = Meaning::where('word_id', $word->id)
+            ->where('user_id', auth()->id())
+            ->first();
+        if ($userMeaning) {
+            $userMeaning->update([
+                'meaning' => $request->meaning,
+            ]);
+        } else {
+            // If the user doesn't have a meaning, create a new one
+            $word->meanings()->create([
+                'meaning' => $request->meaning,
+                'user_id' => auth()->id(),
+            ]);
+        }
 
         return redirect()->route('dashboard')->with('success', 'Word updated successfully!');
     }
