@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Search Results')
+@section('title', 'Inyishu: ' . $query)
+@section('description', 'Inyishu: ' . $query)
 
 @section('content')
 <div class="container">
