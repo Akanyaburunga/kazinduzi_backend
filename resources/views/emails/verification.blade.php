@@ -86,8 +86,8 @@
 
         <!-- Content -->
         <div class="content">
-            <p>Hello,</p>
-            <p>Urakoze kwiyandikisha! Kugira urangize kwiyandikisha, emeza email yawe ukoresheje ikigiharuro kabanga:</p>
+            <p>Amahoro,</p>
+            <p>Urakoze kwiyandikisha! Kugira urangize kwiyandikisha, emeza imeyile yawe ukoresheje ikigiharuro kabanga:</p>
             <p class="code">{{ $code }}</p>
             <p>Iki giharuro gita igihe inyuma y' <strong>iminota 10</strong>.</p>
             <p>Si we wasavye kwiyandikisha ?  Ihoze ubu butumwa canke usuzume ko ata muntu yoba ariko agerageza gukoresha email yawe.</p>
