@@ -14,10 +14,10 @@
                          class="rounded-circle mb-3" alt="User Avatar">
                     
                     <h2 class="mb-1">{{ $user->name }}</h2>
-                    <p class="text-muted">Ndi umunyamuryango kuva {{ $user->created_at->format('F Y') }}</p>
+                    <p class="text-muted">🥰Ndi umunyamuryango kuva {{ $user->created_at->format('F Y') }}</p>
 
                     <!-- Reputation Badge -->
-                    <span class="badge bg-success fs-5">Amanota afise: {{ $user->reputation }}</span>
+                    <span class="badge bg-success fs-5">Amanota mfise 🤩: {{ $user->reputation }}</span>
 
                     <hr>
 
@@ -25,15 +25,15 @@
                     <div class="row">
                         <div class="col">
                             <h5>{{ $user->words->count() }}</h5>
-                            <p class="text-muted">Ayo maze guterera</p>
+                            <p class="text-muted">Ayo maze guterera💪🏽</p>
                         </div>
                         <div class="col">
                             <h5>{{ $user->meanings->count() }}</h5>
-                            <p class="text-muted">Insiguro maze gutanga</p>
+                            <p class="text-muted">Insiguro maze gutanga💪🏽</p>
                         </div>
                         <div class="col">
                             <h5>{{ $user->received_votes_count ?? 0 }}</h5>
-                            <p class="text-muted">Amajwi maze kuronka</p>
+                            <p class="text-muted">😎 Amajwi maze kuronka</p>
                         </div>
                     </div>
                 </div>
@@ -41,10 +41,10 @@
 
             <!-- Recent Contributions -->
             <div class="mt-4">
-                <h4>Intererano mperuka gutanga</h4>
+                <h4>Intererano mperuka gutanga💪🏽</h4>
 
                 @if($contributions->isEmpty())
-                    <p class="alert alert-info">Nta ntererano ndatanga.</p>
+                    <p class="alert alert-info">Nta ntererano ndatanga 😞.</p>
                 @else
                     <ul class="list-group">
                         @foreach ($contributions as $word)
