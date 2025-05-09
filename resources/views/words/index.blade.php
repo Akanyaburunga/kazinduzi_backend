@@ -31,7 +31,7 @@
             <div class="card my-3">
                 <div class="card-body">
                 <a href="{{ route('words.show', $word) }}">{{ $word->word }}</a>
-                <span class="badge bg-secondary">{{ $word->meanings->count() }} meanings</span>
+                <span class="badge bg-secondary">{{ $word->insiguro->count() }} meanings</span>
 
                 </div>
             </div>
