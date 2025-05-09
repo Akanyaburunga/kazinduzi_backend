@@ -58,8 +58,8 @@
                             </a>
                         </td>
                         <td><strong class="text-success">+{{ $user->total_reputation }}</strong></td>
-                        <td>{{ $user->total_words }}</td>
-                        <td>{{ $user->total_meanings }}</td>
+                        <td>{{ $user->amajambo_yose }}</td>
+                        <td>{{ $user->insiguro_zose }}</td>
                     </tr>
                 @empty
                     <tr>
