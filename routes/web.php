@@ -10,6 +10,7 @@ use App\Http\Controllers\MeaningController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ModerationController;
+use App\Http\Controllers\Admin\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +72,16 @@ Route::get('/search', [WordController::class, 'search'])->name('words.search');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/leaderboard/{filter?}', [LeaderboardController::class, 'index'])->name('leaderboard');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
+// Admin panel host (Vue SPA). Serves the same shell for any /admin route.
+Route::prefix('admin/api')->middleware('admin')->group(function () {
+    Route::get('/session', [SessionController::class, 'show']);
+});
+
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/{vueRoute?}', function () {
+        return view('admin.app');
+    })->where('vueRoute', '.*')->name('admin.index');
+});
 
 require __DIR__.'/auth.php';

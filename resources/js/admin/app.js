@@ -1,0 +1,13 @@
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import router from './router.js';
+import App from './App.vue';
+
+import './../css/admin.css';
+
+const app = createApp(App);
+
+app.use(createPinia());
+app.use(router);
+
+app.mount('#admin-app');
