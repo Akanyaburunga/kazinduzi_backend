@@ -55,6 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Meaning::class);
     }
 
+    public function riddleAttempts()
+    {
+        return $this->hasMany(RiddleAttempt::class);
+    }
+
     public function updateReputation(int $points, String $reason, $related)
     {
         $this->reputation += $points;

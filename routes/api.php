@@ -6,6 +6,10 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\WordController;
 use App\Http\Controllers\Api\LeaderboardController;
+use App\Http\Controllers\Api\Riddle\GameController;
+use App\Http\Controllers\Api\Riddle\AnswerController;
+use App\Http\Controllers\Api\Riddle\RiddleController;
+use App\Http\Controllers\Api\Riddle\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +51,30 @@ Route::prefix('users')->middleware('auth:sanctum', 'verified')->group(function (
 Route::get('/words', [WordController::class, 'index']);
 // ✅ Get top 10 contributors
 Route::get('leaderboard', [LeaderboardController::class, 'index']);
+
+/**
+ * 🧩 Riddle Game
+ */
+Route::prefix('riddles')->group(function () {
+    // Game-facing routes (authenticated + verified)
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::get('/categories', [CategoryController::class, 'index']);      // List categories (curator view)
+        Route::get('/', [GameController::class, 'index']);                    // List riddles (no answers)
+        Route::get('/daily', [GameController::class, 'daily']);               // Riddle of the day
+        Route::get('/{riddle}', [GameController::class, 'show']);             // Single riddle (no answer)
+        Route::post('/{riddle}/answer', [AnswerController::class, 'store']);  // Submit an answer
+    });
+
+    // Curator routes (reputation-gated)
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::post('/categories', [CategoryController::class, 'store']);
+        Route::put('/categories/{category}', [CategoryController::class, 'update']);
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+
+        Route::post('/', [RiddleController::class, 'store']);
+        Route::put('/{riddle}', [RiddleController::class, 'update']);
+        Route::delete('/{riddle}', [RiddleController::class, 'destroy']);
+        Route::post('/{riddle}/suspend', [RiddleController::class, 'suspend']);
+        Route::post('/{riddle}/unsuspend', [RiddleController::class, 'unsuspend']);
+    });
+});

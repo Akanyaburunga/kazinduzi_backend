@@ -27,5 +27,7 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TURNSTILE_SECRET" value=""/>
+        <env name="MODERATION_REPUTATION_THRESHOLD" value="10"/>
+        <env name="RIDDLE_SOLVE_REPUTATION" value="5"/>
     </php>
 </phpunit>
