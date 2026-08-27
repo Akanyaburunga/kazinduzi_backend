@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Riddle;
 use App\Http\Controllers\Controller;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
+use App\Support\Streaks;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -81,9 +82,18 @@ class GameController extends Controller
         $riddle = $pool[$index];
         $riddle->load('category:id,name,slug');
 
+        $solvedToday = in_array($riddle->id, $solvedIds, true);
+        $streaks = Streaks::compute($user);
+
         return response()->json([
             'success' => true,
-            'data' => $this->gamePayload($riddle, in_array($riddle->id, $solvedIds, true)),
+            'data' => [
+                'streak' => [
+                    'current' => $streaks['current'],
+                    'longest' => $streaks['longest'],
+                ],
+                'daily' => $this->gamePayload($riddle, $solvedToday),
+            ],
         ]);
     }
 

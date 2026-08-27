@@ -48,6 +48,10 @@ class AnswerController extends Controller
             $rewarded = true;
         }
 
+        if ($isCorrect) {
+            \App\Support\Streaks::recompute($user);
+        }
+
         return response()->json([
             'correct' => $isCorrect,
             'rewarded' => $rewarded,

@@ -44,6 +44,10 @@ class MeController extends Controller
                     'reputation' => (int) $user->reputation,
                     'level' => Levels::currentLevel((int) $user->reputation),
                 ],
+                'streak' => [
+                    'current' => (int) $user->current_streak,
+                    'longest' => (int) $user->longest_streak,
+                ],
                 'stats' => $stats,
             ],
         ]);
