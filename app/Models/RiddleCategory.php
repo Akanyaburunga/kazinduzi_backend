@@ -13,6 +13,6 @@ class RiddleCategory extends Model
 
     public function riddles()
     {
-        return $this->hasMany(Riddle::class);
+        return $this->hasMany(Riddle::class, 'category_id');
     }
 }
