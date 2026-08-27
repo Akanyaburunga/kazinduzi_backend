@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
     columns: { type: Array, default: () => [] },
     items: { type: Array, default: () => [] },
     idField: { type: String, default: 'id' },
@@ -9,9 +11,29 @@ defineProps({
     sortField: { type: String, default: null },
     sortDir: { type: String, default: 'asc' },
     meta: { type: Object, default: null },
+    selectable: { type: Boolean, default: false },
+    selected: { type: Array, default: () => [] },
 });
 
-defineEmits(['update:search', 'sort', 'page']);
+const emit = defineEmits(['update:search', 'sort', 'page', 'update:selected']);
+
+const allSelected = computed(() =>
+    rows.value.length > 0 &&
+    rows.value.every((row) => row != null && props.selected.includes(row[props.idField]))
+);
+
+const rows = computed(() => props.items.filter((row) => row != null));
+
+function toggleRow(row) {
+    const id = row[props.idField];
+    if (props.selected.includes(id)) {
+        emit('update:selected', props.selected.filter((v) => v !== id));
+    } else {
+        emit('update:selected', [...props.selected, id]);
+    }
+}
+
+const extraCols = computed(() => (props.selectable ? 1 : 0) + 1);
 </script>
 
 <template>
@@ -38,6 +60,14 @@ defineEmits(['update:search', 'sort', 'page']);
             <table class="min-w-full divide-y divide-gray-200 text-sm">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th v-if="selectable" class="w-10 px-4 py-3">
+                            <input
+                                type="checkbox"
+                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                :checked="allSelected"
+                                @change="$emit('update:selected', $event.target.checked ? items.map((row) => row[idField]) : [])"
+                            />
+                        </th>
                         <th
                             v-for="column in columns"
                             :key="column.key"
@@ -60,12 +90,20 @@ defineEmits(['update:search', 'sort', 'page']);
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     <tr v-if="loading">
-                        <td :colspan="columns.length + 1" class="px-4 py-8 text-center text-gray-400">Loading...</td>
+                        <td :colspan="columns.length + extraCols" class="px-4 py-8 text-center text-gray-400">Loading...</td>
                     </tr>
-                    <tr v-else-if="items.length === 0">
-                        <td :colspan="columns.length + 1" class="px-4 py-8 text-center text-gray-400">No results found.</td>
+                    <tr v-else-if="rows.length === 0">
+                        <td :colspan="columns.length + extraCols" class="px-4 py-8 text-center text-gray-400">No results found.</td>
                     </tr>
-                    <tr v-for="row in items" v-else :key="row[idField]" class="hover:bg-gray-50">
+                    <tr v-for="(row, index) in rows" v-else :key="row?.[idField] ?? index" class="hover:bg-gray-50">
+                        <td v-if="selectable" class="px-4 py-3">
+                            <input
+                                type="checkbox"
+                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                :checked="selected.includes(row[idField])"
+                                @change="toggleRow(row)"
+                            />
+                        </td>
                         <td
                             v-for="column in columns"
                             :key="column.key"

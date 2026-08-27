@@ -80,7 +80,7 @@ class RiddleCuratorTest extends TestCase
 
         $this->deleteJson("/api/riddles/{$riddle->id}")->assertOk();
 
-        $this->assertDatabaseMissing('riddles', ['id' => $riddle->id]);
+        $this->assertSoftDeleted('riddles', ['id' => $riddle->id]);
     }
 
     public function test_curator_can_suspend_and_unsuspend_a_riddle(): void

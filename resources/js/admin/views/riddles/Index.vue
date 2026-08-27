@@ -12,7 +12,7 @@ const toast = useToastStore();
 const store = useRiddlesStore();
 const categoriesStore = useCategoriesStore();
 
-const { items, meta, loading, search, sortField, sortDir } = storeToRefs(store);
+const { items, meta, loading, search, sortField, sortDir, filters } = storeToRefs(store);
 const { items: categories } = storeToRefs(categoriesStore);
 
 const showForm = ref(false);
@@ -22,6 +22,14 @@ const duplicate = ref(null);
 const pendingDelete = ref(null);
 const pendingSuspend = ref(null);
 const pendingUnsuspend = ref(null);
+const pendingRestore = ref(null);
+const selected = ref([]);
+const pendingBulkDelete = ref(false);
+const pendingBulkSuspend = ref(false);
+const pendingBulkUnsuspend = ref(false);
+const pendingCategoryChange = ref(false);
+const bulkCategoryId = ref('');
+const bulkBusy = ref(false);
 const actionBusy = ref(false);
 
 const columns = [
@@ -30,11 +38,81 @@ const columns = [
     { key: 'difficulty', label: 'Difficulty', sortable: true },
     { key: 'category', label: 'Category' },
     { key: 'source', label: 'Source' },
+    { key: 'suspended_reason', label: 'Reason' },
     { key: 'status', label: 'Status' },
     { key: 'attempts_count', label: 'Attempts', sortable: true },
     { key: 'solved_count', label: 'Solved', sortable: true },
     { key: 'success_rate', label: 'Success %' },
 ];
+
+const selectedCount = computed(() => selected.value.length);
+
+const filterOptions = [
+    { value: '', label: 'All statuses' },
+    { value: 'active', label: 'Active only' },
+    { value: 'suspended', label: 'Suspended only' },
+];
+
+const trashedOptions = [
+    { value: '', label: 'Trash: Off' },
+    { value: '1', label: 'Trash: On' },
+];
+
+const deleteMessage = computed(() =>
+    `Delete the riddle: "${pendingDelete.value?.question ?? ''}"?`
+);
+
+const bulkDeleteMessage = computed(() =>
+    `Delete ${selectedCount.value} selected riddle(s)? This can be restored later from trash.`
+);
+
+const restoreMessage = computed(() =>
+    `Restore the riddle: "${pendingRestore.value?.question ?? ''}"?`
+);
+
+function setFilter(key, value) {
+    selected.value = [];
+    store.setFilter(key, value);
+}
+
+function clearFilters() {
+    selected.value = [];
+    store.resetFilters();
+}
+
+async function confirmRestore() {
+    actionBusy.value = true;
+    try {
+        await store.custom(`/admin/api/riddles/${pendingRestore.value.id}/restore`, 'Riddle restored.');
+        await store.setFilter('trashed', filters.value.trashed || '1');
+    } catch {
+        // handled
+    } finally {
+        actionBusy.value = false;
+        pendingRestore.value = null;
+    }
+}
+
+async function runBulk(action) {
+    bulkBusy.value = true;
+    const payload = { ids: selected.value, action };
+    if (action === 'change_category') {
+        payload.category_id = Number(bulkCategoryId.value);
+    }
+    try {
+        await store.bulkAction(payload);
+        selected.value = [];
+    } catch {
+        // handled
+    } finally {
+        bulkBusy.value = false;
+        pendingBulkDelete.value = false;
+        pendingBulkSuspend.value = false;
+        pendingBulkUnsuspend.value = false;
+        pendingCategoryChange.value = false;
+        bulkCategoryId.value = '';
+    }
+}
 
 function openCreate() {
     editing.value = null;
@@ -104,10 +182,6 @@ async function confirmUnsuspend() {
     }
 }
 
-const deleteMessage = computed(() =>
-    `Delete the riddle: "${pendingDelete.value?.question ?? ''}"? This cannot be undone.`
-);
-
 onMounted(async () => {
     await Promise.all([store.fetch(), categoriesStore.fetch()]);
 });
@@ -141,12 +215,61 @@ onMounted(async () => {
             :sort-field="sortField"
             :sort-dir="sortDir"
             id-field="id"
+            :selectable="true"
+            :selected="selected"
+            @update:selected="(value) => (selected = value)"
             @update:search="store.setSearch"
             @sort="store.sort"
             @page="store.setPage"
         >
+            <template #toolbar>
+                <div class="flex flex-wrap items-center gap-2">
+                    <select
+                        :value="filters.status"
+                        class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="setFilter('status', $event.target.value)"
+                    >
+                        <option v-for="opt in filterOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+                    </select>
+                    <select
+                        :value="filters.category_id"
+                        class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="setFilter('category_id', $event.target.value)"
+                    >
+                        <option value="">All categories</option>
+                        <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+                    </select>
+                    <select
+                        :value="filters.difficulty"
+                        class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="setFilter('difficulty', $event.target.value)"
+                    >
+                        <option value="">All difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <select
+                        :value="filters.trashed"
+                        class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="setFilter('trashed', $event.target.value)"
+                    >
+                        <option v-for="opt in trashedOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+                    </select>
+                    <button
+                        v-if="Object.values(filters).some((v) => v !== '' && v !== undefined)"
+                        class="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
+                        @click="clearFilters"
+                    >
+                        Clear
+                    </button>
+                </div>
+            </template>
             <template #cell-category="{ row }">
                 {{ row.category?.name ?? '—' }}
+            </template>
+            <template #cell-suspended_reason="{ row }">
+                <span class="text-xs text-gray-500">{{ row.suspended_reason ?? '—' }}</span>
             </template>
             <template #cell-difficulty="{ row }">
                 <span
@@ -175,17 +298,63 @@ onMounted(async () => {
                 <div class="flex justify-end gap-2">
                     <button class="text-sm text-indigo-600 hover:underline" @click="openEdit(row)">Edit</button>
                     <button
-                        v-if="row.is_suspended"
-                        class="text-sm text-green-600 hover:underline"
-                        @click="pendingUnsuspend = row"
+                        v-if="row.deleted_at"
+                        class="text-sm text-teal-600 hover:underline"
+                        @click="pendingRestore = row"
                     >
-                        Unsuspend
+                        Restore
                     </button>
-                    <button v-else class="text-sm text-amber-600 hover:underline" @click="pendingSuspend = row">Suspend</button>
-                    <button class="text-sm text-red-600 hover:underline" @click="pendingDelete = row">Delete</button>
+                    <template v-else>
+                        <button
+                            v-if="row.is_suspended"
+                            class="text-sm text-green-600 hover:underline"
+                            @click="pendingUnsuspend = row"
+                        >
+                            Unsuspend
+                        </button>
+                        <button v-else class="text-sm text-amber-600 hover:underline" @click="pendingSuspend = row">Suspend</button>
+                        <button class="text-sm text-red-600 hover:underline" @click="pendingDelete = row">Delete</button>
+                    </template>
                 </div>
             </template>
         </DataTable>
+
+        <div v-if="selectedCount > 0" class="flex flex-wrap items-center gap-3 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3">
+            <span class="text-sm font-medium text-indigo-700">{{ selectedCount }} selected</span>
+            <button
+                class="rounded-lg bg-amber-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-amber-700"
+                @click="pendingBulkSuspend = true"
+            >
+                Suspend
+            </button>
+            <button
+                class="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-green-700"
+                @click="pendingBulkUnsuspend = true"
+            >
+                Unsuspend
+            </button>
+            <select
+                v-model="bulkCategoryId"
+                class="rounded-lg border-gray-300 py-1.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            >
+                <option value="">Move to category...</option>
+                <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+            </select>
+            <button
+                class="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-indigo-700"
+                :disabled="!bulkCategoryId"
+                @click="pendingCategoryChange = true"
+            >
+                Move
+            </button>
+            <button
+                class="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-red-700"
+                @click="pendingBulkDelete = true"
+            >
+                Delete
+            </button>
+            <button class="ml-auto text-sm text-gray-500 hover:underline" @click="selected = []">Clear</button>
+        </div>
 
         <RiddleForm
             :open="showForm"
@@ -225,6 +394,56 @@ onMounted(async () => {
             :busy="actionBusy"
             @confirm="confirmUnsuspend"
             @cancel="pendingUnsuspend = null"
+        />
+
+        <ConfirmDialog
+            :open="pendingRestore !== null"
+            title="Restore riddle?"
+            :message="restoreMessage"
+            confirm-label="Restore"
+            :busy="actionBusy"
+            @confirm="confirmRestore"
+            @cancel="pendingRestore = null"
+        />
+
+        <ConfirmDialog
+            :open="pendingBulkDelete"
+            title="Delete selected riddles?"
+            :message="bulkDeleteMessage"
+            confirm-label="Delete"
+            :busy="bulkBusy"
+            @confirm="runBulk('delete')"
+            @cancel="pendingBulkDelete = false"
+        />
+
+        <ConfirmDialog
+            :open="pendingBulkSuspend"
+            title="Suspend selected riddles?"
+            :message="`Suspend ${selectedCount} selected riddle(s)? They will be hidden from players.`"
+            confirm-label="Suspend"
+            :busy="bulkBusy"
+            @confirm="runBulk('suspend')"
+            @cancel="pendingBulkSuspend = false"
+        />
+
+        <ConfirmDialog
+            :open="pendingBulkUnsuspend"
+            title="Unsuspend selected riddles?"
+            :message="`Unsuspend ${selectedCount} selected riddle(s)?`"
+            confirm-label="Unsuspend"
+            :busy="bulkBusy"
+            @confirm="runBulk('unsuspend')"
+            @cancel="pendingBulkUnsuspend = false"
+        />
+
+        <ConfirmDialog
+            :open="pendingCategoryChange"
+            title="Move riddles to category?"
+            :message="`Move ${selectedCount} selected riddle(s) to the chosen category?`"
+            confirm-label="Move"
+            :busy="bulkBusy"
+            @confirm="runBulk('change_category')"
+            @cancel="pendingCategoryChange = false"
         />
     </div>
 </template>

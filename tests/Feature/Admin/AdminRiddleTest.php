@@ -93,7 +93,7 @@ class AdminRiddleTest extends TestCase
         $this->assertDatabaseHas('riddles', ['id' => $riddleId, 'question' => 'New question', 'answer' => 'new answer']);
 
         $this->deleteJson("/admin/api/riddles/{$riddleId}")->assertOk();
-        $this->assertDatabaseMissing('riddles', ['id' => $riddleId]);
+        $this->assertSoftDeleted('riddles', ['id' => $riddleId]);
     }
 
     public function test_admin_can_suspend_and_unsuspend_riddle(): void
@@ -285,5 +285,67 @@ class AdminRiddleTest extends TestCase
 
         $this->assertSame(0, $row['attempts_count']);
         $this->assertSame(0, $row['success_rate']);
+    }
+
+    public function test_index_filters_by_status_category_and_difficulty(): void
+    {
+        $this->actingAs($this->admin());
+        $catA = $this->category();
+        $catB = $this->category();
+
+        Riddle::factory()->create(['category_id' => $catA->id, 'difficulty' => 'easy', 'is_suspended' => false]);
+        Riddle::factory()->create(['category_id' => $catA->id, 'difficulty' => 'hard', 'is_suspended' => true]);
+        Riddle::factory()->create(['category_id' => $catB->id, 'difficulty' => 'easy', 'is_suspended' => false]);
+
+        $suspended = $this->getJson('/admin/api/riddles?status=suspended')->json('data.data');
+        $this->assertCount(1, $suspended);
+        $this->assertTrue($suspended[0]['is_suspended']);
+
+        $byCat = $this->getJson("/admin/api/riddles?category_id={$catA->id}")->json('data.data');
+        $this->assertCount(2, $byCat);
+
+        $byDifficulty = $this->getJson('/admin/api/riddles?difficulty=hard')->json('data.data');
+        $this->assertCount(1, $byDifficulty);
+        $this->assertSame('hard', $byDifficulty[0]['difficulty']);
+    }
+
+    public function test_trashed_riddles_hidden_and_restorable(): void
+    {
+        $this->actingAs($this->admin());
+        $riddle = Riddle::factory()->create(['category_id' => $this->category()->id]);
+        $riddle->delete();
+
+        $defaultRows = $this->getJson('/admin/api/riddles')->json('data.data');
+        $this->assertEmpty(collect($defaultRows)->where('id', $riddle->id));
+
+        $trashed = $this->getJson('/admin/api/riddles?trashed=1')->json('data.data');
+        $this->assertCount(1, $trashed);
+        $this->assertSame($riddle->id, $trashed[0]['id']);
+
+        $this->postJson("/admin/api/riddles/{$riddle->id}/restore")->assertOk();
+        $this->assertDatabaseHas('riddles', ['id' => $riddle->id, 'deleted_at' => null]);
+    }
+
+    public function test_suspend_stores_reason_and_unsuspend_clears_it(): void
+    {
+        $this->actingAs($this->admin());
+        $riddle = Riddle::factory()->create(['category_id' => $this->category()->id]);
+
+        $this->postJson("/admin/api/riddles/{$riddle->id}/suspend", [
+            'reason' => 'Duplicate content',
+        ])->assertOk();
+
+        $this->assertDatabaseHas('riddles', [
+            'id' => $riddle->id,
+            'is_suspended' => true,
+            'suspended_reason' => 'Duplicate content',
+        ]);
+
+        $this->postJson("/admin/api/riddles/{$riddle->id}/unsuspend")->assertOk();
+        $this->assertDatabaseHas('riddles', [
+            'id' => $riddle->id,
+            'is_suspended' => false,
+            'suspended_reason' => null,
+        ]);
     }
 }

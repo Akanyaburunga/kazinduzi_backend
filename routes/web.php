@@ -13,6 +13,7 @@ use App\Http\Controllers\ModerationController;
 use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RiddleController;
+use App\Http\Controllers\Admin\RiddleBulkController;
 use App\Http\Controllers\Admin\RiddleCategoryController;
 
 /*
@@ -88,9 +89,11 @@ Route::prefix('admin/api')->group(function () {
 
     Route::get('/riddles', [RiddleController::class, 'index']);
     Route::post('/riddles', [RiddleController::class, 'store']);
+    Route::post('/riddles/bulk', [RiddleBulkController::class, 'store']);
     Route::get('/riddles/{riddle}', [RiddleController::class, 'show']);
     Route::put('/riddles/{riddle}', [RiddleController::class, 'update']);
     Route::delete('/riddles/{riddle}', [RiddleController::class, 'destroy']);
+    Route::post('/riddles/{id}/restore', [RiddleController::class, 'restore']);
     Route::post('/riddles/{riddle}/suspend', [RiddleController::class, 'suspend']);
     Route::post('/riddles/{riddle}/unsuspend', [RiddleController::class, 'unsuspend']);
 

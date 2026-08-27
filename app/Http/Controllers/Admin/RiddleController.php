@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreRiddleRequest;
 use App\Http\Requests\Admin\UpdateRiddleRequest;
 use App\Models\Riddle;
 use App\Support\RiddleHelper;
+use Illuminate\Http\Request;
 
 class RiddleController extends Controller
 {
@@ -20,6 +21,10 @@ class RiddleController extends Controller
             ->withCount('attempts')
             ->withCount(['attempts as solved_count' => fn ($q) => $q->where('is_correct', true)]);
 
+        if (request('trashed')) {
+            $query->onlyTrashed();
+        }
+
         if ($search = request('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('question', 'like', "%{$search}%")
@@ -27,9 +32,21 @@ class RiddleController extends Controller
             });
         }
 
+        if (($status = request('status')) && in_array($status, ['active', 'suspended'], true)) {
+            $query->where('is_suspended', $status === 'suspended');
+        }
+
+        if ($categoryId = request('category_id')) {
+            $query->where('category_id', $categoryId);
+        }
+
+        if (($difficulty = request('difficulty')) && in_array($difficulty, Riddle::DIFFICULTIES, true)) {
+            $query->where('difficulty', $difficulty);
+        }
+
         $sort = request('sort');
         $dir = request('dir') === 'desc' ? 'desc' : 'asc';
-        if (in_array($sort, ['id', 'question', 'answer', 'is_suspended', 'created_at', 'attempts_count', 'solved_count'], true)) {
+        if (in_array($sort, ['id', 'question', 'answer', 'difficulty', 'is_suspended', 'created_at', 'attempts_count', 'solved_count'], true)) {
             $query->orderBy($sort, $dir);
         } else {
             $query->latest();
@@ -106,18 +123,35 @@ class RiddleController extends Controller
         return response()->json(['success' => true, 'message' => 'Riddle deleted.']);
     }
 
-    public function suspend(Riddle $riddle)
+    public function suspend(Request $request, Riddle $riddle)
     {
-        $riddle->update(['is_suspended' => true]);
+        $riddle->update([
+            'is_suspended' => true,
+            'suspended_reason' => $request->input('reason'),
+        ]);
 
         return response()->json(['success' => true, 'message' => 'Riddle suspended.']);
     }
 
     public function unsuspend(Riddle $riddle)
     {
-        $riddle->update(['is_suspended' => false]);
+        $riddle->update([
+            'is_suspended' => false,
+            'suspended_reason' => null,
+        ]);
 
         return response()->json(['success' => true, 'message' => 'Riddle unsuspended.']);
+    }
+
+    /**
+     * Restore a soft-deleted riddle.
+     */
+    public function restore(int $id)
+    {
+        $riddle = Riddle::onlyTrashed()->findOrFail($id);
+        $riddle->restore();
+
+        return response()->json(['success' => true, 'message' => 'Riddle restored.']);
     }
 
     /**

@@ -30,25 +30,33 @@ export function useCrudStore(name, endpoint, options = {}) {
             sortDir: initialSort?.dir ?? 'asc',
             page: 1,
             perPage,
+            filters: options.filters ?? {},
         }),
 
         actions: {
             buildParams() {
-                return {
+                const params = {
                     page: this.page,
                     per_page: this.perPage,
                     search: this.search || undefined,
                     sort: this.sortField || undefined,
                     dir: this.sortDir || undefined,
                 };
+                for (const [key, value] of Object.entries(this.filters)) {
+                    if (value !== '' && value !== null && value !== undefined) {
+                        params[key] = value;
+                    }
+                }
+                return params;
             },
 
             async fetch() {
                 this.loading = true;
                 try {
                     const { data } = await axios.get(endpoint, { params: this.buildParams() });
-                    this.items = data.data || [];
-                    this.meta = data.meta || null;
+                    const payload = data.data;
+                    this.items = Array.isArray(payload) ? payload : (payload?.data ?? []);
+                    this.meta = data.meta ?? (Array.isArray(payload) ? null : (payload ?? null));
                     return data;
                 } finally {
                     this.loading = false;
@@ -123,6 +131,30 @@ export function useCrudStore(name, endpoint, options = {}) {
                 this.search = search;
                 this.page = 1;
                 this.fetch();
+            },
+
+            setFilter(key, value) {
+                this.filters = { ...this.filters, [key]: value };
+                this.page = 1;
+                this.fetch();
+            },
+
+            resetFilters() {
+                this.filters = {};
+                this.page = 1;
+                this.fetch();
+            },
+
+            async bulkAction(payload, successMessage) {
+                const toast = useToastStore();
+                try {
+                    const { data } = await axios.post(`${endpoint}/bulk`, payload);
+                    toast.success(successMessage ?? data.message ?? 'Done.');
+                    await this.fetch();
+                } catch (error) {
+                    toast.error(this.errorMessage(error));
+                    throw error;
+                }
             },
 
             sort(field) {
