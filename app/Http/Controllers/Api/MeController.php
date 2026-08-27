@@ -48,4 +48,25 @@ class MeController extends Controller
             ],
         ]);
     }
+
+    /**
+     * Level ladder: current level, progress and the full threshold table.
+     */
+    public function levels(Request $request)
+    {
+        $user = $request->user();
+        $reputation = (int) $user->reputation;
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'current' => Levels::currentLevel($reputation),
+                'levels' => collect(Levels::THRESHOLDS)->map(fn ($minimum, $level) => [
+                    'level' => $level,
+                    'title' => Levels::titleForLevel($level),
+                    'min_reputation' => $minimum,
+                ])->values(),
+            ],
+        ]);
+    }
 }
