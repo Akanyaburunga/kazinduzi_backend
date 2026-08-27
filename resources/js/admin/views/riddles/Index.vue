@@ -17,6 +17,8 @@ const { items: categories } = storeToRefs(categoriesStore);
 
 const showForm = ref(false);
 const editing = ref(null);
+const serverErrors = ref({});
+const duplicate = ref(null);
 const pendingDelete = ref(null);
 const pendingSuspend = ref(null);
 const pendingUnsuspend = ref(null);
@@ -27,26 +29,41 @@ const columns = [
     { key: 'answer', label: 'Answer', sortable: true },
     { key: 'category', label: 'Category' },
     { key: 'status', label: 'Status' },
-    { key: 'attempts_count', label: 'Attempts' },
+    { key: 'attempts_count', label: 'Attempts', sortable: true },
+    { key: 'solved_count', label: 'Solved', sortable: true },
+    { key: 'success_rate', label: 'Success %' },
 ];
 
 function openCreate() {
     editing.value = null;
+    serverErrors.value = {};
+    duplicate.value = null;
     showForm.value = true;
 }
 
 function openEdit(row) {
     editing.value = row;
+    serverErrors.value = {};
+    duplicate.value = null;
     showForm.value = true;
 }
 
 async function submitForm(payload) {
+    serverErrors.value = {};
+    duplicate.value = null;
     try {
         await store.save(payload, editing.value?.id);
         showForm.value = false;
-    } catch {
-        // toast already emitted by the store
+    } catch (error) {
+        serverErrors.value = error.response?.data?.errors ?? {};
+        duplicate.value = error.response?.data?.duplicate ?? null;
     }
+}
+
+function closeForm() {
+    serverErrors.value = {};
+    duplicate.value = null;
+    showForm.value = false;
 }
 
 async function confirmDelete() {
@@ -158,7 +175,9 @@ onMounted(async () => {
             :riddle="editing"
             :categories="categories"
             :saving="store.saving"
-            @close="showForm = false"
+            :server-errors="serverErrors"
+            :duplicate="duplicate"
+            @close="closeForm"
             @submit="submitForm"
         />
 

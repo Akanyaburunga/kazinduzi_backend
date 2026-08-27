@@ -128,4 +128,99 @@ class AdminRiddleTest extends TestCase
         $this->deleteJson("/admin/api/categories/{$categoryId}")->assertOk();
         $this->assertDatabaseMissing('riddle_categories', ['id' => $categoryId]);
     }
+
+    public function test_create_rejects_duplicate_answer_in_same_category(): void
+    {
+        $this->actingAs($this->admin());
+        $category = $this->category();
+
+        Riddle::factory()->create([
+            'category_id' => $category->id,
+            'question' => 'Existing riddle',
+            'answer' => '  Igisobanuro  ',
+        ]);
+
+        $response = $this->postJson('/admin/api/riddles', [
+            'category_id' => $category->id,
+            'question' => 'Another riddle',
+            'answer' => 'igisobanuro',
+        ])->assertStatus(422);
+
+        $this->assertArrayHasKey('answer', $response->json('errors'));
+        $this->assertSame('Existing riddle', $response->json('duplicate.question'));
+    }
+
+    public function test_create_allows_same_answer_in_different_category(): void
+    {
+        $this->actingAs($this->admin());
+        $a = $this->category();
+        $b = $this->category();
+
+        Riddle::factory()->create(['category_id' => $a->id, 'answer' => 'igisobanuro']);
+
+        $this->postJson('/admin/api/riddles', [
+            'category_id' => $b->id,
+            'question' => 'New',
+            'answer' => 'igisobanuro',
+        ])->assertCreated();
+    }
+
+    public function test_update_rejects_duplicate_answer_in_same_category(): void
+    {
+        $this->actingAs($this->admin());
+        $category = $this->category();
+
+        $other = Riddle::factory()->create([
+            'category_id' => $category->id,
+            'answer' => 'igisobanuro',
+        ]);
+
+        $riddle = Riddle::factory()->create(['category_id' => $category->id, 'answer' => 'ikindi']);
+
+        $this->putJson("/admin/api/riddles/{$riddle->id}", [
+            'answer' => 'igisobanuro',
+        ])->assertStatus(422)->assertJsonPath('duplicate.id', $other->id);
+    }
+
+    public function test_update_allows_keeping_same_answer(): void
+    {
+        $this->actingAs($this->admin());
+        $category = $this->category();
+
+        $riddle = Riddle::factory()->create(['category_id' => $category->id, 'answer' => 'igisobanuro']);
+
+        $this->putJson("/admin/api/riddles/{$riddle->id}", [
+            'question' => 'Updated question',
+            'answer' => 'igisobanuro',
+        ])->assertOk();
+
+        $this->assertDatabaseHas('riddles', ['id' => $riddle->id, 'question' => 'Updated question']);
+    }
+
+    public function test_index_includes_activity_stats(): void
+    {
+        $this->actingAs($this->admin());
+        $riddle = Riddle::factory()->create(['category_id' => $this->category()->id]);
+
+        \App\Models\RiddleAttempt::factory()->count(2)->correct()->create(['riddle_id' => $riddle->id]);
+        \App\Models\RiddleAttempt::factory()->count(2)->create(['riddle_id' => $riddle->id]);
+
+        $response = $this->getJson('/admin/api/riddles')->assertOk();
+        $row = collect($response->json('data.data'))->firstWhere('id', $riddle->id);
+
+        $this->assertSame(4, $row['attempts_count']);
+        $this->assertSame(2, $row['solved_count']);
+        $this->assertEquals(50.0, $row['success_rate']);
+    }
+
+    public function test_index_returns_zero_success_rate_when_no_attempts(): void
+    {
+        $this->actingAs($this->admin());
+        $riddle = Riddle::factory()->create(['category_id' => $this->category()->id]);
+
+        $row = collect($this->getJson('/admin/api/riddles')->json('data.data'))->firstWhere('id', $riddle->id);
+
+        $this->assertSame(0, $row['attempts_count']);
+        $this->assertSame(0, $row['success_rate']);
+    }
 }

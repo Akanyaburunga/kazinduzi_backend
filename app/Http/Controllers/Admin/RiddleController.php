@@ -17,7 +17,8 @@ class RiddleController extends Controller
     {
         $query = Riddle::query()
             ->with(['category:id,name,slug', 'creator:id,name'])
-            ->withCount('attempts');
+            ->withCount('attempts')
+            ->withCount(['attempts as solved_count' => fn ($q) => $q->where('is_correct', true)]);
 
         if ($search = request('search')) {
             $query->where(function ($q) use ($search) {
@@ -28,20 +29,34 @@ class RiddleController extends Controller
 
         $sort = request('sort');
         $dir = request('dir') === 'desc' ? 'desc' : 'asc';
-        if (in_array($sort, ['id', 'question', 'answer', 'is_suspended', 'created_at'], true)) {
+        if (in_array($sort, ['id', 'question', 'answer', 'is_suspended', 'created_at', 'attempts_count', 'solved_count'], true)) {
             $query->orderBy($sort, $dir);
         } else {
             $query->latest();
         }
 
+        $riddles = $query->paginate(request('per_page', 15));
+
+        $riddles->getCollection()->transform(function ($riddle) {
+            $riddle->success_rate = $riddle->attempts_count > 0
+                ? round(($riddle->solved_count / $riddle->attempts_count) * 100, 1)
+                : 0;
+
+            return $riddle;
+        });
+
         return response()->json([
             'success' => true,
-            'data' => $query->paginate(request('per_page', 15)),
+            'data' => $riddles,
         ]);
     }
 
     public function store(StoreRiddleRequest $request)
     {
+        if ($duplicate = $this->findDuplicate($request->answer, $request->category_id)) {
+            return $this->duplicateResponse($duplicate);
+        }
+
         $riddle = Riddle::create([
             'category_id' => $request->category_id,
             'question' => $request->question,
@@ -65,6 +80,15 @@ class RiddleController extends Controller
         $data = $request->only(['category_id', 'question', 'hint']);
         if ($request->filled('answer')) {
             $data['answer'] = RiddleHelper::normalize($request->answer);
+        }
+
+        $effectiveAnswer = $data['answer'] ?? $riddle->answer;
+        $effectiveCategory = $request->has('category_id') ? $request->category_id : $riddle->category_id;
+
+        if ($this->answersDiffer($effectiveAnswer, $effectiveCategory, $riddle)) {
+            if ($duplicate = $this->findDuplicate($effectiveAnswer, $effectiveCategory, $riddle)) {
+                return $this->duplicateResponse($duplicate);
+            }
         }
 
         $riddle->update($data);
@@ -91,5 +115,37 @@ class RiddleController extends Controller
         $riddle->update(['is_suspended' => false]);
 
         return response()->json(['success' => true, 'message' => 'Riddle unsuspended.']);
+    }
+
+    /**
+     * Find an existing riddle with the same normalized answer in the same category.
+     */
+    private function findDuplicate(string $answer, ?int $categoryId, ?Riddle $ignore = null): ?Riddle
+    {
+        return Riddle::query()
+            ->where('answer', RiddleHelper::normalize($answer))
+            ->where('category_id', $categoryId)
+            ->when($ignore, fn ($q) => $q->whereKeyNot($ignore->id))
+            ->first();
+    }
+
+    private function answersDiffer(string $answer, ?int $categoryId, Riddle $riddle): bool
+    {
+        return RiddleHelper::normalize($answer) !== $riddle->answer
+            || (int) $categoryId !== (int) $riddle->category_id;
+    }
+
+    private function duplicateResponse(Riddle $duplicate)
+    {
+        return response()->json([
+            'message' => 'A riddle with this answer already exists in this category.',
+            'errors' => [
+                'answer' => ["A riddle with this answer already exists in \"{$duplicate->question}\"."],
+            ],
+            'duplicate' => [
+                'id' => $duplicate->id,
+                'question' => $duplicate->question,
+            ],
+        ], 422);
     }
 }
