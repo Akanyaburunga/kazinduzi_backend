@@ -40,6 +40,7 @@ class AnswerController extends Controller
         );
 
         $rewarded = false;
+        $points = 0;
         if ($isCorrect && !$attempt->rewarded) {
             $points = (int) env('RIDDLE_SOLVE_REPUTATION', 5);
             $user->updateReputation($points, 'Solved a riddle', $attempt);
@@ -50,6 +51,7 @@ class AnswerController extends Controller
         return response()->json([
             'correct' => $isCorrect,
             'rewarded' => $rewarded,
+            'points' => $points,
             'message' => $isCorrect
                 ? ($rewarded ? "Correct! You earned {$points} reputation points." : 'Correct!')
                 : 'Not quite. Try again.',

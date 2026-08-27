@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api;
 
 use App\Models\Riddle;
+use App\Models\RiddleAttempt;
 use App\Models\RiddleCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -159,5 +160,139 @@ class RiddleGameTest extends TestCase
         $this->postJson("/api/riddles/{$riddle->id}/answer", [
             'answer' => '  INKEREBUZO  ',
         ])->assertOk()->assertJson(['correct' => true]);
+    }
+
+    public function test_list_marks_solved_riddles(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $solved = $this->makeRiddle();
+        $unsolved = $this->makeRiddle();
+        RiddleAttempt::factory()->correct()->create(['user_id' => $user->id, 'riddle_id' => $solved->id]);
+
+        $data = $this->getJson('/api/riddles')->json('data');
+
+        foreach ($data as $row) {
+            if ($row['id'] === $solved->id) {
+                $this->assertTrue($row['solved']);
+            } else {
+                $this->assertFalse($row['solved']);
+            }
+        }
+    }
+
+    public function test_next_returns_an_unsolved_riddle(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $solved = $this->makeRiddle();
+        $unsolved = $this->makeRiddle();
+        RiddleAttempt::factory()->correct()->create(['user_id' => $user->id, 'riddle_id' => $solved->id]);
+
+        $response = $this->getJson('/api/riddles/next')->assertOk();
+        $this->assertSame($unsolved->id, $response->json('data.id'));
+        $this->assertFalse($response->json('data.solved'));
+    }
+
+    public function test_next_filters_by_difficulty(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $this->makeRiddle(['difficulty' => 'easy']);
+        $hard = $this->makeRiddle(['difficulty' => 'hard']);
+
+        $response = $this->getJson('/api/riddles/next?difficulty=hard')->assertOk();
+        $this->assertSame($hard->id, $response->json('data.id'));
+        $this->assertSame('hard', $response->json('data.difficulty'));
+    }
+
+    public function test_next_returns_404_when_all_riddles_solved(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $riddle = $this->makeRiddle();
+        RiddleAttempt::factory()->correct()->create(['user_id' => $user->id, 'riddle_id' => $riddle->id]);
+
+        $this->getJson('/api/riddles/next')->assertStatus(404);
+    }
+
+    public function test_hint_returns_progressive_hints_without_answer(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $riddle = $this->makeRiddle(['hint' => 'first', 'hint2' => 'second']);
+
+        $response = $this->getJson("/api/riddles/{$riddle->id}/hint")->assertOk();
+        $this->assertSame('first', $response->json('data.hint'));
+        $this->assertSame('second', $response->json('data.hint2'));
+        $this->assertArrayNotHasKey('answer', $response->json('data'));
+    }
+
+    public function test_reveal_returns_answer_without_reward(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+        $user->update(['reputation' => 0]);
+
+        $riddle = $this->makeRiddle(['answer' => 'inkerebuzo']);
+
+        $response = $this->postJson("/api/riddles/{$riddle->id}/reveal")->assertOk();
+        $this->assertSame('inkerebuzo', $response->json('data.answer'));
+
+        $this->assertDatabaseCount('reputation_logs', 0);
+        $this->assertDatabaseCount('riddle_attempts', 0);
+    }
+
+    public function test_history_returns_paginated_attempts_without_answer(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $riddle = $this->makeRiddle(['difficulty' => 'easy']);
+        RiddleAttempt::factory()->correct()->create([
+            'user_id' => $user->id,
+            'riddle_id' => $riddle->id,
+            'submitted_answer' => 'inkerebuzo',
+        ]);
+
+        $response = $this->getJson('/api/riddles/history')->assertOk();
+        $data = $response->json('data');
+
+        $this->assertCount(1, $data);
+        $this->assertSame($riddle->id, $data[0]['riddle']['id']);
+        $this->assertSame('inkerebuzo', $data[0]['submitted_answer']);
+        $this->assertTrue($data[0]['is_correct']);
+        $this->assertArrayNotHasKey('answer', $data[0]['riddle']);
+    }
+
+    public function test_history_stats_returns_aggregates(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $catA = RiddleCategory::factory()->create(['name' => 'Imigani']);
+        $riddleA = Riddle::factory()->create(['category_id' => $catA->id]);
+        $riddleB = Riddle::factory()->create(['category_id' => $catA->id]);
+        $riddleC = Riddle::factory()->create(['category_id' => $catA->id]);
+
+        RiddleAttempt::factory()->correct()->create(['user_id' => $user->id, 'riddle_id' => $riddleA->id]);
+        RiddleAttempt::factory()->correct()->create(['user_id' => $user->id, 'riddle_id' => $riddleB->id]);
+        RiddleAttempt::factory()->create(['user_id' => $user->id, 'riddle_id' => $riddleC->id]);
+
+        $data = $this->getJson('/api/riddles/history/stats')->assertOk()->json('data');
+
+        $this->assertSame(3, $data['total_attempts']);
+        $this->assertSame(2, $data['riddles_solved']);
+        $this->assertSame(3, $data['unique_riddles']);
+        $this->assertEquals(66.7, $data['accuracy']);
+        $this->assertCount(1, $data['by_category']);
+        $this->assertSame('Imigani', $data['by_category'][0]['name']);
+        $this->assertSame(3, $data['by_category'][0]['attempts']);
+        $this->assertSame(2, $data['by_category'][0]['solved']);
     }
 }

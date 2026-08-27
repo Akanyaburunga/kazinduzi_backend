@@ -69,8 +69,13 @@ Route::prefix('riddles')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index']);      // List categories (curator view)
         Route::get('/', [GameController::class, 'index']);                    // List riddles (no answers)
         Route::get('/daily', [GameController::class, 'daily']);               // Riddle of the day
+        Route::get('/next', [GameController::class, 'next']);                 // Next unsolved riddle (difficulty filter)
+        Route::get('/history', [GameController::class, 'history']);           // Paginated attempt history
+        Route::get('/history/stats', [GameController::class, 'historyStats']); // Attempt statistics
         Route::get('/{riddle}', [GameController::class, 'show']);             // Single riddle (no answer)
+        Route::get('/{riddle}/hint', [GameController::class, 'hint']);        // Progressive hint(s)
         Route::post('/{riddle}/answer', [AnswerController::class, 'store']);  // Submit an answer
+        Route::post('/{riddle}/reveal', [GameController::class, 'reveal']);   // Reveal answer (learning, no reward)
     });
 
     // Curator routes (reputation-gated)
