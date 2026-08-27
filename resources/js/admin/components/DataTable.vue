@@ -18,19 +18,23 @@ defineEmits(['update:search', 'sort', 'page']);
     <div class="space-y-4">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div class="w-full sm:max-w-xs">
-                <input
-                    v-if="searchable"
-                    :value="search"
-                    type="search"
-                    class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    placeholder="Search..."
-                    @input="$emit('update:search', $event.target.value)"
-                />
+                <div v-if="searchable" class="relative">
+                    <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+                    </svg>
+                    <input
+                        :value="search"
+                        type="search"
+                        class="block w-full rounded-lg border-gray-300 py-2 pl-9 pr-3 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        placeholder="Search..."
+                        @input="$emit('update:search', $event.target.value)"
+                    />
+                </div>
             </div>
             <slot name="toolbar" />
         </div>
 
-        <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <table class="min-w-full divide-y divide-gray-200 text-sm">
                 <thead class="bg-gray-50">
                     <tr>
@@ -85,14 +89,14 @@ defineEmits(['update:search', 'sort', 'page']);
             </span>
             <div class="flex gap-2">
                 <button
-                    class="rounded-md border border-gray-300 px-3 py-1 hover:bg-gray-50 disabled:opacity-40"
+                    class="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50 disabled:opacity-40"
                     :disabled="meta.current_page <= 1"
                     @click="$emit('page', meta.current_page - 1)"
                 >
                     Previous
                 </button>
                 <button
-                    class="rounded-md border border-gray-300 px-3 py-1 hover:bg-gray-50 disabled:opacity-40"
+                    class="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50 disabled:opacity-40"
                     :disabled="meta.current_page >= meta.last_page"
                     @click="$emit('page', meta.current_page + 1)"
                 >

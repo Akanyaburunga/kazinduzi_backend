@@ -97,8 +97,17 @@ onMounted(async () => {
 <template>
     <div class="space-y-4">
         <div class="flex items-center justify-between">
-            <h1 class="text-xl font-semibold text-gray-900">Riddles</h1>
-            <button class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" @click="openCreate">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Riddles</h1>
+                <p class="mt-1 text-sm text-gray-500">Create and moderate riddles on the platform.</p>
+            </div>
+            <button
+                class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                @click="openCreate"
+            >
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
                 New Riddle
             </button>
         </div>

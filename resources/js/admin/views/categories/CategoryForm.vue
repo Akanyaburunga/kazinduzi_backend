@@ -48,22 +48,22 @@ function submit() {
 
 <template>
     <Teleport to="body">
-        <div v-if="open" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 p-4" @click.self="emit('close')">
-            <div class="mt-10 w-full max-w-md rounded-lg bg-white shadow-xl">
-                <div class="flex items-center justify-between border-b border-gray-200 px-5 py-3">
-                    <h3 class="text-base font-semibold text-gray-900">
+        <div v-if="open" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-gray-900/60 p-4 backdrop-blur-sm" @click.self="emit('close')">
+            <div class="mt-10 w-full max-w-md overflow-hidden rounded-xl bg-white shadow-2xl">
+                <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
                         {{ category ? 'Edit Category' : 'New Category' }}
                     </h3>
-                    <button class="text-2xl leading-none text-gray-400 hover:text-gray-600" @click="emit('close')">&times;</button>
+                    <button class="rounded-md p-1 text-2xl leading-none text-gray-400 transition hover:bg-gray-100 hover:text-gray-600" @click="emit('close')">&times;</button>
                 </div>
 
-                <form class="space-y-4 px-5 py-4" @submit.prevent="submit">
+                <form class="space-y-4 px-6 py-5" @submit.prevent="submit">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Name</label>
                         <input
                             v-model="form.name"
                             type="text"
-                            class="mt-1 block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
                         <p v-if="errors.name" class="mt-1 text-xs text-red-600">{{ errors.name }}</p>
                     </div>
@@ -74,7 +74,7 @@ function submit() {
                             v-model="form.slug"
                             type="text"
                             placeholder="Leave empty to auto-generate"
-                            class="mt-1 block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
                     </div>
 
@@ -83,14 +83,14 @@ function submit() {
                         <textarea
                             v-model="form.description"
                             rows="3"
-                            class="mt-1 block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         ></textarea>
                     </div>
 
                     <div class="flex justify-end gap-3 pt-2">
                         <button
                             type="button"
-                            class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                            class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
                             :disabled="saving"
                             @click="emit('close')"
                         >
@@ -98,10 +98,10 @@ function submit() {
                         </button>
                         <button
                             type="submit"
-                            class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                            class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-60"
                             :disabled="saving"
                         >
-                            {{ saving ? 'Saving...' : category ? 'Save' : 'Create' }}
+                            {{ saving ? 'Saving...' : category ? 'Save changes' : 'Create category' }}
                         </button>
                     </div>
                 </form>

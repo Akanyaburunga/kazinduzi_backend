@@ -3,8 +3,15 @@ import { useAuthStore } from './stores/auth.js';
 
 const routes = [
     {
+        path: '/admin/login',
+        name: 'admin.login',
+        component: () => import('./views/Login.vue'),
+        meta: { title: 'Login' },
+    },
+    {
         path: '/admin',
         component: () => import('./layouts/AdminLayout.vue'),
+        meta: { requiresAdmin: true },
         children: [
             {
                 path: '',
@@ -44,8 +51,17 @@ router.beforeEach(async (to) => {
         document.title = `${to.meta.title} | Kazinduzi Admin`;
     }
 
+    const isLogin = to.name === 'admin.login';
+
     if (!auth.isAdmin) {
-        return { path: to.path.startsWith('/admin') ? '/admin' : to.fullPath };
+        if (!isLogin) {
+            return { name: 'admin.login' };
+        }
+        return;
+    }
+
+    if (isLogin) {
+        return { name: 'admin.dashboard' };
     }
 });
 

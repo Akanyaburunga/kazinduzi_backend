@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             return;
         }
 
-        User::firstOrCreate(
+        $user = User::firstOrCreate(
             ['email' => $email],
             [
                 'name' => $name,
@@ -28,6 +28,14 @@ class AdminUserSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        // Ensure the admin passes the reputation gate for the panel. reputation
+        // is not mass-assignable, so set it directly.
+        $threshold = (int) env('MODERATION_REPUTATION_THRESHOLD', 500);
+        if ((int) $user->reputation < $threshold + 100) {
+            $user->reputation = $threshold + 100;
+            $user->save();
+        }
 
         $this->command->info('Default admin created or already exists.');
 

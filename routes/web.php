@@ -77,8 +77,13 @@ Route::get('/leaderboard/{filter?}', [LeaderboardController::class, 'index'])->n
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 // Admin panel host (Vue SPA). Serves the same shell for any /admin route.
-Route::prefix('admin/api')->middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('/session', [SessionController::class, 'show']);
+Route::prefix('admin/api')->group(function () {
+    Route::post('/login', [SessionController::class, 'store']);
+
+    Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+        Route::get('/session', [SessionController::class, 'show']);
+        Route::post('/logout', [SessionController::class, 'destroy']);
+
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/riddles', [RiddleController::class, 'index']);
@@ -89,16 +94,15 @@ Route::prefix('admin/api')->middleware(['auth', 'verified', 'admin'])->group(fun
     Route::post('/riddles/{riddle}/suspend', [RiddleController::class, 'suspend']);
     Route::post('/riddles/{riddle}/unsuspend', [RiddleController::class, 'unsuspend']);
 
-    Route::get('/categories', [RiddleCategoryController::class, 'index']);
-    Route::post('/categories', [RiddleCategoryController::class, 'store']);
-    Route::put('/categories/{category}', [RiddleCategoryController::class, 'update']);
-    Route::delete('/categories/{category}', [RiddleCategoryController::class, 'destroy']);
+        Route::get('/categories', [RiddleCategoryController::class, 'index']);
+        Route::post('/categories', [RiddleCategoryController::class, 'store']);
+        Route::put('/categories/{category}', [RiddleCategoryController::class, 'update']);
+        Route::delete('/categories/{category}', [RiddleCategoryController::class, 'destroy']);
+    });
 });
 
-Route::middleware('admin')->group(function () {
-    Route::get('/admin/{vueRoute?}', function () {
-        return view('admin.app');
-    })->where('vueRoute', '.*')->name('admin.index');
-});
+Route::get('/admin/{vueRoute?}', function () {
+    return view('admin.app');
+})->where('vueRoute', '.*')->name('admin.index');
 
 require __DIR__.'/auth.php';

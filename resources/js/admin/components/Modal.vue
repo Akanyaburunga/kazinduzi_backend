@@ -11,13 +11,13 @@ const emit = defineEmits(['close']);
 <template>
     <Teleport to="body">
         <Transition name="modal">
-            <div v-if="open" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 p-4" @click.self="emit('close')">
-                <div :class="size" class="mt-10 w-full rounded-lg bg-white shadow-xl">
-                    <div class="flex items-center justify-between border-b border-gray-200 px-5 py-3">
-                        <h3 class="text-base font-semibold text-gray-900">{{ title }}</h3>
-                        <button class="text-2xl leading-none text-gray-400 hover:text-gray-600" @click="emit('close')">&times;</button>
+            <div v-if="open" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-gray-900/60 p-4 backdrop-blur-sm" @click.self="emit('close')">
+                <div :class="size" class="mt-10 w-full overflow-hidden rounded-xl bg-white shadow-2xl">
+                    <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+                        <h3 class="text-lg font-semibold text-gray-900">{{ title }}</h3>
+                        <button class="rounded-md p-1 text-2xl leading-none text-gray-400 transition hover:bg-gray-100 hover:text-gray-600" @click="emit('close')">&times;</button>
                     </div>
-                    <div class="px-5 py-4">
+                    <div class="px-6 py-5">
                         <slot />
                     </div>
                 </div>
