@@ -66,7 +66,7 @@ Route::prefix('users')->middleware('auth:sanctum', 'verified')->group(function (
 // ✅ Get all words with optional search query
 Route::get('/words', [WordController::class, 'index']);
 // ✅ Get top 10 contributors
-Route::get('leaderboard', [LeaderboardController::class, 'index']);
+Route::get('leaderboard', [LeaderboardController::class, 'index'])->middleware('auth:sanctum');
 
 /**
  * 🧩 Riddle Game
