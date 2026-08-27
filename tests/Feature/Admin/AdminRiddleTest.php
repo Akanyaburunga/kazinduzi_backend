@@ -197,6 +197,69 @@ class AdminRiddleTest extends TestCase
         $this->assertDatabaseHas('riddles', ['id' => $riddle->id, 'question' => 'Updated question']);
     }
 
+    public function test_admin_can_set_difficulty_hints_and_source(): void
+    {
+        $this->actingAs($this->admin());
+        $category = $this->category();
+
+        $created = $this->postJson('/admin/api/riddles', [
+            'category_id' => $category->id,
+            'question' => 'Umubajwe?',
+            'answer' => 'urugo',
+            'difficulty' => 'hard',
+            'hint' => 'first hint',
+            'hint2' => 'second hint',
+            'source' => 'Imigani y\'ikirundi',
+        ])->assertCreated();
+
+        $riddleId = $created->json('data.id');
+        $this->assertDatabaseHas('riddles', [
+            'id' => $riddleId,
+            'difficulty' => 'hard',
+            'hint' => 'first hint',
+            'hint2' => 'second hint',
+            'source' => 'Imigani y\'ikirundi',
+        ]);
+
+        $this->putJson("/admin/api/riddles/{$riddleId}", [
+            'difficulty' => 'easy',
+            'hint2' => 'updated second hint',
+            'source' => null,
+        ])->assertOk();
+
+        $this->assertDatabaseHas('riddles', [
+            'id' => $riddleId,
+            'difficulty' => 'easy',
+            'hint2' => 'updated second hint',
+            'source' => null,
+        ]);
+    }
+
+    public function test_create_defaults_difficulty_to_easy_when_absent(): void
+    {
+        $this->actingAs($this->admin());
+
+        $created = $this->postJson('/admin/api/riddles', [
+            'category_id' => $this->category()->id,
+            'question' => 'Umuseke?',
+            'answer' => 'inkokokazi',
+        ])->assertCreated();
+
+        $this->assertDatabaseHas('riddles', ['id' => $created->json('data.id'), 'difficulty' => 'easy']);
+    }
+
+    public function test_create_rejects_invalid_difficulty(): void
+    {
+        $this->actingAs($this->admin());
+
+        $this->postJson('/admin/api/riddles', [
+            'category_id' => $this->category()->id,
+            'question' => 'q',
+            'answer' => 'a',
+            'difficulty' => 'impossible',
+        ])->assertStatus(422)->assertJsonPath('errors.difficulty.0', 'The selected difficulty is invalid.');
+    }
+
     public function test_index_includes_activity_stats(): void
     {
         $this->actingAs($this->admin());

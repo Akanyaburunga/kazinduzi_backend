@@ -16,7 +16,10 @@ const form = ref({
     category_id: '',
     question: '',
     answer: '',
+    difficulty: 'easy',
     hint: '',
+    hint2: '',
+    source: '',
 });
 
 const errors = ref({});
@@ -27,7 +30,10 @@ function dirty() {
         category_id: props.riddle?.category_id ?? '',
         question: props.riddle?.question ?? '',
         answer: props.riddle?.answer ?? '',
+        difficulty: props.riddle?.difficulty ?? 'easy',
         hint: props.riddle?.hint ?? '',
+        hint2: props.riddle?.hint2 ?? '',
+        source: props.riddle?.source ?? '',
     };
     return JSON.stringify(form.value) !== JSON.stringify(pristine);
 }
@@ -42,7 +48,10 @@ watch(
                 category_id: props.riddle?.category_id ?? '',
                 question: props.riddle?.question ?? '',
                 answer: props.riddle?.answer ?? '',
+                difficulty: props.riddle?.difficulty ?? 'easy',
                 hint: props.riddle?.hint ?? '',
+                hint2: props.riddle?.hint2 ?? '',
+                source: props.riddle?.source ?? '',
             };
         }
     }
@@ -112,6 +121,19 @@ function submit() {
                     </div>
 
                     <div>
+                        <label class="block text-sm font-medium text-gray-700">Difficulty</label>
+                        <select
+                            v-model="form.difficulty"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        >
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <p v-if="fieldError('difficulty')" class="mt-1 text-xs text-red-600">{{ fieldError('difficulty') }}</p>
+                    </div>
+
+                    <div>
                         <label class="block text-sm font-medium text-gray-700">Question</label>
                         <textarea
                             v-model="form.question"
@@ -133,12 +155,33 @@ function submit() {
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Hint</label>
+                        <label class="block text-sm font-medium text-gray-700">Hint 1</label>
                         <input
                             v-model="form.hint"
                             type="text"
                             class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
+                        <p class="mt-1 text-xs text-gray-400">First hint, revealed first in the game.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Hint 2</label>
+                        <input
+                            v-model="form.hint2"
+                            type="text"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        />
+                        <p class="mt-1 text-xs text-gray-400">Optional second, more revealing hint.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Source</label>
+                        <input
+                            v-model="form.source"
+                            type="text"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        />
+                        <p class="mt-1 text-xs text-gray-400">Attribution, e.g. imigani, a book, or a website.</p>
                     </div>
 
                     <div class="flex justify-end gap-3 pt-2">

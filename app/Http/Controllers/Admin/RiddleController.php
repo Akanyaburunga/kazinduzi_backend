@@ -61,7 +61,10 @@ class RiddleController extends Controller
             'category_id' => $request->category_id,
             'question' => $request->question,
             'answer' => $request->answer,
+            'difficulty' => $request->difficulty ?? 'easy',
             'hint' => $request->hint,
+            'hint2' => $request->hint2,
+            'source' => $request->source,
             'created_by' => $request->user()->id,
         ]);
 
@@ -77,7 +80,7 @@ class RiddleController extends Controller
 
     public function update(UpdateRiddleRequest $request, Riddle $riddle)
     {
-        $data = $request->only(['category_id', 'question', 'hint']);
+        $data = $request->only(['category_id', 'question', 'difficulty', 'hint', 'hint2', 'source']);
         if ($request->filled('answer')) {
             $data['answer'] = RiddleHelper::normalize($request->answer);
         }

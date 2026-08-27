@@ -49,6 +49,28 @@ class RiddleGameTest extends TestCase
         $this->assertArrayHasKey('question', $data[0]);
     }
 
+    public function test_game_payload_surfaces_difficulty_and_hints_but_not_answer_or_source(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $this->makeRiddle([
+            'difficulty' => 'medium',
+            'hint' => 'first clue',
+            'hint2' => 'second clue',
+            'source' => 'secret attribution',
+        ]);
+
+        $data = $this->getJson('/api/riddles')->json('data');
+        $this->assertNotEmpty($data);
+
+        $this->assertSame('medium', $data[0]['difficulty']);
+        $this->assertSame('first clue', $data[0]['hint']);
+        $this->assertSame('second clue', $data[0]['hint2']);
+        $this->assertArrayNotHasKey('answer', $data[0]);
+        $this->assertArrayNotHasKey('source', $data[0]);
+    }
+
     public function test_suspended_riddles_are_not_listed(): void
     {
         $user = $this->verifiedUser();

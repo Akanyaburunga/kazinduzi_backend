@@ -14,7 +14,10 @@ class Riddle extends Model
         'category_id',
         'question',
         'answer',
+        'difficulty',
         'hint',
+        'hint2',
+        'source',
         'is_suspended',
         'created_by',
     ];
@@ -22,6 +25,8 @@ class Riddle extends Model
     protected $casts = [
         'is_suspended' => 'boolean',
     ];
+
+    public const DIFFICULTIES = ['easy', 'medium', 'hard'];
 
     protected static function boot()
     {

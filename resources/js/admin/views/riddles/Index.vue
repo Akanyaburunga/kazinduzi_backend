@@ -27,7 +27,9 @@ const actionBusy = ref(false);
 const columns = [
     { key: 'question', label: 'Question', sortable: true },
     { key: 'answer', label: 'Answer', sortable: true },
+    { key: 'difficulty', label: 'Difficulty', sortable: true },
     { key: 'category', label: 'Category' },
+    { key: 'source', label: 'Source' },
     { key: 'status', label: 'Status' },
     { key: 'attempts_count', label: 'Attempts', sortable: true },
     { key: 'solved_count', label: 'Solved', sortable: true },
@@ -145,6 +147,21 @@ onMounted(async () => {
         >
             <template #cell-category="{ row }">
                 {{ row.category?.name ?? '—' }}
+            </template>
+            <template #cell-difficulty="{ row }">
+                <span
+                    class="inline-flex rounded-full px-2 py-0.5 text-xs font-semibold"
+                    :class="{
+                        'bg-emerald-100 text-emerald-700': row.difficulty === 'easy',
+                        'bg-amber-100 text-amber-700': row.difficulty === 'medium',
+                        'bg-rose-100 text-rose-700': row.difficulty === 'hard',
+                    }"
+                >
+                    {{ row.difficulty ? row.difficulty.charAt(0).toUpperCase() + row.difficulty.slice(1) : '—' }}
+                </span>
+            </template>
+            <template #cell-source="{ row }">
+                <span class="text-xs text-gray-500">{{ row.source ?? '—' }}</span>
             </template>
             <template #cell-status="{ row }">
                 <span

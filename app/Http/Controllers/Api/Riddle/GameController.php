@@ -88,7 +88,9 @@ class GameController extends Controller
                 ? ['id' => $riddle->category->id, 'name' => $riddle->category->name, 'slug' => $riddle->category->slug]
                 : null,
             'question' => $riddle->question,
+            'difficulty' => $riddle->difficulty,
             'hint' => $riddle->hint,
+            'hint2' => $riddle->hint2,
             'created_at' => $riddle->created_at,
         ];
     }

@@ -17,7 +17,10 @@ class RiddleFactory extends Factory
             'category_id' => RiddleCategory::factory(),
             'question' => fake()->sentence(8),
             'answer' => fake()->word(),
+            'difficulty' => 'easy',
             'hint' => null,
+            'hint2' => null,
+            'source' => null,
             'is_suspended' => false,
             'created_by' => User::factory(),
         ];
@@ -26,5 +29,10 @@ class RiddleFactory extends Factory
     public function suspended(): static
     {
         return $this->state(fn () => ['is_suspended' => true]);
+    }
+
+    public function difficulty(string $difficulty): static
+    {
+        return $this->state(fn () => ['difficulty' => $difficulty]);
     }
 }
