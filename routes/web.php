@@ -11,6 +11,9 @@ use App\Http\Controllers\VoteController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ModerationController;
 use App\Http\Controllers\Admin\SessionController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RiddleController;
+use App\Http\Controllers\Admin\RiddleCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,8 +77,22 @@ Route::get('/leaderboard/{filter?}', [LeaderboardController::class, 'index'])->n
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
 // Admin panel host (Vue SPA). Serves the same shell for any /admin route.
-Route::prefix('admin/api')->middleware('admin')->group(function () {
+Route::prefix('admin/api')->middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/session', [SessionController::class, 'show']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::get('/riddles', [RiddleController::class, 'index']);
+    Route::post('/riddles', [RiddleController::class, 'store']);
+    Route::get('/riddles/{riddle}', [RiddleController::class, 'show']);
+    Route::put('/riddles/{riddle}', [RiddleController::class, 'update']);
+    Route::delete('/riddles/{riddle}', [RiddleController::class, 'destroy']);
+    Route::post('/riddles/{riddle}/suspend', [RiddleController::class, 'suspend']);
+    Route::post('/riddles/{riddle}/unsuspend', [RiddleController::class, 'unsuspend']);
+
+    Route::get('/categories', [RiddleCategoryController::class, 'index']);
+    Route::post('/categories', [RiddleCategoryController::class, 'store']);
+    Route::put('/categories/{category}', [RiddleCategoryController::class, 'update']);
+    Route::delete('/categories/{category}', [RiddleCategoryController::class, 'destroy']);
 });
 
 Route::middleware('admin')->group(function () {
