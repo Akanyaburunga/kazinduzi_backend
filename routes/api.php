@@ -26,13 +26,21 @@ use App\Http\Controllers\Api\Riddle\CategoryController;
  * 🔐 Authentication & User Management
  */
 Route::prefix('auth')->group(function () {
-    Route::post('register', [AuthController::class, 'register']);  // User Registration
-    Route::post('login', [AuthController::class, 'login']);        // User Login
+    Route::post('register', [AuthController::class, 'register'])->middleware('throttle:5,1');  // User Registration
+    Route::post('login', [AuthController::class, 'login'])->middleware('throttle:10,1');        // User Login
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum'); // Logout
     Route::get('user', [AuthController::class, 'user'])->middleware('auth:sanctum'); // Get Authenticated User Info
+    Route::post('password/change', [AuthController::class, 'changePassword'])->middleware('auth:sanctum'); // Change password & revoke tokens
     //Email Verification
     Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('api.verification.verify');
-    Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])->middleware('auth:sanctum');
+    Route::post('/email/resend', [AuthController::class, 'resendVerificationCode'])->middleware('auth:sanctum', 'throttle:3,1');
+});
+
+/**
+ * 👤 Authenticated profile, points & stats
+ */
+Route::prefix('me')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', \App\Http\Controllers\Api\MeController::class);
 });
 
 /**

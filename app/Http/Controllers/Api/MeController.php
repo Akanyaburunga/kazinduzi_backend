@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Meaning;
+use App\Models\Word;
+use App\Support\Levels;
+use Illuminate\Http\Request;
+
+class MeController extends Controller
+{
+    /**
+     * Authenticated user profile, points, level and activity stats.
+     */
+    public function __invoke(Request $request)
+    {
+        $user = $request->user();
+
+        $profilePictureUrl = $user->profile_picture
+            ? asset('storage/' . $user->profile_picture)
+            : asset('images/default-profile.png');
+
+        $attempts = $user->riddleAttempts();
+
+        $stats = [
+            'words_contributed' => $user->words()->count(),
+            'meanings_contributed' => $user->meanings()->count(),
+            'riddles_solved' => (clone $attempts)->where('is_correct', true)->count(),
+            'riddle_attempts' => (clone $attempts)->count(),
+            'correct_riddle_attempts' => (clone $attempts)->where('is_correct', true)->count(),
+        ];
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+                'profile_picture_url' => $profilePictureUrl,
+                'referral_code' => $user->referral_code,
+                'points' => [
+                    'reputation' => (int) $user->reputation,
+                    'level' => Levels::currentLevel((int) $user->reputation),
+                ],
+                'stats' => $stats,
+            ],
+        ]);
+    }
+}
