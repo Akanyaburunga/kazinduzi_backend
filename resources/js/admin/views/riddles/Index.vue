@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+import axios from '../../bootstrap.js';
 import { useToastStore } from '../../stores/toast.js';
 import { useRiddlesStore } from '../../stores/riddles.js';
 import { useCategoriesStore } from '../../stores/categories.js';
@@ -8,6 +10,7 @@ import DataTable from '../../components/DataTable.vue';
 import ConfirmDialog from '../../components/ConfirmDialog.vue';
 import RiddleForm from './RiddleForm.vue';
 
+const router = useRouter();
 const toast = useToastStore();
 const store = useRiddlesStore();
 const categoriesStore = useCategoriesStore();
@@ -31,6 +34,7 @@ const pendingCategoryChange = ref(false);
 const bulkCategoryId = ref('');
 const bulkBusy = ref(false);
 const actionBusy = ref(false);
+const exporting = ref(false);
 
 const columns = [
     { key: 'question', label: 'Question', sortable: true },
@@ -78,6 +82,26 @@ function setFilter(key, value) {
 function clearFilters() {
     selected.value = [];
     store.resetFilters();
+}
+
+async function exportCsv() {
+    exporting.value = true;
+    try {
+        const response = await axios.get('/admin/api/riddles/export', { params: store.buildParams() });
+        const disposition = response.headers['content-disposition'] || '';
+        const match = disposition.match(/filename="?([^";]+)"?/);
+        const filename = match ? match[1] : `riddles-${new Date().toISOString().slice(0, 10)}.csv`;
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    } catch {
+        toast.error('Could not export riddles.');
+    } finally {
+        exporting.value = false;
+    }
 }
 
 async function confirmRestore() {
@@ -263,6 +287,16 @@ onMounted(async () => {
                     >
                         Clear
                     </button>
+                    <button
+                        class="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:opacity-50"
+                        :disabled="exporting"
+                        @click="exportCsv"
+                    >
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0 0l-4-4m4 4l4-4" />
+                        </svg>
+                        {{ exporting ? 'Exporting...' : 'Export CSV' }}
+                    </button>
                 </div>
             </template>
             <template #cell-category="{ row }">
@@ -297,6 +331,7 @@ onMounted(async () => {
             <template #actions="{ row }">
                 <div class="flex justify-end gap-2">
                     <button class="text-sm text-indigo-600 hover:underline" @click="openEdit(row)">Edit</button>
+                    <button class="text-sm text-sky-600 hover:underline" @click="router.push({ name: 'admin.riddles.show', params: { id: row.id } })">Analytics</button>
                     <button
                         v-if="row.deleted_at"
                         class="text-sm text-teal-600 hover:underline"

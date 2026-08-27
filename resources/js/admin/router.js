@@ -26,6 +26,12 @@ const routes = [
                 meta: { title: 'Riddles' },
             },
             {
+                path: 'riddles/:id',
+                name: 'admin.riddles.show',
+                component: () => import('./views/riddles/Show.vue'),
+                meta: { title: 'Riddle Analytics' },
+            },
+            {
                 path: 'categories',
                 name: 'admin.categories.index',
                 component: () => import('./views/categories/Index.vue'),

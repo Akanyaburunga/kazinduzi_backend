@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRiddleRequest;
 use App\Http\Requests\Admin\UpdateRiddleRequest;
 use App\Models\Riddle;
+use App\Models\RiddleAttempt;
 use App\Support\RiddleHelper;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RiddleController extends Controller
 {
@@ -16,10 +18,128 @@ class RiddleController extends Controller
      */
     public function index()
     {
-        $query = Riddle::query()
+        $query = $this->filteredQuery()
             ->with(['category:id,name,slug', 'creator:id,name'])
             ->withCount('attempts')
             ->withCount(['attempts as solved_count' => fn ($q) => $q->where('is_correct', true)]);
+
+        $sort = request('sort');
+        $dir = request('dir') === 'desc' ? 'desc' : 'asc';
+        if (in_array($sort, ['id', 'question', 'answer', 'difficulty', 'is_suspended', 'created_at', 'attempts_count', 'solved_count'], true)) {
+            $query->orderBy($sort, $dir);
+        } else {
+            $query->latest();
+        }
+
+        $riddles = $query->paginate(request('per_page', 15));
+
+        $riddles->getCollection()->transform(function ($riddle) {
+            $riddle->success_rate = $riddle->attempts_count > 0
+                ? round(($riddle->solved_count / $riddle->attempts_count) * 100, 1)
+                : 0;
+
+            return $riddle;
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $riddles,
+        ]);
+    }
+
+    /**
+     * Per-riddle analytics for the admin drill-down.
+     */
+    public function stats(Riddle $riddle)
+    {
+        $attempts = $riddle->attempts();
+        $solved = (clone $attempts)->where('is_correct', true)->count();
+        $total = (clone $attempts)->count();
+
+        $days = 14;
+        $byDay = RiddleAttempt::query()
+            ->selectRaw('date(created_at) as day, count(*) as attempts, sum(case when is_correct then 1 else 0 end) as correct')
+            ->where('riddle_id', $riddle->id)
+            ->where('created_at', '>=', now()->subDays($days - 1)->startOfDay())
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get()
+            ->mapWithKeys(fn ($row) => [
+                $row->day => ['attempts' => (int) $row->attempts, 'correct' => (int) $row->correct],
+            ]);
+
+        $wrong = RiddleAttempt::query()
+            ->selectRaw('submitted_answer as answer, count(*) as total')
+            ->where('riddle_id', $riddle->id)
+            ->where('is_correct', false)
+            ->whereNotNull('submitted_answer')
+            ->where('submitted_answer', '!=', '')
+            ->groupBy('submitted_answer')
+            ->orderByDesc('total')
+            ->limit(10)
+            ->get(['answer', 'total']);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'riddle' => $riddle->load('category:id,name,slug'),
+                'attempts_total' => $total,
+                'solved_count' => $solved,
+                'success_rate' => $total > 0 ? round(($solved / $total) * 100, 1) : 0,
+                'attempts_by_day' => $byDay,
+                'wrong_answers' => $wrong,
+                'report_days' => $days,
+            ],
+        ]);
+    }
+
+    /**
+     * Export riddles (respecting current filters) to CSV.
+     */
+    public function export(): StreamedResponse
+    {
+        $rows = $this->filteredQuery()
+            ->with('category:id,name')
+            ->withCount('attempts')
+            ->withCount(['attempts as solved_count' => fn ($q) => $q->where('is_correct', true)])
+            ->orderByDesc('id')
+            ->get();
+
+        $filename = 'riddles-' . now()->format('Y-m-d-His') . '.csv';
+
+        return response()->streamDownload(function () use ($rows) {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, ['ID', 'Question', 'Answer', 'Difficulty', 'Category', 'Source', 'Suspended', 'Attempts', 'Solved', 'Success %', 'Created at']);
+
+            foreach ($rows as $riddle) {
+                $rate = $riddle->attempts_count > 0
+                    ? round(($riddle->solved_count / $riddle->attempts_count) * 100, 1)
+                    : 0;
+                fputcsv($handle, [
+                    $riddle->id,
+                    $riddle->question,
+                    $riddle->answer,
+                    $riddle->difficulty,
+                    $riddle->category?->name ?? '',
+                    $riddle->source ?? '',
+                    $riddle->is_suspended ? 'yes' : 'no',
+                    $riddle->attempts_count,
+                    $riddle->solved_count,
+                    $rate,
+                    $riddle->created_at?->toDateTimeString(),
+                ]);
+            }
+
+            fclose($handle);
+        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
+
+    /**
+     * Base query with the same filters used by the list view.
+     */
+    private function filteredQuery()
+    {
+        $query = Riddle::query();
 
         if (request('trashed')) {
             $query->onlyTrashed();
@@ -44,28 +164,7 @@ class RiddleController extends Controller
             $query->where('difficulty', $difficulty);
         }
 
-        $sort = request('sort');
-        $dir = request('dir') === 'desc' ? 'desc' : 'asc';
-        if (in_array($sort, ['id', 'question', 'answer', 'difficulty', 'is_suspended', 'created_at', 'attempts_count', 'solved_count'], true)) {
-            $query->orderBy($sort, $dir);
-        } else {
-            $query->latest();
-        }
-
-        $riddles = $query->paginate(request('per_page', 15));
-
-        $riddles->getCollection()->transform(function ($riddle) {
-            $riddle->success_rate = $riddle->attempts_count > 0
-                ? round(($riddle->solved_count / $riddle->attempts_count) * 100, 1)
-                : 0;
-
-            return $riddle;
-        });
-
-        return response()->json([
-            'success' => true,
-            'data' => $riddles,
-        ]);
+        return $query;
     }
 
     public function store(StoreRiddleRequest $request)

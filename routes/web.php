@@ -90,8 +90,10 @@ Route::prefix('admin/api')->group(function () {
     Route::get('/riddles', [RiddleController::class, 'index']);
     Route::post('/riddles', [RiddleController::class, 'store']);
     Route::post('/riddles/bulk', [RiddleBulkController::class, 'store']);
+    Route::get('/riddles/export', [RiddleController::class, 'export']);
     Route::get('/riddles/{riddle}', [RiddleController::class, 'show']);
     Route::put('/riddles/{riddle}', [RiddleController::class, 'update']);
+    Route::get('/riddles/{riddle}/stats', [RiddleController::class, 'stats']);
     Route::delete('/riddles/{riddle}', [RiddleController::class, 'destroy']);
     Route::post('/riddles/{id}/restore', [RiddleController::class, 'restore']);
     Route::post('/riddles/{riddle}/suspend', [RiddleController::class, 'suspend']);
