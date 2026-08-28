@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\RiddleController;
 use App\Http\Controllers\Admin\RiddleBulkController;
 use App\Http\Controllers\Admin\RiddleCategoryController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\AchievementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +111,12 @@ Route::prefix('admin/api')->group(function () {
         Route::put('/tags/{tag}', [TagController::class, 'update']);
         Route::delete('/tags/{tag}', [TagController::class, 'destroy']);
         Route::get('/riddle-types', [TagController::class, 'types']);
+
+        Route::get('/achievements', [AchievementController::class, 'index']);
+        Route::post('/achievements', [AchievementController::class, 'store']);
+        Route::post('/achievements/sync', [AchievementController::class, 'sync']);
+        Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
+        Route::delete('/achievements/{achievement}', [AchievementController::class, 'destroy']);
     });
 });
 

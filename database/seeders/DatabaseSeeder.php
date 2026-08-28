@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             WordsFromJsonSeeder::class,
             RiddleSeeder::class,
+            AchievementSeeder::class,
         ]);
     }
 }

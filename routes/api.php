@@ -42,6 +42,7 @@ Route::prefix('auth')->group(function () {
 Route::prefix('me')->middleware('auth:sanctum')->group(function () {
     Route::get('/', \App\Http\Controllers\Api\MeController::class);
     Route::get('/levels', [\App\Http\Controllers\Api\MeController::class, 'levels']);
+    Route::get('/achievements', [\App\Http\Controllers\Api\MeController::class, 'achievements']);
 });
 
 /**

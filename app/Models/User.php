@@ -75,6 +75,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(RiddleAttempt::class);
     }
 
+    /**
+     * Achievements (badges) the user has unlocked.
+     */
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class, 'user_achievements')
+            ->withPivot('unlocked_at')
+            ->withTimestamps();
+    }
+
     public function updateReputation(int $points, String $reason, $related)
     {
         $this->reputation += $points;

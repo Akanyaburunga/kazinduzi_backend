@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Riddle\AnswerRiddleRequest;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
+use App\Support\Achievements;
 use App\Support\RiddleHelper;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,8 @@ class AnswerController extends Controller
             \App\Support\Popularity::recompute($riddle);
         }
 
+        $newAchievements = $isCorrect ? Achievements::evaluate($user) : collect();
+
         return response()->json([
             'correct' => $isCorrect,
             'rewarded' => $rewarded,
@@ -60,6 +63,12 @@ class AnswerController extends Controller
             'message' => $isCorrect
                 ? ($rewarded ? "Correct! You earned {$points} reputation points." : 'Correct!')
                 : 'Not quite. Try again.',
+            'new_achievements' => $newAchievements->map(fn ($achievement) => [
+                'slug' => $achievement->slug,
+                'name' => $achievement->name,
+                'description' => $achievement->description,
+                'icon' => $achievement->icon,
+            ])->values(),
         ]);
     }
 }

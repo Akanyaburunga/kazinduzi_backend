@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Achievement;
 use App\Models\Meaning;
 use App\Models\Word;
+use App\Support\Achievements;
 use App\Support\Levels;
 use Illuminate\Http\Request;
 
@@ -70,6 +72,50 @@ class MeController extends Controller
                     'title' => Levels::titleForLevel($level),
                     'min_reputation' => $minimum,
                 ])->values(),
+            ],
+        ]);
+    }
+
+    /**
+     * Badge catalogue with each user's earn/progress state.
+     */
+    public function achievements(Request $request)
+    {
+        $user = $request->user();
+
+        $earned = $user->achievements()
+            ->get()
+            ->keyBy('id')
+            ->mapWithKeys(fn ($achievement) => [
+                $achievement->id => $achievement->pivot->unlocked_at,
+            ]);
+
+        $badges = Achievements::catalogue()->map(function (Achievement $achievement) use ($user, $earned) {
+            $progress = Achievements::progress($user, $achievement->metric);
+            $unlockedAt = $earned->get($achievement->id);
+
+            return [
+                'id' => $achievement->id,
+                'slug' => $achievement->slug,
+                'name' => $achievement->name,
+                'description' => $achievement->description,
+                'category' => $achievement->category,
+                'icon' => $achievement->icon,
+                'threshold' => $achievement->threshold,
+                'metric' => $achievement->metric,
+                'earned' => $unlockedAt !== null,
+                'earned_at' => $unlockedAt,
+                'progress' => $progress,
+                'goal' => $achievement->threshold,
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'earned_count' => $earned->count(),
+                'total' => $badges->count(),
+                'achievements' => $badges->values(),
             ],
         ]);
     }

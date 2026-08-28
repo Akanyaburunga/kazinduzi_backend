@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Riddle;
 use App\Http\Controllers\Controller;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
+use App\Models\RiddleHintUse;
 use App\Models\User;
 use App\Support\Streaks;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -287,12 +288,24 @@ class GameController extends Controller
 
     /**
      * Progressive hint(s) for a riddle (never reveals the answer).
+     * Records that the user used a hint for this riddle (for the "no hint"
+     * achievement).
      */
-    public function hint(Riddle $riddle)
+    public function hint(Request $request, Riddle $riddle)
     {
         if ($riddle->is_suspended) {
             return response()->json(['success' => false, 'message' => 'Riddle not available.'], 404);
         }
+
+        $userId = $request->user()->id;
+
+        RiddleHintUse::query()->updateOrCreate(
+            ['user_id' => $userId, 'riddle_id' => $riddle->id],
+            ['count' => (int) RiddleHintUse::query()
+                ->where('user_id', $userId)
+                ->where('riddle_id', $riddle->id)
+                ->value('count') + 1]
+        );
 
         return response()->json([
             'success' => true,
