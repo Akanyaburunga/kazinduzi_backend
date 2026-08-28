@@ -109,6 +109,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserRiddleProgress::class);
     }
 
+    /**
+     * User-generated riddle submissions awaiting (or past) review.
+     */
+    public function riddleSubmissions()
+    {
+        return $this->hasMany(RiddleSubmission::class);
+    }
+
     public function updateReputation(int $points, String $reason, $related)
     {
         $this->reputation += $points;

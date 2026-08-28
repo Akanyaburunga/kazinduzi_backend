@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Riddle\RiddleController;
 use App\Http\Controllers\Api\Riddle\CategoryController;
 use App\Http\Controllers\Api\Riddle\FavoriteController;
 use App\Http\Controllers\Api\Riddle\ShareController;
+use App\Http\Controllers\Api\Riddle\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +95,8 @@ Route::prefix('riddles')->group(function () {
         Route::post('/{riddle}/share', [ShareController::class, 'store']);    // Create shareable short link
         Route::get('/{riddle}', [GameController::class, 'show']);             // Single riddle (no answer)
         Route::get('/{riddle}/hint', [GameController::class, 'hint']);        // Progressive hint(s)
-        Route::post('/{riddle}/answer', [AnswerController::class, 'store']);  // Submit an answer
+        Route::post('/{riddle}/answer', [AnswerController::class, 'store'])
+            ->middleware('throttle:30,1'); // Guard against brute-force answer submissions
         Route::post('/{riddle}/reveal', [GameController::class, 'reveal']);   // Reveal answer (learning, no reward)
     });
 
@@ -119,4 +121,12 @@ Route::prefix('me/favorites')->middleware(['auth:sanctum', 'verified'])->group(f
     Route::get('/', [FavoriteController::class, 'index']);                 // List bookmarked riddles
     Route::post('/{riddle}', [FavoriteController::class, 'store']);        // Bookmark a riddle
     Route::delete('/{riddle}', [FavoriteController::class, 'destroy']);    // Remove a bookmark
+});
+
+/**
+ * 🧑‍🌾 User-generated submissions (moderation queue)
+ */
+Route::prefix('submissions/riddles')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [SubmissionController::class, 'index']);        // My submissions
+    Route::post('/', [SubmissionController::class, 'store']);       // Submit a riddle for review
 });

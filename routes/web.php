@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\RiddleBulkController;
 use App\Http\Controllers\Admin\RiddleCategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\Admin\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +118,10 @@ Route::prefix('admin/api')->group(function () {
         Route::post('/achievements/sync', [AchievementController::class, 'sync']);
         Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
         Route::delete('/achievements/{achievement}', [AchievementController::class, 'destroy']);
+
+        Route::get('/submissions', [SubmissionController::class, 'index']);
+        Route::post('/submissions/{submission}/approve', [SubmissionController::class, 'approve']);
+        Route::post('/submissions/{submission}/reject', [SubmissionController::class, 'reject']);
     });
 });
 

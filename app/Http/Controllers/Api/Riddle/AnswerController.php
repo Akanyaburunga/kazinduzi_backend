@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Riddle\AnswerRiddleRequest;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
+use App\Models\ReputationLog;
 use App\Support\Achievements;
 use App\Support\RiddleHelper;
 use Illuminate\Http\Request;
@@ -42,11 +43,25 @@ class AnswerController extends Controller
 
         $rewarded = false;
         $points = 0;
+        $capped = false;
         if ($isCorrect && !$attempt->rewarded) {
-            $points = (int) env('RIDDLE_SOLVE_REPUTATION', 5);
-            $user->updateReputation($points, 'Solved a riddle', $attempt);
-            $attempt->update(['rewarded' => true]);
-            $rewarded = true;
+            $base = (int) config('riddles.solve_reputation');
+            $cap = (int) config('riddles.daily_solve_reputation_cap');
+
+            $earnedToday = (int) ReputationLog::where('user_id', $user->id)
+                ->where('related_type', RiddleAttempt::class)
+                ->whereDate('created_at', now()->toDateString())
+                ->sum('change');
+
+            $remaining = max(0, $cap - $earnedToday);
+            $points = $cap > 0 ? min($base, $remaining) : 0;
+            $capped = $remaining <= 0;
+
+            if ($points > 0) {
+                $user->updateReputation($points, 'Solved a riddle', $attempt);
+                $attempt->update(['rewarded' => true]);
+            }
+            $rewarded = $points > 0;
         }
 
         if ($isCorrect) {
@@ -60,8 +75,9 @@ class AnswerController extends Controller
             'correct' => $isCorrect,
             'rewarded' => $rewarded,
             'points' => $points,
+            'capped' => $isCorrect && $capped,
             'message' => $isCorrect
-                ? ($rewarded ? "Correct! You earned {$points} reputation points." : 'Correct!')
+                ? ($rewarded ? "Correct! You earned {$points} reputation points." : ($capped ? 'Correct! You reached today’s reputation cap.' : 'Correct!'))
                 : 'Not quite. Try again.',
             'new_achievements' => $newAchievements->map(fn ($achievement) => [
                 'slug' => $achievement->slug,
