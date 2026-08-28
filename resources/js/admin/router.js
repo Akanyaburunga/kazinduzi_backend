@@ -49,6 +49,12 @@ const routes = [
                 component: () => import('./views/achievements/Index.vue'),
                 meta: { title: 'Badges' },
             },
+            {
+                path: 'analytics',
+                name: 'admin.analytics.index',
+                component: () => import('./views/analytics/Index.vue'),
+                meta: { title: 'Analytics' },
+            },
         ],
     },
 ];

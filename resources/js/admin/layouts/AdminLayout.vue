@@ -17,6 +17,7 @@ const nav = [
     { name: 'admin.categories.index', label: 'Categories', icon: 'M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z' },
     { name: 'admin.tags.index', label: 'Tags', icon: 'M12 2l2.4 4.8L20 8l-4.8 3.6L16 18l-4-2.5L8 18l.8-6.4L4 8l5.6-1.2z' },
     { name: 'admin.achievements.index', label: 'Badges', icon: 'M8.21 13.89L5.7 12.5a2 2 0 011.4-3.74M22 12a5 5 0 00-7.07-4.53L9 9m0 0l2.47-7.07A5 5 0 0018 9l-9 0zM7.21 8.5L9 9l-2.47 7.07a5 5 0 00-3.27-2.32' },
+    { name: 'admin.analytics.index', label: 'Analytics', icon: 'M3 3v18h18M8 17v-5M13 17V8M18 17v-3' },
 ];
 
 watch(() => route.name, () => {
