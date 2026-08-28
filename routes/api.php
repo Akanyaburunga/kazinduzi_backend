@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Riddle\AnswerController;
 use App\Http\Controllers\Api\Riddle\RiddleController;
 use App\Http\Controllers\Api\Riddle\CategoryController;
 use App\Http\Controllers\Api\Riddle\FavoriteController;
+use App\Http\Controllers\Api\Riddle\DuelController;
 use App\Http\Controllers\Api\Riddle\ShareController;
 use App\Http\Controllers\Api\Riddle\SubmissionController;
 
@@ -130,4 +131,16 @@ Route::prefix('me/favorites')->middleware(['auth:sanctum', 'verified'])->group(f
 Route::prefix('submissions/riddles')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [SubmissionController::class, 'index']);        // My submissions
     Route::post('/', [SubmissionController::class, 'store']);       // Submit a riddle for review
+});
+
+/**
+ * ⚔️ Player-versus-player challenge duels
+ */
+Route::prefix('duels')->middleware(['auth:sanctum', 'verified', 'throttle:30,1'])->group(function () {
+    Route::get('/', [DuelController::class, 'index']);                        // My challenges
+    Route::post('/', [DuelController::class, 'store']);                       // Create a challenge
+    Route::get('{challenge}', [DuelController::class, 'show']);               // Live duel status
+    Route::post('{challenge}/accept', [DuelController::class, 'accept']);     // Accept a pending duel
+    Route::post('{challenge}/decline', [DuelController::class, 'decline']);   // Decline a pending duel
+    Route::post('{challenge}/solve', [DuelController::class, 'solve']);       // Submit a single answer
 });

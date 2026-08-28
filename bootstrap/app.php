@@ -38,5 +38,6 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->command('sitemap:generate')->daily();
+        $schedule->command('duels:expire-stale')->hourly();
     })
     ->create();

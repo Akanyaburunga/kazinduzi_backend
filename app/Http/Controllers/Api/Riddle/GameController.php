@@ -170,12 +170,16 @@ class GameController extends Controller
 
         $streaks = Streaks::compute($user);
 
+        $pendingChallenges = \App\Models\Challenge::where('opponent_id', $user->id)
+            ->where('status', \App\Models\Challenge::STATUS_PENDING)
+            ->count();
+
         return response()->json([
             'success' => true,
             'data' => [
                 'daily_available' => !$solvedToday,
                 'streak_at_risk' => $streaks['current'] > 0 && !$solvedToday && !$frozenToday,
-                'pending_challenges' => 0,
+                'pending_challenges' => $pendingChallenges,
                 'streak' => [
                     'current' => $streaks['current'],
                     'longest' => $streaks['longest'],
