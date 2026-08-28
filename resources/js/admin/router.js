@@ -72,7 +72,7 @@ router.beforeEach(async (to) => {
     }
 
     if (to.meta?.title) {
-        document.title = `${to.meta.title} | Kazinduzi Admin`;
+        document.title = `${to.meta.title} | Rinjora`;
     }
 
     const isLogin = to.name === 'admin.login';

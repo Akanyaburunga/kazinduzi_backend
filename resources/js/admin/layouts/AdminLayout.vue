@@ -43,7 +43,7 @@ async function logout() {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
-                <span class="text-lg font-semibold text-white">Kazinduzi Admin</span>
+                <span class="text-lg font-semibold text-white">Rinjora</span>
             </div>
 
             <nav class="mt-4 flex-1 space-y-1 px-3">

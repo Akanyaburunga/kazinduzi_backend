@@ -54,7 +54,7 @@ async function submit() {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
-                <h1 class="text-2xl font-bold tracking-tight text-gray-900">Kazinduzi Admin</h1>
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">Rinjora</h1>
                 <p class="mt-1 text-sm text-gray-500">Sign in to manage the platform</p>
             </div>
 
