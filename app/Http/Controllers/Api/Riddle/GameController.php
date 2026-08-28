@@ -19,13 +19,23 @@ class GameController extends Controller
 
         $query = Riddle::query()
             ->where('is_suspended', false)
-            ->with('category:id,name,slug');
+            ->with(['category:id,name,slug', 'tags:id,name,slug']);
 
         if ($request->has('category_id')) {
             $query->where('category_id', $request->input('category_id'));
         }
 
-        $riddles = $query->latest()->get();
+        if ($request->has('type') && in_array($request->input('type'), Riddle::RIDDLE_TYPES, true)) {
+            $query->where('riddle_type', $request->input('type'));
+        }
+
+        if ($request->input('sort') === 'new') {
+            $riddles = $query->latest('id')->get();
+        } elseif ($request->input('sort') === 'trending') {
+            $riddles = $query->orderByDesc('popularity_score')->get();
+        } else {
+            $riddles = $query->latest()->get();
+        }
 
         $solvedIds = $this->solvedIds($user->id);
 
@@ -34,6 +44,30 @@ class GameController extends Controller
             'data' => $riddles->map(fn (Riddle $riddle) => $this->gamePayload($riddle, in_array($riddle->id, $solvedIds, true))),
         ]);
     }
+
+    /**
+     * Trending riddles ranked by popularity score (recency-weighted solves).
+     */
+    public function trending(Request $request)
+    {
+        $user = $request->user();
+
+        $riddles = Riddle::query()
+            ->where('is_suspended', false)
+            ->with(['category:id,name,slug', 'tags:id,name,slug'])
+            ->orderByDesc('popularity_score')
+            ->orderByDesc('id')
+            ->limit(20)
+            ->get();
+
+        $solvedIds = $this->solvedIds($user->id);
+
+        return response()->json([
+            'success' => true,
+            'data' => $riddles->map(fn (Riddle $riddle) => $this->gamePayload($riddle, in_array($riddle->id, $solvedIds, true))),
+        ]);
+    }
+
 
     /**
      * Fetch a single riddle without revealing the answer.
@@ -270,6 +304,12 @@ class GameController extends Controller
                 : null,
             'question' => $riddle->question,
             'difficulty' => $riddle->difficulty,
+            'riddle_type' => $riddle->riddle_type,
+            'tags' => $riddle->tags->map(fn ($tag) => [
+                'id' => $tag->id,
+                'name' => $tag->name,
+                'slug' => $tag->slug,
+            ])->values(),
             'hint' => $riddle->hint,
             'hint2' => $riddle->hint2,
             'created_at' => $riddle->created_at,

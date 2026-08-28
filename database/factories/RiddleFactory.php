@@ -18,6 +18,7 @@ class RiddleFactory extends Factory
             'question' => fake()->sentence(8),
             'answer' => fake()->word(),
             'difficulty' => 'easy',
+            'riddle_type' => 'riddle',
             'hint' => null,
             'hint2' => null,
             'source' => null,

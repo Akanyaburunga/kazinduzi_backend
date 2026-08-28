@@ -19,7 +19,7 @@ class RiddleController extends Controller
     public function index()
     {
         $query = $this->filteredQuery()
-            ->with(['category:id,name,slug', 'creator:id,name'])
+            ->with(['category:id,name,slug', 'creator:id,name', 'tags:id,name,slug'])
             ->withCount('attempts')
             ->withCount(['attempts as solved_count' => fn ($q) => $q->where('is_correct', true)]);
 
@@ -164,6 +164,14 @@ class RiddleController extends Controller
             $query->where('difficulty', $difficulty);
         }
 
+        if (($type = request('type')) && in_array($type, Riddle::RIDDLE_TYPES, true)) {
+            $query->where('riddle_type', $type);
+        }
+
+        if ($tagId = request('tag_id')) {
+            $query->whereHas('tags', fn ($q) => $q->where('tags.id', $tagId));
+        }
+
         return $query;
     }
 
@@ -178,25 +186,31 @@ class RiddleController extends Controller
             'question' => $request->question,
             'answer' => $request->answer,
             'difficulty' => $request->difficulty ?? 'easy',
+            'riddle_type' => $request->riddle_type ?? 'riddle',
             'hint' => $request->hint,
             'hint2' => $request->hint2,
             'source' => $request->source,
             'created_by' => $request->user()->id,
         ]);
 
-        return response()->json(['success' => true, 'data' => $riddle->load('category:id,name,slug', 'creator:id,name')], 201);
+        $riddle->tags()->sync($this->resolveTagIds($request->input('tags')));
+
+        return response()->json([
+            'success' => true,
+            'data' => $riddle->load('category:id,name,slug', 'creator:id,name', 'tags:id,name,slug'),
+        ], 201);
     }
 
     public function show(Riddle $riddle)
     {
-        $riddle->load(['category:id,name,slug', 'creator:id,name']);
+        $riddle->load(['category:id,name,slug', 'creator:id,name', 'tags:id,name,slug']);
 
         return response()->json(['success' => true, 'data' => $riddle]);
     }
 
     public function update(UpdateRiddleRequest $request, Riddle $riddle)
     {
-        $data = $request->only(['category_id', 'question', 'difficulty', 'hint', 'hint2', 'source']);
+        $data = $request->only(['category_id', 'question', 'difficulty', 'riddle_type', 'hint', 'hint2', 'source']);
         if ($request->filled('answer')) {
             $data['answer'] = RiddleHelper::normalize($request->answer);
         }
@@ -212,7 +226,14 @@ class RiddleController extends Controller
 
         $riddle->update($data);
 
-        return response()->json(['success' => true, 'data' => $riddle->load('category:id,name,slug', 'creator:id,name')]);
+        if ($request->has('tags')) {
+            $riddle->tags()->sync($this->resolveTagIds($request->input('tags')));
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $riddle->load('category:id,name,slug', 'creator:id,name', 'tags:id,name,slug'),
+        ]);
     }
 
     public function destroy(Riddle $riddle)
@@ -269,6 +290,39 @@ class RiddleController extends Controller
     {
         return RiddleHelper::normalize($answer) !== $riddle->answer
             || (int) $categoryId !== (int) $riddle->category_id;
+    }
+
+    /**
+     * Resolve an array of tag ids (integers) or tag names (strings) into
+     * tag ids, creating any that don't already exist by name.
+     */
+    private function resolveTagIds(?array $tags): array
+    {
+        if (empty($tags)) {
+            return [];
+        }
+
+        $ids = [];
+        foreach ($tags as $tag) {
+            if (is_numeric($tag)) {
+                $ids[] = (int) $tag;
+                continue;
+            }
+
+            $name = trim((string) $tag);
+            if ($name === '') {
+                continue;
+            }
+
+            $existing = \App\Models\Tag::firstOrCreate(
+                ['slug' => \Illuminate\Support\Str::slug($name)],
+                ['name' => $name],
+            );
+
+            $ids[] = $existing->id;
+        }
+
+        return array_values(array_unique($ids));
     }
 
     private function duplicateResponse(Riddle $duplicate)

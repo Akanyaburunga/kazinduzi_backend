@@ -76,6 +76,7 @@ Route::prefix('riddles')->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/categories', [CategoryController::class, 'index']);      // List categories (curator view)
         Route::get('/', [GameController::class, 'index']);                    // List riddles (no answers)
+        Route::get('/trending', [GameController::class, 'trending']);         // Trending riddles (popularity score)
         Route::get('/daily', [GameController::class, 'daily']);               // Riddle of the day
         Route::get('/next', [GameController::class, 'next']);                 // Next unsolved riddle (difficulty filter)
         Route::get('/history', [GameController::class, 'history']);           // Paginated attempt history

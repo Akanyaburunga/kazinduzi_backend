@@ -20,6 +20,8 @@ class Riddle extends Model
         'hint',
         'hint2',
         'source',
+        'riddle_type',
+        'popularity_score',
         'is_suspended',
         'suspended_reason',
         'created_by',
@@ -27,9 +29,19 @@ class Riddle extends Model
 
     protected $casts = [
         'is_suspended' => 'boolean',
+        'popularity_score' => 'integer',
     ];
 
     public const DIFFICULTIES = ['easy', 'medium', 'hard'];
+
+    public const RIDDLE_TYPES = [
+        'what_am_i',
+        'what_is_it',
+        'who_am_i',
+        'riddle',
+        'brain_teaser',
+        'math',
+    ];
 
     protected static function boot()
     {
@@ -56,5 +68,10 @@ class Riddle extends Model
     public function attempts()
     {
         return $this->hasMany(RiddleAttempt::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

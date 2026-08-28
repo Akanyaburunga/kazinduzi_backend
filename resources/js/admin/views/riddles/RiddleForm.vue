@@ -1,10 +1,12 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { RIDDLE_TYPES } from '../../riddleTypes.js';
 
 const props = defineProps({
     open: { type: Boolean, default: false },
     riddle: { type: Object, default: null },
     categories: { type: Array, default: () => [] },
+    tags: { type: Array, default: () => [] },
     saving: { type: Boolean, default: false },
     serverErrors: { type: Object, default: () => ({}) },
     duplicate: { type: Object, default: null },
@@ -17,9 +19,11 @@ const form = ref({
     question: '',
     answer: '',
     difficulty: 'easy',
+    riddle_type: 'riddle',
     hint: '',
     hint2: '',
     source: '',
+    tags: [],
 });
 
 const errors = ref({});
@@ -31,9 +35,11 @@ function dirty() {
         question: props.riddle?.question ?? '',
         answer: props.riddle?.answer ?? '',
         difficulty: props.riddle?.difficulty ?? 'easy',
+        riddle_type: props.riddle?.riddle_type ?? 'riddle',
         hint: props.riddle?.hint ?? '',
         hint2: props.riddle?.hint2 ?? '',
         source: props.riddle?.source ?? '',
+        tags: (props.riddle?.tags ?? []).map((tag) => tag.name),
     };
     return JSON.stringify(form.value) !== JSON.stringify(pristine);
 }
@@ -49,9 +55,11 @@ watch(
                 question: props.riddle?.question ?? '',
                 answer: props.riddle?.answer ?? '',
                 difficulty: props.riddle?.difficulty ?? 'easy',
+                riddle_type: props.riddle?.riddle_type ?? 'riddle',
                 hint: props.riddle?.hint ?? '',
                 hint2: props.riddle?.hint2 ?? '',
                 source: props.riddle?.source ?? '',
+                tags: (props.riddle?.tags ?? []).map((tag) => tag.name),
             };
         }
     }
@@ -60,6 +68,13 @@ watch(
 function fieldError(field) {
     return errors.value[field] || props.serverErrors[field]?.[0];
 }
+
+const tagsText = {
+    get: () => form.value.tags.join(', '),
+    set: (value) => {
+        form.value.tags = value.split(',').map((tag) => tag.trim()).filter(Boolean);
+    },
+};
 
 function requestClose() {
     if (dirty() && !props.saving) {
@@ -134,6 +149,17 @@ function submit() {
                     </div>
 
                     <div>
+                        <label class="block text-sm font-medium text-gray-700">Type</label>
+                        <select
+                            v-model="form.riddle_type"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        >
+                            <option v-for="t in RIDDLE_TYPES" :key="t.value" :value="t.value">{{ t.label }}</option>
+                        </select>
+                        <p v-if="fieldError('riddle_type')" class="mt-1 text-xs text-red-600">{{ fieldError('riddle_type') }}</p>
+                    </div>
+
+                    <div>
                         <label class="block text-sm font-medium text-gray-700">Question</label>
                         <textarea
                             v-model="form.question"
@@ -182,6 +208,17 @@ function submit() {
                             class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         />
                         <p class="mt-1 text-xs text-gray-400">Attribution, e.g. imigani, a book, or a website.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tags</label>
+                        <input
+                            v-model="form.tagsText"
+                            type="text"
+                            class="mt-1 block w-full rounded-lg border-gray-300 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            placeholder="matungo, inyamaswa"
+                        />
+                        <p class="mt-1 text-xs text-gray-400">Comma-separated tags. New tags are created automatically.</p>
                     </div>
 
                     <div class="flex justify-end gap-3 pt-2">

@@ -50,6 +50,7 @@ class AnswerController extends Controller
 
         if ($isCorrect) {
             \App\Support\Streaks::recompute($user);
+            \App\Support\Popularity::recompute($riddle);
         }
 
         return response()->json([

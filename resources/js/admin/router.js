@@ -37,6 +37,12 @@ const routes = [
                 component: () => import('./views/categories/Index.vue'),
                 meta: { title: 'Categories' },
             },
+            {
+                path: 'tags',
+                name: 'admin.tags.index',
+                component: () => import('./views/tags/Index.vue'),
+                meta: { title: 'Tags' },
+            },
         ],
     },
 ];

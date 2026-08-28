@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RiddleController;
 use App\Http\Controllers\Admin\RiddleBulkController;
 use App\Http\Controllers\Admin\RiddleCategoryController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,12 @@ Route::prefix('admin/api')->group(function () {
         Route::post('/categories', [RiddleCategoryController::class, 'store']);
         Route::put('/categories/{category}', [RiddleCategoryController::class, 'update']);
         Route::delete('/categories/{category}', [RiddleCategoryController::class, 'destroy']);
+
+        Route::get('/tags', [TagController::class, 'index']);
+        Route::post('/tags', [TagController::class, 'store']);
+        Route::put('/tags/{tag}', [TagController::class, 'update']);
+        Route::delete('/tags/{tag}', [TagController::class, 'destroy']);
+        Route::get('/riddle-types', [TagController::class, 'types']);
     });
 });
 

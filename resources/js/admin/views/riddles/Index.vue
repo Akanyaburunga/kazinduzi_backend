@@ -6,6 +6,8 @@ import axios from '../../bootstrap.js';
 import { useToastStore } from '../../stores/toast.js';
 import { useRiddlesStore } from '../../stores/riddles.js';
 import { useCategoriesStore } from '../../stores/categories.js';
+import { useTagsStore } from '../../stores/tags.js';
+import { RIDDLE_TYPES } from '../../riddleTypes.js';
 import DataTable from '../../components/DataTable.vue';
 import ConfirmDialog from '../../components/ConfirmDialog.vue';
 import RiddleForm from './RiddleForm.vue';
@@ -14,9 +16,11 @@ const router = useRouter();
 const toast = useToastStore();
 const store = useRiddlesStore();
 const categoriesStore = useCategoriesStore();
+const tagsStore = useTagsStore();
 
 const { items, meta, loading, search, sortField, sortDir, filters } = storeToRefs(store);
 const { items: categories } = storeToRefs(categoriesStore);
+const { items: tags } = storeToRefs(tagsStore);
 
 const showForm = ref(false);
 const editing = ref(null);
@@ -40,7 +44,9 @@ const columns = [
     { key: 'question', label: 'Question', sortable: true },
     { key: 'answer', label: 'Answer', sortable: true },
     { key: 'difficulty', label: 'Difficulty', sortable: true },
+    { key: 'riddle_type', label: 'Type' },
     { key: 'category', label: 'Category' },
+    { key: 'tags', label: 'Tags' },
     { key: 'source', label: 'Source' },
     { key: 'suspended_reason', label: 'Reason' },
     { key: 'status', label: 'Status' },
@@ -82,6 +88,10 @@ function setFilter(key, value) {
 function clearFilters() {
     selected.value = [];
     store.resetFilters();
+}
+
+function typeLabel(value) {
+    return RIDDLE_TYPES.find((t) => t.value === value)?.label ?? (value ? value.replace(/_/g, ' ') : '—');
 }
 
 async function exportCsv() {
@@ -207,7 +217,7 @@ async function confirmUnsuspend() {
 }
 
 onMounted(async () => {
-    await Promise.all([store.fetch(), categoriesStore.fetch()]);
+    await Promise.all([store.fetch(), categoriesStore.fetch(), tagsStore.fetch()]);
 });
 </script>
 
@@ -274,6 +284,22 @@ onMounted(async () => {
                         <option value="hard">Hard</option>
                     </select>
                     <select
+                        :value="filters.type"
+                        class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="setFilter('type', $event.target.value)"
+                    >
+                        <option value="">All types</option>
+                        <option v-for="t in RIDDLE_TYPES" :key="t.value" :value="t.value">{{ t.label }}</option>
+                    </select>
+                    <select
+                        :value="filters.tag_id"
+                        class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="setFilter('tag_id', $event.target.value)"
+                    >
+                        <option value="">All tags</option>
+                        <option v-for="tag in tags" :key="tag.id" :value="tag.id">{{ tag.name }}</option>
+                    </select>
+                    <select
                         :value="filters.trashed"
                         class="rounded-lg border-gray-300 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         @change="setFilter('trashed', $event.target.value)"
@@ -319,6 +345,24 @@ onMounted(async () => {
             </template>
             <template #cell-source="{ row }">
                 <span class="text-xs text-gray-500">{{ row.source ?? '—' }}</span>
+            </template>
+            <template #cell-riddle_type="{ row }">
+                <span class="text-xs text-gray-600">{{ typeLabel(row.riddle_type) }}</span>
+            </template>
+            <template #cell-tags="{ row }">
+                <div class="flex flex-wrap gap-1">
+                    <template v-if="row.tags?.length">
+                        <span
+                            v-for="tag in row.tags.slice(0, 2)"
+                            :key="tag.id"
+                            class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-700"
+                        >
+                            {{ tag.name }}
+                        </span>
+                        <span v-if="row.tags.length > 2" class="text-xs text-gray-400">+{{ row.tags.length - 2 }}</span>
+                    </template>
+                    <span v-else class="text-xs text-gray-400">—</span>
+                </div>
             </template>
             <template #cell-status="{ row }">
                 <span
