@@ -288,6 +288,38 @@ Abstract over Part-B points/levels, then add badges:
 
 ---
 
+### Phase C7 — Player versus player challenges (duels)
+
+Head-to-head riddling where one player challenges another to an asynchronous, fair duel.
+
+**Models & schema**
+- `Challenge` — initiator, opponent, chosen riddle (or curated set), wager (optional reputation), status (`pending` / `accepted` / `declined` / `completed` / `expired`), timestamps for acceptance/expiry.
+- `ChallengeAttempt` (or a join/result table) — per-player solve records against the duel riddle, including `is_correct`, answer time, attempts used.
+
+**Core API**
+- `POST /api/duels` — create a challenge; validate opponent is a real, non-banned user (not self); optional reputation wager capped by `config('riddles.duel_max_wager')`; mark `pending`.
+- `GET /api/duels` — list incoming/outgoing with status and opponent summary.
+- `POST /api/duels/{challenge}/accept` / `decline` — respond within `config('riddles.duel_stale_hours')` (a "stale" pending duel auto-expires).
+- `POST /api/duels/{challenge}/solve` — submit an answer against the duel riddle; record time-to-solve; reject after opponent has finished or the riddle is already solved by self (single attempt allowed → mirrors the no-replay feel of a duel).
+- `GET /api/duels/{challenge}` — live status: who solved, times, who is ahead; **never** expose `answer` until a player has actually solved it.
+
+**Resolution & rewards**
+- On both solves (or reveal after expiry), resolve: winner = faster correct solve or fewer attempts.
+- Reputation wager transferred via the existing `reputation_logs` flow with reason `"Won a duel vs {opponent}"` / `"Lost a duel vs {opponent}"`.
+- Draw/tie → wager returned to both; no reputation change.
+- Earnings respect the existing daily reward cap (`daily_solve_reputation_cap`); a lost wager cannot be clawed back if it pushes reward below zero — guard with a floor.
+
+**Fairness & anti-abuse**
+- Only non-suspended riddles eligible as duel targets; opponent must not have already solved that riddle (keeps it a fair contest).
+- One pending outgoing challenge per opponent to prevent spam; rate-limited routes (`throttle`).
+- Expiry via scheduled cleanup (command or `Schedule`) resolving/voiding stale duels.
+
+**Tests:** create/accept/decline/expire/solve/resolution/wager-transfer/anti-abuse/admin visibility.
+
+**Deliverables:** models + migrations; duel API; reputation-wager resolution; expiry command; tests.
+
+---
+
 # Suggested Build Order (combined, one commit per phase)
 
 Phases are deliberately coupled so each commit is meaningful and testable:
@@ -307,10 +339,12 @@ Phases are deliberately coupled so each commit is meaningful and testable:
 13. **C4** — Social, sharing & personalization (favorites, progress, invites)
 14. **C5** — User-generated submissions + fairness/reward cap
 15. **C6** — Reporting & insights / user summary
+16. **C7** — Player versus player challenges (duels)
 
 > **Ordering rationale:** B4 (leaderboard+rank) is pulled early because it is the headline mobile
 > feature and cheap to do once B1/B3 give a clean points query. Part C builds on A2/B5 fields, so
-> those come first.
+> those come first. C7 sits last because duels build on the existing points/wager ledger, daily
+> reward caps (C5) and notifications/activity plumbing (C4/C6).
 
 ---
 
