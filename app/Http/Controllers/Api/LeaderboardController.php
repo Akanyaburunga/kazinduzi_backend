@@ -30,11 +30,11 @@ class LeaderboardController extends Controller
         // Per-user summed points within the period (net positive only).
         $aggregate = ReputationLog::query()
             ->select('user_id')
-            ->selectRaw('SUM(change) as points')
+            ->selectRaw('SUM(`change`) as points')
             ->whereBetween('created_at', [$start, $end])
             ->groupBy('user_id')
-            ->havingRaw('SUM(change) > 0')
-            ->orderByDesc(DB::raw('SUM(change)'))
+            ->havingRaw('SUM(`change`) > 0')
+            ->orderByDesc(DB::raw('SUM(`change`)'))
             ->orderBy('user_id')
             ->get();
 
