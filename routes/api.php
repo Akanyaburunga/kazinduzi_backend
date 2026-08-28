@@ -78,6 +78,9 @@ Route::prefix('riddles')->group(function () {
         Route::get('/', [GameController::class, 'index']);                    // List riddles (no answers)
         Route::get('/trending', [GameController::class, 'trending']);         // Trending riddles (popularity score)
         Route::get('/daily', [GameController::class, 'daily']);               // Riddle of the day
+        Route::get('/daily/history', [GameController::class, 'dailyHistory']); // Revisit a past daily riddle
+        Route::get('/daily/status', [GameController::class, 'dailyStatus']);   // Notifications badge data
+        Route::post('/streak/freeze', [GameController::class, 'useStreakFreeze']); // Spend a streak saver freeze
         Route::get('/next', [GameController::class, 'next']);                 // Next unsolved riddle (difficulty filter)
         Route::get('/history', [GameController::class, 'history']);           // Paginated attempt history
         Route::get('/history/stats', [GameController::class, 'historyStats']); // Attempt statistics

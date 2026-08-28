@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\Riddle;
 use App\Http\Controllers\Controller;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
+use App\Models\User;
 use App\Support\Streaks;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -99,24 +101,14 @@ class GameController extends Controller
     public function daily(Request $request)
     {
         $user = $request->user();
+        $today = now()->toDateString();
 
-        $seed = md5("{$user->id}-" . now()->toDateString());
-        $riddles = Riddle::where('is_suspended', false)->orderBy('id')->get();
-
-        $solvedIds = $this->solvedIds($user->id);
-
-        $unsolved = $riddles->reject(fn (Riddle $r) => in_array($r->id, $solvedIds, true))->values();
-
-        $pool = $unsolved->isNotEmpty() ? $unsolved : $riddles;
-        if ($pool->isEmpty()) {
+        try {
+            [$riddle, $solvedToday] = $this->resolveDaily($user, $today);
+        } catch (ModelNotFoundException $e) {
             return response()->json(['success' => false, 'message' => 'No riddles available.'], 404);
         }
 
-        $index = hexdec(substr($seed, 0, 8)) % $pool->count();
-        $riddle = $pool[$index];
-        $riddle->load('category:id,name,slug');
-
-        $solvedToday = in_array($riddle->id, $solvedIds, true);
         $streaks = Streaks::compute($user);
 
         return response()->json([
@@ -126,9 +118,139 @@ class GameController extends Controller
                     'current' => $streaks['current'],
                     'longest' => $streaks['longest'],
                 ],
+                'solved_by_count' => $this->dailySolvedCount($riddle, $today),
+                'best_streak' => (int) User::query()->max('longest_streak'),
                 'daily' => $this->gamePayload($riddle, $solvedToday),
             ],
         ]);
+    }
+
+    /**
+     * Daily riddle archive: replay a past (or today's) daily riddle for a date.
+     */
+    public function dailyHistory(Request $request)
+    {
+        $user = $request->user();
+        $date = $request->input('date') ?: now()->toDateString();
+
+        try {
+            [$riddle, $solved] = $this->resolveDaily($user, $date);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['success' => false, 'message' => 'No riddles available.'], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'date' => $date,
+                'solved' => $solved,
+                'daily' => $this->gamePayload($riddle, $solved),
+            ],
+        ]);
+    }
+
+    /**
+     * Notifications badge data for the daily experience.
+     */
+    public function dailyStatus(Request $request)
+    {
+        $user = $request->user();
+        $today = now()->startOfDay();
+
+        $solvedToday = $user->riddleAttempts()
+            ->where('is_correct', true)
+            ->whereDate('created_at', $today->toDateString())
+            ->exists();
+
+        $frozenToday = $user->streak_freeze_date
+            && $user->streak_freeze_date->format('Y-m-d') === $today->toDateString();
+
+        $streaks = Streaks::compute($user);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'daily_available' => !$solvedToday,
+                'streak_at_risk' => $streaks['current'] > 0 && !$solvedToday && !$frozenToday,
+                'pending_challenges' => 0,
+                'streak' => [
+                    'current' => $streaks['current'],
+                    'longest' => $streaks['longest'],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Spend one streak saver freeze to protect today's streak without a solve.
+     */
+    public function useStreakFreeze(Request $request)
+    {
+        $user = $request->user();
+        $today = now()->toDateString();
+
+        if ($user->streak_freeze_date && $user->streak_freeze_date->format('Y-m-d') === $today) {
+            return response()->json(['success' => false, 'message' => 'Streak freeze already used today.'], 422);
+        }
+
+        if ($user->streak_freezes <= 0) {
+            return response()->json(['success' => false, 'message' => 'No streak freezes left.'], 422);
+        }
+
+        $user->forceFill([
+            'streak_freezes' => $user->streak_freezes - 1,
+            'streak_freeze_date' => $today,
+        ])->save();
+
+        $streaks = Streaks::recompute($user);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'freezes_remaining' => $user->streak_freezes,
+                'freeze_active' => true,
+                'streak' => [
+                    'current' => $streaks['current'],
+                    'longest' => $streaks['longest'],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Resolve the deterministic daily riddle for a user/date,
+     * falling back to an unsolved active riddle when that pick is already solved.
+     */
+    private function resolveDaily(User $user, string $date): array
+    {
+        $seed = md5("{$user->id}-" . $date);
+        $riddles = Riddle::where('is_suspended', false)->orderBy('id')->get();
+
+        $solvedIds = $this->solvedIds($user->id);
+        $unsolved = $riddles->reject(fn (Riddle $r) => in_array($r->id, $solvedIds, true))->values();
+
+        $pool = $unsolved->isNotEmpty() ? $unsolved : $riddles;
+        if ($pool->isEmpty()) {
+            throw new ModelNotFoundException('No riddles available.');
+        }
+
+        $index = hexdec(substr($seed, 0, 8)) % $pool->count();
+        $riddle = $pool[$index];
+        $riddle->load('category:id,name,slug');
+
+        return [$riddle, in_array($riddle->id, $solvedIds, true)];
+    }
+
+    /**
+     * How many users correct-solved this riddle on the given calendar date.
+     */
+    private function dailySolvedCount(Riddle $riddle, string $date): int
+    {
+        return RiddleAttempt::query()
+            ->where('riddle_id', $riddle->id)
+            ->where('is_correct', true)
+            ->whereDate('created_at', $date)
+            ->count();
     }
 
     /**

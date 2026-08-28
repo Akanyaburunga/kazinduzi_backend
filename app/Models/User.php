@@ -25,6 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_picture',
         'current_streak',
         'longest_streak',
+        'streak_freezes',
+        'streak_freeze_date',
     ];
 
     /**
@@ -45,7 +47,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'streak_freezes' => 'integer',
+        'streak_freeze_date' => 'date',
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (User $user) {
+            if ($user->streak_freezes === null) {
+                $user->streak_freezes = config('riddles.streak_freezes', 3);
+            }
+        });
+    }
 
     public function words()
     {

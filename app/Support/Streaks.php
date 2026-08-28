@@ -74,15 +74,27 @@ class Streaks
             $prev = $current;
         }
 
-        // Current streak: anchor on today if solved, else yesterday; walk backwards.
+        // Current streak: anchor on today if solved (or today is protected by
+        // a streak freeze), else yesterday; walk backwards.
         $todayKey = $today->format('Y-m-d');
-        $anchor = in_array($todayKey, $daySet, true)
-            ? $today
+        $frozenToday = $user->streak_freeze_date
+            && $user->streak_freeze_date->format('Y-m-d') === $todayKey;
+
+        // A freeze applied today protects today: treat it as a covered day so
+        // the run continues instead of resetting.
+        $daySetEffective = $daySet;
+        if ($frozenToday && !in_array($todayKey, $daySetEffective, true)) {
+            $daySetEffective[] = $todayKey;
+            sort($daySetEffective);
+        }
+
+        $anchor = in_array($todayKey, $daySetEffective, true)
+            ? $today->copy()
             : $today->copy()->subDay();
 
         $current = 0;
         $cursor = $anchor;
-        while (in_array($cursor->format('Y-m-d'), $daySet, true)) {
+        while (in_array($cursor->format('Y-m-d'), $daySetEffective, true)) {
             $current++;
             $cursor->subDay();
         }
