@@ -74,4 +74,14 @@ class Riddle extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'user_riddle_favorites')->withTimestamps();
+    }
+
+    public function shares()
+    {
+        return $this->hasMany(RiddleShare::class);
+    }
 }

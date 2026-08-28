@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\Riddle\GameController;
 use App\Http\Controllers\Api\Riddle\AnswerController;
 use App\Http\Controllers\Api\Riddle\RiddleController;
 use App\Http\Controllers\Api\Riddle\CategoryController;
+use App\Http\Controllers\Api\Riddle\FavoriteController;
+use App\Http\Controllers\Api\Riddle\ShareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +75,10 @@ Route::get('leaderboard', [LeaderboardController::class, 'index'])->middleware('
  * 🧩 Riddle Game
  */
 Route::prefix('riddles')->group(function () {
+    // Public share resolution (viewed via a link, no auth required)
+    Route::get('/share/{code}', [ShareController::class, 'show'])
+        ->name('api.riddles.share.show');
+
     // Game-facing routes (authenticated + verified)
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/categories', [CategoryController::class, 'index']);      // List categories (curator view)
@@ -85,6 +91,7 @@ Route::prefix('riddles')->group(function () {
         Route::get('/next', [GameController::class, 'next']);                 // Next unsolved riddle (difficulty filter)
         Route::get('/history', [GameController::class, 'history']);           // Paginated attempt history
         Route::get('/history/stats', [GameController::class, 'historyStats']); // Attempt statistics
+        Route::post('/{riddle}/share', [ShareController::class, 'store']);    // Create shareable short link
         Route::get('/{riddle}', [GameController::class, 'show']);             // Single riddle (no answer)
         Route::get('/{riddle}/hint', [GameController::class, 'hint']);        // Progressive hint(s)
         Route::post('/{riddle}/answer', [AnswerController::class, 'store']);  // Submit an answer
@@ -103,4 +110,13 @@ Route::prefix('riddles')->group(function () {
         Route::post('/{riddle}/suspend', [RiddleController::class, 'suspend']);
         Route::post('/{riddle}/unsuspend', [RiddleController::class, 'unsuspend']);
     });
+});
+
+/**
+ * 🔖 Favorites and bookmarks
+ */
+Route::prefix('me/favorites')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [FavoriteController::class, 'index']);                 // List bookmarked riddles
+    Route::post('/{riddle}', [FavoriteController::class, 'store']);        // Bookmark a riddle
+    Route::delete('/{riddle}', [FavoriteController::class, 'destroy']);    // Remove a bookmark
 });

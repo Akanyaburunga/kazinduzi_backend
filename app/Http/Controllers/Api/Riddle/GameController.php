@@ -89,9 +89,11 @@ class GameController extends Controller
             ->where('is_correct', true)
             ->exists();
 
+        $hintsRevealed = $this->hintsRevealed($request->user()->id, $riddle->id);
+
         return response()->json([
             'success' => true,
-            'data' => $this->gamePayload($riddle, $solved),
+            'data' => $this->gamePayload($riddle, $solved, $hintsRevealed),
         ]);
     }
 
@@ -121,7 +123,7 @@ class GameController extends Controller
                 ],
                 'solved_by_count' => $this->dailySolvedCount($riddle, $today),
                 'best_streak' => (int) User::query()->max('longest_streak'),
-                'daily' => $this->gamePayload($riddle, $solvedToday),
+                'daily' => $this->gamePayload($riddle, $solvedToday, $this->hintsRevealed($user->id, $riddle->id)),
             ],
         ]);
     }
@@ -145,7 +147,7 @@ class GameController extends Controller
             'data' => [
                 'date' => $date,
                 'solved' => $solved,
-                'daily' => $this->gamePayload($riddle, $solved),
+                'daily' => $this->gamePayload($riddle, $solved, $this->hintsRevealed($user->id, $riddle->id)),
             ],
         ]);
     }
@@ -256,6 +258,10 @@ class GameController extends Controller
 
     /**
      * Next unsolved active riddle, optionally filtered by difficulty.
+     *
+     * Personalization: unsolved riddles from categories the user has most
+     * history with (attempts) are preferred, so the next pick leans toward
+     * categories the user already engages with (or avoids when no history).
      */
     public function next(Request $request)
     {
@@ -267,23 +273,53 @@ class GameController extends Controller
             $query->where('difficulty', $request->input('difficulty'));
         }
 
-        $riddles = $query->get();
+        $riddles = $query->with('category:id,name,slug')->get();
         $solvedIds = $this->solvedIds($user->id);
 
-        $next = $riddles
-            ->reject(fn (Riddle $r) => in_array($r->id, $solvedIds, true))
-            ->first();
+        $unsolved = $riddles->reject(fn (Riddle $r) => in_array($r->id, $solvedIds, true))->values();
 
-        if (! $next) {
+        if ($unsolved->isEmpty()) {
             return response()->json(['success' => false, 'message' => 'No unsolved riddles available.'], 404);
         }
+
+        $affinity = $this->categoryAffinity($user->id);
+        $next = $unsolved->sortBy(fn (Riddle $r) => $affinity[$r->category_id ?? 0] ?? -1, SORT_REGULAR, true)
+            ->values()
+            ->first();
 
         $next->load('category:id,name,slug');
 
         return response()->json([
             'success' => true,
-            'data' => $this->gamePayload($next, false),
+            'data' => $this->gamePayload($next, false, $this->hintsRevealed($user->id, $next->id)),
         ]);
+    }
+
+    /**
+     * Per-category attempt counts for a user, used to personalise "next".
+     */
+    private function categoryAffinity(int $userId): array
+    {
+        return RiddleAttempt::query()
+            ->join('riddles', 'riddles.id', '=', 'riddle_attempts.riddle_id')
+            ->where('riddle_attempts.user_id', $userId)
+            ->groupBy('riddles.category_id')
+            ->selectRaw('riddles.category_id, COUNT(*) as attempts')
+            ->get()
+            ->pluck('attempts', 'category_id')
+            ->map(fn ($count) => (int) $count)
+            ->all();
+    }
+
+    /**
+     * Number of hints the user has revealed for a riddle (resume point).
+     */
+    private function hintsRevealed(int $userId, int $riddleId): int
+    {
+        return (int) \App\Models\UserRiddleProgress::query()
+            ->where('user_id', $userId)
+            ->where('riddle_id', $riddleId)
+            ->value('hints_revealed');
     }
 
     /**
@@ -307,12 +343,21 @@ class GameController extends Controller
                 ->value('count') + 1]
         );
 
+        \App\Models\UserRiddleProgress::query()->updateOrCreate(
+            ['user_id' => $userId, 'riddle_id' => $riddle->id],
+            [
+                'hints_revealed' => 2,
+                'last_hinted_at' => now(),
+            ]
+        );
+
         return response()->json([
             'success' => true,
             'data' => [
                 'id' => $riddle->id,
                 'hint' => $riddle->hint,
                 'hint2' => $riddle->hint2,
+                'hints_revealed' => 2,
             ],
         ]);
     }
@@ -429,11 +474,12 @@ class GameController extends Controller
     /**
      * Build the game-facing payload (answer is always omitted unless revealed).
      */
-    protected function gamePayload(Riddle $riddle, bool $solved = false): array
+    protected function gamePayload(Riddle $riddle, bool $solved = false, ?int $hintsRevealed = 0): array
     {
         return [
             'id' => $riddle->id,
             'solved' => $solved,
+            'hints_revealed' => $hintsRevealed,
             'category' => $riddle->category
                 ? ['id' => $riddle->category->id, 'name' => $riddle->category->name, 'slug' => $riddle->category->slug]
                 : null,

@@ -85,6 +85,30 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
+    /**
+     * Riddles the user has bookmarked.
+     */
+    public function favoriteRiddles()
+    {
+        return $this->belongsToMany(Riddle::class, 'user_riddle_favorites')->withTimestamps();
+    }
+
+    /**
+     * Share/invitation records created by the user.
+     */
+    public function shares()
+    {
+        return $this->hasMany(RiddleShare::class);
+    }
+
+    /**
+     * Saved per-riddle progress (revealed hints).
+     */
+    public function riddleProgress()
+    {
+        return $this->hasMany(UserRiddleProgress::class);
+    }
+
     public function updateReputation(int $points, String $reason, $related)
     {
         $this->reputation += $points;
