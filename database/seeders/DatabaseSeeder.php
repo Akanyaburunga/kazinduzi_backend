@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminUserSeeder::class,
             WordsFromJsonSeeder::class,
+            RiddleCategorySeeder::class,
             RiddleSeeder::class,
             AchievementSeeder::class,
+            TestDataSeeder::class,
         ]);
     }
 }
