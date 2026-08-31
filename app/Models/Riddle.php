@@ -16,6 +16,7 @@ class Riddle extends Model
         'category_id',
         'question',
         'answer',
+        'answer_aliases',
         'difficulty',
         'hint',
         'hint2',

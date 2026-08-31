@@ -162,6 +162,51 @@ class RiddleGameTest extends TestCase
         ])->assertOk()->assertJson(['correct' => true]);
     }
 
+    public function test_lenient_matcher_accepts_free_word_order_and_aliases(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+
+        $riddle = $this->makeRiddle([
+            'answer' => 'uruyuki',
+            'answer_aliases' => 'akayuki',
+        ]);
+
+        $this->postJson("/api/riddles/{$riddle->id}/answer", [
+            'answer' => 'akayuki',
+        ])->assertOk()->assertJson(['correct' => true]);
+
+        $free = Riddle::factory()->create([
+            'category_id' => $riddle->category_id,
+            'answer' => 'ingingo n’umuhinzi',
+        ]);
+
+        $this->postJson("/api/riddles/{$free->id}/answer", [
+            'answer' => 'umuhinzi n’ingingo',
+        ])->assertOk()->assertJson(['correct' => true]);
+    }
+
+    public function test_concede_reveals_answer_without_reward(): void
+    {
+        $user = $this->verifiedUser();
+        Sanctum::actingAs($user);
+        $user->update(['reputation' => 0]);
+
+        $riddle = $this->makeRiddle();
+
+        $this->postJson("/api/riddles/{$riddle->id}/answer", [
+            'answer' => 'ndaguhaye',
+        ])->assertOk()
+            ->assertJson([
+                'correct' => false,
+                'rewarded' => false,
+                'conceded' => true,
+                'answer' => 'inkerebuzo',
+            ]);
+
+        $this->assertDatabaseMissing('reputation_logs', ['user_id' => $user->id]);
+    }
+
     public function test_list_marks_solved_riddles(): void
     {
         $user = $this->verifiedUser();

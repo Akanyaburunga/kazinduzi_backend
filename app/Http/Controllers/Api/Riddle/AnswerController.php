@@ -8,7 +8,7 @@ use App\Models\Riddle;
 use App\Models\RiddleAttempt;
 use App\Models\ReputationLog;
 use App\Support\Achievements;
-use App\Support\RiddleHelper;
+use App\Support\AnswerMatcher;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -25,10 +25,13 @@ class AnswerController extends Controller
 
         $user = $request->user();
 
-        $normalizedSubmitted = RiddleHelper::normalize($request->answer);
-        $normalizedAnswer = RiddleHelper::normalize($riddle->answer);
+        $candidates = trim((string) $riddle->answer);
+        if (! empty($riddle->answer_aliases)) {
+            $candidates .= ' / ' . trim((string) $riddle->answer_aliases);
+        }
 
-        $isCorrect = $normalizedSubmitted === $normalizedAnswer;
+        $conceded = AnswerMatcher::isConcede((string) $request->answer);
+        $isCorrect = ! $conceded && AnswerMatcher::isCorrect((string) $request->answer, $candidates);
 
         $attempt = RiddleAttempt::updateOrCreate(
             [
@@ -76,9 +79,11 @@ class AnswerController extends Controller
             'rewarded' => $rewarded,
             'points' => $points,
             'capped' => $isCorrect && $capped,
+            'conceded' => $conceded,
+            'answer' => $conceded ? $riddle->answer : null,
             'message' => $isCorrect
                 ? ($rewarded ? "Correct! You earned {$points} reputation points." : ($capped ? 'Correct! You reached today’s reputation cap.' : 'Correct!'))
-                : 'Not quite. Try again.',
+                : ($conceded ? 'You gave up. The answer is revealed.' : 'Not quite. Try again.'),
             'new_achievements' => $newAchievements->map(fn ($achievement) => [
                 'slug' => $achievement->slug,
                 'name' => $achievement->name,

@@ -26,4 +26,26 @@ return [
     | Hours a pending duel stays open for acceptance before it auto-expires.
     */
     'duel_stale_hours' => (int) env('DUEL_STALE_HOURS', 24),
+
+    /*
+    | Lenient answer-matching behaviour (App\Support\AnswerMatcher).
+    */
+    'answer_match' => [
+        /*
+        | Accept a single matching content word (free order / partial).
+        | Mirrors the rinjora prototype's lenient matching.
+        */
+        'allow_partial' => (bool) env('ANSWER_MATCH_ALLOW_PARTIAL', true),
+
+        /*
+        | Minimum token length considered a "content" word for partial/free
+        | order matching.
+        */
+        'min_partial_word' => 3,
+
+        /*
+        | Words ignored when re-ordering / matching partial answers.
+        */
+        'stop_words' => ['na', 'n', 'mu', 'ku', 'i', 'a', 'ya', 'wa', 'y', 'w'],
+    ],
 ];
