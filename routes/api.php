@@ -24,6 +24,8 @@ use App\Http\Controllers\Api\Joke\JokeSubmissionController as ApiJokeSubmissionC
 use App\Http\Controllers\Api\Proverb\ProverbSubmissionController as ApiProverbSubmissionController;
 use App\Http\Controllers\Api\Game\RoundController;
 use App\Http\Controllers\Api\Game\RoundAnswerController;
+use App\Http\Controllers\Api\Game\RoundHistoryController;
+use App\Http\Controllers\Api\ContributionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,6 +217,10 @@ Route::prefix('submissions/jokes')->middleware(['auth:sanctum', 'verified'])->gr
  * 🎮 Games (Rinjora-parity rounds of 10)
  */
 Route::prefix('games')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    // History & stats (no mode scope).
+    Route::get('/history', [RoundHistoryController::class, 'index']);      // Total / games / best / per-mode rows
+    Route::delete('/history', [RoundHistoryController::class, 'destroy']); // Reset round history
+
     Route::prefix('{mode}')->where(['mode' => 'sokwe|hera|tuja'])->group(function () {
         Route::post('/rounds', [RoundController::class, 'store']);              // Start a round
         Route::get('/rounds', [RoundController::class, 'index']);               // Recent rounds (resume)
@@ -226,3 +232,9 @@ Route::prefix('games')->middleware(['auth:sanctum', 'verified'])->group(function
             ->middleware('throttle:30,1');                                      // Skip == concede
     });
 });
+
+/**
+ * 🧑‍🌾 Contributions (prototype "Intererano" single-screen form)
+ */
+Route::post('/contributions', [ContributionController::class, 'store'])
+    ->middleware(['auth:sanctum', 'verified']);
