@@ -20,6 +20,8 @@ use App\Http\Controllers\Api\Proverb\ProverbAnswerController;
 use App\Http\Controllers\Api\Joke\JokeController;
 use App\Http\Controllers\Api\Joke\JokeGameController;
 use App\Http\Controllers\Api\Joke\JokeAnswerController;
+use App\Http\Controllers\Api\Joke\JokeSubmissionController as ApiJokeSubmissionController;
+use App\Http\Controllers\Api\Proverb\ProverbSubmissionController as ApiProverbSubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,4 +194,17 @@ Route::prefix('jokes')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::delete('/{joke}', [JokeController::class, 'destroy']);
     Route::post('/{joke}/suspend', [JokeController::class, 'suspend']);
     Route::post('/{joke}/unsuspend', [JokeController::class, 'unsuspend']);
+});
+
+/**
+ * 🧑‍🌾 User-generated submissions (moderation queue) — proverbs & jokes
+ */
+Route::prefix('submissions/proverbs')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [ApiProverbSubmissionController::class, 'index']);   // My submissions
+    Route::post('/', [ApiProverbSubmissionController::class, 'store']);  // Submit a proverb for review
+});
+
+Route::prefix('submissions/jokes')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [ApiJokeSubmissionController::class, 'index']);   // My submissions
+    Route::post('/', [ApiJokeSubmissionController::class, 'store']);  // Submit a joke for review
 });

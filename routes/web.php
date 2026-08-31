@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\RiddleCategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\SubmissionController;
+use App\Http\Controllers\Admin\ProverbSubmissionController;
+use App\Http\Controllers\Admin\JokeSubmissionController;
 use App\Http\Controllers\Admin\AnalyticsController;
 
 /*
@@ -123,6 +125,14 @@ Route::prefix('admin/api')->group(function () {
         Route::get('/submissions', [SubmissionController::class, 'index']);
         Route::post('/submissions/{submission}/approve', [SubmissionController::class, 'approve']);
         Route::post('/submissions/{submission}/reject', [SubmissionController::class, 'reject']);
+
+        Route::get('/submissions/proverbs', [ProverbSubmissionController::class, 'index']);
+        Route::post('/submissions/proverbs/{submission}/approve', [ProverbSubmissionController::class, 'approve']);
+        Route::post('/submissions/proverbs/{submission}/reject', [ProverbSubmissionController::class, 'reject']);
+
+        Route::get('/submissions/jokes', [JokeSubmissionController::class, 'index']);
+        Route::post('/submissions/jokes/{submission}/approve', [JokeSubmissionController::class, 'approve']);
+        Route::post('/submissions/jokes/{submission}/reject', [JokeSubmissionController::class, 'reject']);
 
         Route::get('/analytics/performance', [AnalyticsController::class, 'performance']);
         Route::get('/analytics/players', [AnalyticsController::class, 'players']);
