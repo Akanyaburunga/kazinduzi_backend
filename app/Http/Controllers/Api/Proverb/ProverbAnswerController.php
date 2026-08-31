@@ -1,42 +1,40 @@
 <?php
 
-namespace App\Http\Controllers\Api\Riddle;
+namespace App\Http\Controllers\Api\Proverb;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Riddle\AnswerRiddleRequest;
-use App\Models\Riddle;
-use App\Models\RiddleAttempt;
-use App\Support\Achievements;
+use App\Http\Requests\Proverb\AnswerProverbRequest;
+use App\Models\Proverb;
+use App\Models\ProverbAttempt;
 use App\Support\AnswerMatcher;
 use App\Support\Reputation;
-use Illuminate\Http\Request;
 
-class AnswerController extends Controller
+class ProverbAnswerController extends Controller
 {
     /**
      * Evaluate a user's answer, record the attempt, and award reputation
-     * exactly once per riddle on the first correct solve.
+     * exactly once per proverb on the first correct solve (shared daily cap).
      */
-    public function store(AnswerRiddleRequest $request, Riddle $riddle)
+    public function store(AnswerProverbRequest $request, Proverb $proverb)
     {
-        if ($riddle->is_suspended) {
-            return response()->json(['success' => false, 'message' => 'Riddle not available.'], 404);
+        if ($proverb->is_suspended) {
+            return response()->json(['success' => false, 'message' => 'Proverb not available.'], 404);
         }
 
         $user = $request->user();
 
-        $candidates = trim((string) $riddle->answer);
-        if (! empty($riddle->answer_aliases)) {
-            $candidates .= ' / ' . trim((string) $riddle->answer_aliases);
+        $candidates = trim((string) $proverb->answer);
+        if (! empty($proverb->answer_aliases)) {
+            $candidates .= ' / ' . trim((string) $proverb->answer_aliases);
         }
 
         $conceded = AnswerMatcher::isConcede((string) $request->answer);
         $isCorrect = ! $conceded && AnswerMatcher::isCorrect((string) $request->answer, $candidates);
 
-        $attempt = RiddleAttempt::updateOrCreate(
+        $attempt = ProverbAttempt::updateOrCreate(
             [
                 'user_id' => $user->id,
-                'riddle_id' => $riddle->id,
+                'proverb_id' => $proverb->id,
             ],
             [
                 'submitted_answer' => $request->answer,
@@ -56,18 +54,11 @@ class AnswerController extends Controller
             $capped = $remaining <= 0;
 
             if ($points > 0) {
-                $user->updateReputation($points, 'Solved a riddle', $attempt);
+                $user->updateReputation($points, 'Solved a proverb', $attempt);
                 $attempt->update(['rewarded' => true]);
             }
             $rewarded = $points > 0;
         }
-
-        if ($isCorrect) {
-            \App\Support\Streaks::recompute($user);
-            \App\Support\Popularity::recompute($riddle);
-        }
-
-        $newAchievements = $isCorrect ? Achievements::evaluate($user) : collect();
 
         return response()->json([
             'correct' => $isCorrect,
@@ -75,16 +66,10 @@ class AnswerController extends Controller
             'points' => $points,
             'capped' => $isCorrect && $capped,
             'conceded' => $conceded,
-            'answer' => $conceded ? $riddle->answer : null,
+            'answer' => $conceded ? $proverb->answer : null,
             'message' => $isCorrect
                 ? ($rewarded ? "Correct! You earned {$points} reputation points." : ($capped ? 'Correct! You reached today’s reputation cap.' : 'Correct!'))
                 : ($conceded ? 'You gave up. The answer is revealed.' : 'Not quite. Try again.'),
-            'new_achievements' => $newAchievements->map(fn ($achievement) => [
-                'slug' => $achievement->slug,
-                'name' => $achievement->name,
-                'description' => $achievement->description,
-                'icon' => $achievement->icon,
-            ])->values(),
         ]);
     }
 }

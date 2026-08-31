@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             WordsFromJsonSeeder::class,
             RiddleCategorySeeder::class,
             RiddleSeeder::class,
+            ProverbSeeder::class,
             AchievementSeeder::class,
             TestDataSeeder::class,
         ]);

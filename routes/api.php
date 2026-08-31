@@ -14,6 +14,9 @@ use App\Http\Controllers\Api\Riddle\FavoriteController;
 use App\Http\Controllers\Api\Riddle\DuelController;
 use App\Http\Controllers\Api\Riddle\ShareController;
 use App\Http\Controllers\Api\Riddle\SubmissionController;
+use App\Http\Controllers\Api\Proverb\ProverbController;
+use App\Http\Controllers\Api\Proverb\ProverbGameController;
+use App\Http\Controllers\Api\Proverb\ProverbAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,4 +146,26 @@ Route::prefix('duels')->middleware(['auth:sanctum', 'verified', 'throttle:30,1']
     Route::post('{challenge}/accept', [DuelController::class, 'accept']);     // Accept a pending duel
     Route::post('{challenge}/decline', [DuelController::class, 'decline']);   // Decline a pending duel
     Route::post('{challenge}/solve', [DuelController::class, 'solve']);       // Submit a single answer
+});
+
+/**
+ * 📜 Proverbs (Heraheza) — complete the ending
+ */
+Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    // Game-facing routes (answers never exposed)
+    Route::get('/', [ProverbGameController::class, 'index']);               // List proverbs (no answers)
+    Route::get('/next', [ProverbGameController::class, 'next']);            // Next unsolved proverb
+    Route::get('/{proverb}', [ProverbGameController::class, 'show']);       // Single proverb (no answer)
+    Route::post('/{proverb}/answer', [ProverbAnswerController::class, 'store'])
+        ->middleware('throttle:30,1');                                      // Solve (lenient matcher)
+    Route::post('/{proverb}/reveal', [ProverbGameController::class, 'reveal']); // Reveal answer (no reward)
+});
+
+// Curator routes (reputation-gated)
+Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::post('/', [ProverbController::class, 'store']);
+    Route::put('/{proverb}', [ProverbController::class, 'update']);
+    Route::delete('/{proverb}', [ProverbController::class, 'destroy']);
+    Route::post('/{proverb}/suspend', [ProverbController::class, 'suspend']);
+    Route::post('/{proverb}/unsuspend', [ProverbController::class, 'unsuspend']);
 });

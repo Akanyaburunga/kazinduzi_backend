@@ -75,6 +75,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(RiddleAttempt::class);
     }
 
+    public function proverbAttempts()
+    {
+        return $this->hasMany(ProverbAttempt::class);
+    }
+
     /**
      * Achievements (badges) the user has unlocked.
      */
