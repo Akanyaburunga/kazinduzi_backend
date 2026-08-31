@@ -17,6 +17,9 @@ use App\Http\Controllers\Api\Riddle\SubmissionController;
 use App\Http\Controllers\Api\Proverb\ProverbController;
 use App\Http\Controllers\Api\Proverb\ProverbGameController;
 use App\Http\Controllers\Api\Proverb\ProverbAnswerController;
+use App\Http\Controllers\Api\Joke\JokeController;
+use App\Http\Controllers\Api\Joke\JokeGameController;
+use App\Http\Controllers\Api\Joke\JokeAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -168,4 +171,25 @@ Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified'])->group(funct
     Route::delete('/{proverb}', [ProverbController::class, 'destroy']);
     Route::post('/{proverb}/suspend', [ProverbController::class, 'suspend']);
     Route::post('/{proverb}/unsuspend', [ProverbController::class, 'unsuspend']);
+});
+
+/**
+ * 😄 Jokes (Tujajure) — pick the punchline from four options
+ */
+Route::prefix('jokes')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    // Game-facing routes
+    Route::get('/round', [JokeGameController::class, 'round']);               // One round: setup + 4 shuffled options
+    Route::get('/next', [JokeGameController::class, 'next']);                 // Next unsolved setup
+    Route::post('/{joke}/answer', [JokeAnswerController::class, 'store'])
+        ->middleware('throttle:30,1');                                        // Pick a punchline
+    Route::post('/{joke}/reveal', [JokeGameController::class, 'reveal']);      // Reveal punchline (no reward)
+});
+
+// Curator routes (reputation-gated)
+Route::prefix('jokes')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::post('/', [JokeController::class, 'store']);
+    Route::put('/{joke}', [JokeController::class, 'update']);
+    Route::delete('/{joke}', [JokeController::class, 'destroy']);
+    Route::post('/{joke}/suspend', [JokeController::class, 'suspend']);
+    Route::post('/{joke}/unsuspend', [JokeController::class, 'unsuspend']);
 });

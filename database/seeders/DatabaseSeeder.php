@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RiddleCategorySeeder::class,
             RiddleSeeder::class,
             ProverbSeeder::class,
+            JokeSeeder::class,
             AchievementSeeder::class,
             TestDataSeeder::class,
         ]);
