@@ -20,6 +20,7 @@ class RiddleCategorySeeder extends Seeder
             ['name' => 'Inkuru', 'description' => 'Inkuru ngufi z\'utuntu n\'utundi.'],
             ['name' => 'Ibintu', 'description' => 'Ibintu biri ahantu? Ni iki?'],
             ['name' => 'Ubugenge', 'description' => 'Ubugenge n\'ibibazo byo gutekereza.'],
+            ['name' => 'Ibisokozo', 'description' => 'Ibisokozo bigezweho vya SOKWE ku rurimi rw\'ikirundi.'],
         ];
 
         foreach ($categories as $data) {

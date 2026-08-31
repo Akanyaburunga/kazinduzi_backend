@@ -25,6 +25,22 @@ class RinjoraTier
     }
 
     /**
+     * Map an estimated difficulty score onto the DB-level easy/medium/hard buckets.
+     *
+     * @param  int  $score  difficulte() output
+     * @param  int  $low    scores <= this are easy
+     * @param  int  $high   scores > this are hard; between low and high is medium
+     */
+    public static function tier(int $score, int $low, int $high): string
+    {
+        if ($score <= $low) {
+            return 'easy';
+        }
+
+        return $score > $high ? 'hard' : 'medium';
+    }
+
+    /**
      * Build a round pool (unsolved items preserved in order) for a level.
      *
      * @param  array  $source      ordered items, each { q|t, a|p }

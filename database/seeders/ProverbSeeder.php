@@ -5,38 +5,21 @@ namespace Database\Seeders;
 use App\Models\Proverb;
 use App\Models\RiddleCategory;
 use App\Support\RiddleHelper;
+use App\Support\RinjoraData;
+use App\Support\RinjoraTier;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
 class ProverbSeeder extends Seeder
 {
     /**
-     * Starter set of Kirundi proverbs (Heraheza) — complete the ending.
-     * Sourced from the HERAHEZA array in docs/rinjora.html.
+     * Full HERAHEZA proverb set from docs/rinjora.html — complete the ending.
+     * Sourced from the HERAHEZA array via RinjoraData; stored one row per
+     * (question, answer) pair so duplicate setups with two valid endings each
+     * persist as distinct challenges (162 rows total).
      */
     public function run(): void
     {
-        $proverbs = [
-            ['q' => 'Iyo wombye amazi mu kibindi ntakohera…', 'a' => 'inkoko', 'd' => 'medium'],
-            ['q' => 'Amazi arashuha…', 'a' => 'ntiyibagira i bumbeho', 'd' => 'medium'],
-            ['q' => 'Akamuntu kamara…', 'a' => 'iyagwe', 'd' => 'hard'],
-            ['q' => 'Akanse…', 'a' => 'baraheba', 'd' => 'easy'],
-            ['q' => 'Akazi k\'i bwami…', 'a' => 'kica uwicaye', 'd' => 'medium'],
-            ['q' => 'Amarira y\'umugabo…', 'a' => 'atemba aja mu nda', 'd' => 'medium'],
-            ['q' => 'Igiti kigororwa…', 'a' => 'kikiri gito', 'd' => 'easy'],
-            ['q' => 'Ikinyoma kimara umusi…', 'a' => 'ntikimara umwaka', 'd' => 'easy'],
-            ['q' => 'Imana ifasha…', 'a' => 'uwifashije', 'd' => 'easy'],
-            ['q' => 'Ubuntu…', 'a' => 'burihabwa', 'd' => 'easy'],
-            ['q' => 'Ukora ineza…', 'a' => 'ukayisanga imbere', 'd' => 'medium'],
-            ['q' => 'Ukora inabi…', 'a' => 'ikagukurikira', 'd' => 'medium'],
-            ['q' => 'Umubanyi niwe…', 'a' => 'muryango', 'd' => 'easy'],
-            ['q' => 'Umutwe umwe…', 'a' => 'ntiwigira inama', 'd' => 'easy'],
-            ['q' => 'Urya nk\'inka…', 'a' => 'ugapfa nk\'imbwa', 'd' => 'medium'],
-            ['q' => 'Nta wanka kwonka nyina…', 'a' => 'ngo arwaye amahere', 'd' => 'hard'],
-            ['q' => 'Imbwa yarishuse avyara…', 'a' => 'ibihumye', 'd' => 'medium'],
-            ['q' => 'Ivya gusa…', 'a' => 'bitera ubwenge buke', 'd' => 'hard'],
-        ];
-
         $category = RiddleCategory::query()
             ->where('name', 'Imigani')
             ->orWhere('slug', Str::slug('Imigani'))
@@ -52,14 +35,16 @@ class ProverbSeeder extends Seeder
 
         $now = now();
 
-        foreach ($proverbs as $data) {
+        foreach (RinjoraData::heraheza() as $item) {
+            $answer = RiddleHelper::normalize($item['a']);
+            $difficulty = RinjoraTier::tier(RinjoraTier::difficulte($item), 37, 50);
+
             Proverb::updateOrCreate(
-                ['question' => $data['q']],
+                ['question' => $item['q'], 'answer' => $answer],
                 [
                     'category_id' => $category->id,
-                    'answer' => RiddleHelper::normalize($data['a']),
-                    'difficulty' => $data['d'],
-                    'source' => 'Imigani y\'ikirundi',
+                    'difficulty' => $difficulty,
+                    'source' => 'Heraheza y\'ikirundi',
                     'is_suspended' => false,
                     'created_at' => $now,
                     'updated_at' => $now,
