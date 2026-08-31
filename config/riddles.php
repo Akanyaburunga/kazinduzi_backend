@@ -28,6 +28,23 @@ return [
     'duel_stale_hours' => (int) env('DUEL_STALE_HOURS', 24),
 
     /*
+    | Number of items served per round (mirrors the rinjora prototype's
+    | ROUND_SIZE = 10).
+    */
+    'round_size' => (int) env('ROUND_SIZE', 10),
+
+    /*
+    | Minimum round score (out of round_size) required before the player is
+    | offered a harder (next) tier level.
+    */
+    'round_level_min_score' => (int) env('ROUND_LEVEL_MIN_SCORE', 8),
+
+    /*
+    | Number of distinct difficulty tiers used to build round pools.
+    */
+    'round_levels' => (int) env('ROUND_LEVELS', 5),
+
+    /*
     | Lenient answer-matching behaviour (App\Support\AnswerMatcher).
     */
     'answer_match' => [
