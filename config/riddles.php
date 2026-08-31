@@ -45,6 +45,11 @@ return [
     'round_levels' => (int) env('ROUND_LEVELS', 5),
 
     /*
+    | Whether revealing the answer on a conceded/skipped round item is allowed.
+    */
+    'round_reveal_on_concede' => (bool) env('ROUND_REVEAL_ON_CONCEDE', true),
+
+    /*
     | Lenient answer-matching behaviour (App\Support\AnswerMatcher).
     */
     'answer_match' => [

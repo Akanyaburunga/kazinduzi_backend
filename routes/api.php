@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\Joke\JokeGameController;
 use App\Http\Controllers\Api\Joke\JokeAnswerController;
 use App\Http\Controllers\Api\Joke\JokeSubmissionController as ApiJokeSubmissionController;
 use App\Http\Controllers\Api\Proverb\ProverbSubmissionController as ApiProverbSubmissionController;
+use App\Http\Controllers\Api\Game\RoundController;
+use App\Http\Controllers\Api\Game\RoundAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -207,4 +209,20 @@ Route::prefix('submissions/proverbs')->middleware(['auth:sanctum', 'verified'])-
 Route::prefix('submissions/jokes')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', [ApiJokeSubmissionController::class, 'index']);   // My submissions
     Route::post('/', [ApiJokeSubmissionController::class, 'store']);  // Submit a joke for review
+});
+
+/**
+ * 🎮 Games (Rinjora-parity rounds of 10)
+ */
+Route::prefix('games')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::prefix('{mode}')->where(['mode' => 'sokwe|hera|tuja'])->group(function () {
+        Route::post('/rounds', [RoundController::class, 'store']);              // Start a round
+        Route::get('/rounds', [RoundController::class, 'index']);               // Recent rounds (resume)
+        Route::get('/rounds/{round}', [RoundController::class, 'show']);        // Resume current item
+        Route::post('/rounds/{round}/complete', [RoundController::class, 'complete']); // Finalize
+        Route::post('/rounds/{round}/items/{position}/answer', [RoundAnswerController::class, 'answer'])
+            ->middleware('throttle:30,1');                                      // Play an item
+        Route::post('/rounds/{round}/items/{position}/skip', [RoundAnswerController::class, 'skip'])
+            ->middleware('throttle:30,1');                                      // Skip == concede
+    });
 });
