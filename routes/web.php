@@ -14,6 +14,10 @@ use App\Http\Controllers\Admin\SessionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RiddleController;
 use App\Http\Controllers\Admin\RiddleBulkController;
+use App\Http\Controllers\Admin\ProverbController;
+use App\Http\Controllers\Admin\ProverbBulkController;
+use App\Http\Controllers\Admin\JokeController;
+use App\Http\Controllers\Admin\JokeBulkController;
 use App\Http\Controllers\Admin\RiddleCategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\AchievementController;
@@ -134,9 +138,35 @@ Route::prefix('admin/api')->group(function () {
         Route::post('/submissions/jokes/{submission}/approve', [JokeSubmissionController::class, 'approve']);
         Route::post('/submissions/jokes/{submission}/reject', [JokeSubmissionController::class, 'reject']);
 
+    Route::get('/proverbs', [ProverbController::class, 'index']);
+    Route::post('/proverbs', [ProverbController::class, 'store']);
+    Route::post('/proverbs/bulk', [ProverbBulkController::class, 'store']);
+    Route::get('/proverbs/export', [ProverbController::class, 'export']);
+    Route::get('/proverbs/{proverb}', [ProverbController::class, 'show']);
+    Route::put('/proverbs/{proverb}', [ProverbController::class, 'update']);
+    Route::get('/proverbs/{proverb}/stats', [ProverbController::class, 'stats']);
+    Route::delete('/proverbs/{proverb}', [ProverbController::class, 'destroy']);
+    Route::post('/proverbs/{id}/restore', [ProverbController::class, 'restore']);
+    Route::post('/proverbs/{proverb}/suspend', [ProverbController::class, 'suspend']);
+    Route::post('/proverbs/{proverb}/unsuspend', [ProverbController::class, 'unsuspend']);
+
+    Route::get('/jokes', [JokeController::class, 'index']);
+    Route::post('/jokes', [JokeController::class, 'store']);
+    Route::post('/jokes/bulk', [JokeBulkController::class, 'store']);
+    Route::get('/jokes/export', [JokeController::class, 'export']);
+    Route::get('/jokes/{joke}', [JokeController::class, 'show']);
+    Route::put('/jokes/{joke}', [JokeController::class, 'update']);
+    Route::get('/jokes/{joke}/stats', [JokeController::class, 'stats']);
+    Route::delete('/jokes/{joke}', [JokeController::class, 'destroy']);
+    Route::post('/jokes/{id}/restore', [JokeController::class, 'restore']);
+    Route::post('/jokes/{joke}/suspend', [JokeController::class, 'suspend']);
+    Route::post('/jokes/{joke}/unsuspend', [JokeController::class, 'unsuspend']);
+
         Route::get('/analytics/performance', [AnalyticsController::class, 'performance']);
         Route::get('/analytics/players', [AnalyticsController::class, 'players']);
         Route::get('/analytics/daily-conversion', [AnalyticsController::class, 'dailyConversion']);
+        Route::get('/analytics/rounds', [AnalyticsController::class, 'rounds']);
+        Route::get('/analytics/contributions', [AnalyticsController::class, 'contributions']);
     });
 });
 

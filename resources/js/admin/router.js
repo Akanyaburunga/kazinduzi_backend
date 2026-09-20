@@ -32,6 +32,30 @@ const routes = [
                 meta: { title: 'Riddle Analytics' },
             },
             {
+                path: 'proverbs',
+                name: 'admin.proverbs.index',
+                component: () => import('./views/proverbs/Index.vue'),
+                meta: { title: 'Proverbs' },
+            },
+            {
+                path: 'proverbs/:id',
+                name: 'admin.proverbs.show',
+                component: () => import('./views/proverbs/Show.vue'),
+                meta: { title: 'Proverb Analytics' },
+            },
+            {
+                path: 'jokes',
+                name: 'admin.jokes.index',
+                component: () => import('./views/jokes/Index.vue'),
+                meta: { title: 'Jokes' },
+            },
+            {
+                path: 'jokes/:id',
+                name: 'admin.jokes.show',
+                component: () => import('./views/jokes/Show.vue'),
+                meta: { title: 'Joke Analytics' },
+            },
+            {
                 path: 'categories',
                 name: 'admin.categories.index',
                 component: () => import('./views/categories/Index.vue'),
