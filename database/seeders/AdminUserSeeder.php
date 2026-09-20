@@ -11,9 +11,9 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         // Create default admin user if it doesn't already exist
-        $email = env('DEFAULT_ADMIN_EMAIL');
-        $name = env('DEFAULT_ADMIN_NAME');
-        $password = env('DEFAULT_ADMIN_PASSWORD');
+        $email = env('DEFAULT_ADMIN_EMAIL', 'admin@kazinduzi.org');
+        $name = env('DEFAULT_ADMIN_NAME', 'Admin');
+        $password = env('DEFAULT_ADMIN_PASSWORD', 'password123');
 
         if (!$email || !$name || !$password) {
             $this->command->error('Missing default admin credentials in .env file.');

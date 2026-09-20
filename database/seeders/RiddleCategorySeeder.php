@@ -9,18 +9,16 @@ use Illuminate\Support\Str;
 class RiddleCategorySeeder extends Seeder
 {
     /**
-     * Core Kazinduzi riddle categories.
+     * The three rinjora-parity categories (one per game mode). Riddles,
+     * proverbs and jokes are grouped under these, mirroring the prototype's
+     * SOKWE / HERAHEZA / TUJAJURE collections only.
      */
     public function run(): void
     {
         $categories = [
-            ['name' => 'Imigani', 'description' => 'Imigani y\'ikirundi ndetse n\'imigani y\'abantu.'],
-            ['name' => 'Indorerezi', 'description' => 'Indorerezi z\'inyamaswa, ibimera n\'ibintu.'],
-            ['name' => 'Ibikorwa', 'description' => 'Ibikorwa bya buri musi by\'umunyamakuru.'],
-            ['name' => 'Inkuru', 'description' => 'Inkuru ngufi z\'utuntu n\'utundi.'],
-            ['name' => 'Ibintu', 'description' => 'Ibintu biri ahantu? Ni iki?'],
-            ['name' => 'Ubugenge', 'description' => 'Ubugenge n\'ibibazo byo gutekereza.'],
             ['name' => 'Ibisokozo', 'description' => 'Ibisokozo bigezweho vya SOKWE ku rurimi rw\'ikirundi.'],
+            ['name' => 'Imigani', 'description' => 'Imigani n\'imigani y\'ikirundi.'],
+            ['name' => 'Utujajuro', 'description' => 'Utujajuro n\'utunenge turi kuberuriwe.'],
         ];
 
         foreach ($categories as $data) {
