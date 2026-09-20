@@ -5,7 +5,11 @@
 **SDK:** `minSdk 24` (Android 7.0), `targetSdk` = latest stable (34+).
 **Networking model:** **strictly online** — every round/action comes from the backend. Local storage is used only for the session token (and lightweight UI prefs), never for puzzle content or solved state.
 
-This is the **new native Android companion** to the backend plan in `docs/backend-implementation-plan.md`. It consumes the backend's round/history/contribution APIs and mirrors the prototype's 100% Kirundi UI strings and screen flows.
+This is the **native Android companion** to `docs/backend-implementation-plan.md`. The current Android client in production **diverges completely from the prototype** (it drives the legacy single-item riddle API). This document is the **adaptation target**: it consumes only the round/history/contribution endpoints below and mirrors the prototype's 100% Kirundi UI strings and screen flows. Existing client code that calls `/api/riddles/next` and friends must be retired in favour of the round API.
+
+**Backend prerequisites** (already implemented, verified): rounds/round_items on the server, `RoundManager`, tiered pools, history, contributions. The Android client depends on two behaviours that must be live first:
+- `GET /api/games/{mode}/rounds/{round}/items/{position}` — per-position item state for Back navigation (backend gap **G-1**).
+- Tujajure is **flat**: no tiers, no level-up, plain shuffled unsolved jokes (backend gap **G-2**).
 
 ---
 
@@ -109,7 +113,10 @@ Driven by `RoundRepository`:
    - `correct => false`: shake input, "trying" state (impa), keep position, user retypes.
    - `conceded => true`: feedback no card `CONCEDE_MSG`, reveal answer, Next.
 4. **Give up** (`Ndaguhaye ! 🤲`) / **Skip** (`Rengana`): `POST .../items/{position}/skip` → same as concede (server reveals answer, resets in-round streak).
-5. **Back** (`‹ Subira inyuma`): `GET .../rounds/{round}/items/{position-1}` → if already answered, render solved state (answer hidden + feedback), input disabled.
+5. **Back** (`‹ Subira inyuma`): `GET .../rounds/{round}/items/{position-1}` → the item is served in per-position state:
+   - `answered: false` → render as an editable, pending item (input enabled).
+   - `answered: true` + `answered_correct` → render the **solved state** (feedback ok card, revealed answer, input disabled).
+   - `answered: true` + !`answered_correct` (conceded) → render the **conceded state** (feedback no card, `CONCEDE_MSG`, revealed answer, input disabled).
 6. **Next** (`Bandanya`): server advances; render next item.
 7. On `completed` or last item: call `POST .../complete`, get `{score, level_available, next_level, performance}`.
    - If `level_available` → show **level-up dialog** (below); `Yes` → start a new round at `next_level` (re-enter Quiz); `No` → `EndFragment`.
@@ -120,12 +127,13 @@ Driven by `RoundRepository`:
 Mascot image, `Uriko uratsinda neza! 🔥`, "Ushaka gutera intambwe igoye kurusha?", Yes/No buttons. `Yes` calls `RoundRepository.start(mode, level=next_level)`; `No` → end.
 
 ### 4.4 Tujajure — `JokeFragment`
+Tujajure is **flat by design**: the backend never tiers jokes and never sets `level_available`/`next_level` for `tuja` — ignore these fields in this fragment.
 1. `POST /api/games/tuja/rounds` → `item` contains `setup` + `options` (exactly 4 punchlines, shuffled server-side).
 2. "think" prompt `Iyumvire inyishu, uhitemwo 🤔` above 4 option buttons.
 3. On tap option: `POST .../items/{position}/answer {option}`.
    - Correct → highlight chosen green, `correct`, confetti, feedback ok.
    - Wrong → highlight chosen red + reveal correct green, disable all, feedback `CONCEDE_MSG` (prototype treats wrong as concede-level "no").
-4. `Bandanya` → next joke; last → complete → end flow (level-up applies to tuja too where relevant per backend).
+4. `Bandanya` → next joke; last → complete → `EndFragment` (no level-up dialog).
 5. `Quit` → home.
 
 ### 4.5 End — `EndFragment`
@@ -161,6 +169,7 @@ GET  /api/me             -> {name, points:{reputation, level:{level,title,...}},
 
 POST /api/games/{mode}/rounds            {level?}  -> {success,data:{round, item}}
 GET  /api/games/{mode}/rounds/{round}              -> {success,data:{round, item?}}  (resume)
+GET  /api/games/{mode}/rounds/{round}/items/{pos}  -> {success,data:{item}} + answered-state (Back nav, G-1)
 POST /api/games/{mode}/rounds/{round}/items/{pos}/answer  {answer|option} -> flat
 POST /api/games/{mode}/rounds/{round}/items/{pos}/skip    {}
 POST /api/games/{mode}/rounds/{round}/complete            -> {success,data:{round:{...}, performance}}
@@ -169,7 +178,7 @@ DELETE /api/games/history      -> {success,data:{...}}
 POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status:'pending'}}
 ```
 
-**DTO fields** (Java classes `Dtos.java`): `Round{id, mode, level, item_count, index, score, best_streak, current_streak, completed, level_available, next_level}`, `Item{type, id, position, question|setup, category{Dtos}, options?:[String]}` (note `question` for riddle/proverb, `setup` for joke — parse both), answer response `{correct, conceded, answer?, message, round{...}, new_achievements:[]}`.
+**DTO fields** (Java classes `Dtos.java`): `Round{id, mode, level, item_count, index, score, best_streak, current_streak, completed, has_more_levels, next_level, level_available}`, `Item{type, id, position, question|setup, category{Dtos}, difficulty, options?:[String], answered?:boolean, answered_correct?:boolean, revealed_answer?:String}` (note `question` for riddle/proverb, `setup` for joke — parse both; `revealed_answer` is non-null only when `answered=true`), answer response `{correct, conceded, answer?, message, rewarded, points, capped, round{...}, new_achievements:[]}`.
 
 ---
 
@@ -218,10 +227,11 @@ POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status
 - [ ] Home shows 3 cards + footer History/Contribute/About with exact titles/subtitles.
 - [ ] Quiz renders progress bar, score pill, streak pill (streak only when >0), level badge, count in Kirundi ordinals.
 - [ ] Check / Give-up / Skip / Back / Next / Quit all match prototype behaviour incl. feedback card states and emoji messages.
+- [ ] Back renders a previously answered item in its solved/conceded state from `GET .../items/{pos}` (`answered`, `answered_correct`, `revealed_answer`).
 - [ ] Answer revealed only after solve or concede; never before.
-- [ ] Tujajure: 4 shuffled options, correct=green, wrong=red + correct highlighted, think prompt, next.
+- [ ] Tujajure: 4 shuffled options, correct=green, wrong=red + correct highlighted, think prompt, next; **flat (never shows a level-up dialog)**.
 - [ ] End screen: score/round, correct performance message per score band, Replay/Share/Home.
-- [ ] Level-up dialog appears only when `score≥8` + harder tier exists; Yes continues, No ends.
+- [ ] Level-up dialog appears only when `score≥8` + harder tier exists (sokwe/hera only); Yes continues, No ends.
 - [ ] History totals/games/best + 3 rows + reset confirmation.
 - [ ] Contribution form type dropdown + send/copy + note.
 - [ ] All strings 100% Kirundi (mirror `T`/`NOMBRES`); no English leaks.

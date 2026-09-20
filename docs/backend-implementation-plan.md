@@ -1,9 +1,9 @@
-# Backend Implementation Plan — Rinjora Parity Experience
+# Backend & Back-Office Implementation — Rinjora Parity Experience
 
 **Source of truth:** `docs/rinjora.html` (the prototype whose user experience we replicate).
-**Branch:** `upgrade/laravel-13` (all commits GPG-signed, sig `G`, Blaise Nduwimana).
+**Branch:** `upgrade/laravel-13` (GPG-signed commits).
 **DBs:** dev = MySQL `kazinduzi`; test = SQLite `:memory:` (full suite green after every step).
-**Commanding principle:** the app already contains ~90% of the mechanics. This plan packages them into the prototype's **round-of-10, tiered-level, per-mode-score** user experience and backfills the **full source dataset**. No existing endpoint is broken; new additions are additive.
+**Scope of this document:** adapt the **current, already-implemented** backend + back office so the combined API surface and admin tooling reproduce the prototype's round-of-10, tiered-level, per-mode-score experience. This is not a from-scratch plan: §2 inventories what exists today (verified against the code), §3 lists the exact gaps to close.
 
 ---
 
@@ -13,283 +13,197 @@ From `docs/rinjora.html` (arrays: `SOKWE` 216 q/a, `HERAHEZA` 162 q/a, `TUJAJURE
 
 Screens & flows to mirror:
 1. **Home** — brand, slogan, 3 game cards (Sokwe/Heraheza/Tujajure) + footer nav (History, Contribute, About).
-2. **Quiz (Sokwe/Heraheza)** — top progress bar (index/round), `⭐ score` pill, `🔥 streak` pill (in-round), level badge, the puzzle text, free-text input, buttons *Raba ko wabitoye / Ndaguhaye ! / Rengana / ‹ Subira inyuma / Bandanya / Subira ku ntango*. Feedback card (ok/no), reveal of the answer after solve/concede. Confetti on correct. **Level-up modal** when `score ≥ 8` and there is a harder tier (optionally continue harder; else end).
-3. **Tujajure** — setup text, 4 shuffled punchline options, correct/wrong highlight, think prompt, next.
+2. **Quiz (Sokwe/Heraheza)** — top progress bar (index/round), `⭐ score` pill, `🔥 streak` pill (in-round), level badge, the puzzle text, free-text input, buttons *Raba ko wabitoye / Ndaguhaye ! / Rengana / ‹ Subira inyuma / Bandanya / Subira ku ntango*. Feedback card (ok/no), reveal of the answer after solve/concede, **re-answer allowed on wrong** (item stays active until solved or conceded). Confetti on correct. **Back navigation re-renders previously answered items in their solved state.** **Level-up modal** when `score ≥ 8` and there is a harder tier (Yes → start next level, No → end).
+3. **Tujajure** — setup text + think prompt, 4 shuffled punchline options, correct/wrong highlight, next. **No levels, no level-up** (flat experience).
 4. **End** — `score / round_length`, score label, performance message (top/mid/low), *Replay / Share / Home*.
 5. **History (Amateka)** — total, #games, best, and per-mode rows (played count + total points).
-6. **About + Contribution (Intererano)** — type selector (Igisokozo/Umwibutsa/Akajajuro/other), body, answer, name; send/copy.
-
-The **Share** on end-screen shares the score text "Rinjora — … — x / 10 ⭐".
+6. **About + Contribution (Intererano)** — type selector (Igisokozo/Umwibutsa/Akajajuro/Iyindi ngingo), body, answer, name; send/copy.
 
 ---
 
-## 1. Current vs. Target (gap analysis)
+## 1. Current vs. Target (verified gap analysis)
 
-| Prototype concept | Current backend | Gap to close |
+| Prototype concept | Current backend (verified) | Remaining gap |
 |---|---|---|
-| Game modes Sokwe / Heraheza / Tujajure | Riddles, Proverbs, Jokes (separate controllers) | Only naming/packaging; data split into 3 tables is fine. |
-| 216 + 162 + 16 items | 24 riddles, 18 proverbs, 16 jokes seeded | Backfill full source dataset. |
-| Round of 10 (`ROUND_SIZE=10`) | None — `next` returns one unsolved item | **New: server-side round/session of 10.** |
-| Tiered levels (pool size /5, `hasNext`) | `Levels` thresholds are *reputation*-based | **New: game-tier levels** for the round pools. |
-| In-round `⭐ score` + `🔥 streak` | Score tracked as lifetime reputation + daily-cap; streak = consecutive days | **New: in-round score + in-round streak** returned per solve. |
-| Level-up modal when `score≥8` + has harder tier | n/a | Endpoint returns `level_available` + `next_level`; client shows modal. |
-| Feedback, concede, reveal, answer | `AnswerController` returns `correct/rewarded/points/capped/conceded/answer/message/new_achievements` flat envelope | Reuse; add round fields + round-level completion handling. |
-| History (total/games/best/per-mode) | Attempts + reputation logs exist; no per-mode "round" tally | **Round history table** + aggregate endpoint. |
-| Contribution (type selector) | Riddle/Proverb/Joke submission endpoints exist | Expose a single `type`-aware submit + wire answers. |
-| 100% Kirundi UI (T object) | Mixed English rep reasons, `message` strings | Keep server `message` generic; put ALL display strings in the Android client (which mirrors `T`). |
+| Full dataset | `RiddleSeeder` 216, `ProverbSeeder` 162, `JokeSeeder` 16 (tier thresholds 52/66, 37/50) | ✅ Closed. |
+| Round of 10 (`ROUND_SIZE=10`) | `rounds` + `round_items` tables, `RoundManager::buildPool` (size from config) | ✅ Closed. |
+| Tiered levels (`poolNiveau`, `hasNext`) | `RinjoraTier::poolFor` mirrors `difficulte`/`pas`/`debut`; `hasNextTier` | ✅ Closed — **except** jokes (§G-2). |
+| Level-up modal (score≥8 + harder tier) | `roundPayload.level_available` + `.next_level` + `.has_more_levels` | ✅ Closed for sokwe/hera — **jokes must never level up** (§G-2). |
+| In-round `⭐ score` + `🔥 streak` | `rounds.score`, `current_streak`, `best_streak` updated per solve | ✅ Closed. |
+| Feedback, concede, reveal, re-answer | `AnswerMatcher` (`isConcede`/`isCorrect`), item stays pending on wrong, answer revealed only on solve/concede/skip | ✅ Closed (answer never leaked in `itemPayload`). |
+| Joke options (4 punchlines) | `RoundManager::optionsFor` (punchline + distractors, server-shuffled) | ✅ Closed. |
+| **Back → previously answered item** | `GET /rounds/{round}` returns only the *first pending* item | ❌ **G-1** — no per-position answered-state endpoint. |
+| History (total/games/best/per-mode) + reset | `RoundHistoryController@index/destroy` | ✅ Closed. |
+| Contribution (type selector) | `POST /api/contributions` routes sokwe/hera/tuja/other to the right submission store | ✅ Closed. |
+| Performance label (top/mid/low) | `RoundController::performance()` (`>=8` top, `>=5` mid, else low) | ✅ Closed. |
+| 100% Kirundi UI (`T`) | Server stays language-neutral; strings live client-side | ✅ Closed by design. |
+| **Back office: curate *all* game content** | Riddle CRUD/bulk/export only; proverbs & jokes are moderation-only | ❌ **G-3**. |
+| **Back office: monitor all three modes** | Dashboard + analytics are riddle-only | ❌ **G-4**. |
 
-**Design decision:** rounds/live state stay **server-owned** (session records) so the Android client is stateless and resumable, and so the leaderboard/reputation model keeps one source of truth. The round is a lightweight record keyed to `(user, mode, level)`.
-
----
-
-## 2. New schema
-
-Follow the migration convention `2026_08_28_0000<NN>` (next available = `000018`, i.e. after `_17_create_joke_submissions_table.php`). Use the same fixed-date style.
-
-### 2.1 `rounds` (a single play-through of 10 items in one mode)
-```
-id
-user_id            FK users, cascade
-mode               varchar(16)   // 'sokwe' | 'hera' | 'tuja'
-level              unsignedTinyInt default 1
-item_count         unsignedTinyInt default 10
-score              unsignedTinyInt default 0   // # correct in this round
-current_streak     unsignedTinyInt default 0   // in-round consecutive
-best_streak        unsignedTinyInt default 0
-status             varchar(16)   // 'active' | 'completed'
-started_at         timestamp
-completed_at       timestamp nullable
-timestamps
-index: (user_id, status), (user_id, mode, status)
-```
-
-### 2.2 `round_items` (one row per item in the round; preserves ordering)
-```
-id
-round_id           FK rounds, cascade
-puzzle_type        varchar(16)   // 'riddle' | 'proverb' | 'joke'
-puzzle_id          unsignedBigInt  // polymorphic target (riddle/proverb/joke PK)
-position           unsignedTinyInt // 0..9
-status             varchar(16)   // 'pending' | 'solved' | 'conceded' | 'skipped'
-is_correct         boolean default false
-attempts           unsignedTinyInt default 0
-ts_answered_at     timestamp nullable
-unique per (round_id, position)
-```
-
-### 2.3 Per-mode round history tally (optional optimization; can be derived from `rounds`)
-Keep it derived from `rounds` for v1 (total = sum of scores, games = count of completed, best = max score, per-mode rows). No extra table. If queries prove heavy, denormalize later.
-
-**Config (`config/riddles.php`):** add
-```php
-'round_size'        => (int) env('ROUND_SIZE', 10),
-'round_level_min_score' => (int) env('ROUND_LEVEL_MIN_SCORE', 8), // to offer next tier
-'round_levels'      => (int) env('ROUND_LEVELS', 5),              // number of difficulty tiers
-'round_reveal_on_concede' => (bool) true,
-```
+**Design principle (unchanged):** rounds/live state stay **server-owned** so the Android client is stateless and resumable; reputation/leaderboard keep one source of truth.
 
 ---
 
-## 3. Data backfill (seeders)
+## 2. Current implementation inventory (verified)
 
-Create a **night/unmerged** source module so the same data powers riddles, proverbs AND jokes with one import, then split between tables as the prototype does (`SOKWE`→riddles, `HERAHEZA`→proverbs, `TUJAJURE`→jokes).
+### 2.1 Game engine
+- `app/Support/RoundManager.php` — `MODE_MAP` (sokwe→`Riddle`, hera→`Proverb`, tuja→`Joke`), `config()`, `source()` (unsolved-only), `buildPool()`, `hasNextTier()`, `start()`, `currentItem()`, `hasPendingItems()`, `finalize()`, `roundPayload()`, `itemPayload()` (never exposes answers), `revealedAnswer()`, `optionsFor()`.
+- `app/Support/RinjoraTier.php` — `difficulte = mb_strlen(a)*2 + mb_strlen(q)`, `tier()`, `poolFor(source, level, roundSize)` mirroring prototype `poolNiveau`.
+- `app/Support/AnswerMatcher.php` — Kirundi-aware lenient matching + `ndaguhaye` concede.
+- `config/riddles.php` — `round_size: 10`, `round_level_min_score: 8`, `round_levels: 5`, `round_reveal_on_concede: true`, `solve_reputation: 5`, `daily_solve_reputation_cap: 50`, `streak_freezes: 3`.
 
-### 3.1 `app/Support/RinjoraData.php` (pure static, no Laravel state)
-- `sokwe(): array` — returns the 216 `{ q, a }`; `a` may contain `/`-separated alternatives.
-- `heraheza(): array` — returns the 162 `{ q, a }` (q already ends with `…`).
-- `tujajure(): array` — returns the 16 `{ t, p }`.
-- Optionally a generated `database/seeders/data/rinjora_*.php` file with the raw arrays (so we don't hand-edit a 79 KB HTML). **Approach:** one-time extraction script writes the arrays into a dedicated PHP data file (committed), and the seeders read that file.
+### 2.2 Schema
+- `rounds` (user_id, mode `sokwe|hera|tuja`, level, item_count, score, current_streak, best_streak, status `active|completed`, started_at, completed_at) — `app/Models/Round.php`.
+- `round_items` (round_id, puzzle_type `riddle|proverb|joke`, puzzle_id, position, status `pending|solved|conceded`, is_correct, attempts, answered_at; unique per `(round_id, position)`) — `app/Models/RoundItem.php`.
 
-### 3.2 Seeders
-- **`RiddleSeeder`** — extend from 24 to the full SOKWE set (216). Each mapped: `question=q`, `answer=a` (must store raw; the model boot `RiddleHelper::normalize()`s on create — verify normalize preserves `/` for alternatives; the prototype accepts alternates so keep the alternates in `answer` or `answer_aliases`), `riddle_type='what_am_i'` (default), `difficulty` derived via `difficulte()` thresholds for the tier system. Keep the existing 24 too (updateOrCreate, idempotent).
-- **`ProverbSeeder`** — extend from 18 to HERAHEZA (162). `question=q`, `answer=a`, category `Imigani`, difficulty derived.
-- **`JokeSeeder`** — extend from 16 to TUJAJURE (16 — same set, keep).
-- Add `roundSeeding` of categories (`Imigani` etc.) — reuse `RiddleCategorySeeder`.
+### 2.3 API surface (auth:sanctum, verified email)
+| Method | Route | Controller |
+|---|---|---|
+| POST | `/api/games/{mode}/rounds` | `Api/Game/RoundController@store` |
+| GET | `/api/games/{mode}/rounds/{round}` | `Api/Game/RoundController@show` (resume → first pending item) |
+| POST | `/api/games/{mode}/rounds/{round}/items/{position}/answer` | `Api/Game/RoundAnswerController@answer` (throttle:30,1) |
+| POST | `/api/games/{mode}/rounds/{round}/items/{position}/skip` | `Api/Game/RoundAnswerController@skip` |
+| POST | `/api/games/{mode}/rounds/{round}/complete` | `Api/Game/RoundController@complete` |
+| GET | `/api/games/history` | `Api/Game/RoundHistoryController@index` |
+| DELETE | `/api/games/history` | `Api/Game/RoundHistoryController@destroy` |
+| POST | `/api/contributions` | `Api/ContributionController@store` |
 
-All seeders remain idempotent (`updateOrCreate` on `question`/`setup`). **`migrate:fresh --seed` on MySQL must stay green.**
+`/api/me` (`MeController`) already exposes profile, reputation level, and streak.
 
-### 3.3 Difficulty tiers (match prototype `poolNiveau`)
-`difficulte(it) = mb_strlen(a)*2 + mb_strlen(q)`. Sort ascending, `n = count`, `pas = max(ROUND_SIZE, floor(n/5))`, level `l` starts at `debut = min((l-1)*pas, max(0, n-ROUND_SIZE))`. This is pure and can live in `RinjoraData`/a `RinjoraTier` support class used by the server to build rounds consistently with the client.
+### 2.4 Back office (Vue 3 + Pinia SPA at `resources/js/admin`, routes under `/admin/api` in `routes/web.php`)
+- **Riddles:** full CRUD (`RiddleController`), bulk actions (`RiddleBulkController`), CSV export, per-riddle stats, suspend/restore. Views: `views/riddles/{Index,Show,RiddleForm}.vue`.
+- **Categories / Tags / Achievements:** CRUD (`RiddleCategoryController`, `TagController`, `AchievementController`).
+- **Submissions (moderation queue):** `SubmissionController` (riddles), `ProverbSubmissionController`, `JokeSubmissionController` — list/filter + approve/reject with duplicate safe-publish.
+- **Dashboard:** `DashboardController@index` — riddle totals, attempts, solves, active players, top riddles, difficulty breakdown.
+- **Analytics:** `AnalyticsController@performance/players/dailyConversion` — all riddle-attempt based.
 
 ---
 
-## 4. Round API (new controllers)
+## 3. Gaps to close (adaptation tasks)
 
-New prefix groups under `routes/api.php` (auth:sanctum + verified), following the envelope `{ success, data }`.
+### G-1 — Back navigation to answered items
+**Prototype:** pressing `‹ Subira inyuma` renders item `position-1`. If already answered, it shows the solved state (correctness + revealed answer + feedback card, input disabled).
+**Current:** no endpoint returns a *specific position*'s answered state.
 
-### 4.1 `POST /api/games/{mode}/rounds` — start a round
-`{ mode: sokwe|hera|tuja, level?: 1..N }`. Server:
-1. Closes any `active` round for `(user, mode)` (soft-finalize).
-2. Builds the pool for the tier: fetches **unsolved** items (per prototype, answered items are filtered by solved state) ordered by `difficulte()` ascending, applies `poolNiveau` tiering, picks up to 10.
-3. Creates `rounds` + `round_items`.
-4. Responds with the **first item only** (answers/punchlines NEVER exposed):
+**Implement:**
+1. `round_items` already stores everything needed (`status`, `is_correct`, `attempts`, `answered_at`).
+2. Add route `GET /api/games/{mode}/rounds/{round}/items/{position}` → `RoundController@item`:
+   - Auth: round belongs to user, matches route mode.
+   - `status = pending` ⇒ return `itemPayload` (as today, `answered: false`).
+   - `status = solved|conceded` ⇒ return the item payload **plus** answer-disclosure fields:
+   ```
+   { success: true, data: {
+       item: {
+         type:'riddle'|'proverb'|'joke', id, position, question|setup,
+         category:{id,name,slug}, difficulty,
+         options?: (joke only) [4 strings],
+         answered: true,
+         answered_correct: bool,
+         revealed_answer: string|null,   // riddle/proverb answer or joke punchline
+       }
+   }}
+   ```
+   Answers are exposed **only** for non-pending items (invariant preserved).
+3. Add feature tests (§5).
+4. Android maps this to the Back button (§4.2 step 5 of `android-implementation-plan.md`).
+
+### G-2 — Tujajure must be flat (no tiers, no level-up)
+**Prototype:** jokes are served by plain shuffle of unsolved jokes, take up to 10; the end screen never offers a level-up.
+**Current:** `buildPool`/`hasNextTier` tier jokes too, and `roundPayload` can set `level_available` for `tuja`.
+
+**Implement:**
+1. In `RoundManager::buildPool`: for `mode === tuja`, ignore level/tiering — take up to `round_size` shuffled **unsolved** jokes.
+2. In `RoundManager::roundPayload`: for `tuja`, force `has_more_levels=false`, `next_level=null`, `level_available=false`.
+3. Add tests: a `tuja` round never exposes `level_available`/`next_level`; pool items are a random subset of unsolved jokes; with all 16 fresh, item_count is 10.
+
+### G-3 — Back office: curate all three game tables
+**Current:** riddles have full CRUD/bulk/export/stats; proverbs and jokes exist as seeded content with **moderation-only** admin surface.
+
+**Implement** (mirror the riddle pair `RiddleController` + `RiddleBulkController`):
+1. **`Admin/ProverbController`** — index (filter: search, category, difficulty, suspended; with `attempts`/`solve_count`), store, update, destroy(soft), restore, suspend/unsuspend, export CSV, per-proverb stats.
+2. **`Admin/JokeController`** — index (search setup, source, suspended; with attempts/solves), store (setup, punchline, `distractors[]`), update, destroy/restore, suspend/unsuspend, export CSV, per-joke stats.
+3. **Views:** `views/proverbs/{Index,Show,ProverbForm}.vue` and `views/jokes/{Index,Show,JokeForm}.vue`; add nav entries in `router.js` and the admin shell.
+4. **Bulk actions:** either extend `RiddleBulkController` into a generic `GameContentBulkController` or add parallel endpoints; actions: suspend/unsuspend/delete/restore/change_category.
+5. Routes in `routes/web.php` under the existing `/admin/api` auth/admin group (naming convention `submissions/proverbs` shows the precedent for `proverbs`/`jokes` collections).
+6. Admin list payloads may reuse the `success_rate` formula already used by `RiddleController@index`.
+
+### G-4 — Back office: multi-mode dashboard & analytics
+**Current:** `DashboardController` and `AnalyticsController` count `RiddleAttempt` only.
+
+**Implement:**
+1. **Dashboard** — add, per mode (sokwe/hera/tuja): `total_items` (riddles/proverbs/jokes), solve attempt counts, today solves; plus **round stats**: `rounds_played`, `active_rounds`, `completed_rounds`, round score distribution per level, peak concurrent-ish metric from `rounds.started_at` (last 7/30 days).
+2. **Analytics** — new or extended endpoints:
+   - `analytics/performance` → per mode: solve-rate by category, by type, by difficulty.
+   - `analytics/rounds` → rounds per day, completion rate, average score by level, level-up frequency.
+   - `analytics/contributions` → pending/approved/rejected counts across all three submission queues (a moderation funnel).
+3. Views: extend `views/analytics/Index.vue` tabs and `views/Dashboard.vue` widget grid.
+
+---
+
+## 4. API contract (authoritative)
+
+All game routes under `auth:sanctum,verified`; envelope `{ success, data }`. Flat envelope for answer/skip (existing convention).
+
+### 4.1 Response shapes (verified today)
+`POST /api/games/{mode}/rounds` `{ level? }` →
 ```
 { success, data: {
-    round: { id, mode, level, item_count, index:0, score:0,
-             level_available:false, next_level:null, has_more_levels:bool },
+    round: { id, mode, level, item_count, index, score, current_streak, best_streak,
+             completed: false, has_more_levels: bool, next_level, level_available },
     item: { type:'riddle'|'proverb'|'joke', id, position, question|setup,
-            category:{id,name,slug}, difficulty, options?: (joke only) [4 strings] }
+            category:{id,name,slug}, difficulty,
+            options?: (joke only) [4 shuffled punchlines] }
 }}
 ```
-
-### 4.2 `GET /api/games/{mode}/rounds/{round}` — current item (resume)
-Returns the item at the round's current position (or `null` if the round is completed → client shows end screen).
-
-### 4.3 `POST /api/games/{mode}/rounds/{round}/items/{position}/answer` — play an item
-Body `{ answer?: string }` for sokwe/hera; `{ option?: string }` for tuja.
-Logic (reuses existing matchers):
-- **sokwe**: `AnswerMatcher::isConcede` → concede; else `AnswerMatcher::isCorrect(answer, riddle.answer[/aliases])`. On correct: score++, current_streak++. On wrong: attempts++ (try again allowed, as in prototype — do NOT move on until correct or concede). Respond like existing `AnswerController` plus round fields.
-- **hera**: same via `AnswerMatcher` against `Proverb.answer`.
-- **tuja**: check `option === joke.punchline`. On correct: score++, streak++. Wrong → highlight wrong in client (terminal per option; client disables). Respond.
-- On **concede or skip**: reveal answer in response (`answer`/`punchline`), status=conceded, `current_streak=0`.
-
-**Response** (flat, matching existing answer-controller convention, plus round state):
+`POST .../items/{position}/answer` (sokwe/hera `{ answer? }`, tuja `{ option? }`) →
 ```
-{ correct, conceded, answer?, message,
-  round: { score, item_count, current_streak, best_streak, index,
-           completed:bool,
-           level_available: bool, next_level: int|null },
-  new_achievements: [] }   // riddle only, from Achievements::evaluate
+{ correct, conceded, answer?, message, rewarded, points, capped,
+  round: { score, index, current_streak, best_streak, completed, level_available, next_level },
+  new_achievements: [] }   // riddle only
 ```
+Wrong answers keep the item `pending` (re-answer allowed); `ndaguhaye` or a wrong joke option is terminal for the item (`conceded`), reveals `answer`, resets in-round streak.
 
-**Persisting reputation:** on correct solve still call `$user->updateReputation(...)` behind `Reputation::dailyRemaining()` cap (config `solve_reputation`) exactly as the current `AnswerController` does — so the leaderboard stays consistent. `Streaks::recompute()` and `Achievements::evaluate()` only make sense for riddles (preserve current behaviour; do not regress attempts).
-
-### 4.4 `POST /api/games/{mode}/rounds/{round}/complete` — finalize (optional explicit)
-Marks round `completed`, `completed_at`, computes `level_available = score >= ROUND_LEVEL_MIN_SCORE && has_more_levels`. Client sends this when the user hits the end-flow, or the server auto-finalizes when the last item is played. Return:
+`POST .../complete` →
 ```
-{ success, data: {
-    round:{ id, mode, level, score, item_count, best_streak, completed, level_available, next_level },
-    performance: 'top'|'mid'|'low' }   // top>=8, mid>=5, low<5 per prototype
-}}
+{ success, data: { round: { ...round payload }, performance: 'top'|'mid'|'low' } }
 ```
+`GET /api/games/history` →
+```
+{ success, data: { total, games, best, rows: [{ mode, games, points }] } }
+```
+`DELETE /api/games/history` → hard-deletes `rounds`+`round_items` (lifetime reputation preserved).
+`POST /api/contributions` `{ type:'sokwe'|'hera'|'tuja'|'other', body, answer?, who? }` → 201 `{ success, data: { type, id, status:'pending' } }`.
 
-### 4.5 Resume/back-forward
-- `GET .../rounds` → user's recent rounds (for resume + history).
-- Back (`‹ Subira inyuma`) → `GET .../rounds/{round}/items/{position}` (already answered => hidden answer + feedback state).
-- Skip (`Rengana`) → treat as concede (post an answer `{}` with `concede=1` or a dedicated `POST .../items/{position}/skip`).
+### 4.2 New endpoint (G-1)
+`GET /api/games/{mode}/rounds/{round}/items/{position}` — per-position state; answer disclosed **only** when the item is no longer pending. See §3 G-1.
 
 ---
 
-## 5. History & stats API
+## 5. Testing plan
 
-### 5.1 `GET /api/games/history` (auth)
-Aggregates user's `rounds` (completed) and returns exactly the prototype History screen:
-```
-{ success, data: {
-  total: number,          // sum of all round scores
-  games: number,          // count of completed rounds
-  best:  number,          // max single-round score
-  rows: [ { mode:'sokwe'|'hera'|'tuja', name:'Sokwe… Niruze !'|..., games:number, points:number } ]
-}}
-```
-(Expose display `name` here OR keep names solely client-side via the `T` map — prefer client-side to keep backend language-neutral; return `mode` + counts.)
-
-### 5.2 Optional `DELETE /api/games/history` — reset history (mirrors `h-reset` "Futa amateka yose 🗑️")
-Hard-deletes the user's `rounds` + `round_items`. Reputation/attempts stay (they're lifetime stats; prototype's reset is localStorage-only).
+Keep the full suite green (`php artisan test`, SQLite `:memory:`, `RefreshDatabase`) plus:
+- `tests/Feature/Api/RoundItemStateTest.php` (G-1): pending item returns no answer; solved item returns `answered:true`, `answered_correct`, `revealed_answer`; conceded item reveals answer; 403/404 for foreign/other-mode rounds; completed round positions still readable.
+- `tests/Feature/Api/RoundJokeTest.php` (G-2): tuja pool is a shuffled unsolved subset capped at 10; `level_available`/`next_level` always null; `has_more_levels` false.
+- `tests/Feature/Admin/ProverbAdminTest.php` (G-3): index filters, CRUD, suspend/restore, export CSV, stats.
+- `tests/Feature/Admin/JokeAdminTest.php` (G-3): same + `distractors[]` persistence.
+- `tests/Feature/Admin/DashboardRoundsTest.php` (G-4): per-mode dashboard numbers and `analytics/rounds` shape.
+- Existing `RoundTest`/`RoundHistoryTest`/`ContributionTest` must remain green (no regressions to riddles).
 
 ---
 
-## 6. Contribution API (reconcile with existing submissions)
+## 6. Delivery order (each step keeps the suite green + `migrate:fresh --seed` clean)
 
-The prototype offers one contribution form with a **type** selector (Igisokozo = riddle, Umwibutsa = proverb, Akajajuro = joke, other). Existing endpoints:
-- `POST/GET /api/submissions/riddles`, `/proverbs`, `/jokes` (auth:sanctum+verified).
-Add a convenience **`POST /api/contributions`** that accepts `{ type: 'sokwe'|'hera'|'tuja'|'other', body, answer?, who? }` and routes to the right `RiddleSubmission`/`ProverbSubmission`/`JokeSubmission` store with sensible field mapping (`body`→question/setup, `answer`→answer/answer-joke-body). `other` → logged as a generic moderation note (reuse `ModerationLog` or a `content_submissions` row). This keeps the prototype's single-screen form while reusing existing moderation/admin approval.
-
----
-
-## 7. Share endpoints (already existing)
-
-`POST /api/riddles/share` + `GET /api/riddles/share/{code}` exist (link sharing). The prototype **Share** on the end screen shares just a **text score summary** ("Rinjora — <slogan> — x / 10 ⭐") — this is client-side (Android uses the system share sheet); no new backend needed. Optionally add `GET /api/games/{mode}/rounds/{round}` share text if server-generated content is desired later.
+1. **A1 — G-1:** `GET .../items/{position}` controller + routes + tests.
+2. **A2 — G-2:** flat tuja pools + no level-up for jokes + tests.
+3. **A3 — G-3:** `ProverbController`/`JokeController` + bulk + views + routes + tests.
+4. **A4 — G-4:** dashboard + analytics multi-mode extensions + views + tests.
+5. **A5 —** full-suite + MySQL `migrate:fresh --seed` verification + GPG-signed commit.
 
 ---
 
-## 8. Android-native coupling points (backend contract summary)
+## 7. Explicit non-goals (unchanged)
 
-The Android client (see `docs/android-implementation-plan.md`) needs exactly these endpoints:
-1. `POST /api/auth/register|login` (existing) → Sanctum token.
-2. `GET /api/me` (`MeController`) → name, points.level (reputation level badge), streak.
-3. `POST /api/games/{mode}/rounds` + `.../answer` + `.../complete` + `GET .../history`.
-4. `POST /api/contributions`.
-5. `GET /api/riddles/daily` + `POST /api/riddles/streak/freeze` (existing daily/streak features).
-
-Client owns ALL Kirundi display strings (`T` object, `NOMBRES`, performance messages, good/streak messages) — mirror `T`/`NOMBRES` as a Kotlin object so the JS and Android stay in lockstep.
-
----
-
-## 9. Testing plan
-
-All new/edited behaviour must keep the full suite green (`php artisan test`, 241 tests today, SQLite `:memory:`, `RefreshDatabase`), plus additions:
-
-- `tests/Feature/Api/RoundTest.php`:
-  - start round returns exactly `item_count` (10) items, only first item exposed, no answer/punchline leaked.
-  - answering correct increments score/streak; wrong allows re-answer and doesn't move position.
-  - concede reveals answer, resets in-round streak, marks item conceded.
-  - skipping behaves like concede.
-  - completing returns `level_available`/`next_level` only when score≥8 and tier exists; else the end state.
-  - resume returns the current unfinished item; completed round returns `null` item.
-  - round items are drawn from the correct mode and unsolved-only.
-- `tests/Feature/Api/RoundHistoryTest.php`: totals/games/best/rows aggregation + reset.
-- `tests/Feature/Api/ContributionTest.php`: type-routing to each submission store.
-- `tests/Unit/Support/RinjoraDataTest.php` (extends `PHPUnit\Framework\TestCase`): counts (216/162/16), no empty q/a, `/` alternatives present, `difficulte`/`poolNiveau` tier math matches prototype (pas computation).
-- Extend `RiddleSeeder`/`ProverbSeeder`/`JokeSeeder` counts coverage: assert seeded DB has ≥ the source counts after `migrate:fresh --seed`.
-- **`MigrateFreshSeedTest`** (or manual gate): `migrate:fresh --seed` on MySQL clean.
-
----
-
-## 10. Migration / route summary
-
-### New routes (`routes/api.php`)
-```
-POST   /api/games/{mode}/rounds
-GET    /api/games/{mode}/rounds
-GET    /api/games/{mode}/rounds/{round}
-POST   /api/games/{mode}/rounds/{round}/items/{position}/answer
-POST   /api/games/{mode}/rounds/{round}/items/{position}/skip
-POST   /api/games/{mode}/rounds/{round}/complete
-GET    /api/games/history
-DELETE /api/games/history
-POST   /api/contributions
-```
-All under `auth:sanctum,verified` (answer/skip under `throttle:30,1` like current answer routes).
-
-### New files
-```
-database/migrations/2026_08_28_000018_create_rounds_table.php
-database/migrations/2026_08_28_000019_create_round_items_table.php
-app/Models/Round.php
-app/Models/RoundItem.php
-app/Support/RinjoraData.php
-app/Support/RinjoraTier.php            // difficulte + poolNiveau
-app/Http/Controllers/Api/Game/RoundController.php
-app/Http/Controllers/Api/Game/RoundAnswerController.php
-app/Http/Controllers/Api/Game/RoundHistoryController.php
-app/Http/Controllers/Api/ContributionController.php
-app/Http/Requests/Game/StartRoundRequest.php
-app/Http/Requests/Game/AnswerRoundItemRequest.php
-app/Http/Requests/ContributionStoreRequest.php
-routes/api.php (add groups)
-tests/Feature/Api/RoundTest.php
-tests/Feature/Api/RoundHistoryTest.php
-tests/Feature/Api/ContributionTest.php
-tests/Unit/Support/RinjoraDataTest.php
-```
-
----
-
-## 11. Explicit non-goals (now; deferred to "other improvements later")
-
-- Duels, favorites, daily-riddle gameplay parity (they exist; keep as-is, unmodified).
-- Localization server-side (strings stay client-side).
-- Performance/denormalization of round history.
-- Any change to existing riddle/proverb/joke single-item endpoints (they power the web admin + current Android); the new round API is additive.
-
----
-
-## 12. Delivery order (each step keeps the suite green + `migrate:fresh --seed` clean, GPG-signed commit)
-
-1. **S1 — Round schema + models + config**: migrations `000018`/`000019`, `Round`/`RoundItem` models, `config/riddles.php` additions. Tests: schema factories.
-2. **S2 — Tier + data support classes**: `RinjoraData`, `RinjoraTier` + extraction of the source arrays into a committed data file. Unit tests for counts + tier math.
-3. **S3 — Seeder backfill**: extend Riddle/Proverb/Joke seeders to full source sets with derived difficulty. `migrate:fresh --seed` green; counts asserted.
-4. **S4 — Round endpoints**: `RoundController`, `RoundAnswerController`, requests, routes. Feature tests (start/answer/concede/skip/complete/resume).
-5. **S5 — History + contribution**: `RoundHistoryController`, `ContributionController`, routes. Feature tests.
-6. **S6 — Full-suite + MySQL verification + commit.**
+- Duels, favorites, daily-riddle gameplay parity (exist; untouched).
+- Server-side localization (strings stay client-side).
+- Performance/denormalization of round history (derived from `rounds`).
+- Changes to existing single-item riddle/proverb/joke endpoints (they power web admin + legacy Android); round API is additive.
