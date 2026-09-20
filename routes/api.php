@@ -225,6 +225,7 @@ Route::prefix('games')->middleware(['auth:sanctum', 'verified'])->group(function
         Route::post('/rounds', [RoundController::class, 'store']);              // Start a round
         Route::get('/rounds', [RoundController::class, 'index']);               // Recent rounds (resume)
         Route::get('/rounds/{round}', [RoundController::class, 'show']);        // Resume current item
+        Route::get('/rounds/{round}/items/{position}', [RoundController::class, 'item']); // Per-position item state (Back nav)
         Route::post('/rounds/{round}/complete', [RoundController::class, 'complete']); // Finalize
         Route::post('/rounds/{round}/items/{position}/answer', [RoundAnswerController::class, 'answer'])
             ->middleware('throttle:30,1');                                      // Play an item

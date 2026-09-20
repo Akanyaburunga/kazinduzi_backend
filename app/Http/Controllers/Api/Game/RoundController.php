@@ -80,6 +80,42 @@ class RoundController extends Controller
     }
 
     /**
+     * Return one round item in its per-position state (Back navigation).
+     *
+     * Pending items never expose the answer; answered/conceded items disclose
+     * the revealed answer plus correctness so the client can re-render the
+     * solved state.
+     */
+    public function item(Request $request, string $mode, Round $round, int $position)
+    {
+        abort_unless($round->user_id === $request->user()->id, 403);
+        abort_unless($round->mode === $mode, 404);
+
+        $item = $round->items->firstWhere('position', $position);
+
+        if (! $item) {
+            return response()->json(['success' => false, 'message' => 'Round item not found.'], 404);
+        }
+
+        $payload = RoundManager::itemPayload($item);
+
+        if ($item->isAnswered()) {
+            $payload['answered'] = true;
+            $payload['answered_correct'] = (bool) $item->is_correct;
+            $payload['revealed_answer'] = RoundManager::revealedAnswer($round->mode, $item->puzzleModel());
+        } else {
+            $payload['answered'] = false;
+            $payload['answered_correct'] = false;
+            $payload['revealed_answer'] = null;
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => ['item' => $payload],
+        ]);
+    }
+
+    /**
      * Explicitly finalize a round and return the end-state summary.
      */
     public function complete(Request $request, string $mode, Round $round)

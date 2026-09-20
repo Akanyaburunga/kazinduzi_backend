@@ -110,6 +110,19 @@ class RoundManager
             return ['pool' => collect(), 'hasNext' => false, 'offset' => 0];
         }
 
+        // Tujajure is flat: the prototype shuffles the unsolved jokes and takes
+        // up to round_size, with no difficulty tiers and no level-up ever.
+        if ($mode === Round::MODE_TUJA) {
+            $shuffled = $source;
+            shuffle($shuffled);
+
+            return [
+                'pool' => collect(array_slice($shuffled, 0, min($cfg['size'], count($shuffled)))),
+                'hasNext' => false,
+                'offset' => 0,
+            ];
+        }
+
         $tier = RinjoraTier::poolFor($source, $level, $cfg['size'], $cfg['levels']);
 
         return [
