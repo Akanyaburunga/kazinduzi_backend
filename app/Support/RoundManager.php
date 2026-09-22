@@ -64,6 +64,9 @@ class RoundManager
             'levels' => (int) config('riddles.round_levels', 5),
             'min_score' => (int) config('riddles.round_level_min_score', 8),
             'reveal_on_concede' => (bool) config('riddles.round_reveal_on_concede', true),
+            'shuffle_order' => (bool) config('riddles.round_shuffle_order', true),
+            'recency_rounds' => (int) config('riddles.round_recency_rounds', 3),
+            'dedupe_distractors' => (bool) config('riddles.round_dedupe_distractors', true),
         ];
     }
 
@@ -97,6 +100,59 @@ class RoundManager
     }
 
     /**
+     * Puzzle ids this user has been shown in their most recent rounds of a mode.
+     *
+     * Used to deprioritize re-delivery: fresh, never-seen items are preferred.
+     */
+    public static function recentlySeenIds(string $mode, User $user): array
+    {
+        $rounds = static::config()['recency_rounds'];
+
+        if ($rounds < 1) {
+            return [];
+        }
+
+        $recentRoundIds = Round::query()
+            ->where('user_id', $user->id)
+            ->where('mode', $mode)
+            ->orderByDesc('id')
+            ->limit($rounds)
+            ->pluck('id');
+
+        if ($recentRoundIds->isEmpty()) {
+            return [];
+        }
+
+        return RoundItem::query()
+            ->whereIn('round_id', $recentRoundIds)
+            ->distinct()
+            ->pluck('puzzle_id')
+            ->all();
+    }
+
+    /**
+     * Unsolved source for a mode, deprioritizing items recently delivered.
+     *
+     * Fresh (never seen in the last recency window) items are returned alone;
+     * only when that leaves fewer items than a full round does the source
+     * fall back to re-showing recently seen unsolved items, so a round never
+     * starves.
+     */
+    public static function freshSource(string $mode, User $user): Collection
+    {
+        $source = static::source($mode, $user);
+        $recent = static::recentlySeenIds($mode, $user);
+
+        if ($recent === []) {
+            return $source;
+        }
+
+        $fresh = $source->reject(fn ($p) => in_array($p['id'], $recent, true))->values();
+
+        return $fresh->count() >= static::config()['size'] ? $fresh : $source;
+    }
+
+    /**
      * Build a tiered round pool for a level.
      *
      * @return array{pool: Collection<int, array{id: int, type: string, q: string, a: string}>, hasNext: bool, offset: int}
@@ -104,7 +160,7 @@ class RoundManager
     public static function buildPool(string $mode, int $level, User $user): array
     {
         $cfg = static::config();
-        $source = static::source($mode, $user)->values()->all();
+        $source = static::freshSource($mode, $user)->values()->all();
 
         if ($source === []) {
             return ['pool' => collect(), 'hasNext' => false, 'offset' => 0];
@@ -125,11 +181,44 @@ class RoundManager
 
         $tier = RinjoraTier::poolFor($source, $level, $cfg['size'], $cfg['levels']);
 
+        $pool = $tier['pool'];
+
+        if ($cfg['shuffle_order']) {
+            $pool = static::shuffled($pool, static::shuffleSeed($mode, $level, $user));
+        }
+
         return [
-            'pool' => collect($tier['pool']),
+            'pool' => collect($pool),
             'hasNext' => $tier['hasNext'],
             'offset' => $tier['offset'],
         ];
+    }
+
+    /**
+     * Deterministic per-user, per-mode, per-level, per-day order seed.
+     *
+     * Replays on the same day are stable for a player while different players
+     * (and different days) get a different item order. Frozen Carbon time in
+     * tests makes this reproducible.
+     */
+    private static function shuffleSeed(string $mode, int $level, User $user): string
+    {
+        return $user->id.'|'.$mode.'|'.$level.'|'.now()->toDateString();
+    }
+
+    /**
+     * Fisher-Yates shuffle seeded from a string (non-destructive).
+     *
+     * @param  array<int, mixed>  $items
+     * @return array<int, mixed>
+     */
+    public static function shuffled(array $items, string $seed): array
+    {
+        mt_srand(crc32($seed));
+        shuffle($items);
+        mt_srand();
+
+        return array_values($items);
     }
 
     /**
@@ -290,10 +379,40 @@ class RoundManager
         }
 
         if ($item->puzzle_type === RoundItem::PUZZLE_JOKE) {
-            $payload['options'] = static::optionsFor($puzzle);
+            $payload['options'] = static::optionsFor($puzzle, static::siblingJokePunchlines($item));
         }
 
         return $payload;
+    }
+
+    /**
+     * Punchlines of the other jokes dealt in the same round, used to prevent
+     * a correct option from doubling as another item's distractor.
+     *
+     * @return array<int, string>
+     */
+    private static function siblingJokePunchlines(RoundItem $item): array
+    {
+        if (! static::config()['dedupe_distractors']) {
+            return [];
+        }
+
+        $round = $item->round()->with(['items' => fn ($q) => $q->where('puzzle_type', RoundItem::PUZZLE_JOKE)])->first();
+
+        if (! $round) {
+            return [];
+        }
+
+        return $round->items
+            ->filter(fn (RoundItem $sibling) => $sibling->id !== $item->id)
+            ->map(function (RoundItem $sibling) {
+                $joke = $sibling->puzzleModel();
+
+                return $joke instanceof Joke ? $joke->punchline : null;
+            })
+            ->filter()
+            ->values()
+            ->all();
     }
 
     /**
@@ -311,18 +430,21 @@ class RoundManager
     /**
      * The four displayed options for a joke: punchline + 3 distractors, shuffled.
      *
+     * @param  array<int, string>  $excludePunchlines  in-round punchlines never used as distractors
      * @return array<int, string>
      */
-    public static function optionsFor(Joke $joke): array
+    public static function optionsFor(Joke $joke, array $excludePunchlines = []): array
     {
-        $distractors = (array) ($joke->distractors ?? []);
+        $distractors = array_values(
+            array_diff((array) ($joke->distractors ?? []), $excludePunchlines)
+        );
         $options = array_merge([$joke->punchline], $distractors);
 
         $pad = Joke::query()
             ->where('is_suspended', false)
             ->where('id', '!=', $joke->id)
             ->pluck('punchline')
-            ->reject(fn ($p) => in_array($p, $options, true))
+            ->reject(fn ($p) => in_array($p, $options, true) || in_array($p, $excludePunchlines, true))
             ->shuffle()
             ->take(max(0, 4 - count($options)))
             ->values()
