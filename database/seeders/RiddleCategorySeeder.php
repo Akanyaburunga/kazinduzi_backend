@@ -22,7 +22,7 @@ class RiddleCategorySeeder extends Seeder
         ];
 
         foreach ($categories as $data) {
-            RiddleCategory::updateOrCreate(
+            RiddleCategory::firstOrCreate(
                 ['slug' => Str::slug($data['name'])],
                 [
                     'name' => $data['name'],

@@ -13,10 +13,13 @@ use Illuminate\Support\Str;
 class ProverbSeeder extends Seeder
 {
     /**
-     * Full HERAHEZA proverb set from docs/rinjora.html — complete the ending.
-     * Sourced from the HERAHEZA array via RinjoraData; stored one row per
-     * (question, answer) pair so duplicate setups with two valid endings each
-     * persist as distinct challenges (162 rows total).
+     * Full HERAHEZA proverb set from docs/rinjora-data.json — complete the
+     * ending. Sourced from the HERAHEZA array via RinjoraData; stored one row
+     * per (question, answer) pair so duplicate setups with two valid endings
+     * each persist as distinct challenges (162 rows total).
+     *
+     * Designed to be ADD-ONLY: existing rows (by question + answer) are never
+     * touched, so admin edits, suspensions and timestamps survive re-seeding.
      */
     public function run(): void
     {
@@ -33,21 +36,17 @@ class ProverbSeeder extends Seeder
             ]);
         }
 
-        $now = now();
-
         foreach (RinjoraData::heraheza() as $item) {
-            $answer = RiddleHelper::normalize($item['a']);
-            $difficulty = RinjoraTier::tier(RinjoraTier::difficulte($item), 37, 50);
-
-            Proverb::updateOrCreate(
-                ['question' => $item['q'], 'answer' => $answer],
+            Proverb::firstOrCreate(
+                [
+                    'question' => $item['q'],
+                    'answer' => RiddleHelper::normalize($item['a']),
+                ],
                 [
                     'category_id' => $category->id,
-                    'difficulty' => $difficulty,
+                    'difficulty' => RinjoraTier::tier(RinjoraTier::difficulte($item), 37, 50),
                     'source' => 'Heraheza y\'ikirundi',
                     'is_suspended' => false,
-                    'created_at' => $now,
-                    'updated_at' => $now,
                 ]
             );
         }

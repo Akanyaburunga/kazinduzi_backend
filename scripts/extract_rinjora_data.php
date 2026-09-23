@@ -1,17 +1,20 @@
 <?php
 
 /**
- * One-time extraction of the rinjora prototype data arrays into a PHP data file.
+ * Extract the rinjora prototype data arrays into a committed data file.
  *
  * Usage:
+ *   php scripts/extract_rinjora_data.php docs/rinjora.html docs/rinjora-data.json
  *   php scripts/extract_rinjora_data.php docs/rinjora.html app/Support/data/rinjora.php
  *
  * Reads the SOKWE / HERAHEZA / TUJAJURE const arrays from docs/rinjora.html
- * and writes them as a committed PHP data file consumed by App\Support\RinjoraData.
+ * and writes them as a JSON data file (docs/rinjora-data.json) consumed by
+ * App\Support\RinjoraData at seeding time. A `.php` target keeps the legacy
+ * PHP format output for backwards compatibility.
  */
 
 if ($argc < 3) {
-    fwrite(STDERR, "Usage: php scripts/extract_rinjora_data.php <rinjora.html> <output.php>\n");
+    fwrite(STDERR, "Usage: php scripts/extract_rinjora_data.php <rinjora.html> <output.{json|php}>\n");
     exit(1);
 }
 
@@ -66,16 +69,25 @@ $tuja = extractArray('TUJAJURE', $html);
 
 echo 'SOKWE=' . count($sokwe) . ' HERAHEZA=' . count($hera) . ' TUJAJURE=' . count($tuja) . PHP_EOL;
 
-$out = "<?php\n\n"
-    . "/*\n"
-    . " * Auto-extracted from docs/rinjora.html (one-time migration).\n"
-    . " * Do not edit by hand - regenerate with scripts/extract_rinjora_data.php.\n"
-    . " */\n\n"
-    . "return [\n"
-    . "    'sokwe' => " . var_export($sokwe, true) . ",\n"
-    . "    'heraheza' => " . var_export($hera, true) . ",\n"
-    . "    'tujajure' => " . var_export($tuja, true) . ",\n"
-    . "];\n";
+$isJson = strtolower(pathinfo($target, PATHINFO_EXTENSION)) === 'json';
+
+if ($isJson) {
+    $out = json_encode(
+        ['sokwe' => $sokwe, 'heraheza' => $hera, 'tujajure' => $tuja],
+        JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+    ) . PHP_EOL;
+} else {
+    $out = "<?php\n\n"
+        . "/*\n"
+        . " * Auto-extracted from docs/rinjora.html (one-time migration).\n"
+        . " * Do not edit by hand - regenerate with scripts/extract_rinjora_data.php.\n"
+        . " */\n\n"
+        . "return [\n"
+        . "    'sokwe' => " . var_export($sokwe, true) . ",\n"
+        . "    'heraheza' => " . var_export($hera, true) . ",\n"
+        . "    'tujajure' => " . var_export($tuja, true) . ",\n"
+        . "];\n";
+}
 
 if (file_put_contents($target, $out) === false) {
     fwrite(STDERR, "Could not write {$target}\n");

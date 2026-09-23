@@ -13,16 +13,18 @@ use Illuminate\Support\Str;
 class RiddleSeeder extends Seeder
 {
     /**
-     * Full 216-item SOKWE set from docs/rinjora.html, stored in the
+     * Full 216-item SOKWE set from docs/rinjora-data.json, stored in the
      * "Ibisokozo" category. Answers may carry `/` alternatives (preserved by
      * RiddleHelper::normalize); difficulty is derived from the prototype's
      * difficulte() score. The source data carries no hints, so hint/hint2 stay
      * null.
+     *
+     * Designed to be ADD-ONLY: existing rows (by question) are never touched,
+     * so admin edits, suspensions and timestamps survive re-seeding. New rows
+     * are created with Eloquent-managed timestamps.
      */
     public function run(): void
     {
-        $now = now();
-
         $category = RiddleCategory::query()
             ->where('name', 'Ibisokozo')
             ->orWhere('slug', Str::slug('Ibisokozo'))
@@ -37,7 +39,7 @@ class RiddleSeeder extends Seeder
         }
 
         foreach (RinjoraData::sokwe() as $item) {
-            Riddle::updateOrCreate(
+            Riddle::firstOrCreate(
                 ['question' => $item['q']],
                 [
                     'category_id' => $category->id,
@@ -48,8 +50,6 @@ class RiddleSeeder extends Seeder
                     'hint2' => null,
                     'source' => 'Sokwe y\'ikirundi',
                     'is_suspended' => false,
-                    'created_at' => $now,
-                    'updated_at' => $now,
                 ]
             );
         }

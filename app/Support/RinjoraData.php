@@ -5,9 +5,11 @@ namespace App\Support;
 /**
  * Source dataset from the rinjora prototype (docs/rinjora.html).
  *
- * Reads the auto-extracted arrays in app/Support/data/rinjora.php so the
- * full SOKWE / HERAHEZA / TUJAJURE collections are available to seeders and
- * to the round-tiering logic without duplicating data.
+ * Reads docs/rinjora-data.json — the committed, human-auditable extraction of
+ * the auto-extracted SOKWE / HERAHEZA / TUJAJURE arrays — so the full
+ * collections are available to seeders and to the round-tiering logic without
+ * duplicating data. Falls back to the legacy PHP data file if the JSON is
+ * missing so existing deployments keep working.
  */
 class RinjoraData
 {
@@ -24,7 +26,17 @@ class RinjoraData
     public static function all(): array
     {
         if (static::$data === null) {
-            static::$data = require __DIR__.'/data/rinjora.php';
+            // Resolved without app() since this class is used by plain-PHPUnit
+            // unit tests (RinjoraDataTest) that boot no Laravel container.
+            $jsonPath = dirname(__DIR__, 2).'/docs/rinjora-data.json';
+            if (is_file($jsonPath)) {
+                $decoded = json_decode((string) file_get_contents($jsonPath), true);
+                static::$data = is_array($decoded)
+                    ? $decoded
+                    : require __DIR__.'/data/rinjora.php';
+            } else {
+                static::$data = require __DIR__.'/data/rinjora.php';
+            }
         }
 
         return static::$data;
