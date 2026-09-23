@@ -44,11 +44,6 @@ const columns = [
     { key: 'question', label: 'Question', sortable: true },
     { key: 'answer', label: 'Answer', sortable: true },
     { key: 'difficulty', label: 'Difficulty', sortable: true },
-    { key: 'riddle_type', label: 'Type' },
-    { key: 'category', label: 'Category' },
-    { key: 'tags', label: 'Tags' },
-    { key: 'source', label: 'Source' },
-    { key: 'suspended_reason', label: 'Reason' },
     { key: 'status', label: 'Status' },
     { key: 'attempts_count', label: 'Attempts', sortable: true },
     { key: 'solved_count', label: 'Solved', sortable: true },
@@ -90,8 +85,9 @@ function clearFilters() {
     store.resetFilters();
 }
 
-function typeLabel(value) {
-    return RIDDLE_TYPES.find((t) => t.value === value)?.label ?? (value ? value.replace(/_/g, ' ') : '—');
+function truncate(value) {
+    const text = value ?? '';
+    return text.length > 15 ? text.slice(0, 15) + '…' : text;
 }
 
 async function exportCsv() {
@@ -325,11 +321,11 @@ onMounted(async () => {
                     </button>
                 </div>
             </template>
-            <template #cell-category="{ row }">
-                {{ row.category?.name ?? '—' }}
+            <template #cell-question="{ row }">
+                <span class="whitespace-nowrap" :title="row.question">{{ truncate(row.question) }}</span>
             </template>
-            <template #cell-suspended_reason="{ row }">
-                <span class="text-xs text-gray-500">{{ row.suspended_reason ?? '—' }}</span>
+            <template #cell-answer="{ row }">
+                <span class="whitespace-nowrap" :title="row.answer">{{ truncate(row.answer) }}</span>
             </template>
             <template #cell-difficulty="{ row }">
                 <span
@@ -343,27 +339,6 @@ onMounted(async () => {
                     {{ row.difficulty ? row.difficulty.charAt(0).toUpperCase() + row.difficulty.slice(1) : '—' }}
                 </span>
             </template>
-            <template #cell-source="{ row }">
-                <span class="text-xs text-gray-500">{{ row.source ?? '—' }}</span>
-            </template>
-            <template #cell-riddle_type="{ row }">
-                <span class="text-xs text-gray-600">{{ typeLabel(row.riddle_type) }}</span>
-            </template>
-            <template #cell-tags="{ row }">
-                <div class="flex flex-wrap gap-1">
-                    <template v-if="row.tags?.length">
-                        <span
-                            v-for="tag in row.tags.slice(0, 2)"
-                            :key="tag.id"
-                            class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-700"
-                        >
-                            {{ tag.name }}
-                        </span>
-                        <span v-if="row.tags.length > 2" class="text-xs text-gray-400">+{{ row.tags.length - 2 }}</span>
-                    </template>
-                    <span v-else class="text-xs text-gray-400">—</span>
-                </div>
-            </template>
             <template #cell-status="{ row }">
                 <span
                     class="inline-flex rounded-full px-2 py-0.5 text-xs font-semibold"
@@ -373,26 +348,57 @@ onMounted(async () => {
                 </span>
             </template>
             <template #actions="{ row }">
-                <div class="flex justify-end gap-2">
-                    <button class="text-sm text-indigo-600 hover:underline" @click="openEdit(row)">Edit</button>
-                    <button class="text-sm text-sky-600 hover:underline" @click="router.push({ name: 'admin.riddles.show', params: { id: row.id } })">Analytics</button>
+                <div class="flex justify-end gap-1">
+                    <button
+                        class="rounded-lg p-1.5 text-indigo-600 transition hover:bg-indigo-50"
+                        title="Edit"
+                        @click="openEdit(row)"
+                    >
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </button>
+                    <button
+                        class="rounded-lg p-1.5 text-sky-600 transition hover:bg-sky-50"
+                        title="Analytics"
+                        @click="router.push({ name: 'admin.riddles.show', params: { id: row.id } })"
+                    >
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </button>
                     <button
                         v-if="row.deleted_at"
-                        class="text-sm text-teal-600 hover:underline"
+                        class="rounded-lg p-1.5 text-teal-600 transition hover:bg-teal-50"
+                        title="Restore"
                         @click="pendingRestore = row"
                     >
-                        Restore
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
                     </button>
                     <template v-else>
                         <button
                             v-if="row.is_suspended"
-                            class="text-sm text-green-600 hover:underline"
+                            class="rounded-lg p-1.5 text-green-600 transition hover:bg-green-50"
+                            title="Unsuspend"
                             @click="pendingUnsuspend = row"
                         >
-                            Unsuspend
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
                         </button>
-                        <button v-else class="text-sm text-amber-600 hover:underline" @click="pendingSuspend = row">Suspend</button>
-                        <button class="text-sm text-red-600 hover:underline" @click="pendingDelete = row">Delete</button>
+                        <button v-else class="rounded-lg p-1.5 text-amber-600 transition hover:bg-amber-50" title="Suspend" @click="pendingSuspend = row">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
+                        </button>
+                        <button class="rounded-lg p-1.5 text-red-600 transition hover:bg-red-50" title="Delete" @click="pendingDelete = row">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
                     </template>
                 </div>
             </template>
