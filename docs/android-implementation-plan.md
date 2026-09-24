@@ -107,17 +107,20 @@ com.kazinduzi.rinjora/
 ### 4.2 Quiz (Sokwe/Heraheza) — `QuizFragment`
 Driven by `RoundRepository`:
 1. On load, `POST /api/games/{mode}/rounds` (level parsed from a saved pref if continuing). Response: `round` + first `item` (riddle/proverb text, never answer).
+
+**Position contract (read once, apply everywhere):** the backend positions are **0-based**. The first item of a round is `position = 0`, the tenth is `position = 9`, and the payload's `item.position` is always the value to echo verbatim in the answer/skip/back URLs. Never add or subtract 1 to it, and never derive the URL position from the 1-based Kirundi display count ("Rimwe" = `position` 0, "Kabiri" = `position` 1, ...). The `round.index` field is likewise 0-based and equals the position of the *next pending* item (or `item_count` when the round is finished). Display-only conversions: UI count = `item.position + 1` for the "Rimwe / Cumi" label; progress bar shows `round.index / round.item_count`.
 2. Render: `ProgressBar` (custom drawable, width %), `⭐ score`, `🔥 streak` pill (visible only when streak>0), level badge `KirundiUi: "Urugero" + level`, `rideau` text, free-text `EditText`.
-3. **Check** (`Raba ko wabitoye`): `POST .../items/{position}/answer` with `{answer}`.
+3. **Check** (`Raba ko wabitoye`): `POST .../items/{position}/answer` with `{answer}` where `{position}` = the `item.position` of the currently displayed item (0-based, echoed verbatim from the payload).
    - `correct => true`: confetti, feedback ok card with random GOOD_MSG + streak flair, reveal "Inyishu yari: <firstAns>", enable Next.
    - `correct => false`: shake input, "trying" state (impa), keep position, user retypes.
    - `conceded => true`: feedback no card `CONCEDE_MSG`, reveal answer, Next.
-4. **Give up** (`Ndaguhaye ! 🤲`) / **Skip** (`Rengana`): `POST .../items/{position}/skip` → same as concede (server reveals answer, resets in-round streak).
+4. **Give up** (`Ndaguhaye ! 🤲`) / **Skip** (`Rengana`): `POST .../items/{position}/skip` → same as concede (server reveals answer, resets in-round streak). Position = current displayed `item.position`.
 5. **Back** (`‹ Subira inyuma`): `GET .../rounds/{round}/items/{position-1}` → the item is served in per-position state:
    - `answered: false` → render as an editable, pending item (input enabled).
    - `answered: true` + `answered_correct` → render the **solved state** (feedback ok card, revealed answer, input disabled).
    - `answered: true` + !`answered_correct` (conceded) → render the **conceded state** (feedback no card, `CONCEDE_MSG`, revealed answer, input disabled).
-6. **Next** (`Bandanya`): server advances; render next item.
+   - Back is only meaningful from `position ≥ 1`; there is no item at `position -1` (guard against negative positions client-side).
+6. **Next** (`Bandanya`): server advances; render next item from the next `POST .../items/{position}/answer` response's `round.index`, or re-fetch `GET /api/games/{mode}/rounds/{round}` — always display the payload's `item.position`, never a locally incremented counter.
 7. On `completed` or last item: call `POST .../complete`, get `{score, level_available, next_level, performance}`.
    - If `level_available` → show **level-up dialog** (below); `Yes` → start a new round at `next_level` (re-enter Quiz); `No` → `EndFragment`.
    - Else → `EndFragment`.
@@ -130,7 +133,7 @@ Mascot image, `Uriko uratsinda neza! 🔥`, "Ushaka gutera intambwe igoye kurush
 Tujajure is **flat by design**: the backend never tiers jokes and never sets `level_available`/`next_level` for `tuja` — ignore these fields in this fragment.
 1. `POST /api/games/tuja/rounds` → `item` contains `setup` + `options` (exactly 4 punchlines, shuffled server-side).
 2. "think" prompt `Iyumvire inyishu, uhitemwo 🤔` above 4 option buttons.
-3. On tap option: `POST .../items/{position}/answer {option}`.
+3. On tap option: `POST .../items/{position}/answer {option}` — `{position}` = the current displayed `item.position` (0-based, echoed verbatim; the "Rimwe / Cumi" count is that position **+ 1**).
    - Correct → highlight chosen green, `correct`, confetti, feedback ok.
    - Wrong → highlight chosen red + reveal correct green, disable all, feedback `CONCEDE_MSG` (prototype treats wrong as concede-level "no").
 4. `Bandanya` → next joke; last → complete → `EndFragment` (no level-up dialog).
@@ -178,7 +181,9 @@ DELETE /api/games/history      -> {success,data:{...}}
 POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status:'pending'}}
 ```
 
-**DTO fields** (Java classes `Dtos.java`): `Round{id, mode, level, item_count, index, score, best_streak, current_streak, completed, has_more_levels, next_level, level_available}`, `Item{type, id, position, question|setup, category{Dtos}, difficulty, options?:[String], answered?:boolean, answered_correct?:boolean, revealed_answer?:String}` (note `question` for riddle/proverb, `setup` for joke — parse both; `revealed_answer` is non-null only when `answered=true`), answer response `{correct, conceded, answer?, message, rewarded, points, capped, round{...}, new_achievements:[]}`.
+**Position semantics — `{pos}` and every `item.position`/`round.index` are 0-based.** The first item in a round is `position = 0`; there is no position 1-based offset anywhere in the API. The client must echo the `item.position` it received **verbatim** into the answer/skip/back URLs — never `position + 1`, never a locally tracked counter, never the 1-based "Rimwe / Kabiri / ..." display ordinal. Off-by-one submissions are the #1 integration bug between the Android client and this backend; a one-line regression test (start round → answer at the returned `item.position`) prevents it forever.
+
+**DTO fields** (Java classes `Dtos.java`): `Round{id, mode, level, item_count, index, score, best_streak, current_streak, completed, has_more_levels, next_level, level_available}`, `Item{type, id, position, question|setup, category{Dtos}, difficulty, options?:[String], answered?:boolean, answered_correct?:boolean, revealed_answer?:String}` (note `question` for riddle/proverb, `setup` for joke — parse both; `revealed_answer` is non-null only when `answered=true`), answer response `{correct, conceded, answer?, message, rewarded, points, capped, round{...}, new_achievements:[]}`. `round.index` is 0-based and equals the position of the next pending item (or `item_count` when finished); display the progress bar with `index + 1` if the guest count is 1-based ("1 / 10") and the "Rimwe / Cumi" ordinal as `position + 1`.
 
 ---
 
@@ -205,7 +210,7 @@ POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status
 ## 8. Testing plan (Android)
 
 - **Unit (JVM):** `KirundiUiTest` (NOMBRES/motNombre bounds), `ScoreMathTest` (performance classification), `Dtos`/Gson parsing of the backend JSON fixtures (put representative JSON strings as resources).
-- **Integration:** `RoundRepositoryTest` with a fake `RinjoraApi` (OkHttp `MockWebServer`) asserting correct URL/payload and DTO mapping for start/answer/complete/history.
+- **Integration:** `RoundRepositoryTest` with a fake `RinjoraApi` (OkHttp `MockWebServer`) asserting correct URL/payload and DTO mapping for start/answer/complete/history. Add a **position-echo regression test**: start a round, take the returned `item.position` value, POST the answer to that literal `items/{position}/answer` path, and assert the request URL equals the served position (catches 1-based off-by-one before it ships).
 - **UI (Robolectric / Espresso):** `QuizFragmentTest` (correct→ok feedback, wrong→shake, conceded→reveal), `LevelUpDialog` flow, `ContributionFragment` validation & copy format. Network faked via MockWebServer.
 - Acceptable manual QA on a real device + emulator against the live backend staging.
 
@@ -229,6 +234,7 @@ POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status
 - [ ] Check / Give-up / Skip / Back / Next / Quit all match prototype behaviour incl. feedback card states and emoji messages.
 - [ ] Back renders a previously answered item in its solved/conceded state from `GET .../items/{pos}` (`answered`, `answered_correct`, `revealed_answer`).
 - [ ] Answer revealed only after solve or concede; never before.
+- [ ] **Positions are 0-based**: the app always submits answers/skips to the exact `item.position` it received (no `+1`, no counter); the "Rimwe / Cumi" count is `position + 1`. Verified by the position-echo regression test.
 - [ ] Tujajure: 4 shuffled options, correct=green, wrong=red + correct highlighted, think prompt, next; **flat (never shows a level-up dialog)**.
 - [ ] End screen: score/round, correct performance message per score band, Replay/Share/Home.
 - [ ] Level-up dialog appears only when `score≥8` + harder tier exists (sokwe/hera only); Yes continues, No ends.

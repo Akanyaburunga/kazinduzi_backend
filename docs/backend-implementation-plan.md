@@ -155,6 +155,7 @@ All game routes under `auth:sanctum,verified`; envelope `{ success, data }`. Fla
             options?: (joke only) [4 shuffled punchlines] }
 }}
 ```
+**Positions and index are 0-based.** `round.index` is the position of the next pending item (`item_count` when completed); `item.position` ranges `0..item_count-1`. `{position}` in answer/skip/back URLs is the literal `item.position` the client received — the server does no offsetting, and clients must not send `position + 1`. Display ordinals ("Rimwe"=1, "Kabiri"=2, ...) are `position + 1` for presentation only.
 `POST .../items/{position}/answer` (sokwe/hera `{ answer? }`, tuja `{ option? }`) →
 ```
 { correct, conceded, answer?, message, rewarded, points, capped,
