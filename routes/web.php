@@ -10,6 +10,21 @@ use App\Http\Controllers\MeaningController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ModerationController;
+use App\Http\Controllers\Admin\SessionController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RiddleController;
+use App\Http\Controllers\Admin\RiddleBulkController;
+use App\Http\Controllers\Admin\ProverbController;
+use App\Http\Controllers\Admin\ProverbBulkController;
+use App\Http\Controllers\Admin\JokeController;
+use App\Http\Controllers\Admin\JokeBulkController;
+use App\Http\Controllers\Admin\RiddleCategoryController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\Admin\SubmissionController;
+use App\Http\Controllers\Admin\ProverbSubmissionController;
+use App\Http\Controllers\Admin\JokeSubmissionController;
+use App\Http\Controllers\Admin\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +86,92 @@ Route::get('/search', [WordController::class, 'search'])->name('words.search');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/leaderboard/{filter?}', [LeaderboardController::class, 'index'])->name('leaderboard');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
+// Admin panel host (Vue SPA). Serves the same shell for any /admin route.
+Route::prefix('admin/api')->group(function () {
+    Route::post('/login', [SessionController::class, 'store']);
+
+    Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+        Route::get('/session', [SessionController::class, 'show']);
+        Route::post('/logout', [SessionController::class, 'destroy']);
+
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::get('/riddles', [RiddleController::class, 'index']);
+    Route::post('/riddles', [RiddleController::class, 'store']);
+    Route::post('/riddles/bulk', [RiddleBulkController::class, 'store']);
+    Route::get('/riddles/export', [RiddleController::class, 'export']);
+    Route::get('/riddles/{riddle}', [RiddleController::class, 'show']);
+    Route::put('/riddles/{riddle}', [RiddleController::class, 'update']);
+    Route::get('/riddles/{riddle}/stats', [RiddleController::class, 'stats']);
+    Route::delete('/riddles/{riddle}', [RiddleController::class, 'destroy']);
+    Route::post('/riddles/{id}/restore', [RiddleController::class, 'restore']);
+    Route::post('/riddles/{riddle}/suspend', [RiddleController::class, 'suspend']);
+    Route::post('/riddles/{riddle}/unsuspend', [RiddleController::class, 'unsuspend']);
+
+        Route::get('/categories', [RiddleCategoryController::class, 'index']);
+        Route::post('/categories', [RiddleCategoryController::class, 'store']);
+        Route::put('/categories/{category}', [RiddleCategoryController::class, 'update']);
+        Route::delete('/categories/{category}', [RiddleCategoryController::class, 'destroy']);
+
+        Route::get('/tags', [TagController::class, 'index']);
+        Route::post('/tags', [TagController::class, 'store']);
+        Route::put('/tags/{tag}', [TagController::class, 'update']);
+        Route::delete('/tags/{tag}', [TagController::class, 'destroy']);
+        Route::get('/riddle-types', [TagController::class, 'types']);
+
+        Route::get('/achievements', [AchievementController::class, 'index']);
+        Route::post('/achievements', [AchievementController::class, 'store']);
+        Route::post('/achievements/sync', [AchievementController::class, 'sync']);
+        Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
+        Route::delete('/achievements/{achievement}', [AchievementController::class, 'destroy']);
+
+        Route::get('/submissions', [SubmissionController::class, 'index']);
+        Route::post('/submissions/{submission}/approve', [SubmissionController::class, 'approve']);
+        Route::post('/submissions/{submission}/reject', [SubmissionController::class, 'reject']);
+
+        Route::get('/submissions/proverbs', [ProverbSubmissionController::class, 'index']);
+        Route::post('/submissions/proverbs/{submission}/approve', [ProverbSubmissionController::class, 'approve']);
+        Route::post('/submissions/proverbs/{submission}/reject', [ProverbSubmissionController::class, 'reject']);
+
+        Route::get('/submissions/jokes', [JokeSubmissionController::class, 'index']);
+        Route::post('/submissions/jokes/{submission}/approve', [JokeSubmissionController::class, 'approve']);
+        Route::post('/submissions/jokes/{submission}/reject', [JokeSubmissionController::class, 'reject']);
+
+    Route::get('/proverbs', [ProverbController::class, 'index']);
+    Route::post('/proverbs', [ProverbController::class, 'store']);
+    Route::post('/proverbs/bulk', [ProverbBulkController::class, 'store']);
+    Route::get('/proverbs/export', [ProverbController::class, 'export']);
+    Route::get('/proverbs/{proverb}', [ProverbController::class, 'show']);
+    Route::put('/proverbs/{proverb}', [ProverbController::class, 'update']);
+    Route::get('/proverbs/{proverb}/stats', [ProverbController::class, 'stats']);
+    Route::delete('/proverbs/{proverb}', [ProverbController::class, 'destroy']);
+    Route::post('/proverbs/{id}/restore', [ProverbController::class, 'restore']);
+    Route::post('/proverbs/{proverb}/suspend', [ProverbController::class, 'suspend']);
+    Route::post('/proverbs/{proverb}/unsuspend', [ProverbController::class, 'unsuspend']);
+
+    Route::get('/jokes', [JokeController::class, 'index']);
+    Route::post('/jokes', [JokeController::class, 'store']);
+    Route::post('/jokes/bulk', [JokeBulkController::class, 'store']);
+    Route::get('/jokes/export', [JokeController::class, 'export']);
+    Route::get('/jokes/{joke}', [JokeController::class, 'show']);
+    Route::put('/jokes/{joke}', [JokeController::class, 'update']);
+    Route::get('/jokes/{joke}/stats', [JokeController::class, 'stats']);
+    Route::delete('/jokes/{joke}', [JokeController::class, 'destroy']);
+    Route::post('/jokes/{id}/restore', [JokeController::class, 'restore']);
+    Route::post('/jokes/{joke}/suspend', [JokeController::class, 'suspend']);
+    Route::post('/jokes/{joke}/unsuspend', [JokeController::class, 'unsuspend']);
+
+        Route::get('/analytics/performance', [AnalyticsController::class, 'performance']);
+        Route::get('/analytics/players', [AnalyticsController::class, 'players']);
+        Route::get('/analytics/daily-conversion', [AnalyticsController::class, 'dailyConversion']);
+        Route::get('/analytics/rounds', [AnalyticsController::class, 'rounds']);
+        Route::get('/analytics/contributions', [AnalyticsController::class, 'contributions']);
+    });
+});
+
+Route::get('/admin/{vueRoute?}', function () {
+    return view('admin.app');
+})->where('vueRoute', '.*')->name('admin.index');
 
 require __DIR__.'/auth.php';

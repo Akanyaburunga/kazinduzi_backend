@@ -3,10 +3,10 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
-        "build": "npx tailwindcss -i ./resources/css/tailwind.css -o ./public/css/tailwind.css",
+        "build:vite": "vite build",
+        "build:tailwind": "npx tailwindcss -i ./resources/css/tailwind.css -o ./public/css/tailwind.css",
+        "build": "npm run build:tailwind && npm run build:vite",
         "watch": "npx tailwindcss -i ./resources/css/tailwind.css -o ./public/css/tailwind.css --watch"
-
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
@@ -20,6 +20,10 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
-        "bootstrap": "^5.3.3"
+        "@vitejs/plugin-vue": "^5.2.4",
+        "bootstrap": "^5.3.3",
+        "pinia": "^4.0.3",
+        "vue": "^3.5.42",
+        "vue-router": "^4.6.4"
     }
 }

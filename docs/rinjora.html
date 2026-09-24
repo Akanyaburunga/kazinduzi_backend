@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rinjora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#FFF6E9; --card:#FFFFFF; --ink:#2A2420; --ink-soft:#7A6F63;
+  --green:#17915A; --green-d:#0F6B41; --red:#E14B4B; --red-soft:#FDE7E4;
+  --gold:#F6B21A; --green-soft:#E4F4EC; --gold-soft:#FDF1D8;
+  --shadow:0 14px 30px -12px rgba(42,36,32,.28); --radius:26px;
+  --accent:var(--green); --accent-soft:var(--green-soft); --accent-bd:#CDE9D9;
+  /* --- Palette de la terre : chocolat d'Afrique & latérite du Burundi --- */
+  --choco:#6B4226; --choco-l:#8B5A2B; --choco-d:#4A2C18;
+  --terra:#B4441F; --terra-l:#C9603A; --ochre:#D89B4A; --sand:#F6E3C5;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{ font-family:"Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color:var(--ink); background:var(--ivory); min-height:100vh;
+  display:flex; align-items:center; justify-content:center; padding:20px; -webkit-font-smoothing:antialiased; }
+.imigongo{ height:14px; border-radius:20px 20px 0 0;
+  background:repeating-linear-gradient(135deg, var(--green) 0 10px, var(--green-d) 10px 20px,
+    var(--red) 20px 30px, #C63C3C 30px 40px, var(--gold) 40px 50px, #E09A0E 50px 60px); opacity:.9; }
+.app{ width:100%; max-width:440px; background:var(--card); border-radius:var(--radius);
+  box-shadow:var(--shadow); overflow:hidden; position:relative; }
+.screen{ display:none; padding:24px 22px 26px; }
+.screen.on{ display:block; animation:fadeUp .45s ease both; }
+@keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+
+/* ---------- ACCUEIL ---------- */
+.home{ text-align:center; padding-top:16px; }
+.mascot{ line-height:0; }
+.mascot svg{ width:118px; height:auto; }
+.flame{ transform-origin:60px 62px; animation:flick 2.4s ease-in-out infinite; }
+@keyframes flick{ 0%,100%{transform:scaleY(1) scaleX(1);} 50%{transform:scaleY(1.07) scaleX(.96);} }
+.glow{ animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:.28;} 50%{opacity:.5;} }
+.brand{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:46px; letter-spacing:-1px;
+  color:var(--green-d); margin-top:4px; }
+.slogan{ margin-top:4px; color:var(--ink-soft); font-weight:700; font-size:15px; }
+.welcome{ margin-top:14px; font-family:"Fredoka",sans-serif; font-weight:600; font-size:19px; }
+.menu{ margin-top:20px; display:flex; flex-direction:column; gap:12px; }
+.mcard{ display:flex; align-items:center; gap:14px; text-align:left; cursor:pointer;
+  border:2.5px solid #EFE6D7; background:#FFFDF8; border-radius:20px; padding:15px 16px;
+  transition:transform .1s, border-color .2s, background .2s; width:100%; font:inherit; color:inherit; }
+.mcard:hover{ border-color:var(--c); background:#fff; }
+.mcard:active{ transform:scale(.985); }
+.mcard .ic{ width:52px; height:52px; flex:none; border-radius:16px; display:grid; place-items:center;
+  background:var(--sand); border:2px solid #EBD3AE; }
+.mcard .ic svg{ width:34px; height:34px; display:block; }
+.mcard h3{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:19px; color:var(--c); }
+.mcard p{ font-size:13.5px; color:var(--ink-soft); font-weight:700; margin-top:1px; }
+.mcard .n{ margin-left:auto; font-weight:800; color:#C9BCA9; font-size:22px; }
+
+/* ---------- BARRE / EN-TÊTE DE SECTION ---------- */
+.topbar{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+.progress{ flex:1; height:14px; background:#EFE6D7; border-radius:99px; overflow:hidden; }
+.progress > i{ display:block; height:100%; width:0%; background:var(--accent);
+  border-radius:99px; transition:width .5s cubic-bezier(.2,.8,.2,1); }
+.pill{ display:flex; align-items:center; gap:5px; font-weight:800; font-size:15px;
+  padding:6px 11px; border-radius:99px; background:var(--ivory); white-space:nowrap; }
+.pill.star{ color:var(--gold); } .pill.fire{ color:var(--red); } .pill.hidden{ display:none; }
+.eyebrow{ display:flex; align-items:baseline; gap:8px; margin-bottom:10px; }
+.eyebrow .lab{ font-family:"Fredoka",sans-serif; font-weight:700; color:var(--accent); font-size:17px; }
+.eyebrow .count{ color:var(--ink-soft); font-weight:800; font-size:14px; }
+
+.riddle{ background:var(--accent-soft); border:2px solid var(--accent-bd); border-radius:20px;
+  padding:26px 20px; min-height:130px; display:flex; align-items:center; justify-content:center;
+  text-align:center; font-family:"Fredoka",sans-serif; font-weight:600; font-size:21px; line-height:1.4; }
+.answer-box{ margin-top:14px; }
+input[type=text], textarea, select{ width:100%; font-family:"Nunito",sans-serif; font-weight:700;
+  font-size:17px; padding:15px 17px; border:2.5px solid #E7DECF; border-radius:16px;
+  background:#FFFDF8; color:var(--ink); outline:none; transition:border-color .2s; }
+textarea{ min-height:92px; resize:vertical; line-height:1.45; }
+input::placeholder, textarea::placeholder{ color:#BCB0A0; font-weight:600; }
+input:focus, textarea:focus, select:focus{ border-color:var(--accent); }
+input:disabled{ opacity:.75; }
+label.fl{ display:block; font-weight:800; font-size:14px; color:var(--ink-soft); margin:14px 0 6px 2px; }
+
+.btn{ display:block; width:100%; border:none; cursor:pointer; font-family:"Fredoka",sans-serif;
+  font-weight:600; font-size:18px; padding:15px; border-radius:16px; color:#fff; margin-top:11px;
+  transition:transform .08s, filter .2s, box-shadow .2s; box-shadow:0 5px 0 rgba(0,0,0,.14); }
+.btn:active{ transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.14); }
+.btn.green{ background:var(--green); } .btn.gold{ background:var(--gold); box-shadow:0 5px 0 #C98F0C; }
+.btn.red{ background:var(--red); box-shadow:0 5px 0 #B23636; }
+.btn.acc{ background:var(--accent); }
+.btn:hover{ filter:brightness(1.05); }
+.btn.ghost{ background:transparent; color:var(--ink-soft); box-shadow:none; font-size:15.5px; padding:12px; }
+.btn.ghost:active{ transform:none; } .btn.ghost:hover{ color:var(--ink); filter:none; }
+.btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+.subrow{ display:flex; gap:9px; } .subrow .btn{ flex:1; margin-top:6px; }
+
+.feedback{ display:none; margin-top:14px; border-radius:18px; padding:16px 18px; }
+.feedback.on{ display:block; animation:pop .35s ease; }
+.feedback.ok{ background:var(--green-soft); border:2px solid #B7E2C8; }
+.feedback.no{ background:var(--red-soft); border:2px solid #F6C9C4; }
+.feedback .fmsg{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:22px; }
+.feedback.ok .fmsg{ color:var(--green-d); } .feedback.no .fmsg{ color:#C0392B; }
+.feedback .fans{ margin-top:6px; font-weight:800; font-size:16px; }
+.feedback .fans:empty{ display:none; }
+.feedback .streakflair{ margin-top:4px; font-weight:800; color:var(--gold); font-size:16px; }
+.feedback .streakflair:empty{ display:none; }
+@keyframes pop{ from{opacity:0; transform:scale(.94);} to{opacity:1; transform:none;} }
+.shake{ animation:shake .4s; }
+@keyframes shake{ 0%,100%{transform:translateX(0);} 20%,60%{transform:translateX(-7px);} 40%,80%{transform:translateX(7px);} }
+
+/* ---------- TUJAJURE ---------- */
+.joke{ background:var(--gold-soft); border:2px solid #F3DFAF; border-radius:22px; padding:26px 20px;
+  min-height:170px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; gap:14px; }
+.joke .jt{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:21px; line-height:1.4; }
+.joke .jp{ display:none; font-weight:800; font-size:19px; color:#B5820A; line-height:1.4;
+  border-top:2px dashed #E7C880; padding-top:14px; width:100%; }
+.joke .jp.on{ display:block; animation:pop .35s ease; }
+
+/* ---------- FIN ---------- */
+.end{ text-align:center; padding-top:8px; }
+.end .party{ font-size:64px; }
+.end h2{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:28px; color:var(--green-d); margin-top:6px; }
+.scorecard{ margin:20px auto 6px; background:var(--ivory); border-radius:20px; padding:20px; }
+.scorecard .big{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:44px; color:var(--red); }
+.scorecard .lab{ color:var(--ink-soft); font-weight:800; margin-top:2px; }
+.perf{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:18px; line-height:1.45; margin:14px auto 0; max-width:350px; }
+
+/* ---------- CONTRIBUTION ---------- */
+.sechead{ text-align:center; margin-bottom:6px; }
+.sechead .ic{ font-size:42px; }
+.sechead h2{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:26px; color:var(--green-d); margin-top:4px; }
+.sechead p{ color:var(--ink-soft); font-weight:700; font-size:14px; margin-top:5px; line-height:1.45; }
+.note{ background:var(--ivory); border-radius:14px; padding:12px 14px; font-size:13px;
+  font-weight:700; color:var(--ink-soft); line-height:1.5; margin-top:14px; }
+.toast{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px);
+  background:var(--green-d); color:#fff; font-weight:800; padding:13px 20px; border-radius:99px;
+  box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:.3s; z-index:20; font-size:15px; }
+.toast.on{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+.confetti{ position:fixed; top:-10vh; font-size:26px; pointer-events:none; z-index:9; animation:fall linear forwards; }
+@keyframes fall{ to{ transform:translateY(115vh) rotate(360deg); opacity:0; } }
+
+
+/* ---------- FOOTER ---------- */
+.foot{ margin:22px -22px -26px; }
+.foot .band{ height:8px; background:repeating-linear-gradient(135deg,
+  var(--green) 0 8px, var(--green-d) 8px 16px, var(--terra) 16px 24px,
+  #C63C3C 24px 32px, var(--gold) 32px 40px, #E09A0E 40px 48px); opacity:.85; }
+.foot .inner{ background:var(--choco-d); color:#F6E3C5; text-align:center; padding:16px 18px 18px; }
+.foot .fire{ font-size:20px; line-height:1; }
+.foot .nm{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:16px; margin-top:2px; }
+.foot .tg{ font-size:12px; opacity:.75; font-weight:700; margin-top:1px; }
+.foot .cr{ font-size:11.5px; opacity:.55; font-weight:700; margin-top:14px; line-height:1.5; }
+.foot-nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:14px; }
+.fnav{ font-family:"Nunito",sans-serif; font-weight:800; font-size:12.5px; color:#FBEAD0;
+  background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.16);
+  border-radius:99px; padding:9px 14px; cursor:pointer; transition:background .15s, border-color .15s; }
+.fnav:hover{ background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.3); }
+.fnav:active{ transform:translateY(1px); }
+
+/* ---------- BADGE NIVEAU ---------- */
+.lvlbadge{ margin-left:auto; font-family:"Fredoka",sans-serif; font-weight:700; font-size:13px;
+  color:#fff; background:var(--terra); padding:4px 11px; border-radius:99px; }
+
+/* ---------- MODAL NIVEAU SUPÉRIEUR ---------- */
+.modal{ position:fixed; inset:0; z-index:30; display:none; align-items:center; justify-content:center;
+  padding:22px; background:rgba(42,24,16,.55); backdrop-filter:blur(3px); }
+.modal.on{ display:flex; animation:fadeUp .3s ease both; }
+.modal-card{ width:100%; max-width:360px; background:var(--card); border-radius:24px;
+  padding:24px 22px; text-align:center; box-shadow:var(--shadow); }
+.mchar{ margin:0 auto; width:120px; }
+.mchar svg{ width:120px; height:auto; }
+.mchar .arm{ transform-origin:60px 78px; animation:wave 1s ease-in-out infinite; }
+@keyframes wave{ 0%,100%{transform:rotate(0);} 50%{transform:rotate(-16deg);} }
+.lvl-cheer{ font-family:"Fredoka",sans-serif; font-weight:600; color:var(--terra); font-size:16px; margin-top:6px; }
+.modal-card h3{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:22px; margin:6px 4px 4px; line-height:1.3; }
+
+/* ---------- OPTIONS À CHOIX MULTIPLE (Tujajure) ---------- */
+.opt{ display:block; width:100%; text-align:left; font-family:"Nunito",sans-serif; font-weight:700;
+  font-size:15.5px; line-height:1.42; padding:14px 16px; margin-top:10px; cursor:pointer;
+  border:2.5px solid #EFE6D7; background:#FFFDF8; border-radius:16px; color:var(--ink);
+  transition:border-color .15s, background .15s, transform .08s; }
+.opt:hover{ border-color:var(--ochre); }
+.opt:active{ transform:scale(.99); }
+.opt:disabled{ cursor:default; }
+.opt.correct{ border-color:var(--green); background:var(--green-soft); color:var(--green-d); font-weight:800; }
+.opt.wrong{ border-color:var(--red); background:var(--red-soft); color:#C0392B; }
+
+/* ---------- INVITE À RÉFLÉCHIR (Tujajure) ---------- */
+.think{ text-align:center; margin-top:14px; font-family:"Fredoka",sans-serif; font-weight:600;
+  font-size:17px; color:var(--terra); display:flex; align-items:center; justify-content:center; gap:8px; }
+.think::before, .think::after{ content:""; height:2px; width:34px; border-radius:2px;
+  background:linear-gradient(90deg,transparent,#EBD3AE); }
+.think::after{ background:linear-gradient(90deg,#EBD3AE,transparent); }
+
+/* ---------- SCÈNE D'ACCUEIL ---------- */
+.hero{ margin:-24px -22px 0; line-height:0; position:relative; }
+.hero svg{ width:100%; height:auto; display:block; }
+.hero .flame2{ transform-origin:220px 168px; animation:flick 2.6s ease-in-out infinite; }
+@keyframes flick{ 0%,100%{transform:scaleY(1) scaleX(1);} 50%{transform:scaleY(1.09) scaleX(.95);} }
+.hero .glow2{ animation:pulse 2.6s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:.30;} 50%{opacity:.55;} }
+.hero .sway{ transform-origin:center bottom; animation:sway 3.4s ease-in-out infinite; }
+@keyframes sway{ 0%,100%{transform:rotate(-2.5deg);} 50%{transform:rotate(2.5deg);} }
+.hero .bob2{ animation:bob2 2.2s ease-in-out infinite; }
+@keyframes bob2{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+.titlewrap{ text-align:center; margin-top:14px; }
+
+/* ---------- IVYEREKEYE (à propos) ---------- */
+.aboutcard{ background:linear-gradient(155deg,var(--choco),var(--terra)); color:#fff;
+  border-radius:22px; padding:24px 22px; margin-top:6px; text-align:center; }
+.aboutcard .logo{ margin:0 auto 8px; }
+.aboutcard .logo svg{ width:64px; height:auto; }
+.aboutcard h3{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:26px; }
+.aboutcard .tag{ font-weight:800; opacity:.9; font-size:13.5px; margin-top:2px; }
+.aboutcard hr{ border:none; height:2px; background:rgba(255,255,255,.25); margin:18px 0; border-radius:2px; }
+.credit{ text-align:left; }
+.credit .lab{ font-weight:800; font-size:12px; opacity:.75; letter-spacing:.4px; text-transform:uppercase; }
+.credit .val{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:19px; margin:2px 0 14px; }
+.credit .val:last-child{ margin-bottom:0; }
+
+/* ---------- HISTORIQUE ---------- */
+.bigstat{ background:linear-gradient(150deg,var(--choco),var(--terra)); color:#fff;
+  border-radius:22px; padding:22px; text-align:center; margin-top:6px; }
+.bigstat .n{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:52px; line-height:1; }
+.bigstat .l{ font-weight:800; font-size:14px; opacity:.9; margin-top:4px; letter-spacing:.3px; }
+.duo{ display:flex; gap:10px; margin-top:10px; }
+.duo .box{ flex:1; background:var(--sand); border-radius:16px; padding:14px; text-align:center; }
+.duo .box .n{ font-family:"Fredoka",sans-serif; font-weight:700; font-size:26px; color:var(--choco); }
+.duo .box .l{ font-weight:800; font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.srow{ display:flex; align-items:center; gap:12px; background:#FFFDF8; border:2px solid #EFE6D7;
+  border-radius:16px; padding:12px 14px; margin-top:9px; }
+.srow .ic2{ width:38px; height:38px; flex:none; border-radius:12px; background:var(--sand);
+  display:grid; place-items:center; }
+.srow .ic2 svg{ width:26px; height:26px; }
+.srow .nm{ font-family:"Fredoka",sans-serif; font-weight:600; font-size:16px; }
+.srow .sub2{ font-size:12.5px; color:var(--ink-soft); font-weight:700; }
+.srow .pts{ margin-left:auto; font-family:"Fredoka",sans-serif; font-weight:700;
+  font-size:19px; color:var(--terra); }
+.empty{ text-align:center; color:var(--ink-soft); font-weight:700; font-size:14px;
+  line-height:1.6; padding:26px 10px; }
+
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="imigongo"></div>
+
+  <!-- ==================== ACCUEIL ==================== -->
+  <section id="s-home" class="screen on home">
+    <div class="hero">
+      <svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abana bakina ku ziko">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#5A3620"/><stop offset="48%" stop-color="#B4441F"/>
+            <stop offset="100%" stop-color="#E8A33D"/>
+          </linearGradient>
+          <radialGradient id="halo" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#FFD98A" stop-opacity=".85"/>
+            <stop offset="100%" stop-color="#FFD98A" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="440" height="210" fill="url(#sky)"/>
+        <circle cx="352" cy="96" r="26" fill="#F7DFA5" opacity=".55"/>
+        <circle cx="86" cy="34" r="2.2" fill="#FFE9BC" opacity=".8"/>
+        <circle cx="140" cy="22" r="1.6" fill="#FFE9BC" opacity=".7"/>
+        <circle cx="286" cy="28" r="1.8" fill="#FFE9BC" opacity=".6"/>
+        <!-- collines -->
+        <path d="M0 120 q58 -34 116 -12 q66 -38 132 -6 q62 -30 122 -2 q40 16 70 8 V210 H0 Z" fill="#8B4A22" opacity=".55"/>
+        <path d="M0 142 q70 -30 140 -8 q74 -28 150 -2 q72 -22 150 4 V210 H0 Z" fill="#5C3018"/>
+        <path d="M0 168 q110 -20 220 -4 q110 16 220 -2 V210 H0 Z" fill="#3A2116"/>
+        <!-- halo du feu -->
+        <ellipse class="glow2" cx="220" cy="172" rx="104" ry="34" fill="url(#halo)"/>
+        <!-- feu -->
+        <ellipse cx="220" cy="180" rx="30" ry="8" fill="#2A1710"/>
+        <rect x="198" y="172" width="44" height="6" rx="3" fill="#2A1710" transform="rotate(-8 220 175)"/>
+        <rect x="200" y="176" width="40" height="6" rx="3" fill="#2A1710" transform="rotate(7 220 179)"/>
+        <g class="flame2">
+          <path d="M220 130 C210 148 205 156 205 165 a15 15 0 0 0 30 0 C235 156 230 148 220 130 Z" fill="#E8552A"/>
+          <path d="M220 144 C214 155 211 160 211 165 a9 9 0 0 0 18 0 C229 160 226 155 220 144 Z" fill="#F0A63C"/>
+          <ellipse cx="220" cy="167" rx="3.4" ry="4.6" fill="#FFE9BC"/>
+        </g>
+        <!-- étincelles -->
+        <circle class="bob2" cx="206" cy="120" r="1.8" fill="#FFD98A" opacity=".9"/>
+        <circle class="bob2" cx="234" cy="112" r="1.5" fill="#FFD98A" opacity=".75"/>
+        <!-- ENFANTS (silhouettes) -->
+        <g fill="#241209">
+          <!-- assis à gauche, de profil -->
+          <g><circle cx="150" cy="150" r="9"/>
+            <path d="M141 162 q-4 12 0 20 h20 q3 -12 -3 -20 z"/>
+            <path d="M158 178 q16 0 22 6 h-24 z"/>
+            <path d="M150 164 q12 1 17 7" stroke="#241209" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+          <!-- assis à droite, de profil -->
+          <g><circle cx="290" cy="150" r="9"/>
+            <path d="M299 162 q4 12 0 20 h-20 q-3 -12 3 -20 z"/>
+            <path d="M282 178 q-16 0 -22 6 h24 z"/>
+            <path d="M290 164 q-12 1 -17 7" stroke="#241209" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+          <!-- debout, bras levés (danse) -->
+          <g class="sway"><circle cx="96" cy="132" r="10"/>
+            <path d="M89 144 q-3 20 1 32 h12 q4 -12 1 -32 z"/>
+            <path d="M91 150 q-14 -6 -18 -18" stroke="#241209" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+            <path d="M101 150 q14 -6 18 -18" stroke="#241209" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+            <path d="M92 176 l-5 18" stroke="#241209" stroke-width="6" stroke-linecap="round"/>
+            <path d="M100 176 l6 18" stroke="#241209" stroke-width="6" stroke-linecap="round"/></g>
+          <!-- petit qui saute -->
+          <g class="bob2"><circle cx="346" cy="138" r="8"/>
+            <path d="M340 148 q-2 16 1 26 h10 q3 -10 1 -26 z"/>
+            <path d="M341 154 q-12 -2 -15 -12" stroke="#241209" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+            <path d="M351 154 q12 -2 15 -12" stroke="#241209" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+            <path d="M342 174 l-5 14" stroke="#241209" stroke-width="5" stroke-linecap="round"/>
+            <path d="M350 174 l5 14" stroke="#241209" stroke-width="5" stroke-linecap="round"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="titlewrap">
+      <h1 class="brand">Rinjora</h1>
+      <p class="slogan" id="ui-slogan"></p>
+    </div>
+
+    <div class="menu">
+      <button class="mcard" id="m-sokwe" style="--c:var(--green); --cs:var(--green-soft)">
+        <span class="ic"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Urukwavu">
+          <ellipse cx="21" cy="20" rx="6.5" ry="17" fill="var(--choco)" transform="rotate(-13 21 20)"/>
+          <ellipse cx="21" cy="21" rx="3.2" ry="12" fill="var(--terra-l)" transform="rotate(-13 21 21)"/>
+          <ellipse cx="43" cy="20" rx="6.5" ry="17" fill="var(--choco)" transform="rotate(13 43 20)"/>
+          <ellipse cx="43" cy="21" rx="3.2" ry="12" fill="var(--terra-l)" transform="rotate(13 43 21)"/>
+          <ellipse cx="32" cy="45" rx="17" ry="15" fill="var(--choco-l)"/>
+          <circle cx="25" cy="42" r="2.7" fill="var(--choco-d)"/>
+          <circle cx="39" cy="42" r="2.7" fill="var(--choco-d)"/>
+          <path d="M32 48 l-3.4 3.2 h6.8 Z" fill="var(--terra)"/>
+          <path d="M32 51.2 v3 M32 54.2 q-4 3 -7 1 M32 54.2 q4 3 7 1" stroke="var(--choco-d)" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+        </svg></span>
+        <span><h3>Sokwe… Niruze !</h3><p id="d-sokwe"></p></span>
+      </button>
+      <button class="mcard" id="m-hera" style="--c:#B5820A; --cs:var(--gold-soft)">
+        <span class="ic"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ubwenge">
+          <path d="M32 9 C21 9 14 15 14.5 23 C9 26 8.5 34 13 38 C13 46 19 52 27 52 C29 55 35 55 37 52 C45 52 51 46 51 38 C55.5 34 55 26 49.5 23 C50 15 43 9 32 9 Z" fill="var(--choco-l)"/>
+          <path d="M32 9 V55" stroke="var(--choco-d)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M32 18 q-9 -1 -10 6 q9 2 10 8 M32 33 q-10 1 -9 8 q7 2 9 7" stroke="var(--terra)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M32 18 q9 -1 10 6 q-9 2 -10 8 M32 33 q10 1 9 8 q-7 2 -9 7" stroke="var(--terra)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        </svg></span>
+        <span><h3>Heraheza</h3><p id="d-hera"></p></span>
+      </button>
+      <button class="mcard" id="m-tuja" style="--c:var(--red); --cs:var(--red-soft)">
+        <span class="ic"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gutwenga">
+          <circle cx="32" cy="32" r="23" fill="var(--ochre)"/>
+          <path d="M16 25 q6 -7 12 0 M36 25 q6 -7 12 0" stroke="var(--choco-d)" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <path d="M17 35 h30 a15 15 0 0 1 -30 0 Z" fill="var(--choco-d)"/>
+          <path d="M25 47 q7 -6 14 0 a10 10 0 0 1 -14 0 Z" fill="var(--terra)"/>
+          <circle cx="12" cy="40" r="4" fill="var(--terra-l)" opacity=".65"/>
+          <circle cx="52" cy="40" r="4" fill="var(--terra-l)" opacity=".65"/>
+        </svg></span>
+        <span><h3>Tujajure !</h3><p id="d-tuja"></p></span>
+      </button>
+    </div>
+
+    <footer class="foot">
+      <div class="band"></div>
+      <div class="inner">
+        <div class="fire">🔥</div>
+        <div class="nm">Rinjora</div>
+        <div class="tg" id="f-tag"></div>
+        <div class="foot-nav">
+          <button class="fnav" id="m-hist"></button>
+          <button class="fnav" id="m-contrib"></button>
+          <button class="fnav" id="m-about"></button>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ==================== QUIZ (Sokwe + Heraheza) ==================== -->
+  <section id="s-quiz" class="screen">
+    <div class="topbar">
+      <div class="progress"><i id="bar"></i></div>
+      <span class="pill star" id="pill-score">⭐ 0</span>
+      <span class="pill fire hidden" id="pill-fire">🔥 0</span>
+    </div>
+    <div class="eyebrow">
+      <span class="lab" id="ui-lab"></span>
+      <span class="count" id="ui-count"></span>
+      <span class="lvlbadge" id="ui-level"></span>
+    </div>
+    <div class="riddle" id="riddle"></div>
+    <div class="answer-box">
+      <input type="text" id="answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="feedback" id="feedback">
+      <div class="fmsg" id="fmsg"></div>
+      <div class="streakflair" id="fstreak"></div>
+      <div class="fans" id="fans"></div>
+    </div>
+    <button class="btn acc"  id="btn-check"></button>
+    <button class="btn red"  id="btn-give" style="display:none"></button>
+    <button class="btn gold" id="btn-next" style="display:none"></button>
+    <div class="subrow">
+      <button class="btn ghost" id="btn-back"></button>
+      <button class="btn ghost" id="btn-skip"></button>
+    </div>
+    <button class="btn ghost" id="btn-quit"></button>
+  </section>
+
+  <!-- ==================== TUJAJURE ==================== -->
+  <section id="s-joke" class="screen">
+    <div class="eyebrow">
+      <span class="lab" style="color:var(--red)">Tujajure !</span>
+      <span class="count" id="j-count"></span>
+    </div>
+    <div class="joke">
+      <div class="jt" id="j-text"></div>
+    </div>
+    <p class="think" id="j-think"></p>
+    <div id="j-opts"></div>
+    <div class="feedback" id="j-fb"><div class="fmsg" id="j-fmsg"></div></div>
+    <button class="btn gold" id="j-next" style="display:none"></button>
+    <button class="btn ghost" id="j-quit"></button>
+  </section>
+
+  <!-- ==================== FIN ==================== -->
+  <section id="s-end" class="screen end">
+    <div class="party">🎊</div>
+    <h2 id="ui-endtitle"></h2>
+    <div class="scorecard">
+      <div class="big" id="end-score"></div>
+      <div class="lab" id="end-scorelab"></div>
+    </div>
+    <p class="perf" id="end-perf"></p>
+    <button class="btn green" id="btn-replay" style="margin-top:20px"></button>
+    <button class="btn gold" id="btn-share"></button>
+    <button class="btn ghost" id="btn-home"></button>
+  </section>
+
+
+  <!-- ==================== AMATEKA (historique) ==================== -->
+  <section id="s-hist" class="screen">
+    <div class="sechead">
+      <h2 id="h-title"></h2>
+      <p id="h-sub"></p>
+    </div>
+    <div id="h-body">
+      <div class="bigstat">
+        <div class="n" id="h-total">0</div>
+        <div class="l" id="h-totall"></div>
+      </div>
+      <div class="duo">
+        <div class="box"><div class="n" id="h-games">0</div><div class="l" id="h-gamesl"></div></div>
+        <div class="box"><div class="n" id="h-best">0</div><div class="l" id="h-bestl"></div></div>
+      </div>
+      <div id="h-rows"></div>
+    </div>
+    <div class="empty" id="h-empty" style="display:none"></div>
+    <button class="btn ghost" id="h-reset" style="margin-top:14px"></button>
+    <button class="btn ghost" id="h-quit"></button>
+  </section>
+
+
+  <!-- ==================== IVYEREKEYE RINJORA ==================== -->
+  <section id="s-about" class="screen">
+    <div class="sechead"><h2 id="a-title"></h2></div>
+    <div class="aboutcard">
+      <div class="logo">
+        <svg viewBox="0 0 120 104" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="22" y="72" width="76" height="9" rx="4.5" fill="#3A2116" transform="rotate(-6 60 76)"/>
+          <rect x="26" y="76" width="68" height="9" rx="4.5" fill="#4A2C18" transform="rotate(5 60 80)"/>
+          <ellipse cx="60" cy="64" rx="16" ry="12" fill="#3A2116"/>
+          <path d="M60 12 C46 34 38 46 38 58 a22 22 0 0 0 44 0 C82 46 74 34 60 12 Z" fill="#E8552A"/>
+          <path d="M60 30 C51 44 47 51 47 58 a13 13 0 0 0 26 0 C73 51 69 44 60 30 Z" fill="#F0A63C"/>
+          <ellipse cx="60" cy="61" rx="4" ry="6" fill="#FFE9BC"/>
+          <ellipse cx="24" cy="74" rx="16" ry="12.5" fill="#5C3018"/>
+          <ellipse cx="96" cy="74" rx="16" ry="12.5" fill="#5C3018"/>
+          <ellipse cx="60" cy="84" rx="18" ry="13" fill="#3A2116"/>
+        </svg>
+      </div>
+      <h3>Rinjora</h3>
+      <div class="tag" id="a-tag"></div>
+      <hr>
+      <div class="credit">
+        <div class="lab" id="a-l1"></div><div class="val" id="a-v1"></div>
+        <div class="lab" id="a-l2"></div><div class="val" id="a-v2"></div>
+      </div>
+    </div>
+    <button class="btn ghost" id="a-quit"></button>
+  </section>
+
+  <!-- ==================== CONTRIBUTION ==================== -->
+  <section id="s-contrib" class="screen">
+    <div class="sechead">
+      <div class="ic"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Intererano" style="width:46px;height:46px">
+          <path d="M14 50 C20 30 34 16 52 12 C50 32 38 46 20 50 Z" fill="var(--terra)"/>
+          <path d="M52 12 C38 22 26 34 18 52" stroke="var(--sand)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M10 54 q6 -6 10 -4" stroke="var(--choco)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg></div>
+      <h2 id="c-title"></h2>
+      <p id="c-sub"></p>
+    </div>
+
+    <label class="fl" id="c-l1"></label>
+    <select id="c-type">
+      <option value="Igisokozo">Igisokozo 🧠</option>
+      <option value="Umwibutsa">Umwibutsa 🌾</option>
+      <option value="Akajajuro">Akajajuro 😂</option>
+      <option value="Iyindi ngingo">Iyindi ngingo 💡</option>
+    </select>
+
+    <label class="fl" id="c-l2"></label>
+    <textarea id="c-body"></textarea>
+
+    <label class="fl" id="c-l3"></label>
+    <input type="text" id="c-ans">
+
+    <label class="fl" id="c-l4"></label>
+    <input type="text" id="c-who">
+
+    <button class="btn green" id="c-send"></button>
+    <button class="btn gold"  id="c-copy"></button>
+    <button class="btn ghost" id="c-quit"></button>
+    <div class="note" id="c-note"></div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ==================== MODAL : NIVEAU SUPÉRIEUR ==================== -->
+<div class="modal" id="lvlup">
+  <div class="modal-card">
+    <div class="mchar">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="60" cy="112" rx="30" ry="6" fill="#000" opacity=".12"/>
+        <!-- oreilles -->
+        <ellipse cx="44" cy="30" rx="9" ry="26" fill="var(--choco)" transform="rotate(-12 44 30)"/>
+        <ellipse cx="44" cy="30" rx="4.5" ry="18" fill="var(--terra-l)" transform="rotate(-12 44 30)"/>
+        <ellipse cx="76" cy="30" rx="9" ry="26" fill="var(--choco)" transform="rotate(12 76 30)"/>
+        <ellipse cx="76" cy="30" rx="4.5" ry="18" fill="var(--terra-l)" transform="rotate(12 76 30)"/>
+        <!-- corps -->
+        <ellipse cx="60" cy="86" rx="24" ry="22" fill="var(--choco-l)"/>
+        <!-- bras qui salue -->
+        <path class="arm" d="M84 84 q16 -6 18 -22" stroke="var(--choco-l)" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <!-- tête -->
+        <circle cx="60" cy="60" r="27" fill="var(--choco-l)"/>
+        <circle cx="50" cy="56" r="4.6" fill="var(--choco-d)"/>
+        <circle cx="70" cy="56" r="4.6" fill="var(--choco-d)"/>
+        <circle cx="51.4" cy="54.4" r="1.5" fill="#fff"/>
+        <circle cx="71.4" cy="54.4" r="1.5" fill="#fff"/>
+        <path d="M60 63 l-4 4 h8 Z" fill="var(--terra)"/>
+        <path d="M60 67 q-8 8 -16 3 M60 67 q8 8 16 3" stroke="var(--choco-d)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <circle cx="42" cy="66" r="4" fill="var(--terra-l)" opacity=".5"/>
+        <circle cx="78" cy="66" r="4" fill="var(--terra-l)" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="lvl-cheer" id="lvl-cheer"></div>
+    <h3 id="lvl-q"></h3>
+    <div class="subrow">
+      <button class="btn green" id="lvl-yes"></button>
+      <button class="btn gold"  id="lvl-no"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==================================================================
+   ⚙️  RÉGLAGES — À COMPLÉTER PAR TOI (voir explications du message)
+   ================================================================== */
+const CONFIG = {
+  FORM_URL:  "",                 // ← lien Google Forms (méthode recommandée)
+  WHATSAPP:  "",                 // ← ex. "25779123456" (sans + ni espaces)
+  EMAIL:     "",                 // ← ex. "rinjora@example.com"
+};
+
+/* ==================================================================
+   1) SOKWE — 78 devinettes
+   ================================================================== */
+const SOKWE = [
+  { q: "Abagore ba kera baheka abana neza nayo ab'ubu ntumbarire.", a: "Ibigori bisimbije" },
+  { q: "Abageni ba kera ntibitwikira bundi.", a: "Ibigori" },
+  { q: "Abakobwa bansanze ku mugina nti enda bakobwa nkirigita.", a: "Inkumi y'inkezi" },
+  { q: "Abambara ba Ruhinda bambariye impeko mu kuzimu.", a: "Ibiyoba" },
+  { q: "Abanyabuhura ntibubaka barahonjagira.", a: "Umuyirwe w'ibigori" },
+  { q: "Abanyakirimiro ntibubaka barahonjagira.", a: "Amajigo" },
+  { q: "Abatama ba kera baca imanza bunamye.", a: "Imigondoro y'ibiharage" },
+  { q: "Abazungu ba bujumbura bambaye ibirato bose.", a: "Amavunja" },
+  { q: "Agacumu kanje mpungururabunyoni.", a: "Inkono y'umurango ntirya umwe" },
+  { q: "Agacumu kanje runyurabisaka.", a: "Umuravyo" },
+  { q: "Ndakibona sindagifata.", a: "Igitutu" },
+  { q: "Umwana wanje yokunesha ari muto.", a: "Uruyuki / Inzuki" },
+  { q: "Izinguzingu ni warimenya nguhere.", a: "Ibarabara" },
+  { q: "Kararengera.", a: "Akotsi k'abungere" },
+  { q: "Karahinda iduri.", a: "Akato mu mpange" },
+  { q: "Karadiridimba.", a: "Akana kaja iwabo" },
+  { q: "Urabona ga bitugu vya sogokuru ngo unsimbira urugo!", a: "Ikivumvuri" },
+  { q: "Tora akato ntore akandi tuje kuvoma ico tutari bubone.", a: "Amaganga y'inkoko" },
+  { q: "Gira so katamwobwa.", a: "Agahanga k'imbwa" },
+  { q: "Mbe nyoku ko useye bwinshi urarirwa na bande?", a: "Itimbi ry'ifuku" },
+  { q: "Ane meza.", a: "Amabere y'inka" },
+  { q: "Umunani mabi.", a: "Amabere y'imbwa" },
+  { q: "Aha twese turariye umwe.", a: "Inkono ku ziko" },
+  { q: "Ndi mugufi nkaba mu rwanje.", a: "Igicaniro" },
+  { q: "Wigera mu Barembe wari umurembe?", a: "Impene mu ntama" },
+  { q: "Abana banje bakubita ibiganza hirya no hino.", a: "Imitwe y'inzuzi" },
+  { q: "Abo kwa Ruringaniza bambariye imiringa mu kuzimu.", a: "Ibijumbu" },
+  { q: "Abana banje bazi gucuraranga bose.", a: "Imirya y'inanga" },
+  { q: "Abagabo barara bahagaze bakirirwa bahagaze.", a: "Inkingi z'inzu" },
+  { q: "Ndara mpagaze bwaca nkaryama.", a: "Imyugariro" },
+  { q: "Ivyiza biva kuzimu vyambaye inyerere bigacambirwa n'Abamikazi.", a: "Amateke" },
+  { q: "Tubana tutava aho turi ariko ntitwigera turamukanya.", a: "Inkombe z'uruzi / Amabere y'umugore / Amabere y'umukobwa" },
+  { q: "Aho turi ku mbuga tungana twese.", a: "Ifundi" },
+  { q: "Ubugabo buva hasi nokuriza ndi muto.", a: "Isusa" },
+  { q: "Aho Jabwe na Soro barwaniye n'ubu ni inkumbagare.", a: "Ubuhanza" },
+  { q: "Ndi mugiraneza muvyara w'urupfu.", a: "Itiro" },
+  { q: "Nkubise inyuma y'urugo nza ndatwenga.", a: "Ikigori mu minwe" },
+  { q: "Karahara mu ruganda ntibacura.", a: "Inyundo" },
+  { q: "Urusenge rwanje rwuzuye inzahabu naho woraramwo ntiwoziharura.", a: "Ijuru n'inyenyeri" },
+  { q: "Kajuju ka Ntimba kiyereka aho katatumiwe.", a: "Akanyugunyugu" },
+  { q: "Dukumburanye tubana.", a: "Amabere" },
+  { q: "Tubana dutinyana.", a: "Umuriro n'amazi / Umwijima n'umuriro / Umwijima n'umuco" },
+  { q: "Ndatambatamba ntazi iyo nja nkavuna inzara.", a: "Uruyuzi" },
+  { q: "Dusa tudasa.", a: "Intore n'intobotobo" },
+  { q: "Ntugire ubwoba ndasamye ariko sindyana.", a: "Umuryango w'inzu itugaye" },
+  { q: "Fata isuka mfate iyindi tuje kwimba ico tutabona.", a: "Umuzi w'ibuye" },
+  { q: "Nasezeye umusezero kera kuri Cambarantama n'ubu nturashwanyuka.", a: "Ubwoya bw'inka" },
+  { q: "Aha ngo fye, hirya no hino ngo fye fye. Ngo twa !", a: "Imiravyo n'umuturagaro" },
+  { q: "Iyi nzira njanye, idashitse abanje barahera.", a: "Inzira ija mu kigega" },
+  { q: "Akana kanje kokuriza ari gato.", a: "Akanyarirajisho" },
+  { q: "Abeza bahetse n'ubusage ku mutwe.", a: "Umurima w'ibigori uhetse" },
+  { q: "Ntaco umfyurira amaso sindaguha.", a: "Imyenge y'inzu" },
+  { q: "Mvuye kwikura Bushoro aca anyoma amaguru inyuma.", a: "Umunyota" },
+  { q: "Ico utazi utabonye.", a: "Ubukumi bwa nyoko / Ubusore bwa so / Ubugeni bwa so na nyoko" },
+  { q: "Ndashandasha umugongo.", a: "Urusenge" },
+  { q: "Iyo tuva turyoha duhambwe.", a: "Imihwi" },
+  { q: "Aha turi havuyemwo umwe mwese muraburara.", a: "Amashiga" },
+  { q: "Umurwa ukuka amazi ni wawumenya nguhere.", a: "Umukenke" },
+  { q: "Umugozi utekera amazi ni wawumenya nguhere.", a: "Ifu" },
+  { q: "Ehe urya musozi wishika ibikanu.", a: "Abahizi" },
+  { q: "Narajishe inkoko none sindayirirako.", a: "Agasongero" },
+  { q: "Hano dufise impindu twese.", a: "Imirizo y'imbeba" },
+  { q: "Nyoko yambara ibiheko vyinshi nkeka aroga.", a: "Umutobotobo" },
+  { q: "Ndarwaje.", a: "Inzara mu bana" },
+  { q: "Tora inkoni ntore iyindi tuje kugarura Rugamba irambutse.", a: "Ikinyugunyugu" },
+  { q: "Narungitse umwana kurahura none n'ubu ntaraza.", a: "Umwotsi" },
+  { q: "Kubita binati ntiyota arasara.", a: "Urubumbiro" },
+  { q: "Nyegera nyegera bana banje turashize.", a: "Uburo mu ngasiro" },
+  { q: "Akari kure karya abari n'amaguru.", a: "Ikigazi" },
+  { q: "Batatu badatana mu ndagano.", a: "Amashiga" },
+  { q: "Ndahamanuka sindahaduga.", a: "Amazi" },
+  { q: "Ndara ndagenda, nkirirwa ndagenda.", a: "Uruzi" },
+  { q: "Mvuye guta nyokuru agaruka ankurikira.", a: "Umwavu" },
+  { q: "Mpa utwo mbona.", a: "Utuboga ku menyo" },
+  { q: "Ndavye hejuru ndanunkwa.", a: "Umuhwi" },
+  { q: "Ngenda mfoye ariko sindekura.", a: "Amabere y'inkumi ataragwa / Amabere y'inkumi atararwa" },
+  { q: "Kiti fyati.", a: "Ikiziha c'inzovu" },
+  { q: "Mucinye mucinye niwe yishe nyoko.", a: "Umuganda w'inkwi" },
+  { q: "Mupfukure tumurye.", a: "Itu" },
+  { q: "Mfise amahwa kuva ku maguru gashika ku mutwe.", a: "Inanasi" },
+  { q: "Mpagarara ata maguru nkambara inkofero ata mutwe mfise.", a: "Ikizinu" },
+  { q: "Iyo kigira amenyo kiba caraturiye.", a: "Isi" },
+  { q: "Karakwica karakwigarika Bambara ba Matene.", a: "Ihwa mu rwondo" },
+  { q: "Impfizi yanje Rufyiri nayikebeye itongo.", a: "Imvuvyi" },
+  { q: "Sohoka unture.", a: "Igikenye c'imbaragasa / Igikenuye c'imbaragasa" },
+  { q: "Bikoro bikoto vyamariye imbuto.", a: "Isekuro" },
+  { q: "Sasira umugabo ataryama.", a: "Imyugariro / ikawa" },
+  { q: "Ubureta bw'imana bwuzuye inda.", a: "Inyenyeri kw'ijuru" },
+  { q: "Ndabonye ikoti ya Paulo ariko Paulo sindamubona.", a: "Igitutu" },
+  { q: "Ifi yanje yibana mw'ibenga ari imwe.", a: "Ururimi mu kanwa" },
+  { q: "Aho hepfo haciye ingoma itavuga.", a: "Umugore afise inda" },
+  { q: "Aho hepfo haciye ivyiza bisa.", a: "Patiri na Musenyeri" },
+  { q: "Hepfo haciye ubutindi buhetse ubundi.", a: "Umuzungu kw'ipikipiki" },
+  { q: "Mpagaze ngaha mbona ivyera i mbo.", a: "Itamuriro ry'imihivu" },
+  { q: "Ehe kariya kantu kererana.", a: "Ubwimegeri" },
+  { q: "Ehe uriya musozi wambaye inkofero.", a: "Ikizinu" },
+  { q: "Abana banje bambarira inzogera mu kuzimu.", a: "Ibiyoba" },
+  { q: "Dodododo.", a: "Akarato ka madamu" },
+  { q: "Nyoko ni bishamabara ni bishambara ndamukubise aho.", a: "Imivyuka / imijishi" },
+  { q: "Akarima kanje ni nyangaragurwa.", a: "Umurima w'intore" },
+  { q: "Rwikinga ibikemanyi mushiki wa nkegeta.", a: "Impange mu mukingo" },
+  { q: "Sintera ikiremo ndomekera.", a: "Ibara ry'inka" },
+  { q: "Tora ingata ntore iyindi tuje kwikorera Dundagu.", a: "Akabindi k'uburozi" },
+  { q: "Akibo kanje ntunyuguzwa.", a: "Akanyo k'imbwa" },
+  { q: "Fredinand yicaye ku ntebe zitatu n'inkofero ku mutwe.", a: "Inkono ku ziko" },
+  { q: "Ndi muremure mu nama.", a: "Idarapo" },
+  { q: "Fata Rutagari twinjire igongo.", a: "Ishoka" },
+  { q: "Niciye Umunyinya harwa Umunyare.", a: "Ntawunya adosovye" },
+  { q: "Biravyagaraye.", a: "Ibivya vy'umutama" },
+  { q: "Muka Minani atamba neza.", a: "Umutoto w'igitoke" },
+  { q: "Jewe Mariya-Rosa ndakandansa nicaye.", a: "Akayunguruzo" },
+  { q: "Urushinge rwanje rwurira kw'ijuru.", a: "Impfizi" },
+  { q: "Nyegera nyegera bane banje twegere imbere.", a: "Intozi" },
+  { q: "Kiranyugutiza kiranyugutiza bishambara vyatabutse.", a: "Ikinyabwoya" },
+  { q: "Ndajorewe mwishanje.", a: "Umugabo yagiye kwihagarika mu muyonga abura ico yihanduza" },
+  { q: "Mari mari nkaba ngisubira hejuru mwishwanje.", a: "Igikobekobe" },
+  { q: "Ndagupfinze akayamaze.", a: "Agati mu mateke" },
+  { q: "Budara ku moto.", a: "Umuvyindi kw'ibuye" },
+  { q: "Bugutu bugutu.", a: "Impene ibuguta amatovu" },
+  { q: "Munzu iwacu dutunze impindu twese.", a: "Imirizo y'imbeba" },
+  { q: "Ko unkirigita warankoye.", a: "Ikijumbu mw'iburi" },
+  { q: "Inka yanje yimira mw'ihembe ikavyarira mu kinono.", a: "Igitoke" },
+  { q: "Karidundadunda.", a: "Agasore mw'ipantalon" },
+  { q: "Agasakoshi ka madame ntibakorako.", a: "Agafutu k'imbwa" },
+  { q: "Hiraya barahena hirya bagahenura.", a: "Abatozi b'inswa" },
+  { q: "Umukuru w'itongo ni nde.", a: "Igihonyi" },
+  { q: "Iyo So agiye mw'itongo abanza iki.", a: "Uruhwa" },
+  { q: "Umugeni wanje ndamubambuye nezerewe cane.", a: "Ikigori" },
+  { q: "Ehe uriya musozi wameze amabere.", a: "Ikizinu" },
+  { q: "Ipantalon yanje yahiye umusipi urasigara.", a: "Umuyonga" },
+  { q: "Abana ba Perezida bicaye ku ntebe imwe.", a: "Amashashi y'ibitoke" },
+  { q: "Nciye aho hepfo abasoda baramfata.", a: "Ibifashi" },
+  { q: "Imboga zigashe.", a: "Umusundi w'umukecuru" },
+  { q: "Ndakwihanije ntuzosubire kuncira kw'irembo utambaye.", a: "Akagomba" },
+  { q: "Nasezeye kuri Ntare n'ubu nturashanyuka.", a: "Ubwoya bw'inka" },
+  { q: "Narimye umurima munini nimburira mu gipfunsi.", a: "Umushatsi" },
+  { q: "Narimye umurima kera n'ubu nturata ingingo.", a: "Urufunzo" },
+  { q: "Agatangaza nagasanze imbo.", a: "Umurara w'uburo / Umwara w'uburo" },
+  { q: "Aba Nganda baramaranye.", a: "Umuyaga mu bitoke" },
+  { q: "Aba none murerura.", a: "Isazi ku mukenke w'Umwami" },
+  { q: "Aba kera bisigira mw'ikebano rya kinogono.", a: "Ugutwi kw'inka" },
+  { q: "Abakuru baraho baca imanza bunamye.", a: "Impfizi z'intama zirwana" },
+  { q: "Abanyakirwa ntibubaka barahonjagira.", a: "Amarenga" },
+  { q: "Abanyerama ntibazitira barihaniza.", a: "Amenyo" },
+  { q: "Gaciye aho ntikaragaruka.", a: "Imvovo" },
+  { q: "Agafuni kanje rumenamushike.", a: "Ikizinu" },
+  { q: "Agahanga kazira ingogo.", a: "Umutwe w'imbwa" },
+  { q: "Agaheta abami n'abagabo.", a: "Umuryango" },
+  { q: "Agapimbiro nyonyo.", a: "Igitsembe c'intama" },
+  { q: "Agasaka kanje ni nkingiyemenshi.", a: "Impuzu ku mubiri" },
+  { q: "Agasozi gatoyi kaduga amazi.", a: "Umukenke" },
+  { q: "Aho hepfo haciye akagabo katagira amajanja.", a: "Umunana / Umwijima" },
+  { q: "Aha turushwa ubwiza n'umwe.", a: "Igisabo" },
+  { q: "Aha turi ngaha woduharura ukadushobora.", a: "Ubumera ku mbuga" },
+  { q: "Aha turushwa umutima n'umwe.", a: "Urugi" },
+  { q: "Aharaho naho ari heza ntiwoharira.", a: "Agasongero" },
+  { q: "Ndagutume ndagutumagize kwa Ryangombe uti mutize intebe aterekere.", a: "Umunwa w'inyanana" },
+  { q: "Ca hirya nce hino twubure impongo itagira umurizo.", a: "Irobe" },
+  { q: "Ca mu canzo imana ikubike.", a: "Igitsure ca mu kaso" },
+  { q: "Fata akato mfate akandi tuje kurondera ico tutari bubone.", a: "Amosozi y'inkoko" },
+  { q: "Uje uranyuguta ibishambara ngo uje gukwa Mawe.", a: "Ikinyabwoya" },
+  { q: "Umwana wanje mukumuramutsa mbanza gukura inkofero.", a: "Ikiyeri" },
+  { q: "Sokwe sohoka unture.", a: "Agakono k'uburozi" },
+  { q: "Agasaka kanje inampurungu.", a: "Igikobekobe" },
+  { q: "Agatangaza nagasanze I Rwanda.", a: "Inzoga y'ibijumbu" },
+  { q: "Agatekwa canke ntikotswe kagasa kagasa n'akabisi kandi gatetse.", a: "Ikigori ca inankonge" },
+  { q: "Agatsirika ntigaheranwe.", a: "Amabere y'inkumi / Ubwanwa / Amenyo ya ruguru / Urupfu" },
+  { q: "Aho hepfo hari umusozi uvuga amarago.", a: "Abakunzi b'inanka / Abimvyi b'inanka" },
+  { q: "Aha twese tugenzwa n'umwe.", a: "Inda" },
+  { q: "Aha twese turushwa umutima n'umwe.", a: "Inkono ku ziko" },
+  { q: "Ahayagirwa ibanga umukeba mwicaranye ntagire amakenga.", a: "Inkuka y'imissa" },
+  { q: "Aho abadagi n'ababirigi barwaniye n'ubu turacahasanga amabano.", a: "Amarenga" },
+  { q: "Aho hepfu hari umugabo atugera amajanja.", a: "Umwijima" },
+  { q: "Aho hepfo ndaterana.", a: "Umukecuru n'ikigiga" },
+  { q: "Aho wabereye mw'ishishiro ntiwoza uvayo.", a: "Ikigori" },
+  { q: "Aho wakanciriyeko amate uzondeka ryari.", a: "Agahamagazo / Telephone" },
+  { q: "Aho wandabiye unkuyakuya nturaza umpaga.", a: "Igitabu" },
+  { q: "Aho wandabiye unkuyakuya nturaza umpaga ubu ntiwoza umpaga.", a: "Ishusho y'umukunzi" },
+  { q: "Aho waramukirije heba none winjire.", a: "Indodo" },
+  { q: "Akabindi kanje miharango.", a: "Akabindi k'uburozi" },
+  { q: "Akana kanje kagutanga kubona abashitsi.", a: "Isunzu ry'inzu" },
+  { q: "Akana kanje nyangaragurwa.", a: "Agatore ko ku nzira" },
+  { q: "Uragenda neza ntumvunire umutego.", a: "Imigondoro y'ibiharage" },
+  { q: "Nsimbiye kwa Firippo nsanze hugaye.", a: "Agafutu k'imbwa" },
+  { q: "Ndagutume ndagutumagize icananiye umukuru w'igihugu.", a: "Umuzi w'ibuye" },
+  { q: "Nciye aho hepfo mbona abakobwa bariko berekana amabere.", a: "Ipapayi" },
+  { q: "Umugabo yabanje nyoko ni nde.", a: "Agatsintsiri" },
+  { q: "Gakikize tugakindure.", a: "Isahani y'indya" },
+  { q: "Zogarika amahembe womenya iyakowe Nyoko ?", a: "Ingara z'iminyinya" },
+  { q: "Bugingo bwa none bwogutana.", a: "Wotekera amazi mu rukangaga / wosera mu ruzi ukanzura" },
+  { q: "So na nyoko bapfuye iki ?", a: "Umwungu wo mu rubibe" },
+  { q: "Zirashotse ntuku.", a: "Amaraso ku murundi" },
+  { q: "Kati cari nti caki.", a: "Agaca mu mateke" },
+  { q: "Sokoranya n'uwo muri kumwe.", a: "Izuru n'umunwa" },
+  { q: "uuuuhhhh.", a: "Icishesheko umusururu / igikamiwe make" },
+  { q: "uiiiiiuiii.", a: "Umugabo mw'itongo" },
+  { q: "Rangamira ununkwe.", a: "Agahwi ku rusenge" },
+  { q: "Mpagaze hakurya mbona kwa mabukwe burakeye.", a: "Ubumera ku mbuga" },
+  { q: "Umugabo muremure yavuye i Magamba.", a: "Ima ry'imvura" },
+  { q: "Mwishwanje nkazosubirayo.", a: "Ima ry'imvura" },
+  { q: "Ndagufyinze Filippo.", a: "Ifaranga" },
+  { q: "Ndagufyinze ico utabonye.", a: "Ubukumi bwa nyoko / Ubusore bwa so" },
+  { q: "Karasimvye miheneko.", a: "Agahene gasimvye umugazo" },
+  { q: "Wongorora womvuna.", a: "Ikijumbu" },
+  { q: "Aho hepfo haciye impehe nsa.", a: "Ingabo zitagira umutware" },
+  { q: "Madelina arakokoye.", a: "Inkware ku mudugo" },
+  { q: "Inka yanje ni nyamukamwa igaramye.", a: "Urusyo" },
+  { q: "Inka yanje ni nyamuhakira kw'ijuru.", a: "Igitoke" },
+  { q: "Akana kanje kokunesha ari gato.", a: "Uruyuki / Urutozi" },
+  { q: "Ikayaga canje cogamwo urufi rumwe.", a: "Ururimi" },
+  { q: "Umukirigita wamukoye iki.", a: "Urupfunguruzo mw'igufuri" },
+  { q: "Gipipiri gipigi.", a: "Igisuzi c'umukecuru" },
+  { q: "Camucezaceza camusyokoye icana c'igipagani.", a: "ikirungurira" },
+  { q: "Donde yongwe.", a: "ifuku ku kiraro" },
+  { q: "Ehe urya musozi uva umwuna.", a: "Urume" },
+  { q: "Kati barara nti ba !", a: "Akarosho mu mpange" },
+];
+
+/* ==================================================================
+   2) HERAHEZA — ⚠️ EXEMPLES À REMPLACER PAR TES PROVERBES
+   q = début du proverbe ; a = la fin à compléter
+   ================================================================== */
+const HERAHEZA = [
+  { q: "Abahigi benshi…", a: "bayobeza imbwa" },
+  { q: "Abakunzi ntibarangirira…", a: "mu mubindi" },
+  { q: "Abami basangira ingoma…", a: "ntibasangira ingovyi" },
+  { q: "Abanyabwenge basa…", a: "ntibateka inyama ngo zishe" },
+  { q: "Agafuni kabagara ubumwe…", a: "ni akarenge" },
+  { q: "Agakengere kava…", a: "mu gakenguzo" },
+  { q: "Agashaje…", a: "bakanya hejuru" },
+  { q: "Agashitsi kakera…", a: "kavumbika umuriro" },
+  { q: "Agasozi k'intahanurwa…", a: "kahiye abagabo babona" },
+  { q: "Agasumba akandi…", a: "karakamira" },
+  { q: "Agati gateretswe n'Imana…", a: "ntigahenurwa n'umuyaga" },
+  { q: "Agatosho kari amarere…", a: "gatemba kaja haruguru" },
+  { q: "Agatu gatekewe…", a: "gatera amakenga" },
+  { q: "Agatu k'amagara…", a: "ntigatwarwa n'uwufyina" },
+  { q: "Agatu utatekeye…", a: "ugatekururana ubuhiri" },
+  { q: "Ahari abagabo…", a: "ntihagwa ibara" },
+  { q: "Ahari ubumwe…", a: "urusato rw'imbaragasa rwifuka batanu" },
+  { q: "Ahari umugabo…", a: "hashira umugayo" },
+  { q: "Ahavuye umugabo…", a: "hasubira umugayo" },
+  { q: "Aharaye inzara…", a: "hazindunka inzigo" },
+  { q: "Aho ivunikiye…", a: "yorima" },
+  { q: "Aho kwicara ku mutogoto w'inkono…", a: "wokwicara kw'ijambo rya nyene yo" },
+  { q: "Aho umukecuru atoye uruhindu…", a: "ahita mu ruganda" },
+  { q: "Aho umworo yanikiye…", a: "ntibwuma" },
+  { q: "Aho wabukaranga…", a: "nari musi y'urugi" },
+  { q: "Akababaje umutima…", a: "kazindura amaguru" },
+  { q: "Akabi gatwengwa…", a: "nk'akeza" },
+  { q: "Akabigira kabizi…", a: "karya imboga karitse" },
+  { q: "Akadatetswe…", a: "karotswa" },
+  { q: "Akagomba kateranije…", a: "umukwe na inabukwe" },
+  { q: "Akagomba kurya akandi kagira ngo…", a: "igirayo uranuka" },
+  { q: "Agaca karya akandi kagira ngo…", a: "aha turi hanuka urukeke" },
+  { q: "Akagumye…", a: "bagumako" },
+  { q: "Akagutanze imbere…", a: "kaba kagusize" },
+  { q: "Akaje ntikazira…", a: "umwe" },
+  { q: "Akamuntu kamara…", a: "iyagwe" },
+  { q: "Akanse…", a: "baraheba" },
+  { q: "Akantu kagirwa…", a: "n'akandi" },
+  { q: "Akanyoni katagurutse…", a: "ntikamenya iyo bweze" },
+  { q: "Akari mu mpene…", a: "niko kari mu ntama" },
+  { q: "Akari mu nda y'umugabo…", a: "gaserurwa n'akari mu nda y'umubindi" },
+  { q: "Akari mu nda y'ingoma…", a: "kamenywa n'uwayikanye" },
+  { q: "Akataretse kaba…", a: "gasema" },
+  { q: "Akazi k'i bwami…", a: "kica uwicaye" },
+  { q: "Akaziri…", a: "karizana" },
+  { q: "Akeza…", a: "karigura" },
+  { q: "Ak'imuhana kaza…", a: "imvura ihise" },
+  { q: "Amabarankuru yashikanye…", a: "inyenzi i buha" },
+  { q: "Amarira siyo…", a: "maronko" },
+  { q: "Amarira y'umugabo…", a: "atemba aja mu nda" },
+  { q: "Amaronko menshi…", a: "aziba amatwi" },
+  { q: "Amarushwa ari ku wundi…", a: "ntakuraza itiro" },
+  { q: "Amase ya kera…", a: "ntahoma urutaro" },
+  { q: "Amashenyo abiri…", a: "ntahurira ku kimenge" },
+  { q: "Amasinde ntagwa imbuto…", a: "aba araye" },
+  { q: "Amaso y'ibikere…", a: "ntabuza abavomyi" },
+  { q: "Amaso y'uwundi…", a: "ntagushimira umugani" },
+  { q: "Amazi arashuha…", a: "ntiyibagira i bumbeho" },
+  { q: "Amazi masabano…", a: "ntamara imvyiro" },
+  { q: "Amenyo aragutwenga…", a: "ari ayawe" },
+  { q: "Amenyo aronderezwa…", a: "ku majigo" },
+  { q: "Amenyo mabi…", a: "atera inayo agatwengo" },
+  { q: "Amunguranka niyo…", a: "mazikesha" },
+  { q: "Amunguranka niyo…", a: "mazituvya" },
+  { q: "Bata inkoko (isake)…", a: "ntibata ico ibitse" },
+  { q: "Batanga inka…", a: "ntibatanga Imana" },
+  { q: "Bike bikehanira…", a: "abankana" },
+  { q: "Bukebuke bukomeza…", a: "igihonyi" },
+  { q: "Bukebuke bushikana…", a: "umusiba ku mugezi" },
+  { q: "Bukebuke nirwo…", a: "rugendo" },
+  { q: "Bukirikiri bwatunze umworo…", a: "uwo imisi yubutseko ntawumuha nirwere" },
+  { q: "Burira ntibutera…", a: "ku mpeshi" },
+  { q: "Buseye Imana…", a: "bwarika abagabo" },
+  { q: "Caga ari…", a: "kinini" },
+  { q: "Caga…", a: "cagutse" },
+  { q: "Gira Ntare na Ruhaga, ntikiramutswa abami babiri…", a: "kiba gipfuye" },
+  { q: "Gira so…", a: "ntaruta gira ico urya" },
+  { q: "Gira so…", a: "yiturwa iyindi" },
+  { q: "Guca mu rwanko…", a: "ni ukunyaruka" },
+  { q: "Guca mu ziko…", a: "ni ukunyaruka" },
+  { q: "Guseka umusore…", a: "siko kumuhanura" },
+  { q: "Gushaza ni…", a: "ugushinyiriza" },
+  { q: "Gusoba ingenda…", a: "siko gushika amahoro" },
+  { q: "Haguhura n'uwaguhaye…", a: "wohura n'uwakwimye" },
+  { q: "Hagupfa wozanzama…", a: "uwakubonye akaguha iminwe" },
+  { q: "Hagutera icumu nyene Imana…", a: "worimutiza" },
+  { q: "Hakuba twompfa…", a: "woba nopfa" },
+  { q: "Hakuvyara…", a: "worima" },
+  { q: "Hakwishima woshimwa…", a: "n'abandi" },
+  { q: "Hakwishima woshimwa…", a: "n'Imana" },
+  { q: "Havuga uwo…", a: "bubezwe" },
+  { q: "Havumbura…", a: "uwuribwa" },
+  { q: "Hitamwo bihema…", a: "indyarya" },
+  { q: "Ibigiye inama…", a: "bigira Imana" },
+  { q: "Imfizi y'intama…", a: "itendera nka Se" },
+  { q: "Ijisho ry'uwundi…", a: "ntirigushimira umugeni" },
+  { q: "Igiti kigororwa…", a: "kikiri gito" },
+  { q: "Igito gitabwa…", a: "iwabo" },
+  { q: "Ikinyoma kimara umusi…", a: "ntikimara umwaka" },
+  { q: "Ikibarirwa ni ucumva…", a: "icerekwa ni ikibona" },
+  { q: "Imigere ibiri…", a: "ntitereka" },
+  { q: "Imisi y'igisuma…", a: "iraharuye" },
+  { q: "Imiti ikora…", a: "ikoranye" },
+  { q: "Inzira ya hafi…", a: "yamaze abatwa" },
+  { q: "Ivya gusa…", a: "bitera ubwenge buke" },
+  { q: "Ingeso iraraba…", a: "ntihwera" },
+  { q: "Ingumba itazi ikibi…", a: "irigata ishenyo" },
+  { q: "Ingona iva mu ruzi…", a: "ikarigata urume" },
+  { q: "Inkoni ishikira igufa…", a: "ntishikira ingeso" },
+  { q: "Intibagira…", a: "ntibana" },
+  { q: "Intabwirwa ibwirwa…", a: "n'uko amaso atukuye" },
+  { q: "Ishavu ry'umuvyeyi…", a: "ririgwa ntirirara" },
+  { q: "Imana ifasha…", a: "uwifashije" },
+  { q: "Ivyara ntirigora…", a: "nk'irera" },
+  { q: "Kananira abagabo…", a: "ntiyimye" },
+  { q: "Kuvuga menshi…", a: "siko kuyamara" },
+  { q: "Nkundakurya yariye…", a: "igifyera kimumena itama" },
+  { q: "Nyamubura ikimuhanura…", a: "niwe nyamubura ikimuhamba" },
+  { q: "Nyamutegera kazoza…", a: "yakwereye inda iyindi" },
+  { q: "Nyen'imbugita ni…", a: "uwuyifashe ikirindi" },
+  { q: "Nta mvura…", a: "idahita" },
+  { q: "Nta wanka kwonka nyina…", a: "ngo arwaye amahere" },
+  { q: "Nta wurya inzoka…", a: "ngo ananirwe n'umurizo" },
+  { q: "Sindya aka aba…", a: "yariye akandi" },
+  { q: "Tubiri tuvurana…", a: "ubupfu" },
+  { q: "Ubugirigiri bugira…", a: "babiri" },
+  { q: "Ubunyegeri bwinshi…", a: "ntibwimba" },
+  { q: "Ubuja gusa…", a: "buratagata" },
+  { q: "Ubuntu…", a: "burihabwa" },
+  { q: "Ubusigo buhuma…", a: "ntibuba bunini" },
+  { q: "Ubwenge bugukunze…", a: "buza mu nyuma" },
+  { q: "Ukora ineza…", a: "ukayisanga imbere" },
+  { q: "Ukora inabi…", a: "ikagukurikira" },
+  { q: "Umubanyi niwe…", a: "muryango" },
+  { q: "Umufa w'imbwebwe…", a: "unyobwa ugishushe" },
+  { q: "Umugani ugana…", a: "akariho" },
+  { q: "Umupfu…", a: "ntiyinukira" },
+  { q: "Umutindi arota…", a: "ico ababaye" },
+  { q: "Umutwe umwe…", a: "ntiwigira inama" },
+  { q: "Umwana w'inkende…", a: "apfa yurira igiti" },
+  { q: "Umwana yankwa…", a: "ni we akura" },
+  { q: "Umwera uwa i bukuru…", a: "ugakwira igihugu cose" },
+  { q: "Urima itiro…", a: "ukimbura ingonera" },
+  { q: "Urya nk'inka…", a: "ugapfa nk'imbwa" },
+  { q: "Urubuze inkware…", a: "ruvumbukana igihuna" },
+  { q: "Urucira mukaso…", a: "rugatwara Nyoko" },
+  { q: "Uteba kugarura impene ikiri hafi…", a: "yamara kurenga imirambi ukabira nk'ayo" },
+  { q: "Uwitonze amira…", a: "ibinoze" },
+  { q: "Uwufise umutwe muto…", a: "awurinda uruguma" },
+  { q: "Uwuhawe n'Imana…", a: "yiyita umuhinga" },
+  { q: "Imbwa yarishuse avyara…", a: "ibihumye" },
+  { q: "Uwubundabunda abonwa…", a: "n'uwuhagaze" },
+  { q: "Uwuhetswe neza…", a: "asohora amaboko" },
+  { q: "Uwushaka umuce…", a: "acika ijoro" },
+  { q: "Uwushaka umubira…", a: "abira akuya" },
+  { q: "Uwushatse kukurya…", a: "ntabura imboga agukoza" },
+  { q: "Uwutazi umuti…", a: "awanyako" },
+  { q: "Uwuja gukira indwara…", a: "arayirata" },
+  { q: "Umuntu atinya ingwe…", a: "ntatinya iyamwinjiranye" },
+  { q: "Umuna w'inkorabara…", a: "utemba uduga" },
+  { q: "Umwansi agucira icobo…", a: "Imana ikagucira icanzo" },
+  { q: "Uwanka utu…", a: "aba yariye utundi" },
+];
+
+/* ==================================================================
+   3) TUJAJURE — ⚠️ EXEMPLES À REMPLACER PAR TES FACÉTIES
+   t = le texte ; p = la chute (kadobo) qu'on révèle
+   ================================================================== */
+const TUJAJURE = [
+  { t: "Agaca gacakiye agahori gati:", p: "Mwana wa mama undiye twari bamwe." },
+  { t: "Agaca gacakiye agahori gati:", p: "Nagira ngo akaguruka ntikoriye akandi." },
+  { t: "Agaca gacakiye agahori gati, kano kati:", p: "Urandya neza ndahanda." },
+  { t: "Agahume gahwaniye n'akandi mu mwonga ngo:", p: "Rinda tubane waragowe ndagorwa." },
+  { t: "Agakara kagiye iwa sebukwe ngo agataramure kano gahitanywe gaca mu mbavu ati:", p: "Ni wewe ga mupfaso? Na ko ngo ego agakara gasa n'akandi." },
+  { t: "Agakecuru kasanze akandi mu kuzimu kati:", p: "Nyereka ibigega wimbuye. Na ko kati: Noneho ngaho mama uraje kuvyiyimburira nawe." },
+  { t: "Agakecuru kashikuye igikoba kigata ku kingi kati:", p: "Nakudya ntitwarwana." },
+  { t: "Agakecuru karose gapfa gati:", p: "Maze simvyanka." },
+  { t: "Akagomba kaneye mu cibo kati:", p: "Urantuma mugabo wa mama ishikanwa ry'umworo ni iryo." },
+  { t: "Akagomba kenzwe na se kati:", p: "N'uburi mu mwonga nibushoke." },
+  { t: "Urunyegeri rwamenekanye n'intango ruti:", p: "Abenga ni benge jeho ndenguye." },
+  { t: "Babajije gikona bati: «Mbega gikona ko ugenda wasamye?» Giti:", p: "Ntawumenya iyo indya zituruka." },
+  { t: "Ikirogorye cagiye gusaba amazi kw'ijuru, inkuba iti: «Twa!» Giti:", p: "Iyo mbura amazi ngakiza igufa." },
+  { t: "Babariye Samandari bati: «Urabona ga Samandari ukarya inkenekene zimena amaso?» Ati:", p: "Ubusa bwo?" },
+  { t: "Ikirogorye canyereye ku gishishwa, kiragwa, giti:", p: "Haborewe jewe, hari akantu abaruganye!" },
+  { t: "Imbwa yahuye n'umusaza, abura ico ayiha, iti:", p: "Haguhura n'umusaza wohura n'umwana, abura ico aguha akaguherekeza canke akakwirukana." },
+];
+
+/* ==================================================================
+   TEXTES DE L'INTERFACE (100 % kirundi)
+   ================================================================== */
+const T = {
+  slogan:  "Amayagwa magufi y'Ikirundi",
+  welcome: "Kaze ! Hitamwo ico ukunda.",
+  dSokwe:  "Ibisokozo",      dHera: "Imyibutsa — Heraheza/Tangura",   dTuja: "Utujajuro — tube turatwenga",
+  contrib: "✍️ Intererano yawe hano",
+
+  labSokwe:"Sokwe !",        labHera:"Heraheza !",
+  scoreLab:"Amanota uronse",
+  phSokwe: "Andika inyishu yawe aha.",
+  phHera:  "Heza uyu mugani aha.",
+  check:   "Raba ko wabitoye.",
+  skip:    "Rengana",  back: "‹ Subira inyuma",  give: "Ndaguhaye ! 🤲",  next: "Bandanya",
+  quit:    "Subira ku ntango",
+  answerIntro:"Inyishu yari",  heraIntro:"Umugani wose ni",
+
+  good: ["Urabitoye ! 🎉","Uri intwari ! 💪","Uraciye ubwenge pe ! 🧠✨","Amashi menshi ! 👏"],
+  streakMsg:"Amashi menshi cane 👏👏👏",
+  impa:"Impa 😉",
+  concedeMsg:"Ntudebukirwe ! 💪",
+
+  jThink:"Iyumvire inyishu, uhitemwo 🤔",
+  jNext:"Bandanya",
+  jScoreLab:"Ivyo wari uzi",
+  endTitle:"Urukino ruraheze !",
+  perfTop:"Turagukeje cane. Uri muri bake bashoboye kuronka amanota nk'aya ! Amashi menshi 🎉🔥👏",
+  perfMid:"Turagukeje. Ariko ubandanye wiga ibisokozo, hanyuma ubitore vyose. 👍📚✨",
+  perfLow:"Wagerageje. Ariko subira kwiga hahaha! 😄📖💪",
+  replay:"Subira ugerageze !",  share:"Sangiza abandi",  home:"Subira ku ntango",
+
+  cTitle:"Intererano yawe hano",
+  cSub:"Uzi igisokozo, umwibutsa canke akajajuro tutari dufise ? Twandikire !",
+  cL1:"Ni iki utanga ?",  cL2:"Andika ng'aha",
+  cL3:"Inyishu (canke ibindi usigura)",  cL4:"Izina ryawe (si ngombwa)",
+  cSend:"Rungika 📤",  cCopy:"Kopora 📋",
+  cNote:"Tuzobisuzuma tubongere muri Rinjora. Urakoze cane ! 🙏",
+  cEmpty:"Andika ikintu mbere yo kurungika.",
+
+  level:"Urugero",
+  fTag:"Amayagwa magufi y'Ikirundi",
+  fCredit:"Iciyumviro ca Rivardo Niyonizigiye · Cashizwe mu ngiro na Akanyaburunga na Gisabo Tours",
+  lvlCheer:"Uriko uratsinda neza! 🔥",
+  lvlQ:"Ushaka gutera intambwe igoye kurusha?",
+  lvlYes:"Ego 💪",  lvlNo:"Oya",
+  hist:"📊 Amateka yawe",
+  about:"ℹ️ Ivyerekeye Rinjora",
+  aTitle:"Ivyerekeye Rinjora",
+  aTag:"Amayagwa magufi y'Ikirundi",
+  aL1:"Iciyumviro ca", aV1:"Rivardo Niyonizigiye",
+  aL2:"Cashizwe mu ngiro na", aV2:"Akanyaburunga na Gisabo Tours",
+  hTitle:"Amateka yawe",
+  hSub:"Ng'aya amanota wironkeye muri Rinjora.",
+  hTotal:"AMANOTA YOSE",  hGames:"Incuro umaze gukina", hBest:"Amanota menshi",
+  hEmpty:"Ntacho urakina.\nTangura umukino kugira ubone amateka yawe ! 🔥",
+  hReset:"Futa amateka yose 🗑️",
+  hAsk:"Vy'ukuri urashaka gufuta vyose ?",
+  hDone:"Vyafuswe ! ✅",
+  nSokwe:"Sokwe… Niruze !", nHera:"Heraheza", nTuja:"Tujajure !",
+  nPlayed:"incuro",
+  cCopied:"Vyakopowe ! 📋",
+};
+
+const NOMBRES=["Rimwe","Kabiri","Gatatu","Kane","Gatanu","Gatandatu","Indwi","Umunani","Icenda","Cumi",
+"Cumi na rimwe","Cumi na kabiri","Cumi na gatatu","Cumi na kane","Cumi na gatanu","Cumi na gatandatu",
+"Cumi n'indwi","Cumi n'umunani","Cumi n'icenda","Mirongo ibiri"];
+const motNombre = n => NOMBRES[n-1] || String(n);
+const ROUND_SIZE = 10;
+
+/* ==================================================================
+   LOGIQUE
+   ================================================================== */
+const $ = id => document.getElementById(id);
+let pool=[], answers=[], index=0, streak=0, mode="sokwe";
+let level=1, curHasNext=false, pendingScore=0;
+let jokes=[], jIndex=0, jScore=0, jState=[];
+
+function normReorder(s){
+  s=(s||"").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/['’‘`´]/g," ").replace(/[.,!?;:()"…]/g," ").replace(/\s+/g," ").trim();
+  const t=s.split(" ").filter(x=>x&&x!=="na"&&x!=="n"); t.sort(); return t.join(" ");
+}
+function lev(a,b){ const m=a.length,n=b.length; if(!m)return n; if(!n)return m;
+  let p=Array.from({length:n+1},(_,i)=>i);
+  for(let i=1;i<=m;i++){ const c=[i];
+    for(let j=1;j<=n;j++) c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));
+    p=c; } return p[n]; }
+const tol = l => l<=4?0 : l<=7?1 : 2;
+function sigWords(str){
+  return (str||"").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/['’‘`´]/g," ").replace(/[.,!?;:()"…]/g," ")
+    .split(/\s+/).filter(w=>w.length>=4);            // mots "de contenu"
+}
+function suffixeCommun(a,b){ let k=0,i=a.length-1,j=b.length-1;
+  while(i>=0&&j>=0&&a[i]===b[j]){ k++; i--; j--; } return k; }
+function motsProches(g,a){
+  if(g===a) return true;
+  if(lev(g,a) <= tol(Math.max(g.length,a.length))) return true;   // petite faute
+  if(g.length>=4 && (a.indexOf(g)>=0 || g.indexOf(a)>=0)) return true; // même radical
+  if(suffixeCommun(g,a) >= 4) return true;                        // uruyuki / akayuki
+  return false;
+}
+/* On accepte : réponse exacte, petite faute, ordre libre, OU une seule partie juste. */
+function estCorrect(s,rep){
+  const g = normReorder(s); if(!g) return false;
+  const gw = sigWords(s);
+  return rep.split("/").some(v=>{
+    const r = normReorder(v); if(!r) return false;
+    if(g===r) return true;
+    if(lev(g,r) <= tol(r.length)) return true;
+    const aw = sigWords(v);
+    return gw.length>0 && gw.some(x => aw.some(y => motsProches(x,y)));
+  });
+}
+const estNdaguhaye = s => normReorder(s)==="ndaguhaye";
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const score = () => answers.filter(a=>a&&a.status==="correct").length;
+const firstAns = d => d.a.split("/")[0].trim();
+const allAns = d => d.a.split("/").map(x=>x.trim()).join(" / ");
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2200); }
+
+function poserTextes(){
+  $("ui-slogan").textContent=T.slogan;
+  $("d-sokwe").textContent=T.dSokwe; $("d-hera").textContent=T.dHera; $("d-tuja").textContent=T.dTuja;
+  $("m-contrib").textContent=T.contrib; $("m-hist").textContent=T.hist; $("m-about").textContent=T.about;
+  $("f-tag").textContent=T.fTag;
+  $("lvl-cheer").textContent=T.lvlCheer; $("lvl-q").textContent=T.lvlQ;
+  $("lvl-yes").textContent=T.lvlYes; $("lvl-no").textContent=T.lvlNo;
+  $("a-title").textContent=T.aTitle; $("a-tag").textContent=T.aTag;
+  $("a-l1").textContent=T.aL1; $("a-v1").textContent=T.aV1;
+  $("a-l2").textContent=T.aL2; $("a-v2").textContent=T.aV2; $("a-quit").textContent=T.quit;
+  $("btn-check").textContent=T.check; $("btn-skip").textContent=T.skip; $("btn-back").textContent=T.back;
+  $("btn-give").textContent=T.give; $("btn-next").textContent=T.next; $("btn-quit").textContent=T.quit;
+  $("j-think").textContent=T.jThink; $("j-next").textContent=T.jNext; $("j-quit").textContent=T.quit;
+  $("ui-endtitle").textContent=T.endTitle; $("btn-replay").textContent=T.replay;
+  $("btn-share").textContent=T.share; $("btn-home").textContent=T.home;
+  $("c-title").textContent=T.cTitle; $("c-sub").textContent=T.cSub;
+  $("c-l1").textContent=T.cL1; $("c-l2").textContent=T.cL2; $("c-l3").textContent=T.cL3; $("c-l4").textContent=T.cL4;
+  $("c-send").textContent=T.cSend; $("c-copy").textContent=T.cCopy; $("c-quit").textContent=T.quit;
+  $("c-note").textContent=T.cNote;
+}
+function montrer(e){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); $(e).classList.add("on"); }
+function accueil(){ montrer("s-home"); }
+
+/* --- Niveaux : difficulté estimée (réponse + énoncé), du plus simple au plus corsé --- */
+function difficulte(it){ const q=(it.q||it.t||"").length, a=(it.a||it.p||"").length; return a*2 + q; }
+function poolNiveau(src, lvl){
+  const tri = src.slice().sort((x,y)=>difficulte(x)-difficulte(y));
+  const n = tri.length;
+  const pas = Math.max(ROUND_SIZE, Math.floor(n/5));
+  const debut = Math.min((lvl-1)*pas, Math.max(0, n-ROUND_SIZE));
+  const part = tri.slice(debut);
+  return { pool: shuffle(part).slice(0, Math.min(ROUND_SIZE, part.length)),
+           hasNext: debut < (n - ROUND_SIZE) };
+}
+
+/* ---------- QUIZ ---------- */
+function lancerQuiz(m, cont){
+  mode=m;
+  if(!cont) level=1;
+  const src = (m==="sokwe") ? SOKWE : HERAHEZA;
+  const root=document.documentElement.style;
+  if(m==="sokwe"){ root.setProperty("--accent","var(--green)"); root.setProperty("--accent-soft","var(--green-soft)"); root.setProperty("--accent-bd","#CDE9D9"); }
+  else { root.setProperty("--accent","#B5820A"); root.setProperty("--accent-soft","var(--gold-soft)"); root.setProperty("--accent-bd","#F3DFAF"); }
+  $("ui-lab").textContent = (m==="sokwe") ? T.labSokwe : T.labHera;
+  $("answer").placeholder = (m==="sokwe") ? T.phSokwe : T.phHera;
+  $("ui-level").textContent = T.level+" "+level;
+  const r = poolNiveau(src, level);
+  pool = r.pool; curHasNext = r.hasNext;
+  answers = new Array(pool.length); index=0; streak=0;
+  majPills(); montrer("s-quiz"); showItem(0);
+}
+function majPills(){
+  $("pill-score").innerHTML="⭐ "+score();
+  const f=$("pill-fire");
+  if(streak>0){ f.classList.remove("hidden"); f.innerHTML="🔥 "+streak; } else f.classList.add("hidden");
+}
+function showItem(i){
+  index=i; const d=pool[i], a=answers[i], st=a?a.status:"fresh";
+  const inp=$("answer"), fb=$("feedback");
+  $("riddle").textContent=d.q;
+  $("ui-count").textContent=motNombre(i+1)+" / "+pool.length;
+  $("bar").style.width=(i/pool.length*100)+"%";
+  $("btn-back").style.display=(i>0)?"block":"none";
+  ["btn-check","btn-give","btn-skip","btn-next"].forEach(b=>$(b).style.display="none");
+
+  if(st==="correct"||st==="conceded"){
+    inp.value=a.given||""; inp.disabled=true;
+    fb.className="feedback on "+(a.correct?"ok":"no");
+    $("fmsg").textContent=a.msg; $("fstreak").textContent=a.flair||"";
+    $("fans").textContent=(mode==="sokwe"?T.answerIntro:T.heraIntro)+" : "+
+      (mode==="sokwe" ? allAns(d) : d.q.replace(/…$/,"")+" "+firstAns(d));
+    $("btn-next").style.display="block";
+  } else if(st==="trying"){
+    inp.value=""; inp.disabled=false;
+    fb.className="feedback on no";
+    $("fmsg").textContent=T.impa; $("fstreak").textContent=""; $("fans").textContent="";
+    $("btn-check").style.display="block"; $("btn-give").style.display="block"; inp.focus();
+  } else {
+    inp.value=""; inp.disabled=false; fb.className="feedback";
+    $("btn-check").style.display="block"; $("btn-skip").style.display="block"; inp.focus();
+  }
+}
+function verifier(){
+  const a=answers[index];
+  if(a&&(a.status==="correct"||a.status==="conceded")) return;
+  const s=$("answer").value;
+  if(!normReorder(s)){ $("answer").focus(); return; }
+  if(estNdaguhaye(s)){ conceder(); return; }
+  if(estCorrect(s,pool[index].a)){
+    streak++;
+    answers[index]={status:"correct",given:s,correct:true,msg:pick(T.good),flair:(streak>=2?T.streakMsg:"")};
+    majPills(); showItem(index); confettis();
+  } else {
+    answers[index]={status:"trying",given:"",correct:false,msg:T.impa,flair:""};
+    showItem(index);
+    const fb=$("feedback"); fb.classList.add("shake"); setTimeout(()=>fb.classList.remove("shake"),450);
+  }
+}
+function conceder(){
+  const a=answers[index];
+  if(a&&(a.status==="correct"||a.status==="conceded")) return;
+  streak=0;
+  answers[index]={status:"conceded",given:"",correct:false,msg:T.concedeMsg,flair:""};
+  majPills(); showItem(index);
+}
+function precedente(){ if(index>0) showItem(index-1); }
+function suivante(){
+  const a=answers[index];
+  if(!a||a.status==="trying") return;
+  if(index>=pool.length-1) finir(); else showItem(index+1);
+}
+function finir(){
+  $("bar").style.width="100%";
+  const sc=score();
+  noterPartie(mode==="hera"?"hera":"sokwe", sc, pool.length);
+  if(sc>=8 && curHasNext){ pendingScore=sc; $("lvlup").classList.add("on"); return; }
+  showEnd(sc);
+}
+function showEnd(sc){
+  $("end-score").textContent=sc+" / "+pool.length;
+  $("end-scorelab").textContent=T.scoreLab;
+  $("end-perf").textContent = sc>=8?T.perfTop : sc>=5?T.perfMid : T.perfLow;
+  montrer("s-end"); if(sc>=5) confettis(28);
+}
+function niveauEgo(){ $("lvlup").classList.remove("on"); level++; lancerQuiz(mode, true); confettis(18); }
+function niveauOya(){ $("lvlup").classList.remove("on"); showEnd(pendingScore); }
+
+/* ---------- TUJAJURE ---------- */
+function lancerJokes(){
+  mode="tuja";
+  jokes=shuffle(TUJAJURE).slice(0,Math.min(ROUND_SIZE,TUJAJURE.length));
+  jState=new Array(jokes.length);
+  jIndex=0; jScore=0; montrer("s-joke"); showJoke();
+}
+/* Génère 4 choix : la bonne chute + 3 chutes tirées d'autres utujajuro */
+function optionsPour(i){
+  const bonne=jokes[i].p;
+  const autres=shuffle(TUJAJURE.filter(x=>x.p!==bonne).map(x=>x.p)).slice(0,3);
+  return shuffle([bonne, ...autres]);
+}
+function showJoke(){
+  const j=jokes[jIndex];
+  let st=jState[jIndex];
+  if(!st){ st={opts:optionsPour(jIndex), chosen:-1, correct:false}; jState[jIndex]=st; }
+  $("j-text").textContent=j.t;
+  $("j-count").textContent=motNombre(jIndex+1)+" / "+jokes.length;
+
+  const box=$("j-opts"); box.innerHTML="";
+  st.opts.forEach((o,k)=>{
+    const b=document.createElement("button");
+    b.className="opt"; b.textContent=o;
+    if(st.chosen>=0){
+      b.disabled=true;
+      if(o===j.p) b.classList.add("correct");
+      else if(k===st.chosen) b.classList.add("wrong");
+    } else { b.onclick=()=>choisirJoke(k); }
+    box.appendChild(b);
+  });
+
+  const fb=$("j-fb");
+  if(st.chosen>=0){
+    fb.className="feedback on "+(st.correct?"ok":"no");
+    $("j-fmsg").textContent = st.correct ? pick(T.good) : T.concedeMsg;
+    $("j-think").style.display="none";
+    $("j-next").style.display="block";
+  } else {
+    fb.className="feedback";
+    $("j-think").style.display="flex";
+    $("j-next").style.display="none";
+  }
+}
+function choisirJoke(k){
+  const st=jState[jIndex]; if(st.chosen>=0) return;
+  st.chosen=k; st.correct=(st.opts[k]===jokes[jIndex].p);
+  if(st.correct){ jScore++; confettis(10); }
+  majJoke();
+}
+function majJoke(){ showJoke(); }
+function nextJoke(){ if(jIndex>=jokes.length-1) finirJokes(); else { jIndex++; showJoke(); } }
+function finirJokes(){
+  $("end-score").textContent=jScore+" / "+jokes.length;
+  $("end-scorelab").textContent=T.jScoreLab;
+  $("end-perf").textContent = jScore>=8?T.perfTop : jScore>=5?T.perfMid : T.perfLow;
+  noterPartie("tuja", jScore, jokes.length);
+  montrer("s-end"); if(jScore>=5) confettis(28);
+}
+
+/* ---------- CONTRIBUTION ---------- */
+function texteContrib(){
+  const type=$("c-type").value, body=$("c-body").value.trim(),
+        ans=$("c-ans").value.trim(), who=$("c-who").value.trim();
+  if(!body){ toast(T.cEmpty); return null; }
+  let t="RINJORA — "+type+"\n\n"+body;
+  if(ans) t+="\n\nInyishu: "+ans;
+  if(who) t+="\n\nUwabitanze: "+who;
+  return t;
+}
+function envoyer(){
+  if(CONFIG.FORM_URL){ window.open(CONFIG.FORM_URL,"_blank"); return; }
+  const t=texteContrib(); if(!t) return;
+  if(CONFIG.WHATSAPP){ window.open("https://wa.me/"+CONFIG.WHATSAPP+"?text="+encodeURIComponent(t),"_blank"); return; }
+  if(CONFIG.EMAIL){ window.location.href="mailto:"+CONFIG.EMAIL+"?subject="+encodeURIComponent("Rinjora — umuganda")+"&body="+encodeURIComponent(t); return; }
+  copier();
+}
+async function copier(){
+  const t=texteContrib(); if(!t) return;
+  try{ await navigator.clipboard.writeText(t); toast(T.cCopied); }
+  catch(e){ alert(t); }
+}
+
+/* ---------- DIVERS ---------- */
+function confettis(n){
+  n=n||14;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const emo=["🎉","⭐","🔥","💫","🟢","🔴","🟡","🐇"];
+  for(let i=0;i<n;i++){
+    const c=document.createElement("span");
+    c.className="confetti"; c.textContent=pick(emo);
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(1.6+Math.random()*1.4)+"s";
+    c.style.fontSize=(18+Math.random()*18)+"px";
+    document.body.appendChild(c); setTimeout(()=>c.remove(),3200);
+  }
+}
+async function partager(){
+  const txt="Rinjora — "+T.slogan+" — "+$("end-score").textContent+" ⭐";
+  try{ if(navigator.share) await navigator.share({text:txt});
+       else { await navigator.clipboard.writeText(txt); toast(T.cCopied); } }catch(e){}
+}
+
+
+/* ==================================================================
+   AMATEKA — historique conservé dans le navigateur de la personne
+   ================================================================== */
+const SKEY = "rinjora_amateka_v1";
+const STATS0 = { total:0, games:0, best:0,
+  sokwe:{g:0,p:0}, hera:{g:0,p:0}, tuja:{g:0,p:0} };
+let STATS = chargerStats();
+
+function chargerStats(){
+  try{
+    const r = localStorage.getItem(SKEY);
+    if(r) return Object.assign({}, STATS0, JSON.parse(r));
+  }catch(e){}
+  return JSON.parse(JSON.stringify(STATS0));
+}
+function sauverStats(){
+  try{ localStorage.setItem(SKEY, JSON.stringify(STATS)); }catch(e){}
+}
+function noterPartie(dom, points, sur){
+  const d = STATS[dom] || (STATS[dom]={g:0,p:0});
+  d.g += 1; d.p += points;
+  STATS.total += points; STATS.games += 1;
+  if(points > STATS.best) STATS.best = points;
+  sauverStats();
+}
+
+const ICONS = {
+  sokwe:'<svg viewBox="0 0 64 64"><ellipse cx="21" cy="20" rx="6.5" ry="17" fill="var(--choco)" transform="rotate(-13 21 20)"/><ellipse cx="43" cy="20" rx="6.5" ry="17" fill="var(--choco)" transform="rotate(13 43 20)"/><ellipse cx="32" cy="45" rx="17" ry="15" fill="var(--choco-l)"/><circle cx="25" cy="42" r="2.7" fill="var(--choco-d)"/><circle cx="39" cy="42" r="2.7" fill="var(--choco-d)"/></svg>',
+  hera:'<svg viewBox="0 0 64 64"><path d="M32 9 C21 9 14 15 14.5 23 C9 26 8.5 34 13 38 C13 46 19 52 27 52 C29 55 35 55 37 52 C45 52 51 46 51 38 C55.5 34 55 26 49.5 23 C50 15 43 9 32 9 Z" fill="var(--choco-l)"/><path d="M32 9 V55" stroke="var(--choco-d)" stroke-width="2.4" fill="none"/></svg>',
+  tuja:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="23" fill="var(--ochre)"/><path d="M16 25 q6 -7 12 0 M36 25 q6 -7 12 0" stroke="var(--choco-d)" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M17 35 h30 a15 15 0 0 1 -30 0 Z" fill="var(--choco-d)"/></svg>'
+};
+
+function montrerHist(){
+  $("h-title").textContent=T.hTitle; $("h-sub").textContent=T.hSub;
+  $("h-totall").textContent=T.hTotal; $("h-gamesl").textContent=T.hGames; $("h-bestl").textContent=T.hBest;
+  $("h-reset").textContent=T.hReset; $("h-quit").textContent=T.quit;
+
+  const vide = STATS.games === 0;
+  $("h-body").style.display  = vide ? "none" : "block";
+  $("h-reset").style.display = vide ? "none" : "block";
+  const em=$("h-empty");
+  em.style.display = vide ? "block" : "none";
+  em.textContent = T.hEmpty;
+
+  if(!vide){
+    $("h-total").textContent = STATS.total;
+    $("h-games").textContent = STATS.games;
+    $("h-best").textContent  = STATS.best;
+    const noms={sokwe:T.nSokwe, hera:T.nHera, tuja:T.nTuja};
+    $("h-rows").innerHTML = ["sokwe","hera","tuja"].map(k=>{
+      const d=STATS[k]||{g:0,p:0};
+      return '<div class="srow"><span class="ic2">'+ICONS[k]+'</span>'+
+             '<span><span class="nm">'+noms[k]+'</span><br>'+
+             '<span class="sub2">'+d.g+' '+T.nPlayed+'</span></span>'+
+             '<span class="pts">⭐ '+d.p+'</span></div>';
+    }).join("");
+  }
+  montrer("s-hist");
+}
+function resetHist(){
+  if(!confirm(T.hAsk)) return;
+  STATS = JSON.parse(JSON.stringify(STATS0));
+  sauverStats(); toast(T.hDone); montrerHist();
+}
+
+/* ---------- BRANCHEMENTS ---------- */
+poserTextes();
+$("m-sokwe").onclick   = ()=>lancerQuiz("sokwe");
+$("m-hera").onclick    = ()=>lancerQuiz("hera");
+$("m-tuja").onclick    = lancerJokes;
+$("m-contrib").onclick = ()=>montrer("s-contrib");
+$("m-hist").onclick    = montrerHist;
+$("m-about").onclick   = ()=>montrer("s-about");
+$("a-quit").onclick    = accueil;
+$("lvl-yes").onclick   = niveauEgo;
+$("lvl-no").onclick    = niveauOya;
+$("h-quit").onclick    = accueil;
+$("h-reset").onclick   = resetHist;
+$("btn-check").onclick = verifier;
+$("btn-give").onclick  = conceder;
+$("btn-skip").onclick  = conceder;
+$("btn-back").onclick  = precedente;
+$("btn-next").onclick  = suivante;
+$("btn-quit").onclick  = accueil;
+$("j-next").onclick    = nextJoke;
+$("j-quit").onclick    = accueil;
+$("btn-replay").onclick= ()=> (mode==="tuja") ? lancerJokes() : lancerQuiz(mode, true);
+$("btn-share").onclick = partager;
+$("btn-home").onclick  = accueil;
+$("c-send").onclick    = envoyer;
+$("c-copy").onclick    = copier;
+$("c-quit").onclick    = accueil;
+$("answer").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); verifier(); }});
+</script>
+</body>
+</html>

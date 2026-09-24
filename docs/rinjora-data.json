@@ -1,0 +1,1584 @@
+{
+    "sokwe": [
+        {
+            "q": "Abagore ba kera baheka abana neza nayo ab'ubu ntumbarire.",
+            "a": "Ibigori bisimbije"
+        },
+        {
+            "q": "Abageni ba kera ntibitwikira bundi.",
+            "a": "Ibigori"
+        },
+        {
+            "q": "Abakobwa bansanze ku mugina nti enda bakobwa nkirigita.",
+            "a": "Inkumi y'inkezi"
+        },
+        {
+            "q": "Abambara ba Ruhinda bambariye impeko mu kuzimu.",
+            "a": "Ibiyoba"
+        },
+        {
+            "q": "Abanyabuhura ntibubaka barahonjagira.",
+            "a": "Umuyirwe w'ibigori"
+        },
+        {
+            "q": "Abanyakirimiro ntibubaka barahonjagira.",
+            "a": "Amajigo"
+        },
+        {
+            "q": "Abatama ba kera baca imanza bunamye.",
+            "a": "Imigondoro y'ibiharage"
+        },
+        {
+            "q": "Abazungu ba bujumbura bambaye ibirato bose.",
+            "a": "Amavunja"
+        },
+        {
+            "q": "Agacumu kanje mpungururabunyoni.",
+            "a": "Inkono y'umurango ntirya umwe"
+        },
+        {
+            "q": "Agacumu kanje runyurabisaka.",
+            "a": "Umuravyo"
+        },
+        {
+            "q": "Ndakibona sindagifata.",
+            "a": "Igitutu"
+        },
+        {
+            "q": "Umwana wanje yokunesha ari muto.",
+            "a": "Uruyuki / Inzuki"
+        },
+        {
+            "q": "Izinguzingu ni warimenya nguhere.",
+            "a": "Ibarabara"
+        },
+        {
+            "q": "Kararengera.",
+            "a": "Akotsi k'abungere"
+        },
+        {
+            "q": "Karahinda iduri.",
+            "a": "Akato mu mpange"
+        },
+        {
+            "q": "Karadiridimba.",
+            "a": "Akana kaja iwabo"
+        },
+        {
+            "q": "Urabona ga bitugu vya sogokuru ngo unsimbira urugo!",
+            "a": "Ikivumvuri"
+        },
+        {
+            "q": "Tora akato ntore akandi tuje kuvoma ico tutari bubone.",
+            "a": "Amaganga y'inkoko"
+        },
+        {
+            "q": "Gira so katamwobwa.",
+            "a": "Agahanga k'imbwa"
+        },
+        {
+            "q": "Mbe nyoku ko useye bwinshi urarirwa na bande?",
+            "a": "Itimbi ry'ifuku"
+        },
+        {
+            "q": "Ane meza.",
+            "a": "Amabere y'inka"
+        },
+        {
+            "q": "Umunani mabi.",
+            "a": "Amabere y'imbwa"
+        },
+        {
+            "q": "Aha twese turariye umwe.",
+            "a": "Inkono ku ziko"
+        },
+        {
+            "q": "Ndi mugufi nkaba mu rwanje.",
+            "a": "Igicaniro"
+        },
+        {
+            "q": "Wigera mu Barembe wari umurembe?",
+            "a": "Impene mu ntama"
+        },
+        {
+            "q": "Abana banje bakubita ibiganza hirya no hino.",
+            "a": "Imitwe y'inzuzi"
+        },
+        {
+            "q": "Abo kwa Ruringaniza bambariye imiringa mu kuzimu.",
+            "a": "Ibijumbu"
+        },
+        {
+            "q": "Abana banje bazi gucuraranga bose.",
+            "a": "Imirya y'inanga"
+        },
+        {
+            "q": "Abagabo barara bahagaze bakirirwa bahagaze.",
+            "a": "Inkingi z'inzu"
+        },
+        {
+            "q": "Ndara mpagaze bwaca nkaryama.",
+            "a": "Imyugariro"
+        },
+        {
+            "q": "Ivyiza biva kuzimu vyambaye inyerere bigacambirwa n'Abamikazi.",
+            "a": "Amateke"
+        },
+        {
+            "q": "Tubana tutava aho turi ariko ntitwigera turamukanya.",
+            "a": "Inkombe z'uruzi / Amabere y'umugore / Amabere y'umukobwa"
+        },
+        {
+            "q": "Aho turi ku mbuga tungana twese.",
+            "a": "Ifundi"
+        },
+        {
+            "q": "Ubugabo buva hasi nokuriza ndi muto.",
+            "a": "Isusa"
+        },
+        {
+            "q": "Aho Jabwe na Soro barwaniye n'ubu ni inkumbagare.",
+            "a": "Ubuhanza"
+        },
+        {
+            "q": "Ndi mugiraneza muvyara w'urupfu.",
+            "a": "Itiro"
+        },
+        {
+            "q": "Nkubise inyuma y'urugo nza ndatwenga.",
+            "a": "Ikigori mu minwe"
+        },
+        {
+            "q": "Karahara mu ruganda ntibacura.",
+            "a": "Inyundo"
+        },
+        {
+            "q": "Urusenge rwanje rwuzuye inzahabu naho woraramwo ntiwoziharura.",
+            "a": "Ijuru n'inyenyeri"
+        },
+        {
+            "q": "Kajuju ka Ntimba kiyereka aho katatumiwe.",
+            "a": "Akanyugunyugu"
+        },
+        {
+            "q": "Dukumburanye tubana.",
+            "a": "Amabere"
+        },
+        {
+            "q": "Tubana dutinyana.",
+            "a": "Umuriro n'amazi / Umwijima n'umuriro / Umwijima n'umuco"
+        },
+        {
+            "q": "Ndatambatamba ntazi iyo nja nkavuna inzara.",
+            "a": "Uruyuzi"
+        },
+        {
+            "q": "Dusa tudasa.",
+            "a": "Intore n'intobotobo"
+        },
+        {
+            "q": "Ntugire ubwoba ndasamye ariko sindyana.",
+            "a": "Umuryango w'inzu itugaye"
+        },
+        {
+            "q": "Fata isuka mfate iyindi tuje kwimba ico tutabona.",
+            "a": "Umuzi w'ibuye"
+        },
+        {
+            "q": "Nasezeye umusezero kera kuri Cambarantama n'ubu nturashwanyuka.",
+            "a": "Ubwoya bw'inka"
+        },
+        {
+            "q": "Aha ngo fye, hirya no hino ngo fye fye. Ngo twa !",
+            "a": "Imiravyo n'umuturagaro"
+        },
+        {
+            "q": "Iyi nzira njanye, idashitse abanje barahera.",
+            "a": "Inzira ija mu kigega"
+        },
+        {
+            "q": "Akana kanje kokuriza ari gato.",
+            "a": "Akanyarirajisho"
+        },
+        {
+            "q": "Abeza bahetse n'ubusage ku mutwe.",
+            "a": "Umurima w'ibigori uhetse"
+        },
+        {
+            "q": "Ntaco umfyurira amaso sindaguha.",
+            "a": "Imyenge y'inzu"
+        },
+        {
+            "q": "Mvuye kwikura Bushoro aca anyoma amaguru inyuma.",
+            "a": "Umunyota"
+        },
+        {
+            "q": "Ico utazi utabonye.",
+            "a": "Ubukumi bwa nyoko / Ubusore bwa so / Ubugeni bwa so na nyoko"
+        },
+        {
+            "q": "Ndashandasha umugongo.",
+            "a": "Urusenge"
+        },
+        {
+            "q": "Iyo tuva turyoha duhambwe.",
+            "a": "Imihwi"
+        },
+        {
+            "q": "Aha turi havuyemwo umwe mwese muraburara.",
+            "a": "Amashiga"
+        },
+        {
+            "q": "Umurwa ukuka amazi ni wawumenya nguhere.",
+            "a": "Umukenke"
+        },
+        {
+            "q": "Umugozi utekera amazi ni wawumenya nguhere.",
+            "a": "Ifu"
+        },
+        {
+            "q": "Ehe urya musozi wishika ibikanu.",
+            "a": "Abahizi"
+        },
+        {
+            "q": "Narajishe inkoko none sindayirirako.",
+            "a": "Agasongero"
+        },
+        {
+            "q": "Hano dufise impindu twese.",
+            "a": "Imirizo y'imbeba"
+        },
+        {
+            "q": "Nyoko yambara ibiheko vyinshi nkeka aroga.",
+            "a": "Umutobotobo"
+        },
+        {
+            "q": "Ndarwaje.",
+            "a": "Inzara mu bana"
+        },
+        {
+            "q": "Tora inkoni ntore iyindi tuje kugarura Rugamba irambutse.",
+            "a": "Ikinyugunyugu"
+        },
+        {
+            "q": "Narungitse umwana kurahura none n'ubu ntaraza.",
+            "a": "Umwotsi"
+        },
+        {
+            "q": "Kubita binati ntiyota arasara.",
+            "a": "Urubumbiro"
+        },
+        {
+            "q": "Nyegera nyegera bana banje turashize.",
+            "a": "Uburo mu ngasiro"
+        },
+        {
+            "q": "Akari kure karya abari n'amaguru.",
+            "a": "Ikigazi"
+        },
+        {
+            "q": "Batatu badatana mu ndagano.",
+            "a": "Amashiga"
+        },
+        {
+            "q": "Ndahamanuka sindahaduga.",
+            "a": "Amazi"
+        },
+        {
+            "q": "Ndara ndagenda, nkirirwa ndagenda.",
+            "a": "Uruzi"
+        },
+        {
+            "q": "Mvuye guta nyokuru agaruka ankurikira.",
+            "a": "Umwavu"
+        },
+        {
+            "q": "Mpa utwo mbona.",
+            "a": "Utuboga ku menyo"
+        },
+        {
+            "q": "Ndavye hejuru ndanunkwa.",
+            "a": "Umuhwi"
+        },
+        {
+            "q": "Ngenda mfoye ariko sindekura.",
+            "a": "Amabere y'inkumi ataragwa / Amabere y'inkumi atararwa"
+        },
+        {
+            "q": "Kiti fyati.",
+            "a": "Ikiziha c'inzovu"
+        },
+        {
+            "q": "Mucinye mucinye niwe yishe nyoko.",
+            "a": "Umuganda w'inkwi"
+        },
+        {
+            "q": "Mupfukure tumurye.",
+            "a": "Itu"
+        },
+        {
+            "q": "Mfise amahwa kuva ku maguru gashika ku mutwe.",
+            "a": "Inanasi"
+        },
+        {
+            "q": "Mpagarara ata maguru nkambara inkofero ata mutwe mfise.",
+            "a": "Ikizinu"
+        },
+        {
+            "q": "Iyo kigira amenyo kiba caraturiye.",
+            "a": "Isi"
+        },
+        {
+            "q": "Karakwica karakwigarika Bambara ba Matene.",
+            "a": "Ihwa mu rwondo"
+        },
+        {
+            "q": "Impfizi yanje Rufyiri nayikebeye itongo.",
+            "a": "Imvuvyi"
+        },
+        {
+            "q": "Sohoka unture.",
+            "a": "Igikenye c'imbaragasa / Igikenuye c'imbaragasa"
+        },
+        {
+            "q": "Bikoro bikoto vyamariye imbuto.",
+            "a": "Isekuro"
+        },
+        {
+            "q": "Sasira umugabo ataryama.",
+            "a": "Imyugariro / ikawa"
+        },
+        {
+            "q": "Ubureta bw'imana bwuzuye inda.",
+            "a": "Inyenyeri kw'ijuru"
+        },
+        {
+            "q": "Ndabonye ikoti ya Paulo ariko Paulo sindamubona.",
+            "a": "Igitutu"
+        },
+        {
+            "q": "Ifi yanje yibana mw'ibenga ari imwe.",
+            "a": "Ururimi mu kanwa"
+        },
+        {
+            "q": "Aho hepfo haciye ingoma itavuga.",
+            "a": "Umugore afise inda"
+        },
+        {
+            "q": "Aho hepfo haciye ivyiza bisa.",
+            "a": "Patiri na Musenyeri"
+        },
+        {
+            "q": "Hepfo haciye ubutindi buhetse ubundi.",
+            "a": "Umuzungu kw'ipikipiki"
+        },
+        {
+            "q": "Mpagaze ngaha mbona ivyera i mbo.",
+            "a": "Itamuriro ry'imihivu"
+        },
+        {
+            "q": "Ehe kariya kantu kererana.",
+            "a": "Ubwimegeri"
+        },
+        {
+            "q": "Ehe uriya musozi wambaye inkofero.",
+            "a": "Ikizinu"
+        },
+        {
+            "q": "Abana banje bambarira inzogera mu kuzimu.",
+            "a": "Ibiyoba"
+        },
+        {
+            "q": "Dodododo.",
+            "a": "Akarato ka madamu"
+        },
+        {
+            "q": "Nyoko ni bishamabara ni bishambara ndamukubise aho.",
+            "a": "Imivyuka / imijishi"
+        },
+        {
+            "q": "Akarima kanje ni nyangaragurwa.",
+            "a": "Umurima w'intore"
+        },
+        {
+            "q": "Rwikinga ibikemanyi mushiki wa nkegeta.",
+            "a": "Impange mu mukingo"
+        },
+        {
+            "q": "Sintera ikiremo ndomekera.",
+            "a": "Ibara ry'inka"
+        },
+        {
+            "q": "Tora ingata ntore iyindi tuje kwikorera Dundagu.",
+            "a": "Akabindi k'uburozi"
+        },
+        {
+            "q": "Akibo kanje ntunyuguzwa.",
+            "a": "Akanyo k'imbwa"
+        },
+        {
+            "q": "Fredinand yicaye ku ntebe zitatu n'inkofero ku mutwe.",
+            "a": "Inkono ku ziko"
+        },
+        {
+            "q": "Ndi muremure mu nama.",
+            "a": "Idarapo"
+        },
+        {
+            "q": "Fata Rutagari twinjire igongo.",
+            "a": "Ishoka"
+        },
+        {
+            "q": "Niciye Umunyinya harwa Umunyare.",
+            "a": "Ntawunya adosovye"
+        },
+        {
+            "q": "Biravyagaraye.",
+            "a": "Ibivya vy'umutama"
+        },
+        {
+            "q": "Muka Minani atamba neza.",
+            "a": "Umutoto w'igitoke"
+        },
+        {
+            "q": "Jewe Mariya-Rosa ndakandansa nicaye.",
+            "a": "Akayunguruzo"
+        },
+        {
+            "q": "Urushinge rwanje rwurira kw'ijuru.",
+            "a": "Impfizi"
+        },
+        {
+            "q": "Nyegera nyegera bane banje twegere imbere.",
+            "a": "Intozi"
+        },
+        {
+            "q": "Kiranyugutiza kiranyugutiza bishambara vyatabutse.",
+            "a": "Ikinyabwoya"
+        },
+        {
+            "q": "Ndajorewe mwishanje.",
+            "a": "Umugabo yagiye kwihagarika mu muyonga abura ico yihanduza"
+        },
+        {
+            "q": "Mari mari nkaba ngisubira hejuru mwishwanje.",
+            "a": "Igikobekobe"
+        },
+        {
+            "q": "Ndagupfinze akayamaze.",
+            "a": "Agati mu mateke"
+        },
+        {
+            "q": "Budara ku moto.",
+            "a": "Umuvyindi kw'ibuye"
+        },
+        {
+            "q": "Bugutu bugutu.",
+            "a": "Impene ibuguta amatovu"
+        },
+        {
+            "q": "Munzu iwacu dutunze impindu twese.",
+            "a": "Imirizo y'imbeba"
+        },
+        {
+            "q": "Ko unkirigita warankoye.",
+            "a": "Ikijumbu mw'iburi"
+        },
+        {
+            "q": "Inka yanje yimira mw'ihembe ikavyarira mu kinono.",
+            "a": "Igitoke"
+        },
+        {
+            "q": "Karidundadunda.",
+            "a": "Agasore mw'ipantalon"
+        },
+        {
+            "q": "Agasakoshi ka madame ntibakorako.",
+            "a": "Agafutu k'imbwa"
+        },
+        {
+            "q": "Hiraya barahena hirya bagahenura.",
+            "a": "Abatozi b'inswa"
+        },
+        {
+            "q": "Umukuru w'itongo ni nde.",
+            "a": "Igihonyi"
+        },
+        {
+            "q": "Iyo So agiye mw'itongo abanza iki.",
+            "a": "Uruhwa"
+        },
+        {
+            "q": "Umugeni wanje ndamubambuye nezerewe cane.",
+            "a": "Ikigori"
+        },
+        {
+            "q": "Ehe uriya musozi wameze amabere.",
+            "a": "Ikizinu"
+        },
+        {
+            "q": "Ipantalon yanje yahiye umusipi urasigara.",
+            "a": "Umuyonga"
+        },
+        {
+            "q": "Abana ba Perezida bicaye ku ntebe imwe.",
+            "a": "Amashashi y'ibitoke"
+        },
+        {
+            "q": "Nciye aho hepfo abasoda baramfata.",
+            "a": "Ibifashi"
+        },
+        {
+            "q": "Imboga zigashe.",
+            "a": "Umusundi w'umukecuru"
+        },
+        {
+            "q": "Ndakwihanije ntuzosubire kuncira kw'irembo utambaye.",
+            "a": "Akagomba"
+        },
+        {
+            "q": "Nasezeye kuri Ntare n'ubu nturashanyuka.",
+            "a": "Ubwoya bw'inka"
+        },
+        {
+            "q": "Narimye umurima munini nimburira mu gipfunsi.",
+            "a": "Umushatsi"
+        },
+        {
+            "q": "Narimye umurima kera n'ubu nturata ingingo.",
+            "a": "Urufunzo"
+        },
+        {
+            "q": "Agatangaza nagasanze imbo.",
+            "a": "Umurara w'uburo / Umwara w'uburo"
+        },
+        {
+            "q": "Aba Nganda baramaranye.",
+            "a": "Umuyaga mu bitoke"
+        },
+        {
+            "q": "Aba none murerura.",
+            "a": "Isazi ku mukenke w'Umwami"
+        },
+        {
+            "q": "Aba kera bisigira mw'ikebano rya kinogono.",
+            "a": "Ugutwi kw'inka"
+        },
+        {
+            "q": "Abakuru baraho baca imanza bunamye.",
+            "a": "Impfizi z'intama zirwana"
+        },
+        {
+            "q": "Abanyakirwa ntibubaka barahonjagira.",
+            "a": "Amarenga"
+        },
+        {
+            "q": "Abanyerama ntibazitira barihaniza.",
+            "a": "Amenyo"
+        },
+        {
+            "q": "Gaciye aho ntikaragaruka.",
+            "a": "Imvovo"
+        },
+        {
+            "q": "Agafuni kanje rumenamushike.",
+            "a": "Ikizinu"
+        },
+        {
+            "q": "Agahanga kazira ingogo.",
+            "a": "Umutwe w'imbwa"
+        },
+        {
+            "q": "Agaheta abami n'abagabo.",
+            "a": "Umuryango"
+        },
+        {
+            "q": "Agapimbiro nyonyo.",
+            "a": "Igitsembe c'intama"
+        },
+        {
+            "q": "Agasaka kanje ni nkingiyemenshi.",
+            "a": "Impuzu ku mubiri"
+        },
+        {
+            "q": "Agasozi gatoyi kaduga amazi.",
+            "a": "Umukenke"
+        },
+        {
+            "q": "Aho hepfo haciye akagabo katagira amajanja.",
+            "a": "Umunana / Umwijima"
+        },
+        {
+            "q": "Aha turushwa ubwiza n'umwe.",
+            "a": "Igisabo"
+        },
+        {
+            "q": "Aha turi ngaha woduharura ukadushobora.",
+            "a": "Ubumera ku mbuga"
+        },
+        {
+            "q": "Aha turushwa umutima n'umwe.",
+            "a": "Urugi"
+        },
+        {
+            "q": "Aharaho naho ari heza ntiwoharira.",
+            "a": "Agasongero"
+        },
+        {
+            "q": "Ndagutume ndagutumagize kwa Ryangombe uti mutize intebe aterekere.",
+            "a": "Umunwa w'inyanana"
+        },
+        {
+            "q": "Ca hirya nce hino twubure impongo itagira umurizo.",
+            "a": "Irobe"
+        },
+        {
+            "q": "Ca mu canzo imana ikubike.",
+            "a": "Igitsure ca mu kaso"
+        },
+        {
+            "q": "Fata akato mfate akandi tuje kurondera ico tutari bubone.",
+            "a": "Amosozi y'inkoko"
+        },
+        {
+            "q": "Uje uranyuguta ibishambara ngo uje gukwa Mawe.",
+            "a": "Ikinyabwoya"
+        },
+        {
+            "q": "Umwana wanje mukumuramutsa mbanza gukura inkofero.",
+            "a": "Ikiyeri"
+        },
+        {
+            "q": "Sokwe sohoka unture.",
+            "a": "Agakono k'uburozi"
+        },
+        {
+            "q": "Agasaka kanje inampurungu.",
+            "a": "Igikobekobe"
+        },
+        {
+            "q": "Agatangaza nagasanze I Rwanda.",
+            "a": "Inzoga y'ibijumbu"
+        },
+        {
+            "q": "Agatekwa canke ntikotswe kagasa kagasa n'akabisi kandi gatetse.",
+            "a": "Ikigori ca inankonge"
+        },
+        {
+            "q": "Agatsirika ntigaheranwe.",
+            "a": "Amabere y'inkumi / Ubwanwa / Amenyo ya ruguru / Urupfu"
+        },
+        {
+            "q": "Aho hepfo hari umusozi uvuga amarago.",
+            "a": "Abakunzi b'inanka / Abimvyi b'inanka"
+        },
+        {
+            "q": "Aha twese tugenzwa n'umwe.",
+            "a": "Inda"
+        },
+        {
+            "q": "Aha twese turushwa umutima n'umwe.",
+            "a": "Inkono ku ziko"
+        },
+        {
+            "q": "Ahayagirwa ibanga umukeba mwicaranye ntagire amakenga.",
+            "a": "Inkuka y'imissa"
+        },
+        {
+            "q": "Aho abadagi n'ababirigi barwaniye n'ubu turacahasanga amabano.",
+            "a": "Amarenga"
+        },
+        {
+            "q": "Aho hepfu hari umugabo atugera amajanja.",
+            "a": "Umwijima"
+        },
+        {
+            "q": "Aho hepfo ndaterana.",
+            "a": "Umukecuru n'ikigiga"
+        },
+        {
+            "q": "Aho wabereye mw'ishishiro ntiwoza uvayo.",
+            "a": "Ikigori"
+        },
+        {
+            "q": "Aho wakanciriyeko amate uzondeka ryari.",
+            "a": "Agahamagazo / Telephone"
+        },
+        {
+            "q": "Aho wandabiye unkuyakuya nturaza umpaga.",
+            "a": "Igitabu"
+        },
+        {
+            "q": "Aho wandabiye unkuyakuya nturaza umpaga ubu ntiwoza umpaga.",
+            "a": "Ishusho y'umukunzi"
+        },
+        {
+            "q": "Aho waramukirije heba none winjire.",
+            "a": "Indodo"
+        },
+        {
+            "q": "Akabindi kanje miharango.",
+            "a": "Akabindi k'uburozi"
+        },
+        {
+            "q": "Akana kanje kagutanga kubona abashitsi.",
+            "a": "Isunzu ry'inzu"
+        },
+        {
+            "q": "Akana kanje nyangaragurwa.",
+            "a": "Agatore ko ku nzira"
+        },
+        {
+            "q": "Uragenda neza ntumvunire umutego.",
+            "a": "Imigondoro y'ibiharage"
+        },
+        {
+            "q": "Nsimbiye kwa Firippo nsanze hugaye.",
+            "a": "Agafutu k'imbwa"
+        },
+        {
+            "q": "Ndagutume ndagutumagize icananiye umukuru w'igihugu.",
+            "a": "Umuzi w'ibuye"
+        },
+        {
+            "q": "Nciye aho hepfo mbona abakobwa bariko berekana amabere.",
+            "a": "Ipapayi"
+        },
+        {
+            "q": "Umugabo yabanje nyoko ni nde.",
+            "a": "Agatsintsiri"
+        },
+        {
+            "q": "Gakikize tugakindure.",
+            "a": "Isahani y'indya"
+        },
+        {
+            "q": "Zogarika amahembe womenya iyakowe Nyoko ?",
+            "a": "Ingara z'iminyinya"
+        },
+        {
+            "q": "Bugingo bwa none bwogutana.",
+            "a": "Wotekera amazi mu rukangaga / wosera mu ruzi ukanzura"
+        },
+        {
+            "q": "So na nyoko bapfuye iki ?",
+            "a": "Umwungu wo mu rubibe"
+        },
+        {
+            "q": "Zirashotse ntuku.",
+            "a": "Amaraso ku murundi"
+        },
+        {
+            "q": "Kati cari nti caki.",
+            "a": "Agaca mu mateke"
+        },
+        {
+            "q": "Sokoranya n'uwo muri kumwe.",
+            "a": "Izuru n'umunwa"
+        },
+        {
+            "q": "uuuuhhhh.",
+            "a": "Icishesheko umusururu / igikamiwe make"
+        },
+        {
+            "q": "uiiiiiuiii.",
+            "a": "Umugabo mw'itongo"
+        },
+        {
+            "q": "Rangamira ununkwe.",
+            "a": "Agahwi ku rusenge"
+        },
+        {
+            "q": "Mpagaze hakurya mbona kwa mabukwe burakeye.",
+            "a": "Ubumera ku mbuga"
+        },
+        {
+            "q": "Umugabo muremure yavuye i Magamba.",
+            "a": "Ima ry'imvura"
+        },
+        {
+            "q": "Mwishwanje nkazosubirayo.",
+            "a": "Ima ry'imvura"
+        },
+        {
+            "q": "Ndagufyinze Filippo.",
+            "a": "Ifaranga"
+        },
+        {
+            "q": "Ndagufyinze ico utabonye.",
+            "a": "Ubukumi bwa nyoko / Ubusore bwa so"
+        },
+        {
+            "q": "Karasimvye miheneko.",
+            "a": "Agahene gasimvye umugazo"
+        },
+        {
+            "q": "Wongorora womvuna.",
+            "a": "Ikijumbu"
+        },
+        {
+            "q": "Aho hepfo haciye impehe nsa.",
+            "a": "Ingabo zitagira umutware"
+        },
+        {
+            "q": "Madelina arakokoye.",
+            "a": "Inkware ku mudugo"
+        },
+        {
+            "q": "Inka yanje ni nyamukamwa igaramye.",
+            "a": "Urusyo"
+        },
+        {
+            "q": "Inka yanje ni nyamuhakira kw'ijuru.",
+            "a": "Igitoke"
+        },
+        {
+            "q": "Akana kanje kokunesha ari gato.",
+            "a": "Uruyuki / Urutozi"
+        },
+        {
+            "q": "Ikayaga canje cogamwo urufi rumwe.",
+            "a": "Ururimi"
+        },
+        {
+            "q": "Umukirigita wamukoye iki.",
+            "a": "Urupfunguruzo mw'igufuri"
+        },
+        {
+            "q": "Gipipiri gipigi.",
+            "a": "Igisuzi c'umukecuru"
+        },
+        {
+            "q": "Camucezaceza camusyokoye icana c'igipagani.",
+            "a": "ikirungurira"
+        },
+        {
+            "q": "Donde yongwe.",
+            "a": "ifuku ku kiraro"
+        },
+        {
+            "q": "Ehe urya musozi uva umwuna.",
+            "a": "Urume"
+        },
+        {
+            "q": "Kati barara nti ba !",
+            "a": "Akarosho mu mpange"
+        }
+    ],
+    "heraheza": [
+        {
+            "q": "Abahigi benshi…",
+            "a": "bayobeza imbwa"
+        },
+        {
+            "q": "Abakunzi ntibarangirira…",
+            "a": "mu mubindi"
+        },
+        {
+            "q": "Abami basangira ingoma…",
+            "a": "ntibasangira ingovyi"
+        },
+        {
+            "q": "Abanyabwenge basa…",
+            "a": "ntibateka inyama ngo zishe"
+        },
+        {
+            "q": "Agafuni kabagara ubumwe…",
+            "a": "ni akarenge"
+        },
+        {
+            "q": "Agakengere kava…",
+            "a": "mu gakenguzo"
+        },
+        {
+            "q": "Agashaje…",
+            "a": "bakanya hejuru"
+        },
+        {
+            "q": "Agashitsi kakera…",
+            "a": "kavumbika umuriro"
+        },
+        {
+            "q": "Agasozi k'intahanurwa…",
+            "a": "kahiye abagabo babona"
+        },
+        {
+            "q": "Agasumba akandi…",
+            "a": "karakamira"
+        },
+        {
+            "q": "Agati gateretswe n'Imana…",
+            "a": "ntigahenurwa n'umuyaga"
+        },
+        {
+            "q": "Agatosho kari amarere…",
+            "a": "gatemba kaja haruguru"
+        },
+        {
+            "q": "Agatu gatekewe…",
+            "a": "gatera amakenga"
+        },
+        {
+            "q": "Agatu k'amagara…",
+            "a": "ntigatwarwa n'uwufyina"
+        },
+        {
+            "q": "Agatu utatekeye…",
+            "a": "ugatekururana ubuhiri"
+        },
+        {
+            "q": "Ahari abagabo…",
+            "a": "ntihagwa ibara"
+        },
+        {
+            "q": "Ahari ubumwe…",
+            "a": "urusato rw'imbaragasa rwifuka batanu"
+        },
+        {
+            "q": "Ahari umugabo…",
+            "a": "hashira umugayo"
+        },
+        {
+            "q": "Ahavuye umugabo…",
+            "a": "hasubira umugayo"
+        },
+        {
+            "q": "Aharaye inzara…",
+            "a": "hazindunka inzigo"
+        },
+        {
+            "q": "Aho ivunikiye…",
+            "a": "yorima"
+        },
+        {
+            "q": "Aho kwicara ku mutogoto w'inkono…",
+            "a": "wokwicara kw'ijambo rya nyene yo"
+        },
+        {
+            "q": "Aho umukecuru atoye uruhindu…",
+            "a": "ahita mu ruganda"
+        },
+        {
+            "q": "Aho umworo yanikiye…",
+            "a": "ntibwuma"
+        },
+        {
+            "q": "Aho wabukaranga…",
+            "a": "nari musi y'urugi"
+        },
+        {
+            "q": "Akababaje umutima…",
+            "a": "kazindura amaguru"
+        },
+        {
+            "q": "Akabi gatwengwa…",
+            "a": "nk'akeza"
+        },
+        {
+            "q": "Akabigira kabizi…",
+            "a": "karya imboga karitse"
+        },
+        {
+            "q": "Akadatetswe…",
+            "a": "karotswa"
+        },
+        {
+            "q": "Akagomba kateranije…",
+            "a": "umukwe na inabukwe"
+        },
+        {
+            "q": "Akagomba kurya akandi kagira ngo…",
+            "a": "igirayo uranuka"
+        },
+        {
+            "q": "Agaca karya akandi kagira ngo…",
+            "a": "aha turi hanuka urukeke"
+        },
+        {
+            "q": "Akagumye…",
+            "a": "bagumako"
+        },
+        {
+            "q": "Akagutanze imbere…",
+            "a": "kaba kagusize"
+        },
+        {
+            "q": "Akaje ntikazira…",
+            "a": "umwe"
+        },
+        {
+            "q": "Akamuntu kamara…",
+            "a": "iyagwe"
+        },
+        {
+            "q": "Akanse…",
+            "a": "baraheba"
+        },
+        {
+            "q": "Akantu kagirwa…",
+            "a": "n'akandi"
+        },
+        {
+            "q": "Akanyoni katagurutse…",
+            "a": "ntikamenya iyo bweze"
+        },
+        {
+            "q": "Akari mu mpene…",
+            "a": "niko kari mu ntama"
+        },
+        {
+            "q": "Akari mu nda y'umugabo…",
+            "a": "gaserurwa n'akari mu nda y'umubindi"
+        },
+        {
+            "q": "Akari mu nda y'ingoma…",
+            "a": "kamenywa n'uwayikanye"
+        },
+        {
+            "q": "Akataretse kaba…",
+            "a": "gasema"
+        },
+        {
+            "q": "Akazi k'i bwami…",
+            "a": "kica uwicaye"
+        },
+        {
+            "q": "Akaziri…",
+            "a": "karizana"
+        },
+        {
+            "q": "Akeza…",
+            "a": "karigura"
+        },
+        {
+            "q": "Ak'imuhana kaza…",
+            "a": "imvura ihise"
+        },
+        {
+            "q": "Amabarankuru yashikanye…",
+            "a": "inyenzi i buha"
+        },
+        {
+            "q": "Amarira siyo…",
+            "a": "maronko"
+        },
+        {
+            "q": "Amarira y'umugabo…",
+            "a": "atemba aja mu nda"
+        },
+        {
+            "q": "Amaronko menshi…",
+            "a": "aziba amatwi"
+        },
+        {
+            "q": "Amarushwa ari ku wundi…",
+            "a": "ntakuraza itiro"
+        },
+        {
+            "q": "Amase ya kera…",
+            "a": "ntahoma urutaro"
+        },
+        {
+            "q": "Amashenyo abiri…",
+            "a": "ntahurira ku kimenge"
+        },
+        {
+            "q": "Amasinde ntagwa imbuto…",
+            "a": "aba araye"
+        },
+        {
+            "q": "Amaso y'ibikere…",
+            "a": "ntabuza abavomyi"
+        },
+        {
+            "q": "Amaso y'uwundi…",
+            "a": "ntagushimira umugani"
+        },
+        {
+            "q": "Amazi arashuha…",
+            "a": "ntiyibagira i bumbeho"
+        },
+        {
+            "q": "Amazi masabano…",
+            "a": "ntamara imvyiro"
+        },
+        {
+            "q": "Amenyo aragutwenga…",
+            "a": "ari ayawe"
+        },
+        {
+            "q": "Amenyo aronderezwa…",
+            "a": "ku majigo"
+        },
+        {
+            "q": "Amenyo mabi…",
+            "a": "atera inayo agatwengo"
+        },
+        {
+            "q": "Amunguranka niyo…",
+            "a": "mazikesha"
+        },
+        {
+            "q": "Amunguranka niyo…",
+            "a": "mazituvya"
+        },
+        {
+            "q": "Bata inkoko (isake)…",
+            "a": "ntibata ico ibitse"
+        },
+        {
+            "q": "Batanga inka…",
+            "a": "ntibatanga Imana"
+        },
+        {
+            "q": "Bike bikehanira…",
+            "a": "abankana"
+        },
+        {
+            "q": "Bukebuke bukomeza…",
+            "a": "igihonyi"
+        },
+        {
+            "q": "Bukebuke bushikana…",
+            "a": "umusiba ku mugezi"
+        },
+        {
+            "q": "Bukebuke nirwo…",
+            "a": "rugendo"
+        },
+        {
+            "q": "Bukirikiri bwatunze umworo…",
+            "a": "uwo imisi yubutseko ntawumuha nirwere"
+        },
+        {
+            "q": "Burira ntibutera…",
+            "a": "ku mpeshi"
+        },
+        {
+            "q": "Buseye Imana…",
+            "a": "bwarika abagabo"
+        },
+        {
+            "q": "Caga ari…",
+            "a": "kinini"
+        },
+        {
+            "q": "Caga…",
+            "a": "cagutse"
+        },
+        {
+            "q": "Gira Ntare na Ruhaga, ntikiramutswa abami babiri…",
+            "a": "kiba gipfuye"
+        },
+        {
+            "q": "Gira so…",
+            "a": "ntaruta gira ico urya"
+        },
+        {
+            "q": "Gira so…",
+            "a": "yiturwa iyindi"
+        },
+        {
+            "q": "Guca mu rwanko…",
+            "a": "ni ukunyaruka"
+        },
+        {
+            "q": "Guca mu ziko…",
+            "a": "ni ukunyaruka"
+        },
+        {
+            "q": "Guseka umusore…",
+            "a": "siko kumuhanura"
+        },
+        {
+            "q": "Gushaza ni…",
+            "a": "ugushinyiriza"
+        },
+        {
+            "q": "Gusoba ingenda…",
+            "a": "siko gushika amahoro"
+        },
+        {
+            "q": "Haguhura n'uwaguhaye…",
+            "a": "wohura n'uwakwimye"
+        },
+        {
+            "q": "Hagupfa wozanzama…",
+            "a": "uwakubonye akaguha iminwe"
+        },
+        {
+            "q": "Hagutera icumu nyene Imana…",
+            "a": "worimutiza"
+        },
+        {
+            "q": "Hakuba twompfa…",
+            "a": "woba nopfa"
+        },
+        {
+            "q": "Hakuvyara…",
+            "a": "worima"
+        },
+        {
+            "q": "Hakwishima woshimwa…",
+            "a": "n'abandi"
+        },
+        {
+            "q": "Hakwishima woshimwa…",
+            "a": "n'Imana"
+        },
+        {
+            "q": "Havuga uwo…",
+            "a": "bubezwe"
+        },
+        {
+            "q": "Havumbura…",
+            "a": "uwuribwa"
+        },
+        {
+            "q": "Hitamwo bihema…",
+            "a": "indyarya"
+        },
+        {
+            "q": "Ibigiye inama…",
+            "a": "bigira Imana"
+        },
+        {
+            "q": "Imfizi y'intama…",
+            "a": "itendera nka Se"
+        },
+        {
+            "q": "Ijisho ry'uwundi…",
+            "a": "ntirigushimira umugeni"
+        },
+        {
+            "q": "Igiti kigororwa…",
+            "a": "kikiri gito"
+        },
+        {
+            "q": "Igito gitabwa…",
+            "a": "iwabo"
+        },
+        {
+            "q": "Ikinyoma kimara umusi…",
+            "a": "ntikimara umwaka"
+        },
+        {
+            "q": "Ikibarirwa ni ucumva…",
+            "a": "icerekwa ni ikibona"
+        },
+        {
+            "q": "Imigere ibiri…",
+            "a": "ntitereka"
+        },
+        {
+            "q": "Imisi y'igisuma…",
+            "a": "iraharuye"
+        },
+        {
+            "q": "Imiti ikora…",
+            "a": "ikoranye"
+        },
+        {
+            "q": "Inzira ya hafi…",
+            "a": "yamaze abatwa"
+        },
+        {
+            "q": "Ivya gusa…",
+            "a": "bitera ubwenge buke"
+        },
+        {
+            "q": "Ingeso iraraba…",
+            "a": "ntihwera"
+        },
+        {
+            "q": "Ingumba itazi ikibi…",
+            "a": "irigata ishenyo"
+        },
+        {
+            "q": "Ingona iva mu ruzi…",
+            "a": "ikarigata urume"
+        },
+        {
+            "q": "Inkoni ishikira igufa…",
+            "a": "ntishikira ingeso"
+        },
+        {
+            "q": "Intibagira…",
+            "a": "ntibana"
+        },
+        {
+            "q": "Intabwirwa ibwirwa…",
+            "a": "n'uko amaso atukuye"
+        },
+        {
+            "q": "Ishavu ry'umuvyeyi…",
+            "a": "ririgwa ntirirara"
+        },
+        {
+            "q": "Imana ifasha…",
+            "a": "uwifashije"
+        },
+        {
+            "q": "Ivyara ntirigora…",
+            "a": "nk'irera"
+        },
+        {
+            "q": "Kananira abagabo…",
+            "a": "ntiyimye"
+        },
+        {
+            "q": "Kuvuga menshi…",
+            "a": "siko kuyamara"
+        },
+        {
+            "q": "Nkundakurya yariye…",
+            "a": "igifyera kimumena itama"
+        },
+        {
+            "q": "Nyamubura ikimuhanura…",
+            "a": "niwe nyamubura ikimuhamba"
+        },
+        {
+            "q": "Nyamutegera kazoza…",
+            "a": "yakwereye inda iyindi"
+        },
+        {
+            "q": "Nyen'imbugita ni…",
+            "a": "uwuyifashe ikirindi"
+        },
+        {
+            "q": "Nta mvura…",
+            "a": "idahita"
+        },
+        {
+            "q": "Nta wanka kwonka nyina…",
+            "a": "ngo arwaye amahere"
+        },
+        {
+            "q": "Nta wurya inzoka…",
+            "a": "ngo ananirwe n'umurizo"
+        },
+        {
+            "q": "Sindya aka aba…",
+            "a": "yariye akandi"
+        },
+        {
+            "q": "Tubiri tuvurana…",
+            "a": "ubupfu"
+        },
+        {
+            "q": "Ubugirigiri bugira…",
+            "a": "babiri"
+        },
+        {
+            "q": "Ubunyegeri bwinshi…",
+            "a": "ntibwimba"
+        },
+        {
+            "q": "Ubuja gusa…",
+            "a": "buratagata"
+        },
+        {
+            "q": "Ubuntu…",
+            "a": "burihabwa"
+        },
+        {
+            "q": "Ubusigo buhuma…",
+            "a": "ntibuba bunini"
+        },
+        {
+            "q": "Ubwenge bugukunze…",
+            "a": "buza mu nyuma"
+        },
+        {
+            "q": "Ukora ineza…",
+            "a": "ukayisanga imbere"
+        },
+        {
+            "q": "Ukora inabi…",
+            "a": "ikagukurikira"
+        },
+        {
+            "q": "Umubanyi niwe…",
+            "a": "muryango"
+        },
+        {
+            "q": "Umufa w'imbwebwe…",
+            "a": "unyobwa ugishushe"
+        },
+        {
+            "q": "Umugani ugana…",
+            "a": "akariho"
+        },
+        {
+            "q": "Umupfu…",
+            "a": "ntiyinukira"
+        },
+        {
+            "q": "Umutindi arota…",
+            "a": "ico ababaye"
+        },
+        {
+            "q": "Umutwe umwe…",
+            "a": "ntiwigira inama"
+        },
+        {
+            "q": "Umwana w'inkende…",
+            "a": "apfa yurira igiti"
+        },
+        {
+            "q": "Umwana yankwa…",
+            "a": "ni we akura"
+        },
+        {
+            "q": "Umwera uwa i bukuru…",
+            "a": "ugakwira igihugu cose"
+        },
+        {
+            "q": "Urima itiro…",
+            "a": "ukimbura ingonera"
+        },
+        {
+            "q": "Urya nk'inka…",
+            "a": "ugapfa nk'imbwa"
+        },
+        {
+            "q": "Urubuze inkware…",
+            "a": "ruvumbukana igihuna"
+        },
+        {
+            "q": "Urucira mukaso…",
+            "a": "rugatwara Nyoko"
+        },
+        {
+            "q": "Uteba kugarura impene ikiri hafi…",
+            "a": "yamara kurenga imirambi ukabira nk'ayo"
+        },
+        {
+            "q": "Uwitonze amira…",
+            "a": "ibinoze"
+        },
+        {
+            "q": "Uwufise umutwe muto…",
+            "a": "awurinda uruguma"
+        },
+        {
+            "q": "Uwuhawe n'Imana…",
+            "a": "yiyita umuhinga"
+        },
+        {
+            "q": "Imbwa yarishuse avyara…",
+            "a": "ibihumye"
+        },
+        {
+            "q": "Uwubundabunda abonwa…",
+            "a": "n'uwuhagaze"
+        },
+        {
+            "q": "Uwuhetswe neza…",
+            "a": "asohora amaboko"
+        },
+        {
+            "q": "Uwushaka umuce…",
+            "a": "acika ijoro"
+        },
+        {
+            "q": "Uwushaka umubira…",
+            "a": "abira akuya"
+        },
+        {
+            "q": "Uwushatse kukurya…",
+            "a": "ntabura imboga agukoza"
+        },
+        {
+            "q": "Uwutazi umuti…",
+            "a": "awanyako"
+        },
+        {
+            "q": "Uwuja gukira indwara…",
+            "a": "arayirata"
+        },
+        {
+            "q": "Umuntu atinya ingwe…",
+            "a": "ntatinya iyamwinjiranye"
+        },
+        {
+            "q": "Umuna w'inkorabara…",
+            "a": "utemba uduga"
+        },
+        {
+            "q": "Umwansi agucira icobo…",
+            "a": "Imana ikagucira icanzo"
+        },
+        {
+            "q": "Uwanka utu…",
+            "a": "aba yariye utundi"
+        }
+    ],
+    "tujajure": [
+        {
+            "t": "Agaca gacakiye agahori gati:",
+            "p": "Mwana wa mama undiye twari bamwe."
+        },
+        {
+            "t": "Agaca gacakiye agahori gati:",
+            "p": "Nagira ngo akaguruka ntikoriye akandi."
+        },
+        {
+            "t": "Agaca gacakiye agahori gati, kano kati:",
+            "p": "Urandya neza ndahanda."
+        },
+        {
+            "t": "Agahume gahwaniye n'akandi mu mwonga ngo:",
+            "p": "Rinda tubane waragowe ndagorwa."
+        },
+        {
+            "t": "Agakara kagiye iwa sebukwe ngo agataramure kano gahitanywe gaca mu mbavu ati:",
+            "p": "Ni wewe ga mupfaso? Na ko ngo ego agakara gasa n'akandi."
+        },
+        {
+            "t": "Agakecuru kasanze akandi mu kuzimu kati:",
+            "p": "Nyereka ibigega wimbuye. Na ko kati: Noneho ngaho mama uraje kuvyiyimburira nawe."
+        },
+        {
+            "t": "Agakecuru kashikuye igikoba kigata ku kingi kati:",
+            "p": "Nakudya ntitwarwana."
+        },
+        {
+            "t": "Agakecuru karose gapfa gati:",
+            "p": "Maze simvyanka."
+        },
+        {
+            "t": "Akagomba kaneye mu cibo kati:",
+            "p": "Urantuma mugabo wa mama ishikanwa ry'umworo ni iryo."
+        },
+        {
+            "t": "Akagomba kenzwe na se kati:",
+            "p": "N'uburi mu mwonga nibushoke."
+        },
+        {
+            "t": "Urunyegeri rwamenekanye n'intango ruti:",
+            "p": "Abenga ni benge jeho ndenguye."
+        },
+        {
+            "t": "Babajije gikona bati: «Mbega gikona ko ugenda wasamye?» Giti:",
+            "p": "Ntawumenya iyo indya zituruka."
+        },
+        {
+            "t": "Ikirogorye cagiye gusaba amazi kw'ijuru, inkuba iti: «Twa!» Giti:",
+            "p": "Iyo mbura amazi ngakiza igufa."
+        },
+        {
+            "t": "Babariye Samandari bati: «Urabona ga Samandari ukarya inkenekene zimena amaso?» Ati:",
+            "p": "Ubusa bwo?"
+        },
+        {
+            "t": "Ikirogorye canyereye ku gishishwa, kiragwa, giti:",
+            "p": "Haborewe jewe, hari akantu abaruganye!"
+        },
+        {
+            "t": "Imbwa yahuye n'umusaza, abura ico ayiha, iti:",
+            "p": "Haguhura n'umusaza wohura n'umwana, abura ico aguha akaguherekeza canke akakwirukana."
+        }
+    ]
+}

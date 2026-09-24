@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VerificationCodeMail; // Mail class
+use App\Mail\VerificationCodeMail;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\App; // Import App facade
+use Illuminate\Support\Facades\App;
 
 class AuthController extends Controller
 {
@@ -34,12 +32,24 @@ class AuthController extends Controller
             ]);
         }
 
-        // Create API token
-        $token = $user->createToken('AndroidApp')->plainTextToken;
+        $deviceName = $request->input('device_name', 'AndroidApp');
+
+        // Single active token per device: revoke that device's previous tokens.
+        $user->tokens()->where('name', $deviceName)->delete();
+
+        $token = $this->issueToken($user, $deviceName);
+
+        $user->refresh();
 
         return response()->json([
-            'user' => $user,
-            'token' => $token
+            'success' => true,
+            'message' => 'Logged in successfully.',
+            'data' => [
+                'user' => $user,
+                'token' => $token['token'],
+                'token_type' => $token['token_type'],
+                'expires_at' => $token['expires_at'],
+            ],
         ]);
     }
 
@@ -48,9 +58,19 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $deviceName = $request->input('device_name');
 
-        return response()->json(['message' => 'Logged out successfully']);
+        if ($deviceName) {
+            $request->user()->tokens()->where('name', $deviceName)->delete();
+        } else {
+            $request->user()->tokens()->delete();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Logged out successfully.',
+            'data' => null,
+        ]);
     }
 
     /**
@@ -58,7 +78,10 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json([
+            'success' => true,
+            'data' => $request->user(),
+        ]);
     }
 
     /**
@@ -87,7 +110,9 @@ class AuthController extends Controller
         $this->sendVerificationCode($user);
 
         return response()->json([
-            'message' => 'Registration successful. A verification code has been sent to your email.'
+            'success' => true,
+            'message' => 'Registration successful. A verification code has been sent to your email.',
+            'data' => null,
         ], 201);
     }
 
@@ -101,16 +126,16 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return response()->json(['message' => 'User not found.'], 404);
+            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
 
         // Check if code is correct and not expired
         if ($user->verification_code !== $request->verification_code) {
-            return response()->json(['message' => 'Invalid verification code.'], 400);
+            return response()->json(['success' => false, 'message' => 'Invalid verification code.'], 400);
         }
 
         if (Carbon::now()->gt($user->verification_expires_at)) {
-            return response()->json(['message' => 'Verification code has expired.'], 400);
+            return response()->json(['success' => false, 'message' => 'Verification code has expired.'], 400);
         }
 
         // Mark email as verified
@@ -119,10 +144,14 @@ class AuthController extends Controller
         $user->verification_expires_at = null;
         $user->save();
 
-        return response()->json(['message' => 'Email verified successfully.'], 200);
+        return response()->json([
+            'success' => true,
+            'message' => 'Email verified successfully.',
+            'data' => null,
+        ], 200);
     }
 
-    // Resend Verification Email
+    // Resend Verification Code
     public function resendVerificationCode(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -130,11 +159,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return response()->json(['message' => 'User not found.'], 404);
+            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
 
         if ($user->email_verified_at) {
-            return response()->json(['message' => 'Email already verified.'], 200);
+            return response()->json(['success' => true, 'message' => 'Email already verified.'], 200);
         }
 
         // Generate new code
@@ -146,12 +175,46 @@ class AuthController extends Controller
         // Send email
         $this->sendVerificationCode($user);
 
-        return response()->json(['message' => 'A new verification code has been sent.'], 200);
+        return response()->json([
+            'success' => true,
+            'message' => 'A new verification code has been sent.',
+            'data' => null,
+        ], 200);
+    }
+
+    /**
+     * Change the authenticated user's password and revoke all tokens.
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = $request->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => ['The current password is incorrect.'],
+            ]);
+        }
+
+        $user->update(['password' => Hash::make($request->password)]);
+
+        // Revoke all tokens so other devices must sign in again.
+        $user->tokens()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Password updated. Please sign in again.',
+            'data' => null,
+        ]);
     }
 
     public function sendVerificationCode(User $user)
     {
-        if (App::environment('production')) { 
+        if (App::environment('production')) {
             // Send email only in production
             Mail::to($user->email)->send(new VerificationCodeMail($user->verification_code));
         } else {
@@ -159,6 +222,27 @@ class AuthController extends Controller
             $user->email_verified_at = now();
             $user->save();
         }
+    }
+
+    /**
+     * Create a Sanctum token and return its plain-text value with metadata.
+     *
+     * Expiry is read from SANCTUM_TOKEN_EXPIRY (minutes); empty/unset means no expiry.
+     */
+    protected function issueToken(User $user, string $deviceName): array
+    {
+        $expiryMinutes = env('SANCTUM_TOKEN_EXPIRY');
+        $expiresAt = $expiryMinutes
+            ? Carbon::now()->addMinutes((int) $expiryMinutes)
+            : null;
+
+        $token = $user->createToken($deviceName, ['*'], $expiresAt);
+
+        return [
+            'token' => $token->plainTextToken,
+            'token_type' => 'Bearer',
+            'expires_at' => $expiresAt?->toISOString(),
+        ];
     }
 
 }

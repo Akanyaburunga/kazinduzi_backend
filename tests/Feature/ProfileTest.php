@@ -16,7 +16,7 @@ class ProfileTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/profile');
+            ->get('/reputation');
 
         $response->assertOk();
     }
@@ -34,7 +34,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ->assertRedirect('/reputation');
 
         $user->refresh();
 
@@ -56,7 +56,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ->assertRedirect('/reputation');
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
@@ -85,14 +85,14 @@ class ProfileTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->from('/profile')
+            ->from('/reputation')
             ->delete('/profile', [
                 'password' => 'wrong-password',
             ]);
 
         $response
             ->assertSessionHasErrorsIn('userDeletion', 'password')
-            ->assertRedirect('/profile');
+            ->assertRedirect('/reputation');
 
         $this->assertNotNull($user->fresh());
     }

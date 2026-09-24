@@ -23,6 +23,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'profile_picture',
+        'current_streak',
+        'longest_streak',
+        'streak_freezes',
+        'streak_freeze_date',
     ];
 
     /**
@@ -43,7 +47,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'streak_freezes' => 'integer',
+        'streak_freeze_date' => 'date',
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (User $user) {
+            if ($user->streak_freezes === null) {
+                $user->streak_freezes = config('riddles.streak_freezes', 3);
+            }
+        });
+    }
 
     public function words()
     {
@@ -53,6 +68,79 @@ class User extends Authenticatable implements MustVerifyEmail
     public function meanings()
     {
         return $this->hasMany(Meaning::class);
+    }
+
+    public function riddleAttempts()
+    {
+        return $this->hasMany(RiddleAttempt::class);
+    }
+
+    public function proverbAttempts()
+    {
+        return $this->hasMany(ProverbAttempt::class);
+    }
+
+    public function jokeAttempts()
+    {
+        return $this->hasMany(JokeAttempt::class);
+    }
+
+    /**
+     * Achievements (badges) the user has unlocked.
+     */
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class, 'user_achievements')
+            ->withPivot('unlocked_at')
+            ->withTimestamps();
+    }
+
+    /**
+     * Riddles the user has bookmarked.
+     */
+    public function favoriteRiddles()
+    {
+        return $this->belongsToMany(Riddle::class, 'user_riddle_favorites')->withTimestamps();
+    }
+
+    /**
+     * Share/invitation records created by the user.
+     */
+    public function shares()
+    {
+        return $this->hasMany(RiddleShare::class);
+    }
+
+    /**
+     * Saved per-riddle progress (revealed hints).
+     */
+    public function riddleProgress()
+    {
+        return $this->hasMany(UserRiddleProgress::class);
+    }
+
+    /**
+     * User-generated riddle submissions awaiting (or past) review.
+     */
+    public function riddleSubmissions()
+    {
+        return $this->hasMany(RiddleSubmission::class);
+    }
+
+    /**
+     * User-generated proverb submissions awaiting (or past) review.
+     */
+    public function proverbSubmissions()
+    {
+        return $this->hasMany(ProverbSubmission::class);
+    }
+
+    /**
+     * User-generated joke submissions awaiting (or past) review.
+     */
+    public function jokeSubmissions()
+    {
+        return $this->hasMany(JokeSubmission::class);
     }
 
     public function updateReputation(int $points, String $reason, $related)
