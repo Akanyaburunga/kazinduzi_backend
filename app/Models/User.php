@@ -27,6 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'longest_streak',
         'streak_freezes',
         'streak_freeze_date',
+        'verification_code',
+        'verification_expires_at',
     ];
 
     /**
@@ -37,6 +39,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'verification_code',
+        'verification_expires_at',
     ];
 
     /**
@@ -49,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
         'streak_freezes' => 'integer',
         'streak_freeze_date' => 'date',
+        'verification_expires_at' => 'datetime',
     ];
 
     protected static function booted(): void

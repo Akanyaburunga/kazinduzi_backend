@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationCodeMail;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\App;
 
 class AuthController extends Controller
 {
@@ -85,7 +85,11 @@ class AuthController extends Controller
     }
 
     /**
-     * User Registration
+     * User Registration (for Android API)
+     *
+     * Creates an unverified user, generates a 6-digit verification code valid
+     * for 10 minutes and emails it. The account is not usable until
+     * POST /api/auth/email/verify confirms the code.
      */
     public function register(Request $request)
     {
@@ -95,18 +99,15 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed'
         ]);
 
-        // Generate 6-digit code
-        $verificationCode = mt_rand(100000, 999999);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'verification_code' => $verificationCode,
-            'verification_expires_at' => Carbon::now()->addMinutes(10) // Code expires in 10 min
+            'verification_code' => (string) random_int(100000, 999999),
+            'verification_expires_at' => now()->addMinutes(10), // Code expires in 10 min
         ]);
 
-        // Send email
+        // Send email with the verification code.
         $this->sendVerificationCode($user);
 
         return response()->json([
@@ -129,20 +130,27 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
 
+        if ($user->hasVerifiedEmail()) {
+            return response()->json(['success' => true, 'message' => 'Email already verified.'], 200);
+        }
+
         // Check if code is correct and not expired
         if ($user->verification_code !== $request->verification_code) {
             return response()->json(['success' => false, 'message' => 'Invalid verification code.'], 400);
         }
 
-        if (Carbon::now()->gt($user->verification_expires_at)) {
+        if (now()->gt($user->verification_expires_at)) {
             return response()->json(['success' => false, 'message' => 'Verification code has expired.'], 400);
         }
 
-        // Mark email as verified
-        $user->email_verified_at = Carbon::now();
-        $user->verification_code = null;
-        $user->verification_expires_at = null;
-        $user->save();
+        // Mark email as verified and fire the framework Verified event, which
+        // awards referral reputation to the referring user.
+        $user->markEmailAsVerified();
+        event(new \Illuminate\Auth\Events\Verified($user));
+        $user->forceFill([
+            'verification_code' => null,
+            'verification_expires_at' => null,
+        ])->save();
 
         return response()->json([
             'success' => true,
@@ -162,15 +170,15 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
 
-        if ($user->email_verified_at) {
+        if ($user->hasVerifiedEmail()) {
             return response()->json(['success' => true, 'message' => 'Email already verified.'], 200);
         }
 
         // Generate new code
-        $verificationCode = mt_rand(100000, 999999);
-        $user->verification_code = $verificationCode;
-        $user->verification_expires_at = Carbon::now()->addMinutes(10);
-        $user->save();
+        $user->forceFill([
+            'verification_code' => (string) random_int(100000, 999999),
+            'verification_expires_at' => now()->addMinutes(10),
+        ])->save();
 
         // Send email
         $this->sendVerificationCode($user);
@@ -212,16 +220,34 @@ class AuthController extends Controller
         ]);
     }
 
-    public function sendVerificationCode(User $user)
+    /**
+     * Deliver the 6-digit code to the user.
+     *
+     * In the local (dev) environment the code is written to the Laravel log
+     * instead of being emailed — no mail server (e.g. Mailpit) is required, so
+     * the mobile frontend must NOT surface any "mail unreachable" toasts in
+     * dev builds. In every other environment (staging, production, ...) a
+     * normal verification email is sent through the configured MAIL_* sender.
+     *
+     * If `app.env` is `local`, log; otherwise send email.
+     */
+    public function sendVerificationCode(User $user): void
     {
-        if (App::environment('production')) {
-            // Send email only in production
-            Mail::to($user->email)->send(new VerificationCodeMail($user->verification_code));
-        } else {
-            // In dev mode, automatically mark the user as verified
-            $user->email_verified_at = now();
-            $user->save();
+        if (app()->environment('local')) {
+            Log::info(
+                'Email verification code for {email}: {code} (expires {expires_at})',
+                [
+                    'email' => $user->email,
+                    'code' => $user->verification_code,
+                    'expires_at' => $user->verification_expires_at?->toIso8601String(),
+                    'user_id' => $user->id,
+                ]
+            );
+
+            return;
         }
+
+        Mail::to($user->email)->send(new VerificationCodeMail($user->verification_code));
     }
 
     /**
