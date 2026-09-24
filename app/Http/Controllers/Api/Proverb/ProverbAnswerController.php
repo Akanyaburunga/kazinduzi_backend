@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Proverb\AnswerProverbRequest;
 use App\Models\Proverb;
 use App\Models\ProverbAttempt;
+use App\Models\Round;
 use App\Support\AnswerMatcher;
+use App\Support\GuestLimits;
 use App\Support\Reputation;
 
 class ProverbAnswerController extends Controller
@@ -22,6 +24,14 @@ class ProverbAnswerController extends Controller
         }
 
         $user = $request->user();
+
+        if ($user->isGuest()) {
+            if (GuestLimits::requiresRegistration(Round::MODE_HERA, $user)) {
+                return GuestLimits::blockedResponse(Round::MODE_HERA, $user);
+            }
+
+            GuestLimits::recordLegacyPlay(Round::MODE_HERA, $user, 'proverb', $proverb->id);
+        }
 
         $candidates = trim((string) $proverb->answer);
         if (! empty($proverb->answer_aliases)) {
@@ -45,7 +55,7 @@ class ProverbAnswerController extends Controller
         $rewarded = false;
         $points = 0;
         $capped = false;
-        if ($isCorrect && !$attempt->rewarded) {
+        if ($isCorrect && ! $attempt->rewarded && ! $user->isGuest()) {
             $base = (int) config('riddles.solve_reputation');
             $cap = (int) config('riddles.daily_solve_reputation_cap');
 

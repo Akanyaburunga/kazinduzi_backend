@@ -182,6 +182,10 @@ class RoundAnswerController extends Controller
      * Award reputation (once per puzzle) for a correct solve, mirroring the
      * mode-specific answer controllers.
      *
+     * Guests get their solve recorded (so the pool personalization and any
+     * later account conversion keep the answer) but earn no reputation,
+     * streaks, popularity or achievements — those require an account.
+     *
      * @return array{rewarded: bool, points: int, capped: bool, new_achievements: array}
      */
     protected function awardSolve(string $mode, $user, $puzzle, string $submitted): array
@@ -201,6 +205,15 @@ class RoundAnswerController extends Controller
         $rewarded = false;
         $points = 0;
         $capped = false;
+
+        if (method_exists($user, 'isGuest') && $user->isGuest()) {
+            return [
+                'rewarded' => false,
+                'points' => 0,
+                'capped' => false,
+                'new_achievements' => [],
+            ];
+        }
 
         if (! $attempt->rewarded) {
             $base = (int) config('riddles.solve_reputation');

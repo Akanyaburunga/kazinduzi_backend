@@ -56,9 +56,12 @@ Screens & flows to mirror:
 - `rounds` (user_id, mode `sokwe|hera|tuja`, level, item_count, score, current_streak, best_streak, status `active|completed`, started_at, completed_at) — `app/Models/Round.php`.
 - `round_items` (round_id, puzzle_type `riddle|proverb|joke`, puzzle_id, position, status `pending|solved|conceded`, is_correct, attempts, answered_at; unique per `(round_id, position)`) — `app/Models/RoundItem.php`.
 
-### 2.3 API surface (auth:sanctum, verified email)
+### 2.3 API surface
+Game routes (`/api/games/*`) use `auth:sanctum, verified.or.guest`. The classic single-play **play endpoints** are also guest-open (same per-mode cap): riddles `GET /api/riddles/next` + `POST /api/riddles/{id}/answer`, proverbs `GET /api/proverbs/next` + `POST /api/proverbs/{id}/answer`, jokes `GET /api/jokes/round` + `GET /api/jokes/next` + `POST /api/jokes/{id}/answer`. Everything else (`/api/riddles`, `/api/riddles/{id}`, hints/reveal, index/list, contributions, duels, `/api/me`, etc.) stays `auth:sanctum, verified` (guests blocked with 403 `requires_registration:true`).
 | Method | Route | Controller |
 |---|---|---|
+| POST | `/api/auth/guest` `{guest_uid}` | `Api/AuthController@guestSession` (throttle:10,1) |
+| GET | `/api/auth/guest` | `Api/AuthController@guestStatus` |
 | POST | `/api/games/{mode}/rounds` | `Api/Game/RoundController@store` |
 | GET | `/api/games/{mode}/rounds/{round}` | `Api/Game/RoundController@show` (resume → first pending item) |
 | POST | `/api/games/{mode}/rounds/{round}/items/{position}/answer` | `Api/Game/RoundAnswerController@answer` (throttle:30,1) |
@@ -66,6 +69,8 @@ Screens & flows to mirror:
 | POST | `/api/games/{mode}/rounds/{round}/complete` | `Api/Game/RoundController@complete` |
 | GET | `/api/games/history` | `Api/Game/RoundHistoryController@index` |
 | DELETE | `/api/games/history` | `Api/Game/RoundHistoryController@destroy` |
+| GET | `/api/riddles/next` · `/api/proverbs/next` · `/api/jokes/round` · `/api/jokes/next` | guest+account play load (capped) |
+| POST | `/api/riddles/{id}/answer` · `/api/proverbs/{id}/answer` · `/api/jokes/{id}/answer` | guest+account play answer (capped, throttle:30,1) |
 | POST | `/api/contributions` | `Api/ContributionController@store` |
 
 `/api/me` (`MeController`) already exposes profile, reputation level, and streak.
@@ -76,6 +81,7 @@ Screens & flows to mirror:
 - **Submissions (moderation queue):** `SubmissionController` (riddles), `ProverbSubmissionController`, `JokeSubmissionController` — list/filter + approve/reject with duplicate safe-publish.
 - **Dashboard:** `DashboardController@index` — riddle totals, attempts, solves, active players, top riddles, difficulty breakdown.
 - **Analytics:** `AnalyticsController@performance/players/dailyConversion` — all riddle-attempt based.
+- **Settings:** `SettingController@guestLimits/updateGuestLimits/resetGuestLimits` — per-mode guest round caps (`GET/PUT /admin/api/settings/guest-limits`, `POST .../reset`), Vue settings store + `views/settings/Index.vue` (nav: **Settings**).
 
 ---
 
@@ -178,6 +184,40 @@ Wrong answers keep the item `pending` (re-answer allowed); `ndaguhaye` or a wron
 ### 4.2 New endpoint (G-1)
 `GET /api/games/{mode}/rounds/{round}/items/{position}` — per-position state; answer disclosed **only** when the item is no longer pending. See §3 G-1.
 
+### 4.3 Guest mode (device-anonymous round play)
+A guest is a normal `users` row with `email = null`, `email_verified_at = null`, `name = 'Guest'`, an unusable random password, and a unique `guest_uid` (device-persisted UUID, ≤ 64 chars, app-supplied). `User::isGuest()` = `guest_uid !== null`. Identities:
+```
+POST /api/auth/guest {guest_uid}   // no auth required
+ -> 200 { success, data: { user, token, token_type:'Bearer', expires_at, guest: status } }
+GET  /api/auth/guest               // auth:sanctum
+ -> 200 { success, data: { guest: bool, summary: [ per-mode status ] | null } }
+```
+The session is idempotent: the same `guest_uid` always resolves to the same `users` row, so round history survives app restarts. Tokens are named `GuestApp`; a new `POST` revokes the device's previous `GuestApp` token (one active guest session per device). Passing a registered account's `guest_uid` to `POST /api/auth/guest` will attach a guest token to that account (server-side `guest_uid` is first-come, first-served; the app should generate fresh UUIDs).
+
+**Per-mode cap.** Every round start consumes one slot in its mode **regardless of completion** (abandoned rounds count), and every classic puzzle answered on the legacy play endpoints consumes one slot too — both draw from the **same per-mode allowance**. Defaults live in `config/riddles.php 'guest_round_limits'` (env `GUEST_SOKWE_ROUND_LIMIT`/`GUEST_HERA_ROUND_LIMIT`/`GUEST_TUJA_ROUND_LIMIT`, default 3 each); admins override per mode in the `settings` table (`guest_round_limit.{mode}`). A limit of `0` disables guest play for that mode.
+```
+status = { mode, limit, used, remaining, requires_registration }
+```
+- `used` = number of `rounds` rows (any status) this guest has started in the mode **plus** `guest_plays` rows (one per distinct classic puzzle answered: unique on `(user_id, mode, puzzle_type, puzzle_id)`, so re-answering the same puzzle never consumes more).
+- `requires_registration` = `remaining <= 0` (0 plays as "immediately blocked").
+
+**Where the cap is enforced** (`RoundController@store` plus the classic play controllers): whenever `requires_registration` — including a `limit` of 0 — the request returns:
+```
+403 { success: false, message: <friendly "create an account" text>,
+      requires_registration: true, guest: status }
+```
+The gate is shared via `GuestLimits::blockedResponse()`. Successful round starts are unchanged, but `data.guest` (per-mode `status`) is added to round-start responses for guest users only.
+
+**Classic (legacy) play endpoints.** The play load (`riddles/proverbs/next`, `jokes/round/next`) and answer (`.../answer`) endpoints are open to `verified.or.guest`. Guests get **zero rewards** on classic answers too (`rewarded:false, points:0, capped:false`, no achievements/streaks/popularity), while the attempt is still recorded so pool personalization and conversion keep working. The cap is enforced **at load and at answer**, so a guest at the cap cannot fetch another puzzle nor submit an answer against one already on screen. Loads never consume allowance; each answered puzzle consumes exactly one (recorded first when a guest submits — `GuestLimits::recordLegacyPlay()`).
+
+**No economy for guests:** solved items still record an attempt (`RiddleAttempt`/`ProverbAttempt`/`JokeAttempt`) so pool personalization and later conversion keep working, but `awardSolve` short-circuits guests to `{ reward:false, points:0, capped:false, new_achievements:[] }` — no reputation, achievements, streaks, or leaderboard/duel activity from anonymous play. Guests are blocked (403, `requires_registration:true`) on every non-play `verified` route (`/api/me`, contributions, duels, classic list/show/hint/reveal, etc.).
+
+**Conversion:** `POST /api/auth/register` accepts optional `guest_uid`. When present, `mergeGuest()` atomically transfers the guest's `rounds` + `riddle_attempts` + `proverb_attempts` + `joke_attempts` to the new account, deletes the guest row and its tokens, and reports:
+```
+201 { success, data: { converted_guest: bool } }
+```
+The app then discards its `GuestApp` token and logs in with the new account (see the Android doc).
+
 ---
 
 ## 5. Testing plan
@@ -188,6 +228,9 @@ Keep the full suite green (`php artisan test`, SQLite `:memory:`, `RefreshDataba
 - `tests/Feature/Admin/ProverbAdminTest.php` (G-3): index filters, CRUD, suspend/restore, export CSV, stats.
 - `tests/Feature/Admin/JokeAdminTest.php` (G-3): same + `distractors[]` persistence.
 - `tests/Feature/Admin/DashboardRoundsTest.php` (G-4): per-mode dashboard numbers and `analytics/rounds` shape.
+- `tests/Feature/Api/GuestModeTest.php` (guest): session idempotency, round play in all three modes, per-mode cap 403 `requires_registration`, no reputation/achievements but attempt recorded, blocked on account-only routes, guest status summary, register-with-`guest_uid` conversion (rows transferred + guest deleted).
+- `tests/Feature/Api/GuestClassicGamesTest.php` (guest): classic riddles/proverbs/jokes load + zero-reward answers, bearer-token guest flow, cap blocks both load and answer with the 403 envelope (guest `status`), cap shared between round-mode and classic plays, zero limit blocks immediately, per-mode/per-guest independence, verified accounts still rewarded.
+- `tests/Feature/Admin/AdminSettingsTest.php` (guest): admin read/update/reset guest limits, non-admin 403, negative limits 422.
 - Existing `RoundTest`/`RoundHistoryTest`/`ContributionTest` must remain green (no regressions to riddles).
 
 ---
@@ -198,7 +241,8 @@ Keep the full suite green (`php artisan test`, SQLite `:memory:`, `RefreshDataba
 2. **A2 — G-2:** flat tuja pools + no level-up for jokes + tests.
 3. **A3 — G-3:** `ProverbController`/`JokeController` + bulk + views + routes + tests.
 4. **A4 — G-4:** dashboard + analytics multi-mode extensions + views + tests.
-5. **A5 —** full-suite + MySQL `migrate:fresh --seed` verification + GPG-signed commit.
+5. **A5 — guest mode:** `guest_uid` column + `settings` table + `GuestLimits` support + `verified.or.guest` middleware + guest session/status + round & classic cap enforcement + no-economy short-circuit + register conversion + admin settings back office + tests + docs.
+6. **A6 —** full-suite + MySQL `migrate:fresh --seed` verification + GPG-signed commit.
 
 ---
 

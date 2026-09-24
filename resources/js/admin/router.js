@@ -79,6 +79,12 @@ const routes = [
                 component: () => import('./views/analytics/Index.vue'),
                 meta: { title: 'Analytics' },
             },
+            {
+                path: 'settings',
+                name: 'admin.settings.index',
+                component: () => import('./views/settings/Index.vue'),
+                meta: { title: 'Settings' },
+            },
         ],
     },
 ];

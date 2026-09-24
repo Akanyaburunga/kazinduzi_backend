@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Joke;
 use App\Http\Controllers\Controller;
 use App\Models\Joke;
 use App\Models\JokeAttempt;
+use App\Models\Round;
+use App\Support\GuestLimits;
 use Illuminate\Http\Request;
 
 class JokeGameController extends Controller
@@ -18,6 +20,10 @@ class JokeGameController extends Controller
     public function round(Request $request)
     {
         $user = $request->user();
+
+        if ($user->isGuest() && GuestLimits::requiresRegistration(Round::MODE_TUJA, $user)) {
+            return GuestLimits::blockedResponse(Round::MODE_TUJA, $user);
+        }
 
         $jokes = Joke::where('is_suspended', false)->get();
         $solvedIds = $this->solvedIds($user->id);
@@ -48,8 +54,14 @@ class JokeGameController extends Controller
      */
     public function next(Request $request)
     {
+        $user = $request->user();
+
+        if ($user->isGuest() && GuestLimits::requiresRegistration(Round::MODE_TUJA, $user)) {
+            return GuestLimits::blockedResponse(Round::MODE_TUJA, $user);
+        }
+
         $jokes = Joke::where('is_suspended', false)->orderBy('id')->get();
-        $solvedIds = $this->solvedIds($request->user()->id);
+        $solvedIds = $this->solvedIds($user->id);
 
         $unsolved = $jokes->reject(fn (Joke $j) => in_array($j->id, $solvedIds, true))->values();
 

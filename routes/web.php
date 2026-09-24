@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\ProverbSubmissionController;
 use App\Http\Controllers\Admin\JokeSubmissionController;
 use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,6 +168,10 @@ Route::prefix('admin/api')->group(function () {
         Route::get('/analytics/daily-conversion', [AnalyticsController::class, 'dailyConversion']);
         Route::get('/analytics/rounds', [AnalyticsController::class, 'rounds']);
         Route::get('/analytics/contributions', [AnalyticsController::class, 'contributions']);
+
+        Route::get('/settings/guest-limits', [SettingController::class, 'guestLimits']);
+        Route::put('/settings/guest-limits', [SettingController::class, 'updateGuestLimits']);
+        Route::post('/settings/guest-limits/reset', [SettingController::class, 'resetGuestLimits']);
     });
 });
 

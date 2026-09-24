@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'guest_uid',
         'profile_picture',
         'current_streak',
         'longest_streak',
@@ -63,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
                 $user->streak_freezes = config('riddles.streak_freezes', 3);
             }
         });
+    }
+
+    public function isGuest(): bool
+    {
+        return $this->guest_uid !== null;
     }
 
     public function words()

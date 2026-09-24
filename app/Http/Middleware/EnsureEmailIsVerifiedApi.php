@@ -22,9 +22,13 @@ class EnsureEmailIsVerifiedApi
             $api = $request->is('api/*');
 
             if ($request->expectsJson() || $api) {
+                $guest = $request->user() && method_exists($request->user(), 'isGuest')
+                    && $request->user()->isGuest();
+
                 return response()->json([
                     'success' => false,
-                    'message' => 'Your email address is not verified.',
+                    'message' => $guest ? 'Create an account to continue.' : 'Your email address is not verified.',
+                    'requires_registration' => $guest,
                 ], 403);
             }
 

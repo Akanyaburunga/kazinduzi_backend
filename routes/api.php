@@ -44,6 +44,8 @@ use App\Http\Controllers\Api\ContributionController;
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->middleware('throttle:5,1');  // User Registration
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:10,1');        // User Login
+    Route::post('guest', [AuthController::class, 'guestSession'])->middleware('throttle:10,1'); // Start/resume a guest session
+    Route::get('guest', [AuthController::class, 'guestStatus'])->middleware('auth:sanctum');    // Guest limits & usage
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum'); // Logout
     Route::get('user', [AuthController::class, 'user'])->middleware('auth:sanctum'); // Get Authenticated User Info
     Route::post('password/change', [AuthController::class, 'changePassword'])->middleware('auth:sanctum'); // Change password & revoke tokens
@@ -95,7 +97,14 @@ Route::prefix('riddles')->group(function () {
     Route::get('/share/{code}', [ShareController::class, 'show'])
         ->name('api.riddles.share.show');
 
-    // Game-facing routes (authenticated + verified)
+    // Guest + account play routes (guests are capped per mode, see GuestLimits)
+    Route::middleware(['auth:sanctum', 'verified.or.guest'])->group(function () {
+        Route::get('/next', [GameController::class, 'next']);                 // Next unsolved riddle (difficulty filter)
+        Route::post('/{riddle}/answer', [AnswerController::class, 'store'])
+            ->middleware('throttle:30,1'); // Guard against brute-force answer submissions
+    });
+
+    // Account-only game routes (answers never exposed, guests blocked)
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/categories', [CategoryController::class, 'index']);      // List categories (curator view)
         Route::get('/', [GameController::class, 'index']);                    // List riddles (no answers)
@@ -104,14 +113,11 @@ Route::prefix('riddles')->group(function () {
         Route::get('/daily/history', [GameController::class, 'dailyHistory']); // Revisit a past daily riddle
         Route::get('/daily/status', [GameController::class, 'dailyStatus']);   // Notifications badge data
         Route::post('/streak/freeze', [GameController::class, 'useStreakFreeze']); // Spend a streak saver freeze
-        Route::get('/next', [GameController::class, 'next']);                 // Next unsolved riddle (difficulty filter)
         Route::get('/history', [GameController::class, 'history']);           // Paginated attempt history
         Route::get('/history/stats', [GameController::class, 'historyStats']); // Attempt statistics
         Route::post('/{riddle}/share', [ShareController::class, 'store']);    // Create shareable short link
         Route::get('/{riddle}', [GameController::class, 'show']);             // Single riddle (no answer)
         Route::get('/{riddle}/hint', [GameController::class, 'hint']);        // Progressive hint(s)
-        Route::post('/{riddle}/answer', [AnswerController::class, 'store'])
-            ->middleware('throttle:30,1'); // Guard against brute-force answer submissions
         Route::post('/{riddle}/reveal', [GameController::class, 'reveal']);   // Reveal answer (learning, no reward)
     });
 
@@ -161,13 +167,17 @@ Route::prefix('duels')->middleware(['auth:sanctum', 'verified', 'throttle:30,1']
 /**
  * 📜 Proverbs (Heraheza) — complete the ending
  */
-Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified'])->group(function () {
-    // Game-facing routes (answers never exposed)
-    Route::get('/', [ProverbGameController::class, 'index']);               // List proverbs (no answers)
+// Guest + account play routes (guests are capped per mode, see GuestLimits)
+Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified.or.guest'])->group(function () {
     Route::get('/next', [ProverbGameController::class, 'next']);            // Next unsolved proverb
-    Route::get('/{proverb}', [ProverbGameController::class, 'show']);       // Single proverb (no answer)
     Route::post('/{proverb}/answer', [ProverbAnswerController::class, 'store'])
         ->middleware('throttle:30,1');                                      // Solve (lenient matcher)
+});
+
+// Account-only game routes (answers never exposed, guests blocked)
+Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/', [ProverbGameController::class, 'index']);               // List proverbs (no answers)
+    Route::get('/{proverb}', [ProverbGameController::class, 'show']);       // Single proverb (no answer)
     Route::post('/{proverb}/reveal', [ProverbGameController::class, 'reveal']); // Reveal answer (no reward)
 });
 
@@ -183,12 +193,16 @@ Route::prefix('proverbs')->middleware(['auth:sanctum', 'verified'])->group(funct
 /**
  * 😄 Jokes (Tujajure) — pick the punchline from four options
  */
-Route::prefix('jokes')->middleware(['auth:sanctum', 'verified'])->group(function () {
-    // Game-facing routes
+// Guest + account play routes (guests are capped per mode, see GuestLimits)
+Route::prefix('jokes')->middleware(['auth:sanctum', 'verified.or.guest'])->group(function () {
     Route::get('/round', [JokeGameController::class, 'round']);               // One round: setup + 4 shuffled options
     Route::get('/next', [JokeGameController::class, 'next']);                 // Next unsolved setup
     Route::post('/{joke}/answer', [JokeAnswerController::class, 'store'])
         ->middleware('throttle:30,1');                                        // Pick a punchline
+});
+
+// Account-only game routes (guests blocked)
+Route::prefix('jokes')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/{joke}/reveal', [JokeGameController::class, 'reveal']);      // Reveal punchline (no reward)
 });
 
@@ -216,8 +230,11 @@ Route::prefix('submissions/jokes')->middleware(['auth:sanctum', 'verified'])->gr
 
 /**
  * 🎮 Games (Rinjora-parity rounds of 10)
+ *
+ * Guest access: no-account players may start rounds up to the admin-set per-mode
+ * limit (see GuestLimits); the cap is enforced in RoundController::store.
  */
-Route::prefix('games')->middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::prefix('games')->middleware(['auth:sanctum', 'verified.or.guest'])->group(function () {
     // History & stats (no mode scope).
     Route::get('/history', [RoundHistoryController::class, 'index']);      // Total / games / best / per-mode rows
     Route::delete('/history', [RoundHistoryController::class, 'destroy']); // Reset round history

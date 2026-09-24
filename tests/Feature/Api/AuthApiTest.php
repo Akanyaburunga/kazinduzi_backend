@@ -23,7 +23,9 @@ class AuthApiTest extends TestCase
         ])->assertStatus(201)
             ->assertJson([
                 'success' => true,
-                'data' => null,
+                'data' => [
+                    'converted_guest' => false,
+                ],
             ])
             ->assertJsonMissingPath('data.token');
 

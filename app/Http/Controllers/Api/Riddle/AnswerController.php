@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Riddle\AnswerRiddleRequest;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
+use App\Models\Round;
 use App\Support\Achievements;
 use App\Support\AnswerMatcher;
+use App\Support\GuestLimits;
 use App\Support\Reputation;
 use Illuminate\Http\Request;
 
@@ -24,6 +26,14 @@ class AnswerController extends Controller
         }
 
         $user = $request->user();
+
+        if ($user->isGuest()) {
+            if (GuestLimits::requiresRegistration(Round::MODE_SOKWE, $user)) {
+                return GuestLimits::blockedResponse(Round::MODE_SOKWE, $user);
+            }
+
+            GuestLimits::recordLegacyPlay(Round::MODE_SOKWE, $user, 'riddle', $riddle->id);
+        }
 
         $candidates = trim((string) $riddle->answer);
         if (! empty($riddle->answer_aliases)) {
@@ -47,7 +57,7 @@ class AnswerController extends Controller
         $rewarded = false;
         $points = 0;
         $capped = false;
-        if ($isCorrect && !$attempt->rewarded) {
+        if ($isCorrect && ! $attempt->rewarded && ! $user->isGuest()) {
             $base = (int) config('riddles.solve_reputation');
             $cap = (int) config('riddles.daily_solve_reputation_cap');
 
@@ -62,12 +72,14 @@ class AnswerController extends Controller
             $rewarded = $points > 0;
         }
 
-        if ($isCorrect) {
+        if ($isCorrect && ! $user->isGuest()) {
             \App\Support\Streaks::recompute($user);
             \App\Support\Popularity::recompute($riddle);
         }
 
-        $newAchievements = $isCorrect ? Achievements::evaluate($user) : collect();
+        $newAchievements = $isCorrect && ! $user->isGuest()
+            ? Achievements::evaluate($user)
+            : collect();
 
         return response()->json([
             'correct' => $isCorrect,

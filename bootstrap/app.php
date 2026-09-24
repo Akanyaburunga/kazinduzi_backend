@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'signed' => \App\Http\Middleware\ValidateSignature::class,
             'verified' => \App\Http\Middleware\EnsureEmailIsVerifiedApi::class,
+            'verified.or.guest' => \App\Http\Middleware\EnsureEmailIsVerifiedOrGuest::class,
             'auth.vote' => \App\Http\Middleware\AuthenticateVote::class,
             'admin' => \App\Http\Middleware\EnsureIsAdmin::class,
         ]);

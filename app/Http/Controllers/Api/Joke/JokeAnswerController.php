@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Joke\AnswerJokeRequest;
 use App\Models\Joke;
 use App\Models\JokeAttempt;
+use App\Models\Round;
+use App\Support\GuestLimits;
 use App\Support\Reputation;
 
 class JokeAnswerController extends Controller
@@ -21,6 +23,14 @@ class JokeAnswerController extends Controller
         }
 
         $user = $request->user();
+
+        if ($user->isGuest()) {
+            if (GuestLimits::requiresRegistration(Round::MODE_TUJA, $user)) {
+                return GuestLimits::blockedResponse(Round::MODE_TUJA, $user);
+            }
+
+            GuestLimits::recordLegacyPlay(Round::MODE_TUJA, $user, 'joke', $joke->id);
+        }
 
         $submitted = trim((string) $request->option);
         $isCorrect = $this->samePunchline($submitted, (string) $joke->punchline);
@@ -41,6 +51,9 @@ class JokeAnswerController extends Controller
                 'success' => false,
                 'message' => 'Not quite. The correct punchline is revealed.',
                 'correct' => false,
+                'rewarded' => false,
+                'points' => 0,
+                'capped' => false,
                 'answer' => $joke->punchline,
             ]);
         }
@@ -48,7 +61,7 @@ class JokeAnswerController extends Controller
         $rewarded = false;
         $points = 0;
         $capped = false;
-        if (! $attempt->rewarded) {
+        if (! $attempt->rewarded && ! $user->isGuest()) {
             $base = (int) config('riddles.solve_reputation');
             $cap = (int) config('riddles.daily_solve_reputation_cap');
 

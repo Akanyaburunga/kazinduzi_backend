@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Proverb;
 use App\Http\Controllers\Controller;
 use App\Models\Proverb;
 use App\Models\ProverbAttempt;
+use App\Models\Round;
+use App\Support\GuestLimits;
 use Illuminate\Http\Request;
 
 class ProverbGameController extends Controller
@@ -66,6 +68,12 @@ class ProverbGameController extends Controller
      */
     public function next(Request $request)
     {
+        $user = $request->user();
+
+        if ($user->isGuest() && GuestLimits::requiresRegistration(Round::MODE_HERA, $user)) {
+            return GuestLimits::blockedResponse(Round::MODE_HERA, $user);
+        }
+
         $query = Proverb::where('is_suspended', false)->orderBy('id');
 
         if ($request->has('difficulty')) {

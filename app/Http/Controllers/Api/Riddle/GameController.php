@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Riddle;
 use App\Models\RiddleAttempt;
 use App\Models\RiddleHintUse;
+use App\Models\Round;
 use App\Models\User;
+use App\Support\GuestLimits;
 use App\Support\Streaks;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -270,6 +272,10 @@ class GameController extends Controller
     public function next(Request $request)
     {
         $user = $request->user();
+
+        if ($user->isGuest() && GuestLimits::requiresRegistration(Round::MODE_SOKWE, $user)) {
+            return GuestLimits::blockedResponse(Round::MODE_SOKWE, $user);
+        }
 
         $query = Riddle::where('is_suspended', false)->orderBy('id');
 

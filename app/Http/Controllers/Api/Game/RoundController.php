@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Game;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\StartRoundRequest;
 use App\Models\Round;
+use App\Support\GuestLimits;
 use App\Support\RoundManager;
 use Illuminate\Http\Request;
 
@@ -28,17 +29,31 @@ class RoundController extends Controller
                 'rounds' => $rounds->map(
                     fn (Round $round) => RoundManager::roundPayload($round, $request->user())
                 )->values(),
+                'guest' => $request->user()->isGuest()
+                    ? GuestLimits::status($mode, $request->user())
+                    : null,
             ],
         ]);
     }
 
     /**
      * Start a new round for a mode/level and return the first item.
+     *
+     * Guests may only start rounds while they are under their admin-set
+     * per-mode free-round allowance; once exhausted they must register.
      */
     public function store(StartRoundRequest $request, string $mode)
     {
         $user = $request->user();
         $level = (int) $request->input('level', 1);
+
+        if ($user->isGuest()) {
+            $status = GuestLimits::status($mode, $user);
+
+            if ($status['requires_registration']) {
+                return GuestLimits::blockedResponse($mode, $user);
+            }
+        }
 
         $round = RoundManager::start($user, $mode, $level);
 
@@ -56,6 +71,7 @@ class RoundController extends Controller
             'data' => [
                 'round' => RoundManager::roundPayload($round, $user),
                 'item' => $item ? RoundManager::itemPayload($item) : null,
+                'guest' => $user->isGuest() ? GuestLimits::status($mode, $user) : null,
             ],
         ]);
     }

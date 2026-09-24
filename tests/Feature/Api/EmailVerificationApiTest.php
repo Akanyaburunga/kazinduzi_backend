@@ -37,7 +37,9 @@ class EmailVerificationApiTest extends TestCase
         ])->assertStatus(201)
             ->assertJson([
                 'success' => true,
-                'data' => null,
+                'data' => [
+                    'converted_guest' => false,
+                ],
             ]);
 
         $user = User::where('email', 'remy@example.com')->firstOrFail();
@@ -115,7 +117,7 @@ class EmailVerificationApiTest extends TestCase
             'password_confirmation' => 'secret123',
         ])->assertStatus(201)
             ->assertJsonMissingPath('data.verification_code')
-            ->assertJsonPath('data', null);
+            ->assertJsonPath('data.converted_guest', false);
     }
 
     public function test_login_response_does_not_leak_the_code(): void

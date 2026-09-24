@@ -165,12 +165,14 @@ Spinner type (`Igisokozo 🧠` / `Umwibutsa 🌾` / `Akajajuro 😂` / `Iyindi n
 All JSON envelope `{success, data}` except answer endpoints (flat `{correct, conceded, ...}`). DTOs must match the backend doc exactly:
 
 ```
-POST /api/auth/register {name,email,password} -> {success,data:{token,user}}
+POST /api/auth/register {name,email,password,guest_uid?} -> {success,data:{converted_guest}}
 POST /api/auth/login     {email,password}     -> {success,data:{token,user}}
 POST /api/auth/logout    (Bearer)
+POST /api/auth/guest     {guest_uid}          -> {success,data:{user,token,token_type:'Bearer',expires_at,guest}}
+GET  /api/auth/guest     (Bearer)             -> {success,data:{guest:bool,summary:[...]?}}
 GET  /api/me             -> {name, points:{reputation, level:{level,title,...}}, streak:{current,longest}, ...}
 
-POST /api/games/{mode}/rounds            {level?}  -> {success,data:{round, item}}
+POST /api/games/{mode}/rounds            {level?}  -> {success,data:{round, item, guest?}}  (guest = {mode,limit,used,remaining,requires_registration})
 GET  /api/games/{mode}/rounds/{round}              -> {success,data:{round, item?}}  (resume)
 GET  /api/games/{mode}/rounds/{round}/items/{pos}  -> {success,data:{item}} + answered-state (Back nav, G-1)
 POST /api/games/{mode}/rounds/{round}/items/{pos}/answer  {answer|option} -> flat
@@ -178,8 +180,12 @@ POST /api/games/{mode}/rounds/{round}/items/{pos}/skip    {}
 POST /api/games/{mode}/rounds/{round}/complete            -> {success,data:{round:{...}, performance}}
 GET  /api/games/history        -> {success,data:{total,games,best,rows:[{mode,games,points}]}}
 DELETE /api/games/history      -> {success,data:{...}}
+GET  /api/riddles/next  /api/proverbs/next  /api/jokes/round  /api/jokes/next   -> {success,data:{...}} (guest+account, capped for guests)
+POST /api/riddles/{id}/answer  /api/proverbs/{id}/answer  /api/jokes/{id}/answer  {answer|option} -> flat
 POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status:'pending'}}
 ```
+
+**Guest mode:** first ever launch (no stored account, no stored session) generates a persistent UUID and calls `POST /api/auth/guest` instead of showing a login wall. Store both the `token` and the `guest_uid` (e.g. app-private `SharedPreferences` backed by `Settings.Secure.ANDROID_ID` for re-install continuity). Round game endpoints work identically for guests and accounts, and the classic single-play endpoints (`riddles/proverbs/jokes/next`, `jokes/round`) are open to guests too — the per-mode cap spans both: each round start and each answered classic puzzle consumes one slot. Answer rewards are always `rewarded:false, points:0` while a guest. A `POST /api/auth/guest` with same `guest_uid` returns the same player with a fresh token (previous `GuestApp` token is revoked server-side). **Cap reached** → any round start or classic load/answer returns `403 { requires_registration: true, guest: {mode,limit,used,remaining,requires_registration}, message }` (scoped to the single mode you tried): show the create-account prompt, on success call `register` with the stored `guest_uid`, then throw away the `GuestApp` token, `login`, and retry the play.
 
 **Position semantics — `{pos}` and every `item.position`/`round.index` are 0-based.** The first item in a round is `position = 0`; there is no position 1-based offset anywhere in the API. The client must echo the `item.position` it received **verbatim** into the answer/skip/back URLs — never `position + 1`, never a locally tracked counter, never the 1-based "Rimwe / Kabiri / ..." display ordinal. Off-by-one submissions are the #1 integration bug between the Android client and this backend; a one-line regression test (start round → answer at the returned `item.position`) prevents it forever.
 
@@ -189,8 +195,9 @@ POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status
 
 ## 6. Error handling, offline, security
 
-- **Strictly online:** any network failure shows a friendly retry (toast + retry button on the failing screen). No local puzzle cache, no offline solving. Token expiry (401) → cleared session → forced `LoginFragment`.
-- **Auth guard:** app opens to login if no token; else home. Auth state via `SessionStore` + LiveData.
+- **Strictly online:** any network failure shows a friendly retry (toast + retry button on the failing screen). No local puzzle cache, no offline solving. Token expiry (401) → cleared session → new `POST /api/auth/guest` (reuse stored `guest_uid`; re-registering an account requires a fresh login).
+- **Auth guard:** first launch → guest session (`POST /api/auth/guest`, store `guest_uid` + token) → home. On/after 403 `requires_registration` → account prompt → `register` with `guest_uid` → `login` → home. Sessions that already have an account open straight to home when a token exists.
+- **Guest invariant:** rounds played as guest continue to work after conversion (server transferred `rounds` + `riddle/proverb/joke_attempts`); the client must discard the `GuestApp` token on conversion and use the account token thereafter. Guests must be treated as non-earning everywhere (no points, no streak, no achievements) — they can still replay at the cap only after registering.
 - **Cleartext:** `network_security_config.xml` permits `10.0.2.2`/`192.168.x.x` only in debug builds; release uses HTTPS only.
 - **Rate limits:** backend throttles answer/skip (`30,1`); client disables double-taps on Check/Option while in-flight.
 

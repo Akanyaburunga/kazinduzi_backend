@@ -73,6 +73,17 @@ return [
     'round_dedupe_distractors' => (bool) env('ROUND_DEDUPE_DISTRACTORS', true),
 
     /*
+    | How many rounds of each mode a guest (no-account) player may start
+    | before being asked to register. Set to 0 to require an account before
+    | any round in that mode.
+    */
+    'guest_round_limits' => [
+        'sokwe' => (int) env('GUEST_SOKWE_ROUND_LIMIT', 3),
+        'hera' => (int) env('GUEST_HERA_ROUND_LIMIT', 3),
+        'tuja' => (int) env('GUEST_TUJA_ROUND_LIMIT', 3),
+    ],
+
+    /*
     | Lenient answer-matching behaviour (App\Support\AnswerMatcher).
     */
     'answer_match' => [
