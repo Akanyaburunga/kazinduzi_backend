@@ -44,7 +44,7 @@ use App\Http\Controllers\Api\ContributionController;
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->middleware('throttle:5,1');  // User Registration
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:10,1');        // User Login
-    Route::post('guest', [AuthController::class, 'guestSession'])->middleware('throttle:10,1'); // Start/resume a guest session
+    Route::post('guest', [AuthController::class, 'guestSession'])->middleware(['throttle:guest-session', 'throttle:guest-session-ip']); // Start/resume a guest session
     Route::get('guest', [AuthController::class, 'guestStatus'])->middleware('auth:sanctum');    // Guest limits & usage
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum'); // Logout
     Route::get('user', [AuthController::class, 'user'])->middleware('auth:sanctum'); // Get Authenticated User Info

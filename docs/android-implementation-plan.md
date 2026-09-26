@@ -199,7 +199,7 @@ POST /api/contributions        {type,body,answer?,who?} -> {success,data:{status
 - **Auth guard:** first launch → guest session (`POST /api/auth/guest`, store `guest_uid` + token) → home. On/after 403 `requires_registration` → account prompt → `register` with `guest_uid` → `login` → home. Sessions that already have an account open straight to home when a token exists.
 - **Guest invariant:** rounds played as guest continue to work after conversion (server transferred `rounds` + `riddle/proverb/joke_attempts`); the client must discard the `GuestApp` token on conversion and use the account token thereafter. Guests must be treated as non-earning everywhere (no points, no streak, no achievements) — they can still replay at the cap only after registering.
 - **Cleartext:** `network_security_config.xml` permits `10.0.2.2`/`192.168.x.x` only in debug builds; release uses HTTPS only.
-- **Rate limits:** backend throttles answer/skip (`30,1`); client disables double-taps on Check/Option while in-flight.
+- **Rate limits:** backend throttles answer/skip (`30,1`) and **guest session mints per `guest_uid`** (default 60/min, keyed on the device credential not the IP, so refreshes never lock the device or its NAT neighbors out); client disables double-taps on Check/Option while in-flight.
 
 ---
 

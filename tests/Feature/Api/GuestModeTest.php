@@ -11,6 +11,7 @@ use App\Models\RoundItem;
 use App\Models\User;
 use App\Support\GuestLimits;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -72,6 +73,71 @@ class GuestModeTest extends TestCase
     public function test_guest_session_requires_guest_uid(): void
     {
         $this->postJson('/api/auth/guest', [])->assertStatus(422);
+    }
+
+    public function test_guest_session_mint_has_a_generous_budget(): void
+    {
+        Cache::flush();
+
+        // Well above the old 10/min IP throttle: rapid recovery re-mints must
+        // never lock the device out of the whole app.
+        for ($i = 0; $i < 12; $i++) {
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-generous'])->assertOk();
+        }
+    }
+
+    public function test_guest_session_mint_revokes_previous_token(): void
+    {
+        $first = $this->postJson('/api/auth/guest', ['guest_uid' => 'device-revoke'])->assertOk()->json('data');
+        $second = $this->postJson('/api/auth/guest', ['guest_uid' => 'device-revoke'])->assertOk()->json('data');
+
+        $this->assertSame($first['user']['id'], $second['user']['id']);
+        $this->assertNotSame($first['token'], $second['token']);
+
+        $user = User::where('guest_uid', 'device-revoke')->firstOrFail();
+        $this->assertSame(1, $user->tokens()->where('name', 'GuestApp')->count());
+
+        // The stale token is dead; the fresh token works.
+        $this->withToken($first['token'])->getJson('/api/games/history')->assertStatus(401);
+        $this->withToken($second['token'])->getJson('/api/games/history')->assertOk();
+    }
+
+    public function test_guest_session_limiter_keys_by_guest_uid_not_ip(): void
+    {
+        try {
+            config(['riddles.guest_session_throttle' => 5, 'riddles.guest_session_ip_throttle' => 5000]);
+            Cache::flush();
+
+            for ($i = 0; $i < 5; $i++) {
+                $this->postJson('/api/auth/guest', ['guest_uid' => 'device-throttle-a'])->assertOk();
+            }
+
+            // Same device now exhausted its own budget…
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-throttle-a'])->assertStatus(429);
+
+            // …but a different device behind the same source IP is unaffected.
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-throttle-b'])->assertOk();
+        } finally {
+            config(['riddles.guest_session_throttle' => 60, 'riddles.guest_session_ip_throttle' => 600]);
+            Cache::flush();
+        }
+    }
+
+    public function test_guest_session_ip_flood_ceiling_blocks_rotating_uids(): void
+    {
+        try {
+            config(['riddles.guest_session_throttle' => 1000, 'riddles.guest_session_ip_throttle' => 3]);
+            Cache::flush();
+
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-flood-1'])->assertOk();
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-flood-2'])->assertOk();
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-flood-3'])->assertOk();
+
+            $this->postJson('/api/auth/guest', ['guest_uid' => 'device-flood-4'])->assertStatus(429);
+        } finally {
+            config(['riddles.guest_session_throttle' => 60, 'riddles.guest_session_ip_throttle' => 600]);
+            Cache::flush();
+        }
     }
 
     public function test_guest_can_start_and_play_a_round_without_verified_email(): void

@@ -84,6 +84,17 @@ return [
     ],
 
     /*
+    | Rate limit for POST /api/auth/guest (session mint/refresh).
+    |
+    | Keyed per guest_uid (the device-held credential) rather than per IP, so
+    | one device's recovery re-mints never lock out devices sharing a NAT/carrier
+    | IP. `guest_session_ip_throttle` is a pure flood ceiling so a single source
+    | cannot mint unbounded junk guest rows.
+    */
+    'guest_session_throttle' => (int) env('GUEST_SESSION_THROTTLE', 60),
+    'guest_session_ip_throttle' => (int) env('GUEST_SESSION_IP_THROTTLE', 600),
+
+    /*
     | Lenient answer-matching behaviour (App\Support\AnswerMatcher).
     */
     'answer_match' => [

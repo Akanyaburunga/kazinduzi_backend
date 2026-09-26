@@ -60,7 +60,7 @@ Screens & flows to mirror:
 Game routes (`/api/games/*`) use `auth:sanctum, verified.or.guest`. The classic single-play **play endpoints** are also guest-open (same per-mode cap): riddles `GET /api/riddles/next` + `POST /api/riddles/{id}/answer`, proverbs `GET /api/proverbs/next` + `POST /api/proverbs/{id}/answer`, jokes `GET /api/jokes/round` + `GET /api/jokes/next` + `POST /api/jokes/{id}/answer`. Everything else (`/api/riddles`, `/api/riddles/{id}`, hints/reveal, index/list, contributions, duels, `/api/me`, etc.) stays `auth:sanctum, verified` (guests blocked with 403 `requires_registration:true`).
 | Method | Route | Controller |
 |---|---|---|
-| POST | `/api/auth/guest` `{guest_uid}` | `Api/AuthController@guestSession` (throttle:10,1) |
+| POST | `/api/auth/guest` `{guest_uid}` | `Api/AuthController@guestSession` (`throttle:guest-session` per guest_uid + `throttle:guest-session-ip` flood ceiling) |
 | GET | `/api/auth/guest` | `Api/AuthController@guestStatus` |
 | POST | `/api/games/{mode}/rounds` | `Api/Game/RoundController@store` |
 | GET | `/api/games/{mode}/rounds/{round}` | `Api/Game/RoundController@show` (resume → first pending item) |
@@ -192,7 +192,9 @@ POST /api/auth/guest {guest_uid}   // no auth required
 GET  /api/auth/guest               // auth:sanctum
  -> 200 { success, data: { guest: bool, summary: [ per-mode status ] | null } }
 ```
-The session is idempotent: the same `guest_uid` always resolves to the same `users` row, so round history survives app restarts. Tokens are named `GuestApp`; a new `POST` revokes the device's previous `GuestApp` token (one active guest session per device). Passing a registered account's `guest_uid` to `POST /api/auth/guest` will attach a guest token to that account (server-side `guest_uid` is first-come, first-served; the app should generate fresh UUIDs).
+The session is idempotent: the same `guest_uid` always resolves to the same `users` row, so round history survives app restarts. Tokens are named `GuestApp`; a new `POST` revokes the device's previous `GuestApp` token (one active guest session per device) and always returns 200 while the caller is within budget. Passing a registered account's `guest_uid` to `POST /api/auth/guest` will attach a guest token to that account (server-side `guest_uid` is first-come, first-served; the app should generate fresh UUIDs).
+
+**Mint throttle (anti-lockout).** `POST /api/auth/guest` is rate-limited **per `guest_uid`** (not per IP) via a named limiter: default `60/minute` (config `riddles.guest_session_throttle`, env `GUEST_SESSION_THROTTLE`). A separate per-IP flood ceiling (`riddles.guest_session_ip_throttle`, env `GUEST_SESSION_IP_THROTTLE`, default `600/minute`) only stops a single source minting unbounded junk guest rows. Because the budget is keyed on the device-held credential, one device's crash-loop/401-recovery re-mints can never lock out devices sharing the same NAT/carrier IP.
 
 **Per-mode cap.** Every round start consumes one slot in its mode **regardless of completion** (abandoned rounds count), and every classic puzzle answered on the legacy play endpoints consumes one slot too — both draw from the **same per-mode allowance**. Defaults live in `config/riddles.php 'guest_round_limits'` (env `GUEST_SOKWE_ROUND_LIMIT`/`GUEST_HERA_ROUND_LIMIT`/`GUEST_TUJA_ROUND_LIMIT`, default 3 each); admins override per mode in the `settings` table (`guest_round_limit.{mode}`). A limit of `0` disables guest play for that mode.
 ```
