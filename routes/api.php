@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ServerDebugController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\WordController;
 use App\Http\Controllers\Api\LeaderboardController;
@@ -54,6 +55,13 @@ Route::prefix('auth')->group(function () {
     Route::post('email/verify', [AuthController::class, 'verifyEmail'])->middleware('throttle:10,1');
     Route::post('email/resend', [AuthController::class, 'resendVerificationCode'])->middleware('throttle:3,1');
 });
+
+/**
+ * 🩺 TEMPORARY diagnostic endpoint for the prod 401 investigation.
+ * Gate: /api/_debug/server?key=<APP_KEY> ($hash_equals of sha256). DELETE
+ * this route and ServerDebugController once the cause is confirmed.
+ */
+Route::get('_debug/server', ServerDebugController::class);
 
 /**
  * 👤 Authenticated profile, points & stats
