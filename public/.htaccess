@@ -9,6 +9,9 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Pass Authorization to PHP-FPM (cgi-fcgi drops it unless CGIPassAuth is on)
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
